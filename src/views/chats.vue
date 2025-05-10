@@ -1,0 +1,161 @@
+<template>
+	<Grid :columns="headerColumns">
+		<Icon
+			v-if="Screen.isSize('s') && isChatOpened"
+			name="arrow-left"
+			size="l"
+			@click="openedChat = null"
+		/>
+
+		<PageTitle>
+			Мои чаты
+		</PageTitle>
+	</Grid>
+
+	<Grid :columns="Screen.isLarger('s') ? [1,4] : 1 ">
+		<Island v-if="Screen.isLarger('s') || !isChatOpened">
+			<Grid
+				vertical
+				:columns="1"
+			>
+				<Grid
+					v-for="chat in chats"
+					:key="chat.id"
+					gap="xs"
+					class="chats__item"
+					:class="{
+						'_active': openedChat?.chat === chat.chat
+					}"
+					vertical
+					:columns="1"
+					@click="loadChat(chat)"
+				>
+					<Text size="s">
+						{{ chat.title }}
+					</Text>
+
+					<UserCard
+						:loading="loading"
+						:user="getUserForChar(chat)"
+					/>
+				</Grid>
+			</Grid>
+		</Island>
+
+		<Island v-if="(Screen.isSize('s') && isChatOpened) || Screen.isLarger('s')">
+			<Text v-if="!isChatOpened">
+				Выберите чат
+			</Text>
+			<Chat
+				v-else-if="openedChat !== null"
+				:project="openedChat"
+				:rating-type="chatRatingType"
+				:user-type="chatUserType"
+				@update:status="updateStatus"
+				@update:rating="updateRating"
+			/>
+		</Island>
+	</Grid>
+</template>
+
+<script setup lang="ts">
+import { Chat } from '@/components/sections'
+import { User as UserCard } from '@/components/blocks'
+import { PageTitle, Icon } from '@/components/elements'
+import { Island, Grid } from '@/components/structures'
+import { IProject, IProjects, IProjectStatus } from '@/interfaces/Project.ts'
+
+import { Http, Screen } from '@/plugins'
+import { computed, ref, watch } from 'vue'
+import { useAuthStore } from '@/stores/auth'
+import Text from '@/components/elements/text.vue'
+import { IRating } from '@/interfaces/Rating.ts'
+import { emptyUser } from '@/interfaces/User.ts'
+
+const auth = useAuthStore()
+const openedChat = ref<IProject | null>(null)
+const isChatOpened = computed(() => openedChat.value !== null)
+const headerColumns = computed(() => {
+	if (Screen.isSize('s') && isChatOpened.value) {
+		return ['40px', 1]
+	}
+	return 1
+})
+const chats = ref<Array<IProject>>([])
+const loading = ref(true)
+
+const chatRatingType = computed(() => auth.isCustomer ? 'ratingExecutor' : 'ratingCreator')
+const getUserForChar = (chat: IProject) => {
+	if (loading.value) return emptyUser
+
+	const executor = chat.expand?.executor
+	const creator = chat.expand?.creator
+	if (executor && creator) {
+		return auth.isCustomer ? executor : creator
+	}
+
+	return emptyUser
+}
+const chatUserType = computed(() => auth.isCustomer ? 'executor' : 'creator')
+
+const getChats = async () => {
+	if (auth.user.id === '') return
+	loading.value = true
+
+	const filter = auth.isCustomer ? `creator='${auth.user.id}'` : `executor='${auth.user.id}'`
+	const encodedFilter = encodeURIComponent(`(${filter} && status!='created')`)
+
+	await Http.get<IProjects>('/collections/projects/records', {
+		filter: `(${encodedFilter})`,
+		expand: ['proposals', 'type', 'discipline', 'creator', 'ratingCreator', 'executor', 'ratingExecutor']
+	})
+		.then(({ items }) => {
+			chats.value = items
+		})
+
+	loading.value = false
+}
+watch(() => auth.user.id, getChats, { immediate: true })
+
+const updateStatus = async (status: IProjectStatus) => {
+	if (openedChat.value) {
+		openedChat.value.status = status
+	}
+}
+
+const updateRating = async (rating: IRating) => {
+	if (openedChat.value && openedChat.value.expand) {
+		if (auth.isCustomer) {
+			openedChat.value.ratingExecutor = rating.id
+			openedChat.value.expand.ratingExecutor = rating
+		} else if (auth.isExecutor) {
+			openedChat.value.ratingCreator = rating.id
+			openedChat.value.expand.ratingCreator = rating
+		}
+	}
+}
+
+const loadChat = (project: IProject) => {
+	openedChat.value = project
+}
+</script>
+
+<style scoped lang="scss">
+.chats {
+	&__item {
+		padding: 8px 16px;
+
+		border-radius: 8px;
+
+		cursor: pointer;
+
+		&:hover {
+			background-color: hsl(var(--card));
+		}
+
+		&._active {
+			background-color: hsl(var(--card));
+		}
+	}
+}
+</style>
