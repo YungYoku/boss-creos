@@ -22,6 +22,14 @@ const routes: Array<RouteRecordRaw> = [
 				},
 			},
 			{
+				path: '/new-project',
+				name: 'NewProject',
+				component: () => import('@/views/newProject.vue'),
+				meta: {
+					rules: ['auth', 'customer']
+				}
+			},
+			{
 				path: '/project/:id',
 				name: 'Project',
 				component: () => import('@/views/project.vue'),
@@ -38,11 +46,19 @@ const routes: Array<RouteRecordRaw> = [
 				}
 			},
 			{
-				path: '/new-project',
-				name: 'NewProject',
-				component: () => import('@/views/newProject.vue'),
+				path: '/new-creative',
+				name: 'NewCreative',
+				component: () => import('@/views/newCreative.vue'),
 				meta: {
 					rules: ['auth', 'customer']
+				}
+			},
+			{
+				path: '/creative/:id',
+				name: 'Creative',
+				component: () => import('@/views/creative.vue'),
+				meta: {
+					rules: []
 				}
 			},
 			{

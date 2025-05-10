@@ -14,7 +14,6 @@
 			:columns-m="2"
 			:columns-s="1"
 		>
-			<CreativeCard/>
 			<template v-if="loadingProject">
 				<EmptyProjectCard
 					v-for="i in 8"
@@ -43,7 +42,7 @@ import { ref } from 'vue'
 
 import { IProject, IProjects } from '@/interfaces/Project.ts'
 import { Grid } from '@/components/structures'
-import { EmptyProjectCard, ProjectCard, CreativeCard } from '@/components/blocks'
+import { EmptyProjectCard, ProjectCard } from '@/components/blocks'
 import { Text } from '@/components/elements'
 import { Http, Datetime } from '@/plugins'
 

@@ -1,6 +1,6 @@
 type data = number | string | boolean | object | Array<number | string | boolean | object>
 
-class LocalStorage {
+class Storage {
 	constructor() {
 	}
 
@@ -20,4 +20,4 @@ class LocalStorage {
 	}
 }
 
-export default new LocalStorage()
+export default new Storage()

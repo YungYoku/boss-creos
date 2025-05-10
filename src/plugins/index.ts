@@ -2,7 +2,7 @@ import { datetimePlugin, datetime as Datetime } from './datetime.ts'
 import Form from './form.ts'
 import { formatPlugin, format as Format } from './format.ts'
 import Http from './http.ts'
-import LocalStorage from './localStorage.ts'
+import Storage from './storage.ts'
 import Screen from './screen.ts'
 
 export {
@@ -12,6 +12,6 @@ export {
 	formatPlugin,
 	Format,
 	Http,
-	LocalStorage,
+	Storage,
 	Screen
 }

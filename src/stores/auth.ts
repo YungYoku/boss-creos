@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { emptyUser, IUser } from '@/interfaces/User'
-import { LocalStorage } from '@/plugins'
+import { Storage } from '@/plugins'
 
 export interface State {
     user: IUser
@@ -11,14 +11,14 @@ export const useAuthStore = defineStore('auth', {
 	state: (): State => <State>({
 		user: {
 			...emptyUser,
-			...(localStorage.user ? JSON.parse(localStorage.user) : {}),
+			...( Storage.load('user') ?? {}),
 		},
 
-		token: localStorage.token ?? '',
+		token: Storage.load('token') ?? '',
 	}),
 
 	getters: {
-		isLoggedIn: state => state.token.length > 0,
+		isLoggedIn: state => state.token?.length > 0,
 		isCustomer: state => state.user.role === 'customer',
 		isExecutor: state => state.user.role === 'executor',
 		isAdmin: state => state.user.role === 'admin',
@@ -53,7 +53,7 @@ export const useAuthStore = defineStore('auth', {
 	actions: {
 		setToken(token: string) {
 			this.token = token
-			LocalStorage.write('token', token)
+			Storage.write('token', token)
 		},
 
 		setUser(user: IUser) {
@@ -61,7 +61,7 @@ export const useAuthStore = defineStore('auth', {
 				...this.user,
 				...user
 			}
-			LocalStorage.write('user', {
+			Storage.write('user', {
 				role: user.role
 			})
 		},

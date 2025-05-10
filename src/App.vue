@@ -4,13 +4,14 @@
 </template>
 
 <script lang="ts" setup>
-import { watch } from 'vue'
+import { computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { useAuthStore } from '@/stores/auth'
-import { Http, LocalStorage } from '@/plugins'
+import { Http, Storage } from '@/plugins'
 import { IUserRefresh } from '@/interfaces/User'
 import { Toast } from '@/components/blocks'
+import { useColorMode } from '@vueuse/core'
 
 const auth = useAuthStore()
 const router = useRouter()
@@ -27,11 +28,17 @@ const loadUserInfo = async () => {
 				auth.setUser(record)
 			})
 			.catch(() => {
-				LocalStorage.clear()
+				Storage.clear()
 				auth.$reset()
 				router.push('/login')
 			})
 	}
 }
 watch(() => auth.isLoggedIn, loadUserInfo, { immediate: true })
+
+const mode = useColorMode({ selector: 'body' })
+const currentTheme = computed(() => mode.state.value)
+if (currentTheme.value === 'light') {
+	mode.value = 'dark'
+}
 </script>

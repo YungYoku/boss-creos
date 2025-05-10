@@ -7,25 +7,18 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useColorMode } from '@vueuse/core'
 import { useToast } from '@/stores/toast'
 
 import { Dropdown } from '@/components/structures'
 import { Avatar } from '@/components/blocks'
 import { useAuthStore } from '@/stores/auth.ts'
-import { Http, LocalStorage } from '@/plugins'
+import { Http, Storage } from '@/plugins'
 import { IReferralCode } from '@/interfaces/ReferralCode.ts'
 import { IUser } from '@/interfaces/User.ts'
 
 const auth = useAuthStore()
 const router = useRouter()
 const toast = useToast()
-
-const mode = useColorMode({ selector: 'body' })
-const currentTheme = computed(() => mode.state.value)
-if (currentTheme.value === 'light') {
-	mode.value = 'dark'
-}
 
 const generateRefCode = async () => {
 	let referral_code = ''
@@ -54,7 +47,7 @@ const copyRefLink = async () => {
 }
 
 const logout = () => {
-	LocalStorage.clear()
+	Storage.clear()
 	auth.$reset()
 	router.push('/login')
 }
@@ -79,6 +72,11 @@ const items = computed(() => [
 		{
 			text: 'Создать объявление',
 			to: '/new-project',
+			can: auth.isCustomer
+		},
+		{
+			text: 'Создать креатив',
+			to: '/new-creative',
 			can: auth.isCustomer
 		},
 		{
