@@ -61,7 +61,7 @@
 					size="s"
 					:loading="loading"
 				>
-					Цена: {{ creative.price }}₽
+					Цена: {{ creative.price }}$
 				</Text>
 
 				<span/>

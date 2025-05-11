@@ -28,53 +28,53 @@
 				</Text>
 
 				<Input
-					v-model="project.price.value"
+					v-model="creative.price.value"
 					:disabled="loading"
-					:error="project.price.error"
+					:error="creative.price.error"
 					label="Цена"
 				/>
 
 				<Select
-					v-model="project.geo.value"
+					v-model="creative.geo.value"
 					:disabled="loading"
-					:error="project.geo.error"
+					:error="creative.geo.error"
 					label="Гео"
 					:items="geoItems"
 				/>
 
 				<Select
-					v-model="project.slot.value"
+					v-model="creative.slot.value"
 					:disabled="loading"
-					:error="project.slot.error"
+					:error="creative.slot.error"
 					label="Слот"
 				/>
 
 				<Select
-					v-model="project.type.value"
+					v-model="creative.type.value"
 					:disabled="loading"
-					:error="project.type.error"
+					:error="creative.type.error"
 					:items="creativeTypeItems"
 					label="Вид крео"
 				/>
 
-				<Input
-					v-model="project.price.value"
+				<Checkbox
+					v-model="creative.watermark.value"
 					:disabled="loading"
-					:error="project.price.error"
+					:error="creative.watermark.error"
 					label="Водяной знак"
 				/>
 
-				<Input
-					v-model="project.price.value"
+				<InputFile
+					v-model="creative.preview.value"
 					:disabled="loading"
-					:error="project.price.error"
+					:error="creative.preview.error"
 					label="Обложка"
 				/>
 
-				<Input
-					v-model="project.price.value"
+				<InputFile
+					v-model="creative.video.value"
 					:disabled="loading"
-					:error="project.price.error"
+					:error="creative.video.error"
 					label="Креатив"
 				/>
 			</Grid>
@@ -91,7 +91,9 @@ import { useToast } from '@/stores/toast'
 import { Grid, Island } from '@/components/structures'
 import {
 	Input,
+	InputFile,
 	Button,
+	Checkbox,
 	Select
 } from '@/components/blocks'
 import { Http, Form } from '@/plugins'
@@ -100,12 +102,12 @@ import { emptyCreative, ICreative } from '@/interfaces/Creative.ts'
 
 const auth = useAuthStore()
 
-const project = Form<ICreative>({ ...emptyCreative })
+const creative = Form<ICreative>({ ...emptyCreative })
 
 const router = useRouter()
 const toast = useToast()
 
-watch(() => auth.user.id, () => project.creator.value = auth.user.id, { immediate: true })
+watch(() => auth.user.id, () => creative.creator.value = auth.user.id, { immediate: true })
 
 const loading = ref(false)
 const create = async () => {
@@ -115,15 +117,17 @@ const create = async () => {
 	}
 
 	loading.value = true
-	project.clearErrors()
+	creative.clearErrors()
+
+	creative.creator.value = auth.user.id
 
 	await Http
-		.post<ICreative>('/collections/creatives/records', project.get())
+		.post<ICreative>('/collections/creatives/records', creative.get())
 		.then(response => {
 			router.push(`/creative/${response.id}`)
 		})
 		.catch(({ data }) => {
-			project.setErrors(data)
+			creative.setErrors(data)
 
 			toast.set('Ошибка при создании объявления')
 

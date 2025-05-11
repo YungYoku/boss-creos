@@ -1,3 +1,5 @@
+import { IFile } from '@/interfaces/File.ts'
+
 export interface IMessage {
 	id: string
 	collectionId: string
@@ -9,8 +11,6 @@ export interface IMessage {
 	user: string
 	checked: boolean
 	expand?:{
-		file?: {
-			value: File
-		}
+		file?: IFile
 	}
 }

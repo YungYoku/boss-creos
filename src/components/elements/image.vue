@@ -2,30 +2,29 @@
 	<img
 		:src="image"
 		:alt="alt"
-		:loading="local ? 'eager' : 'lazy'"
+		:loading="typeof props.src === 'string' ? 'eager' : 'lazy'"
 	>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { IFile } from '@/interfaces/File.ts'
 
-const props = defineProps({
-	src: {
-		type: String,
-		default: ''
-	},
-	alt: {
-		type: String,
-		default: ''
-	},
-	local: {
-		type: Boolean,
-		default: false
-	}
+interface Props {
+	src: string | IFile,
+	alt?: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+	src: '',
+	alt: ''
 })
 
 const image = computed(() => {
-	if (props.local) return props.src
-	return `${import.meta.env.VITE_API}/files/${props.src}`
+	const src = props.src
+
+	if (typeof src === 'string') return src
+
+	return `${import.meta.env.VITE_API}/files/${src.collectionId}/${src.id}/${src.file}`
 })
 </script>

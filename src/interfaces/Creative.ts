@@ -1,6 +1,7 @@
 import { IUser } from '@/interfaces/User.ts'
 import { IChat } from '@/interfaces/Chat.ts'
 import { IProjectProposal } from '@/interfaces/Project.ts'
+import { IFile } from '@/interfaces/File.ts'
 
 export interface ICreativeProposal {
 	id: string
@@ -59,11 +60,16 @@ export interface ICreative {
 	type: 'video' | 'static' | 'pwa'
 	geo: string
 	slot: string
+	preview: string
+	watermark: boolean
+	video: string
 	expand?: {
 		creator?: IUser
 		proposals?: Array<IProjectProposal>
 		geo?: IGeo
 		slot?: ISlot
+		preview?: IFile
+		video?: IFile
 	}
 }
 
@@ -80,6 +86,9 @@ export const emptyCreative: ICreative = {
 	type: 'video',
 	geo: '',
 	slot: '',
+	preview: '',
+	watermark: false,
+	video: '',
 	expand: {
 		proposals: []
 	}

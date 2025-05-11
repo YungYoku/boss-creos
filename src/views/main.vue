@@ -9,7 +9,7 @@
 		</Text>
 		<Grid
 			v-if="creatives.length || loadingProject"
-			:columns-xl="4"
+			:columns-xl="3"
 			:columns-l="3"
 			:columns-m="2"
 			:columns-s="1"
@@ -53,6 +53,7 @@ const loadProject = async () => {
 
 	await Http
 		.get<ICreatives>('/collections/creatives/records', {
+			expand: ['preview', 'creator'],
 			perPage: 12
 		})
 		.then(res => {
