@@ -8,6 +8,7 @@ const Checkbox = defineAsyncComponent(() => import('./checkbox.vue'))
 const CreativeCard = defineAsyncComponent(() => import('./creativeCard.vue'))
 const DatePicker = defineAsyncComponent(() => import('./datePicker.vue'))
 const EmptyProjectCard = defineAsyncComponent(() => import('./emptyProjectCard.vue'))
+const EmptyCreativeCard = defineAsyncComponent(() => import('./emptyCreativeCard.vue'))
 const Input = defineAsyncComponent(() => import('./input.vue'))
 const InputFile = defineAsyncComponent(() => import('./inputFile.vue'))
 const ProjectCard = defineAsyncComponent(() => import('./projectCard.vue'))
@@ -33,6 +34,7 @@ export {
 	CreativeCard,
 	DatePicker,
 	EmptyProjectCard,
+	EmptyCreativeCard,
 	Input,
 	InputFile,
 	ProjectCard,

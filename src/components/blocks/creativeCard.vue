@@ -1,5 +1,8 @@
 <template>
-	<Grid class="creative-card">
+	<router-link
+		:to="`/creative/${creative.id}`"
+		class="creative-card"
+	>
 		<Grid vertical>
 			<div class="creative-card__video"/>
 
@@ -24,7 +27,7 @@
 				class="creative-card__info"
 			>
 				<div class="creative-card__price">
-					25$
+					{{ creative.price }}$
 				</div>
 
 				<div class="creative-card__detailed">
@@ -32,14 +35,23 @@
 				</div>
 			</Grid>
 		</Grid>
-	</grid>
+	</router-link>
 </template>
 
 <script setup lang="ts">
+import { PropType } from 'vue'
 import { Grid } from '@/components/structures'
 import { User } from '@/components/blocks'
+import { Icon } from '@/components/elements'
 import { emptyUser } from '@/interfaces/User.ts'
-import Icon from '@/components/elements/icon.vue'
+import { ICreative } from '@/interfaces/Creative.ts'
+
+defineProps({
+	creative: {
+		type: Object as PropType<ICreative>,
+		required: true
+	},
+})
 </script>
 
 <style scoped lang="scss">

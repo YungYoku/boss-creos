@@ -8,23 +8,23 @@
 			Фильтры
 		</Text>
 		<Grid
-			v-if="projects.length || loadingProject"
+			v-if="creatives.length || loadingProject"
 			:columns-xl="4"
 			:columns-l="3"
 			:columns-m="2"
 			:columns-s="1"
 		>
 			<template v-if="loadingProject">
-				<EmptyProjectCard
+				<EmptyCreativeCard
 					v-for="i in 8"
 					:key="i"
 				/>
 			</template>
 			<template v-else>
-				<ProjectCard
-					v-for="project in projects"
-					:key="project.id"
-					:project="project"
+				<CreativeCard
+					v-for="creative in creatives"
+					:key="creative.id"
+					:creative="creative"
 				/>
 			</template>
 		</Grid>
@@ -40,28 +40,23 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import { IProject, IProjects } from '@/interfaces/Project.ts'
+import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
 import { Grid } from '@/components/structures'
-import { EmptyProjectCard, ProjectCard } from '@/components/blocks'
+import { EmptyCreativeCard, CreativeCard } from '@/components/blocks'
 import { Text } from '@/components/elements'
-import { Http, Datetime } from '@/plugins'
+import { Http } from '@/plugins'
 
 const loadingProject = ref(true)
-const projects = ref<Array<IProject>>([])
+const creatives = ref<Array<ICreative>>([])
 const loadProject = async () => {
 	loadingProject.value = true
 
-	const filter = `(status='created' && deadline>='${Datetime.get(new Date())}')`
-	const encodedFilter = encodeURIComponent(filter)
-
 	await Http
-		.get<IProjects>('/collections/projects/records', {
-			filter: encodedFilter,
-			expand: ['creator', 'type', 'discipline'],
+		.get<ICreatives>('/collections/creatives/records', {
 			perPage: 12
 		})
 		.then(res => {
-			projects.value = res.items
+			creatives.value = res.items
 		})
 
 	loadingProject.value = false

@@ -30,6 +30,22 @@ export const emptyProposal: ICreativeProposal = {
 	price: 0
 }
 
+export interface IGeo {
+	id: string
+	collectionId: string
+	collectionName: string
+	name: string
+}
+
+export interface ISlot {
+	id: string
+	collectionId: string
+	collectionName: string
+	created: string
+	updated: string
+	name: string
+}
+
 export interface ICreative {
 	id: string
 	collectionId: string
@@ -40,9 +56,14 @@ export interface ICreative {
 	creator: string
 	price: number
 	proposals: Array<string>
+	type: 'video' | 'static' | 'pwa'
+	geo: string
+	slot: string
 	expand?: {
 		creator?: IUser
 		proposals?: Array<IProjectProposal>
+		geo?: IGeo
+		slot?: ISlot
 	}
 }
 
@@ -56,6 +77,9 @@ export const emptyCreative: ICreative = {
 	title: '',
 	price: 0,
 	proposals: [],
+	type: 'video',
+	geo: '',
+	slot: '',
 	expand: {
 		proposals: []
 	}

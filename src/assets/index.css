@@ -81,9 +81,12 @@
 body {
 	color: hsl(var(--foreground));
 
+	background-color: #000000;
 	background-image: url("@/assets/img/bg.webp");
-	background-repeat: repeat-y;
-	background-size: cover;
+	background-repeat: no-repeat;
+	background-position-x: left;
+	background-position-y: top;
+	background-size: 100% auto;
 }
 
 a,

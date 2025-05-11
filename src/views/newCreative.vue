@@ -5,12 +5,7 @@
 		gap="l"
 	>
 		<Grid :columns="[1, '100px']">
-			<Input
-				v-model.trim="project.title.value"
-				:disabled="loading"
-				:error="project.title.error"
-				label="Название"
-			/>
+			<div/>
 
 			<Button
 				:disabled="loading"
@@ -29,7 +24,7 @@
 					size="m"
 					:loading="loading"
 				>
-					Информация о заказе
+					Добавить креатив
 				</Text>
 
 				<Input
@@ -37,6 +32,50 @@
 					:disabled="loading"
 					:error="project.price.error"
 					label="Цена"
+				/>
+
+				<Select
+					v-model="project.geo.value"
+					:disabled="loading"
+					:error="project.geo.error"
+					label="Гео"
+					:items="geoItems"
+				/>
+
+				<Select
+					v-model="project.slot.value"
+					:disabled="loading"
+					:error="project.slot.error"
+					label="Слот"
+				/>
+
+				<Select
+					v-model="project.type.value"
+					:disabled="loading"
+					:error="project.type.error"
+					:items="creativeTypeItems"
+					label="Вид крео"
+				/>
+
+				<Input
+					v-model="project.price.value"
+					:disabled="loading"
+					:error="project.price.error"
+					label="Водяной знак"
+				/>
+
+				<Input
+					v-model="project.price.value"
+					:disabled="loading"
+					:error="project.price.error"
+					label="Обложка"
+				/>
+
+				<Input
+					v-model="project.price.value"
+					:disabled="loading"
+					:error="project.price.error"
+					label="Креатив"
 				/>
 			</Grid>
 		</Island>
@@ -53,6 +92,7 @@ import { Grid, Island } from '@/components/structures'
 import {
 	Input,
 	Button,
+	Select
 } from '@/components/blocks'
 import { Http, Form } from '@/plugins'
 import { Text } from '@/components/elements'
@@ -90,4 +130,14 @@ const create = async () => {
 			loading.value = false
 		})
 }
+
+const geoItems = [
+	{ id: '0', name: 'Ru' }
+]
+
+const creativeTypeItems = [
+	{ id: 'video', name: 'Video' },
+	{ id: 'static', name: 'Static' },
+	{ id: 'pwa', name: 'PWA' },
+]
 </script>

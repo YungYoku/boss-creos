@@ -6,31 +6,21 @@
 		>
 			<Logo class="header__logo"/>
 
-			<div/>
+			<div class="header__nav">
+				<div>Главная</div>
+				<div>Магазин</div>
+				<div>Биржа</div>
+				<div>Реклама</div>
+				<div>Контакты</div>
+			</div>
 
-			<nav class="header__nav">
-				<template v-if="!auth.isLoggedIn">
-					<router-link
-						v-for="link in authLinks"
-						:key="link.text"
-						:to="link.to"
-					>
-						{{ link.text }}
-					</router-link>
-				</template>
-
-				<Button
-					v-if="auth.isCustomer"
-					variant="positive"
-					to="/new-project"
+			<nav class="header__account">
+				<router-link
+					v-if="!auth.isLoggedIn"
+					to="/login"
 				>
-					<Icon
-						name="plus"
-						:colors="['light', 'light']"
-					/>
-				</Button>
-
-				<Notifications v-if="auth.isLoggedIn"/>
+					Авторизация
+				</router-link>
 
 				<UserDropdown v-if="auth.isLoggedIn"/>
 			</nav>
@@ -42,17 +32,10 @@
 import { useAuthStore } from '@/stores/auth.ts'
 
 import { Grid } from '@/components/structures'
-import { UserDropdown, Notifications, Button } from '@/components/blocks'
-import { Logo, Icon } from '@/components/elements'
+import { UserDropdown } from '@/components/blocks'
+import { Logo } from '@/components/elements'
 
 const auth = useAuthStore()
-
-const authLinks = [
-	{
-		text: 'Авторизация',
-		to: '/login',
-	}
-]
 </script>
 
 <style scoped lang="scss">
@@ -62,6 +45,14 @@ const authLinks = [
 	padding: 5px 0;
 
 	&__nav {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		gap: 10px;
+	}
+
+	&__account {
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
