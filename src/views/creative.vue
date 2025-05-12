@@ -45,58 +45,25 @@
 			</template>
 		</Grid>
 
-		<Island>
-			<Grid
-				vertical
-				:columns="1"
-			>
-				<Text
-					size="m"
-					:loading="loading"
-				>
-					Информация о заказе
-				</Text>
+		<Grid :columns="['400px', 1]">
+			<CreativeCard
+				:creative="creative"
+				can-buy
+			/>
 
-				<Text
-					size="s"
-					:loading="loading"
-				>
-					Цена: {{ creative.price }}$
-				</Text>
+			<div class="creative__info">
+				<div class="creative__name">
+					Название
+				</div>
 
-				<span/>
-
-				<Text
-					size="s"
-					:loading="loading"
-				>
-					Создано: {{ $date(created) }}
-				</Text>
-
-				<span/>
-
-				<Grid
-					v-if="creative.expand?.creator"
-					:columns="[0, 0]"
-					ver-align="center"
-				>
-					<Text
-						size="s"
-						:loading="loading"
-					>
-						Заказчик:
-					</Text>
-
-					<UserCard
-						link
-						:user="creative.expand.creator"
-						:loading="loading"
-					/>
-				</Grid>
-			</Grid>
-		</Island>
+				<div class="creative__name">
+					Описание
+				</div>
+			</div>
+		</Grid>
 	</Grid>
 
+	
 	<ModalDeleteConfirmation
 		v-if="deleteConfirmationModal.show"
 		@remove="remove"
@@ -120,12 +87,13 @@ import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useToast } from '@/stores/toast'
 
-import { Grid, Island } from '@/components/structures'
+import { Grid } from '@/components/structures'
 import { ModalDeleteConfirmation, ModalMakeProposal } from '@/components/sections'
-import { Button, User as UserCard } from '@/components/blocks'
-import { PageTitle, Text } from '@/components/elements'
+import { Button, } from '@/components/blocks'
+import { PageTitle } from '@/components/elements'
 import { Http } from '@/plugins'
 import { emptyCreative, ICreative, ICreativeProposal } from '@/interfaces/Creative.ts'
+import CreativeCard from '@/components/blocks/creativeCard.vue'
 
 const router = useRouter()
 
@@ -139,7 +107,7 @@ const loadProject = async () => {
 
 	await Http
 		.get<ICreative>(`/collections/creatives/records/${id}`, {
-			expand: ['creator', 'executor', 'proposals', 'discipline', 'type', 'university']
+			expand: ['creator', 'preview']
 		})
 		.then(response => {
 			creative.value = response
@@ -210,8 +178,6 @@ const isAlreadyProposed = computed(() => {
 
 	return proposal !== undefined
 })
-
-const created = computed(() => new Date(creative.value.created))
 
 const deleteConfirmationModal = reactive<{
 	show: boolean

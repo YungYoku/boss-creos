@@ -121,10 +121,10 @@ const removeAvatar = () => loadImage('')
 
 	overflow: hidden;
 
-	background-color: #444444;
+	background-color: #27272B;
 	background-position: center;
 	background-size: cover;
-	border-radius: 50%;
+	border-radius: 20%;
 
 	&__image {
 		max-width: 100%;
@@ -163,17 +163,17 @@ const removeAvatar = () => loadImage('')
 	}
 
 	&._s {
-		min-width: 32px;
-		max-width: 32px;
-		min-height: 32px;
-		max-height: 32px;
+		min-width: 24px;
+		max-width: 24px;
+		min-height: 24px;
+		max-height: 24px;
 	}
 
 	&._m {
-		min-width: 48px;
-		max-width: 48px;
-		min-height: 48px;
-		max-height: 48px;
+		min-width: 40px;
+		max-width: 40px;
+		min-height: 40px;
+		max-height: 40px;
 	}
 
 	&._l {

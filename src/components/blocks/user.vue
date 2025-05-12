@@ -15,14 +15,19 @@
 		:to="`/users/${user.id}`"
 	>
 		<Avatar
-			size="s"
+			size="m"
 			:user="user"
 		/>
-		{{ user.name }}
 
-		<template v-if="showingSurname">
-			{{ user.surname }}
-		</template>
+		<div class="user__info">
+			<div class="user__name">
+				{{ user.name }}
+			</div>
+
+			<div class="user__bought-amount">
+				Купили {{boughtAmount}} раз
+			</div>
+		</div>
 	</component>
 </template>
 
@@ -36,14 +41,14 @@ interface Props {
 	user: IUser,
 	loading?: boolean
 	link?: boolean
-	showingSurname?: boolean
+	boughtAmount?: number
 }
 
 withDefaults(defineProps<Props>(), {
 	user: () => ({ ...emptyUser }),
 	loading: false,
 	link: false,
-	showingSurname: false
+	boughtAmount: 0
 })
 </script>
 
@@ -53,6 +58,22 @@ withDefaults(defineProps<Props>(), {
 	justify-content: flex-start;
 	align-items: center;
 	gap: 10px;
+
+	&__info {
+		display: flex;
+		flex-direction: column;
+		line-height: 1.5;
+	}
+
+	&__name {
+		font-size: 14px;
+		color: #E5E5E7;
+	}
+
+	&__bought-amount {
+		font-size: 11px;
+		color: #AFAFB7;
+	}
 
 	&._link {
 		cursor: pointer;

@@ -1,18 +1,28 @@
 <template>
 	<header class="header">
 		<Grid
-			:columns-xl="[1, 2, 1]"
-			:columns-s="[1, 1]"
+			:columns-xl="['300px', 2, 1]"
+			:columns-s="['300px', 1]"
 		>
 			<Logo class="header__logo"/>
 
-			<div class="header__nav">
-				<div>Главная</div>
-				<div>Магазин</div>
-				<div>Биржа</div>
-				<div>Реклама</div>
-				<div>Контакты</div>
-			</div>
+			<nav class="header__nav">
+				<router-link to="/">
+					Главная
+				</router-link>
+				<router-link to="/">
+					Магазин
+				</router-link>
+				<router-link to="/">
+					Биржа
+				</router-link>
+				<router-link to="/">
+					Реклама
+				</router-link>
+				<router-link to="/">
+					Контакты
+				</router-link>
+			</nav>
 
 			<nav class="header__account">
 				<router-link
@@ -46,7 +56,7 @@ const auth = useAuthStore()
 
 	&__nav {
 		display: flex;
-		justify-content: center;
+		justify-content: flex-start;
 		align-items: center;
 
 		gap: 10px;

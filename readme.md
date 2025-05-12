@@ -1,4 +1,4 @@
-# College freelance
+# Boss creos
 
 ## 1. Clone project and submodules
 

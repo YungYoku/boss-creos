@@ -1,8 +1,5 @@
 <template>
-	<router-link
-		:to="`/creative/${creative.id}`"
-		class="creative-card"
-	>
+	<div class="creative-card">
 		<Image
 			v-if="creative.expand?.preview"
 			class="creative-card__preview"
@@ -26,13 +23,23 @@
 				{{ creative.price }}$
 			</div>
 
-			<div class="creative-card__detailed">
-				Подробнее
+			<div
+				v-if="canBuy"
+				class="creative-card__action"
+			>
+				Купить
 			</div>
+			<router-link
+				v-else
+				:to="`/creative/${creative.id}`"
+				class="creative-card__action"
+			>
+				Подробнее
+			</router-link>
 		</div>
 
 		<div class="creative-card__fade"/>
-	</router-link>
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -48,11 +55,17 @@ defineProps({
 		type: Object as PropType<ICreative>,
 		required: true
 	},
+	canBuy: {
+		type: Boolean,
+		default: false
+	}
 })
 </script>
 
 <style scoped lang="scss">
 .creative-card {
+	max-width: 400px;
+
 	position: relative;
 
 	padding: 16px 8px;
@@ -85,7 +98,7 @@ defineProps({
 		justify-content: space-between;
 		align-items: center;
 
-		margin: -40px 10px 0 10px;
+		margin: -37px 10px 0 10px;
 	}
 	
 	&__info {
@@ -103,16 +116,16 @@ defineProps({
 	}
 
 	&__info,
-	&__detailed {
+	&__action {
 		border-radius: 14px;
 	}
 
 	&__price,
-	&__detailed {
+	&__action {
 		padding: 12px;
 	}
 
-	&__detailed {
+	&__action {
 		width: 160px;
 
 		text-align: center;
@@ -129,7 +142,7 @@ defineProps({
 		width: 100%;
 		height: 200px;
 
-		background: linear-gradient(to top, rgba(15, 15, 16, 1) 60px, transparent);
+		background: linear-gradient(to top, rgba(15, 15, 16, 1) 80px, transparent);
 	}
 }
 </style>
