@@ -73,6 +73,16 @@ export interface ICreative {
 	}
 }
 
+export interface IBasket {
+	id: string
+	collectionId: string
+	collectionName: string
+	created: string
+	updated: string
+	creative: ICreative
+	geo: Array<IGeo>
+}
+
 export const emptyCreative: ICreative = {
 	collectionId: '',
 	collectionName: '',

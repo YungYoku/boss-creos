@@ -5,7 +5,9 @@
 			class="creative-card__preview"
 			:src="creative.expand.preview"
 		/>
-		
+
+		<div class="creative-card__fade"/>
+
 		<div class="creative-card__user">
 			<User
 				link
@@ -18,17 +20,24 @@
 			/>
 		</div>
 
+		<SelectLive
+			v-if="forSale"
+			class="creative-card__select-geo"
+			label="Указать гео"
+			api="slots"
+		/>
+
 		<div class="creative-card__info">
 			<div class="creative-card__price">
 				{{ creative.price }}$
 			</div>
 
-			<div
-				v-if="canBuy"
+			<button
+				v-if="forSale"
 				class="creative-card__action"
 			>
 				Купить
-			</div>
+			</button>
 			<router-link
 				v-else
 				:to="`/creative/${creative.id}`"
@@ -37,25 +46,22 @@
 				Подробнее
 			</router-link>
 		</div>
-
-		<div class="creative-card__fade"/>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { PropType } from 'vue'
-import { User } from '@/components/blocks'
-import { Icon } from '@/components/elements'
+import { User, SelectLive } from '@/components/blocks'
+import { Icon, Image } from '@/components/elements'
 import { emptyUser } from '@/interfaces/User.ts'
 import { ICreative } from '@/interfaces/Creative.ts'
-import Image from '@/components/elements/image.vue'
 
 defineProps({
 	creative: {
 		type: Object as PropType<ICreative>,
 		required: true
 	},
-	canBuy: {
+	forSale: {
 		type: Boolean,
 		default: false
 	}
@@ -65,9 +71,6 @@ defineProps({
 <style scoped lang="scss">
 .creative-card {
 	max-width: 400px;
-
-	position: relative;
-
 	padding: 16px 8px;
 	overflow: hidden;
 
@@ -75,30 +78,29 @@ defineProps({
 	border: 1px solid #1D1D20;
 	border-radius: 16px;
 
-	&__user,
-	&__info {
-		position: relative;
-		z-index: 2;
-	}
-
 	&__preview {
-		position: relative;
-		z-index: 1;
-
 		width: 100%;
 		max-width: 100%;
 
+		background: linear-gradient(to top, rgba(15, 15, 16, 1) 80px, transparent);
 		border-radius: 10px;
 		object-fit: cover;
 		aspect-ratio: 1 / 1;
 	}
 
 	&__user {
+		position: relative;
+		z-index: 2;
+
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 
-		margin: -37px 10px 0 10px;
+		margin: -40px 10px 15px 10px;
+	}
+
+	&__select-geo {
+		margin-bottom: 5px;
 	}
 	
 	&__info {
@@ -126,7 +128,7 @@ defineProps({
 	}
 
 	&__action {
-		width: 160px;
+		width: 158px;
 
 		text-align: center;
 
@@ -134,15 +136,14 @@ defineProps({
 	}
 
 	&__fade {
-		position: absolute;
-		bottom: 0;
-		left: 0;
+		position: relative;
 		z-index: 1;
 
 		width: 100%;
-		height: 200px;
+		height: 80px;
+		margin: -80px 0 0 0;
 
-		background: linear-gradient(to top, rgba(15, 15, 16, 1) 80px, transparent);
+		background: linear-gradient(to top, rgba(15, 15, 16, 1) 5px, transparent);
 	}
 }
 </style>

@@ -45,18 +45,18 @@
 			</template>
 		</Grid>
 
-		<Grid :columns="['400px', 1]">
+		<Grid :columns="['430px', 1]">
 			<CreativeCard
 				:creative="creative"
-				can-buy
+				for-sale
 			/>
 
 			<div class="creative__info">
 				<div class="creative__name">
-					Название
+					{{ creative.expand?.slot?.name }}
 				</div>
 
-				<div class="creative__name">
+				<div class="creative__description">
 					Описание
 				</div>
 			</div>
@@ -107,7 +107,7 @@ const loadProject = async () => {
 
 	await Http
 		.get<ICreative>(`/collections/creatives/records/${id}`, {
-			expand: ['creator', 'preview']
+			expand: ['creator', 'preview', 'slot']
 		})
 		.then(response => {
 			creative.value = response
@@ -187,3 +187,13 @@ const deleteConfirmationModal = reactive<{
 const showDeleteConfirmation = () => deleteConfirmationModal.show = true
 const hideDeleteConfirmation = () => deleteConfirmationModal.show = false
 </script>
+
+<style scoped lang="scss">
+.creative {
+	&__name {
+		font-size: 40px;
+		line-height: 1.5;
+		font-weight: 600;
+	}
+}
+</style>

@@ -42,11 +42,12 @@
 					:items="geoItems"
 				/>
 
-				<Select
+				<SelectLive
 					v-model="creative.slot.value"
 					:disabled="loading"
 					:error="creative.slot.error"
 					label="Слот"
+					api="slots"
 				/>
 
 				<Select
@@ -99,6 +100,7 @@ import {
 import { Http, Form } from '@/plugins'
 import { Text } from '@/components/elements'
 import { emptyCreative, ICreative } from '@/interfaces/Creative.ts'
+import SelectLive from '@/components/blocks/selectLive.vue'
 
 const auth = useAuthStore()
 

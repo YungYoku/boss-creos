@@ -2,6 +2,7 @@ import { IReferralCode } from '@/interfaces/ReferralCode.ts'
 import { IProject } from '@/interfaces/Project.ts'
 import { IRating } from '@/interfaces/Rating.ts'
 import { INotification } from '@/interfaces/Notification.ts'
+import { IBasket } from '@/interfaces/Creative.ts'
 
 export interface IUser {
     avatar: string
@@ -24,11 +25,13 @@ export interface IUser {
     favorite: Array<string>
     rating: Array<string>
 	notifications: Array<string>
+	baskets: Array<IBasket>
     expand?: {
         referral_code?: IReferralCode
         favorite?: Array<IProject>
         rating?: Array<IRating>
-		notifications: Array<INotification>
+		notifications?: Array<INotification>
+		baskets?: Array<IBasket>
     }
 }
 
@@ -57,7 +60,8 @@ export const emptyUser: IUser = {
 	energy: 0,
 	favorite: [],
 	referral_code: '',
-	notifications: []
+	notifications: [],
+	baskets: []
 }
 
 export interface IUsers {
