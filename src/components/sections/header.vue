@@ -25,6 +25,10 @@
 			</nav>
 
 			<nav class="header__account">
+				<router-link to="/shopping-cart">
+					Корзина
+				</router-link>
+
 				<router-link
 					v-if="!auth.isLoggedIn"
 					to="/login"

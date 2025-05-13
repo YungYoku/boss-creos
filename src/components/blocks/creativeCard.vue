@@ -53,8 +53,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, PropType } from 'vue'
-import { User, SelectLive } from '@/components/blocks'
+import { PropType, ref } from 'vue'
+import { SelectLive, User } from '@/components/blocks'
 import { Icon, Image } from '@/components/elements'
 import { emptyUser } from '@/interfaces/User.ts'
 import { ICreative } from '@/interfaces/Creative.ts'

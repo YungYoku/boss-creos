@@ -1,18 +1,115 @@
 <template>
-	<div
-		v-for="basket in user.user.expand?.baskets"
-		:key="basket.id"
-	>
-		{{ basket.expand?.creative?.id }}
+	<div class="shopping-cart">
+		<div
+			v-for="basket in user.user.expand?.baskets"
+			:key="basket.id"
+			class="shopping-cart__creative"
+		>
+			<Image
+				v-if="basket.expand?.creative?.expand?.preview"
+				class="shopping-cart__creative-image"
+				:src="basket.expand.creative.expand.preview"
+			/>
+
+			<div class="shopping-cart__creative-info">
+				<div class="shopping-cart__creative-name">
+					{{ basket.expand?.creative?.expand?.slot?.name }}
+				</div>
+
+				<div class="shopping-cart__creative-geo">
+					Geo:
+					<span
+						v-for="(geo, index) in basket.expand?.geo"
+						:key="geo.id"
+						class="shopping-cart__creative-geo-item"
+					>
+						{{ geo.name }}
+						<template v-if="index < (basket?.expand?.geo?.length ?? 0) - 1">
+							/
+						</template>
+					</span>
+				</div>
+			</div>
+
+			<button class="shopping-cart__creative-edit">
+				Ред
+			</button>
+		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth.ts'
+import { Image } from '@/components/elements'
 
 const user = useAuthStore()
 </script>
 
 <style scoped lang="scss">
+.shopping-cart {
+	display: flex;
+	flex-direction: column;
 
+	padding: 24px 15px;
+
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.08) 100%),
+	radial-gradient(50% 100% at 50% 0%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+	border: 1px solid;
+	border-radius: 10px;
+	border-image-source: linear-gradient(135.28deg, rgba(255, 255, 255, 0.3) -128.53%, rgba(255, 255, 255, 0) 75.12%);
+
+	&__creative {
+		display: flex;
+		align-items: center;
+
+		width: 370px;
+		padding: 0 15px 0 0;
+
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.08) 100%),
+		radial-gradient(50% 100% at 50% 0%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+		border: 1px solid;
+		border-radius: 10px;
+		border-image-source: linear-gradient(135.28deg, rgba(255, 255, 255, 0.3) -128.53%, rgba(255, 255, 255, 0) 75.12%);
+		gap: 12px;
+	}
+
+	&__creative-image {
+		max-width: 40px;
+		max-height: 40px;
+		aspect-ratio: 1/1;
+
+		border-radius: 10px;
+	}
+
+	&__creative-info {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__creative-name {
+		font-size: 10px;
+	}
+
+	&__creative-geo {
+		font-size: 8px;
+		color: #AFAFB7;
+	}
+
+	&__creative-geo-item {
+		text-transform: uppercase;
+	}
+
+	&__creative-edit {
+		width: 70px;
+		height: 25px;
+		margin-left: auto;
+
+		font-size: 8px;
+		color: #9297A0;
+
+		background: transparent;
+		border: 1px solid #FFFFFF1A;
+		border-radius: 8px;
+	}
+}
 </style>
