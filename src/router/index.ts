@@ -86,6 +86,14 @@ const routes: Array<RouteRecordRaw> = [
 				}
 			},
 			{
+				path: '/shopping-cart',
+				name: 'ShoppingCard',
+				component: () => import('@/views/shoppingCart.vue'),
+				meta: {
+					rules: ['auth']
+				}
+			},
+			{
 				path: '/users/:id',
 				name: 'User',
 				component: () => import('@/views/user.vue'),

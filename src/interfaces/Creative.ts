@@ -79,8 +79,12 @@ export interface IBasket {
 	collectionName: string
 	created: string
 	updated: string
-	creative: ICreative
-	geo: Array<IGeo>
+	creative: string
+	geo: Array<string>
+	expand?: {
+		creative?: ICreative
+		geo?: Array<IGeo>
+	}
 }
 
 export const emptyCreative: ICreative = {
