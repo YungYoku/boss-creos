@@ -22,9 +22,11 @@
 
 		<SelectLive
 			v-if="forSale"
+			v-model="geo"
 			class="creative-card__select-geo"
 			label="Указать гео"
-			api="slots"
+			api="geo"
+			multiple
 		/>
 
 		<div class="creative-card__info">
@@ -35,6 +37,7 @@
 			<button
 				v-if="forSale"
 				class="creative-card__action"
+				@click="addToBasket"
 			>
 				Купить
 			</button>
@@ -50,13 +53,14 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from 'vue'
+import { ref, PropType } from 'vue'
 import { User, SelectLive } from '@/components/blocks'
 import { Icon, Image } from '@/components/elements'
 import { emptyUser } from '@/interfaces/User.ts'
 import { ICreative } from '@/interfaces/Creative.ts'
+import { Http } from '@/plugins'
 
-defineProps({
+const props = defineProps({
 	creative: {
 		type: Object as PropType<ICreative>,
 		required: true
@@ -66,13 +70,21 @@ defineProps({
 		default: false
 	}
 })
+
+const geo = ref([])
+
+const addToBasket = async () => {
+	await Http.post('/baskets/add', {
+		creative: props.creative?.id,
+		geo: [...geo.value]
+	})
+}
 </script>
 
 <style scoped lang="scss">
 .creative-card {
 	max-width: 400px;
 	padding: 16px 8px;
-	overflow: hidden;
 
 	background: #0F0F10;
 	border: 1px solid #1D1D20;

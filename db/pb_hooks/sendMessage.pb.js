@@ -1,39 +1,35 @@
-routerAdd('POST', '/api/send-message/:chatId', (c) => {
-	const chatId = c.pathParam('chatId')
-	const chat = $app.dao().findRecordById('chats', chatId)
+routerAdd('POST', '/api/send-message/{chatId}', (c) => {
+	const chatId = c.request.pathValue('chatId')
+	const chat = $app.findRecordById('chats', chatId)
 	const messages = chat.get('messages')
 
 
-	const token = c.request().header.get('Authorization')
-	const user = $app.dao().findAuthRecordByToken(token, $app.settings().recordAuthToken.secret)
+	const token = c.request.header.get('Authorization')
+	const user = $app.findAuthRecordByToken(token, 'auth')
 	const userId = user.get('id')
 
 
-	const data = $apis.requestInfo(c).data
+	const data = c.requestInfo().body
 	const text = data.text
 	const file = data.file
 
 	const createMessage = () => {
-		const collection = $app.dao().findCollectionByNameOrId('messages')
+		const collection = $app.findCollectionByNameOrId('messages')
 
 		const record = new Record(collection)
 
-		const form = new RecordUpsertForm($app, record)
+		record.set('text', text)
+		record.set('file', file)
+		record.set('user', userId)
 
-		form.loadData({
-			'text': text,
-			'file': file,
-			'user': userId,
-		})
-
-		form.submit()
+		$app.save(record)
 
 		return record.get('id')
 	}
 
 	const updateChat = (messageId) => {
 		chat.set('messages', [...messages, messageId])
-		$app.dao().saveRecord(chat)
+		$app.save(chat)
 	}
 
 	const messageId = createMessage()

@@ -1,74 +1,72 @@
-routerAdd('POST', '/api/make-proposal/:offerId', (c) => {
-	const offerId = c.pathParam('offerId')
-	const offer = $app.dao().findRecordById('job_offers', offerId)
+routerAdd('POST', '/api/make-proposal/{offerId}', (c) => {
+	const offerId = c.request.pathValue('offerId')
+	const offer = $app.findRecordById('job_offers', offerId)
 	const offerProposals = offer.get('proposals')
 
 
-	const token = c.request().header.get('Authorization')
-	const user = $app.dao().findAuthRecordByToken(token, $app.settings().recordAuthToken.secret)
+	const token = c.request.header.get('Authorization')
+	const user = $app.findAuthRecordByToken(token, 'auth')
 	const userId = user.get('id')
 
 	const reduceEnergy = () => {
 		const energy = user.get('energy')
 		user.set('energy', energy - 1)
-		$app.dao().saveRecord(user)
+		$app.save(user)
 	}
 
 	const createChat = () => {
-		const collection = $app.dao().findCollectionByNameOrId('chats')
+		const collection = $app.findCollectionByNameOrId('chats')
 
 		const record = new Record(collection)
 
-		const form = new RecordUpsertForm($app, record)
-
-		form.submit()
+		$app.save(record)
 
 		return record.get('id')
 	}
 
-	const createProposal = (chatId) => {
-		const collection = $app.dao().findCollectionByNameOrId('job_offer_proposals')
+
+	const data = c.requestInfo().body
+	const price = data?.price ?? 0
+	const text = data?.text ?? ''
+
+	const createProposal = (chat) => {
+		const collection = $app.findCollectionByNameOrId('job_offer_proposals')
 
 		const record = new Record(collection)
 
-		const form = new RecordUpsertForm($app, record)
+		record.set('chat', chat)
+		record.set('user', userId)
+		record.set('price', price)
+		record.set('text', text)
 
-		form.loadData({
-			'chat': chatId,
-			'user': userId
-		})
-
-		form.submit()
+		$app.save(record)
 
 		return record.get('id')
 	}
 
 	// Вынести в общий код для других роутов
-	const sendNotification = () => {
+	const sendNotification = (link = '') => {
 		const createNotification = () => {
-			const collection = $app.dao().findCollectionByNameOrId('notifications')
+			const collection = $app.findCollectionByNameOrId('notifications')
 
 			const record = new Record(collection)
 
-			const form = new RecordUpsertForm($app, record)
+			record.set('text', 'На ваше объявление откликнулись.')
+			record.set('link', link)
 
-			form.loadData({
-				'text': 'На ваше объявление откликнулись.'
-			})
-
-			form.submit()
+			$app.save(record)
 
 			return record.get('id')
 		}
 
 		const offerCreatorId = offer.get('creator')
-		const offerCreator = $app.dao().findRecordById('users', offerCreatorId)
+		const offerCreator = $app.findRecordById('users', offerCreatorId)
 
 		const offerCreatorNotifications = offerCreator.get('notifications')
 		const notificationId = createNotification()
 		offerCreator.set('notifications', [...offerCreatorNotifications, notificationId])
 
-		$app.dao().saveRecord(offerCreator)
+		$app.save(offerCreator)
 	}
 
 	reduceEnergy()
@@ -76,9 +74,9 @@ routerAdd('POST', '/api/make-proposal/:offerId', (c) => {
 	const proposalId = createProposal(chatId)
 
 	offer.set('proposals', [...offerProposals, proposalId])
-	$app.dao().saveRecord(offer)
-	$app.dao().expandRecord(offer, ['creator', 'proposals', 'discipline'], null)
-	sendNotification()
+	$app.save(offer)
+	$app.expandRecord(offer, ['creator', 'proposals', 'discipline'], null)
+	sendNotification('/made-offers')
 
 	return c.json(200, offer)
 })

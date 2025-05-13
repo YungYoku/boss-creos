@@ -2,9 +2,9 @@
 	<Select
 		v-model="value"
 		v-model:search="search"
-		:items="items"
-		:multiple="multiple"
-		:label="placeHolder"
+		:items
+		:multiple
+		:label
 		searchable
 		@update:search="handleContextChange"
 	/>
@@ -34,7 +34,7 @@ interface Props {
 	modelValue: Array<string> | string
 	error?: string | null
 	typeKey?: string
-	placeHolder?: string,
+	label?: string,
 	api: string,
 	filterFields?: Array<string>,
 	multiple?: boolean
@@ -44,7 +44,7 @@ const props = withDefaults(defineProps<Props>(), {
 	modelValue: () => ([]),
 	error: null,
 	typeKey: 'name',
-	placeHolder: 'Значение',
+	label: 'Значение',
 	api: '',
 	filterFields: () => (['id', 'name_lowercase']),
 	multiple: false
