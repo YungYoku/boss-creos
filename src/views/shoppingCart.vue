@@ -50,6 +50,8 @@ const user = useAuthStore()
 	display: flex;
 	flex-direction: column;
 
+	width: 800px;
+	max-width: 100%;
 	padding: 24px 15px;
 
 	background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.08) 100%),
@@ -62,7 +64,7 @@ const user = useAuthStore()
 		display: flex;
 		align-items: center;
 
-		width: 370px;
+		width: 100%;
 		padding: 0 15px 0 0;
 
 		background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.08) 100%),
@@ -74,8 +76,8 @@ const user = useAuthStore()
 	}
 
 	&__creative-image {
-		max-width: 40px;
-		max-height: 40px;
+		max-width: 57px;
+		max-height: 57px;
 		aspect-ratio: 1/1;
 
 		border-radius: 10px;
@@ -87,11 +89,11 @@ const user = useAuthStore()
 	}
 
 	&__creative-name {
-		font-size: 10px;
+		font-size: 14px;
 	}
 
 	&__creative-geo {
-		font-size: 8px;
+		font-size: 10px;
 		color: #AFAFB7;
 	}
 
@@ -100,11 +102,11 @@ const user = useAuthStore()
 	}
 
 	&__creative-edit {
-		width: 70px;
-		height: 25px;
+		width: 84px;
+		height: 30px;
 		margin-left: auto;
 
-		font-size: 8px;
+		font-size: 11px;
 		color: #9297A0;
 
 		background: transparent;
