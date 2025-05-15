@@ -94,7 +94,6 @@ const addToBasket = async () => {
 		width: 100%;
 		max-width: 100%;
 
-		background: linear-gradient(to top, rgba(15, 15, 16, 1) 80px, transparent);
 		border-radius: 10px;
 		object-fit: cover;
 		aspect-ratio: 1 / 1;

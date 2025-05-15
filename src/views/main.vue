@@ -4,30 +4,48 @@
 		:columns="1"
 		gap="l"
 	>
-		<Text size="l">
-			Фильтры
-		</Text>
-		<Grid
+		<div class="main__prologue">
+			<div class="main__prologue-info">
+				<div class="main__prologue-text">
+					<span>Закажи крео по своему ТЗ</span>
+					<span>Или выбери уже готовое прямо сейчас</span>
+				</div>
+			</div>
+			
+			<div class="main__prologue-creatives">
+				<CreativeCard
+					v-if="creatives[0]"
+					class="main__prologue-creative"
+					:creative="creatives[0]"
+				/>
+				<CreativeCard
+					v-if="creatives[1]"
+					class="main__prologue-creative"
+					:creative="creatives[1]"
+				/>
+			</div>
+		</div>
+
+		<div
 			v-if="creatives.length || loadingProject"
-			:columns-xl="3"
-			:columns-l="3"
-			:columns-m="2"
-			:columns-s="1"
+			class="main__creatives"
 		>
 			<template v-if="loadingProject">
 				<EmptyCreativeCard
 					v-for="i in 8"
 					:key="i"
+					class="main__creatives-item"
 				/>
 			</template>
 			<template v-else>
 				<CreativeCard
 					v-for="creative in creatives"
 					:key="creative.id"
+					class="main__creatives-item"
 					:creative="creative"
 				/>
 			</template>
-		</Grid>
+		</div>
 		<Text
 			v-else
 			size="xs"
@@ -39,10 +57,9 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-
 import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
 import { Grid } from '@/components/structures'
-import { EmptyCreativeCard, CreativeCard } from '@/components/blocks'
+import { CreativeCard, EmptyCreativeCard } from '@/components/blocks'
 import { Text } from '@/components/elements'
 import { Http } from '@/plugins'
 
@@ -64,3 +81,90 @@ const loadProject = async () => {
 }
 loadProject()
 </script>
+
+<style scoped lang="scss">
+.main {
+	&__prologue {
+		display: flex;
+		justify-content: space-between;
+
+		width: 1240px;
+		max-width: 100%;
+		min-height: 600px;
+		margin: 0 auto;
+		gap: 20px;
+	}
+
+	&__prologue-info {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	&__prologue-text {
+		display: flex;
+		flex-direction: column;
+
+		font-weight: 700;
+
+		span:nth-child(1) {
+			font-size: 32px;
+		}
+		span:nth-child(2) {
+			font-size: 20px;
+		}
+	}
+
+	&__prologue-creatives {
+		position: relative;
+
+		width: 50%;
+	}
+
+	&__prologue-creative {
+		position: absolute;
+		&:nth-child(1) {
+			right: 0;
+			z-index: 1;
+		}
+		&:nth-child(2) {
+			top: 90px;
+			left: 0;
+			z-index: 2;
+		}
+	}
+
+	&__creatives {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+
+		width: 1240px;
+		max-width: 100%;
+		gap: 20px;
+
+		margin: 0 auto;
+
+		@media (max-width: 1024px) {
+			gap: 15px;
+		}
+
+		@media (max-width: 600px) {
+			gap: 15px;
+		}
+	}
+
+	&__creatives-item {
+		max-width: calc(100% / 3 - 20px);
+
+		@media (max-width: 1024px) {
+			max-width: calc(100% / 2 - 10px);
+		}
+
+		@media (max-width: 600px) {
+			max-width: 100%;
+		}
+	}
+}
+</style>
