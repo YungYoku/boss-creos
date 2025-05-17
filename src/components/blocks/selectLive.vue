@@ -46,7 +46,7 @@ const props = withDefaults(defineProps<Props>(), {
 	typeKey: 'name',
 	label: 'Значение',
 	api: '',
-	filterFields: () => (['id', 'name_lowercase']),
+	filterFields: () => (['id', 'name']),
 	multiple: false
 })
 

@@ -25,7 +25,7 @@ export interface IUser {
     favorite: Array<string>
     rating: Array<string>
 	notifications: Array<string>
-	baskets: Array<IBasket>
+	baskets: Array<string>
     expand?: {
         referral_code?: IReferralCode
         favorite?: Array<IProject>

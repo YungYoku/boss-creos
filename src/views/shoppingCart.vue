@@ -1,5 +1,7 @@
 <template>
 	<div class="shopping-cart">
+		<span v-if="user.user.baskets.length === 0">Пусто</span>
+
 		<div
 			v-for="basket in user.user.expand?.baskets"
 			:key="basket.id"
@@ -31,15 +33,23 @@
 				</div>
 			</div>
 
-			<button class="shopping-cart__creative-edit">
+			<router-link
+				to="/shopping-cart/edit"
+				class="shopping-cart__creative-edit"
+			>
 				Ред
-			</button>
+			</router-link>
 		</div>
+
+		<Button>
+			Оплатить
+		</Button>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth.ts'
+import { Button } from '@/components/blocks'
 import { Image } from '@/components/elements'
 
 const user = useAuthStore()
@@ -102,6 +112,10 @@ const user = useAuthStore()
 	}
 
 	&__creative-edit {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
 		width: 84px;
 		height: 30px;
 		margin-left: auto;

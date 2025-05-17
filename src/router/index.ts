@@ -94,6 +94,14 @@ const routes: Array<RouteRecordRaw> = [
 				}
 			},
 			{
+				path: '/shopping-cart/edit',
+				name: 'EditShoppingCard',
+				component: () => import('@/views/editShoppingCart.vue'),
+				meta: {
+					rules: ['auth']
+				}
+			},
+			{
 				path: '/users/:id',
 				name: 'User',
 				component: () => import('@/views/user.vue'),
@@ -110,9 +118,9 @@ const routes: Array<RouteRecordRaw> = [
 				}
 			},
 			{
-				path: '/search',
-				name: 'Search',
-				component: () => import('@/views/search.vue'),
+				path: '/shop',
+				name: 'Shop',
+				component: () => import('@/views/shop.vue'),
 				meta: {
 					rules: []
 				}

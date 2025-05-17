@@ -137,7 +137,7 @@ loadProject()
 	&__creatives {
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: space-between;
+		justify-content: flex-start;
 		align-items: center;
 
 		width: 1240px;
@@ -156,10 +156,10 @@ loadProject()
 	}
 
 	&__creatives-item {
-		max-width: calc(100% / 3 - 20px);
+		max-width: calc((100% - 40px) / 3);
 
 		@media (max-width: 1024px) {
-			max-width: calc(100% / 2 - 10px);
+			max-width: calc((100% - 15px) / 2);
 		}
 
 		@media (max-width: 600px) {

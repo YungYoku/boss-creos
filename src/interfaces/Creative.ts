@@ -63,6 +63,7 @@ export interface ICreative {
 	preview: string
 	watermark: boolean
 	video: string
+	description: string
 	expand?: {
 		creator?: IUser
 		proposals?: Array<IProjectProposal>
@@ -103,6 +104,7 @@ export const emptyCreative: ICreative = {
 	preview: '',
 	watermark: false,
 	video: '',
+	description: '',
 	expand: {
 		proposals: []
 	}

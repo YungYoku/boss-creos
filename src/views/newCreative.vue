@@ -4,22 +4,8 @@
 		:columns="1"
 		gap="l"
 	>
-		<Grid :columns="[1, '100px']">
-			<div/>
-
-			<Button
-				:disabled="loading"
-				@click="create"
-			>
-				Создать
-			</Button>
-		</Grid>
-
 		<Island>
-			<Grid
-				vertical
-				:columns="1"
-			>
+			<Grid vertical>
 				<Text
 					size="m"
 					:loading="loading"
@@ -27,57 +13,115 @@
 					Добавить креатив
 				</Text>
 
-				<Input
-					v-model="creative.price.value"
+				<Grid :columns="2">
+					<Grid vertical>
+						<Input
+							v-model="creative.price.value"
+							:disabled="loading"
+							:error="creative.price.error"
+							label="Цена"
+						/>
+
+						<SelectLive
+							v-model="creative.geo.value"
+							:disabled="loading"
+							:error="creative.geo.error"
+							label="Гео"
+							api="geo"
+						/>
+
+						<SelectLive
+							v-model="creative.slot.value"
+							:disabled="loading"
+							:error="creative.slot.error"
+							label="Слот"
+							api="slots"
+						/>
+
+						<Select
+							v-model="creative.type.value"
+							:disabled="loading"
+							:error="creative.type.error"
+							:items="creativeTypeItems"
+							label="Вид крео"
+						/>
+
+						<Checkbox
+							v-model="creative.watermark.value"
+							:disabled="loading"
+							:error="creative.watermark.error"
+							label="Водяной знак"
+						/>
+
+						<InputFile
+							v-model="creative.preview.value"
+							:disabled="loading"
+							:error="creative.preview.error"
+							label="Обложка"
+						/>
+					</Grid>
+
+					<Grid vertical>
+						<Select
+							v-model="creative.geo.value"
+							:disabled="loading"
+							:error="creative.geo.error"
+							label="Размер"
+						/>
+
+						<SelectLive
+							v-model="creative.geo.value"
+							:disabled="loading"
+							:error="creative.geo.error"
+							label="Цена ресайза"
+							api="geo"
+						/>
+
+						<SelectLive
+							v-model="creative.slot.value"
+							:disabled="loading"
+							:error="creative.slot.error"
+							label="Рескин"
+							api="slots"
+						/>
+
+						<Select
+							v-model="creative.type.value"
+							:disabled="loading"
+							:error="creative.type.error"
+							:items="creativeTypeItems"
+							label="Цена рескина"
+						/>
+
+						<Checkbox
+							v-model="creative.watermark.value"
+							:disabled="loading"
+							:error="creative.watermark.error"
+							label="Подход"
+						/>
+
+						<InputFile
+							v-model="creative.video.value"
+							:disabled="loading"
+							:error="creative.video.error"
+							label="Загрузите крео"
+						/>
+					</Grid>
+				</Grid>
+
+				<Textarea
+					v-model="creative.description.value"
 					:disabled="loading"
-					:error="creative.price.error"
-					label="Цена"
+					:error="creative.description.error"
+					label="Описание"
 				/>
 
-				<Select
-					v-model="creative.geo.value"
+				<Button
 					:disabled="loading"
-					:error="creative.geo.error"
-					label="Гео"
-					:items="geoItems"
-				/>
-
-				<SelectLive
-					v-model="creative.slot.value"
-					:disabled="loading"
-					:error="creative.slot.error"
-					label="Слот"
-					api="slots"
-				/>
-
-				<Select
-					v-model="creative.type.value"
-					:disabled="loading"
-					:error="creative.type.error"
-					:items="creativeTypeItems"
-					label="Вид крео"
-				/>
-
-				<Checkbox
-					v-model="creative.watermark.value"
-					:disabled="loading"
-					:error="creative.watermark.error"
-					label="Водяной знак"
-				/>
-
-				<InputFile
-					v-model="creative.preview.value"
-					:disabled="loading"
-					:error="creative.preview.error"
-					label="Обложка"
-				/>
-
-				<InputFile
-					v-model="creative.video.value"
-					:disabled="loading"
-					:error="creative.video.error"
-					label="Креатив"
-				/>
+					@click="create"
+				>
+					Отправить на модерацию
+				</Button>
 			</Grid>
 		</Island>
 	</Grid>
@@ -95,7 +139,8 @@ import {
 	InputFile,
 	Button,
 	Checkbox,
-	Select
+	Select,
+	Textarea
 } from '@/components/blocks'
 import { Http, Form } from '@/plugins'
 import { Text } from '@/components/elements'
@@ -136,10 +181,6 @@ const create = async () => {
 			loading.value = false
 		})
 }
-
-const geoItems = [
-	{ id: '0', name: 'Ru' }
-]
 
 const creativeTypeItems = [
 	{ id: 'video', name: 'Video' },

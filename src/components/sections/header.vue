@@ -7,20 +7,14 @@
 			<Logo class="header__logo"/>
 
 			<nav class="header__nav">
-				<router-link to="/">
-					Главная
-				</router-link>
-				<router-link to="/">
-					Магазин
-				</router-link>
-				<router-link to="/">
-					Биржа
-				</router-link>
-				<router-link to="/">
-					Реклама
-				</router-link>
-				<router-link to="/">
-					Контакты
+				<router-link
+					v-for="item in nav"
+					:key="item.text"
+					class="header__nav-item"
+					exact-active-class="_active"
+					:to="item.to"
+				>
+					{{ item.text }}
 				</router-link>
 			</nav>
 
@@ -50,6 +44,31 @@ import { UserDropdown } from '@/components/blocks'
 import { Logo } from '@/components/elements'
 
 const auth = useAuthStore()
+
+const nav = [
+	{
+		text: 'Главная',
+		to: '/',
+	},
+	{
+		text: 'Магазин',
+		to: '/shop',
+	},
+	/*
+	{
+		text: 'Биржа',
+		to: '/',
+	},
+	{
+		text: 'Реклама',
+		to: '/',
+	},
+	{
+		text: 'Контакты',
+		to: '/',
+	},
+	*/
+]
 </script>
 
 <style scoped lang="scss">
@@ -64,6 +83,12 @@ const auth = useAuthStore()
 		align-items: center;
 
 		gap: 10px;
+	}
+	
+	&__nav-item {
+		&._active {
+			border-bottom: 1px solid #ffffff;
+		}
 	}
 
 	&__account {

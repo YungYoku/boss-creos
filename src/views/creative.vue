@@ -56,8 +56,16 @@
 					{{ creative.expand?.slot?.name }}
 				</div>
 
+				<div class="creative__info">
+					Creo ID: {{ creative.id }}
+				</div>
+
+				<div class="creative__info">
+					Geo: {{ creative.expand?.geo?.name }}
+				</div>
+
 				<div class="creative__description">
-					Описание
+					Описание: {{ creative.description }}
 				</div>
 			</div>
 		</Grid>
@@ -107,7 +115,7 @@ const loadProject = async () => {
 
 	await Http
 		.get<ICreative>(`/collections/creatives/records/${id}`, {
-			expand: ['creator', 'preview', 'slot']
+			expand: ['creator', 'preview', 'slot', 'geo']
 		})
 		.then(response => {
 			creative.value = response
@@ -194,6 +202,12 @@ const hideDeleteConfirmation = () => deleteConfirmationModal.show = false
 		font-size: 40px;
 		line-height: 1.5;
 		font-weight: 600;
+	}
+
+	&__info {
+		font-size: 16px;
+		line-height: 1;
+		font-weight: 400;
 	}
 }
 </style>

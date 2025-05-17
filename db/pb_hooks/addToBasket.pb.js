@@ -27,5 +27,5 @@ routerAdd('POST', '/api/baskets/add', (c) => {
 	const shoppingCardId = createShoppingCard()
 	updateUserInfo(shoppingCardId)
 
-	return c.json(200, {})
+	return c.json(200, user)
 })
