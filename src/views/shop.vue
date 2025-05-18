@@ -32,12 +32,6 @@
 				label="Оплата до"
 			/>
 
-			<Checkbox
-				v-model="form.tutoring.value"
-				:error="form.tutoring.error"
-				label="Репетиторство"
-			/>
-
 			<Button
 				:disabled="loading"
 				@click="loadData"
@@ -53,24 +47,24 @@
 			</Button>
 		</Grid>
 
-		<template v-if="form.entity.value === 'project'">
+		<template v-if="form.entity.value === 'creative'">
 			<Grid
-				v-if="projects.length || loading"
+				v-if="creatives.length || loading"
 				:columns-xl="3"
 				:columns-l="2"
 				:columns-m="1"
 			>
 				<template v-if="loading">
-					<EmptyProjectCard
+					<EmptyCreativeCard
 						v-for="i in 8"
 						:key="i"
 					/>
 				</template>
 				<template v-else>
-					<ProjectCard
-						v-for="project in projects"
-						:key="project.id"
-						:project="project"
+					<CreativeCard
+						v-for="creative in creatives"
+						:key="creative.id"
+						:creative="creative"
 						:loading="loading"
 					/>
 				</template>
@@ -100,34 +94,30 @@
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
-import { useAuthStore } from '@/stores/auth.ts'
 import { useSearchStore } from '@/stores/search.ts'
 
 import { Grid } from '@/components/structures'
 import {
-	EmptyProjectCard,
-	ProjectCard,
+	EmptyCreativeCard,
+	CreativeCard,
 	Button,
 	Input,
 	Select,
-	UserCard,
-	Checkbox,
+	UserCard
 } from '@/components/blocks'
-import { IProject, IProjects } from '@/interfaces/Project.ts'
-import { Datetime, Form, Http } from '@/plugins'
+import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
+import { Form, Http } from '@/plugins'
 import { emptyUser, IUser, IUsers } from '@/interfaces/User.ts'
 
 interface SearchForm {
 	priceFrom: string
 	priceTo: string
-	entity: 'project' | 'executor'
-	tutoring: boolean
+	entity: 'creative' | 'executor'
 }
 
-const projects = ref<Array<IProject>>([])
+const creatives = ref<Array<ICreative>>([])
 const executors = ref<Array<IUser>>(Array(8).fill(emptyUser))
 
-const authStore = useAuthStore()
 const searchStore = useSearchStore()
 
 const _search = ref('')
@@ -145,26 +135,23 @@ watch(() => searchStore.search, (value) => {
 const form = Form<SearchForm>({
 	priceFrom: '',
 	priceTo: '',
-	entity: 'project',
-	tutoring: false
+	entity: 'creative'
 })
 const entitiesItems = [
-	{ id: 'project', name: 'Объявление' },
+	{ id: 'creative', name: 'Креатив' },
 	{ id: 'executor', name: 'Исполнитель' }
 ]
 
 const loading = ref(true)
-const loadProjects = async () => {
+const loadCreatives = async () => {
 	const filters = []
 	let filter = ''
 	let encodedFilter = ''
 
-	if (!authStore.isAdmin) filters.push(`status='created' && deadline>='${Datetime.get(new Date())}'`)
 	const searchValue = search.value?.toLowerCase?.()
-	if (searchValue) filters.push(`(title_lowercase~'${searchValue}' || description_lowercase~'${searchValue}')`)
+	if (searchValue) filters.push(`(description~'${searchValue}')`)
 	if (form.priceFrom.value) filters.push(`price>=${form.priceFrom.value}`)
 	if (form.priceTo.value) filters.push(`price<=${form.priceTo.value}`)
-	filters.push(`tutoring=${form.tutoring.value}`)
 	if (filters.length) {
 		filter = filters.reduce((acc, filter) => filter ? `${acc} && ${filter}` : acc, '')
 		filter = filter.slice(4)
@@ -173,13 +160,13 @@ const loadProjects = async () => {
 	}
 
 	await Http
-		.get<IProjects>('/collections/projects/records', {
+		.get<ICreatives>('/collections/creatives/records', {
 			filter: encodedFilter,
-			expand: ['creator', 'type', 'discipline'],
+			expand: ['preview', 'creator'],
 			perPage: 12
 		})
 		.then(res => {
-			projects.value = res.items
+			creatives.value = res.items
 		})
 }
 
@@ -187,7 +174,7 @@ const loadUsers = async () => {
 	await Http
 		.get<IUsers>('/collections/users/records', {
 			filter: '(role=\'executor\')',
-			expand: ['university', 'rating', 'disciplines'],
+			expand: ['rating'],
 			perPage: 12
 		})
 		.then(res => {
@@ -199,8 +186,8 @@ const loadData = async () => {
 	loading.value = true
 	searchStore.setLoading(true)
 
-	if (form.entity.value === 'project') {
-		await loadProjects()
+	if (form.entity.value === 'creative') {
+		await loadCreatives()
 	} else {
 		await loadUsers()
 	}

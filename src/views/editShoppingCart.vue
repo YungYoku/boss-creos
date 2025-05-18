@@ -1,59 +1,68 @@
 <template>
-	<div class="shopping-cart">
+	<div class="edit-shopping-cart">
 		<span v-if="user.user.baskets.length === 0">Пусто</span>
 
 		<div
 			v-for="basket in user.user.expand?.baskets"
 			:key="basket.id"
-			class="shopping-cart__creative"
+			class="edit-shopping-cart__creative"
 		>
-			<Image
-				v-if="basket.expand?.creative?.expand?.preview"
-				class="shopping-cart__creative-image"
-				:src="basket.expand.creative.expand.preview"
-			/>
+			<div class="edit-shopping-cart__creative-head">
+				<Image
+					v-if="basket.expand?.creative?.expand?.preview"
+					class="edit-shopping-cart__creative-image"
+					:src="basket.expand.creative.expand.preview"
+				/>
 
-			<div class="shopping-cart__creative-info">
-				<div class="shopping-cart__creative-name">
-					{{ basket.expand?.creative?.expand?.slot?.name }}
-				</div>
+				<div class="edit-shopping-cart__creative-info">
+					<div class="edit-shopping-cart__creative-name">
+						{{ basket.expand?.creative?.expand?.slot?.name }}
+					</div>
 
-				<div class="shopping-cart__creative-geo">
-					Geo:
-					<span
-						v-for="(geo, index) in basket.expand?.geo"
-						:key="geo.id"
-						class="shopping-cart__creative-geo-item"
-					>
-						{{ geo.name }}
-						<template v-if="index < (basket?.expand?.geo?.length ?? 0) - 1">
-							/
-						</template>
-					</span>
+					<div class="edit-shopping-cart__creative-geo">
+						Geo:
+						<span
+							v-for="(geo, index) in basket.expand?.geo"
+							:key="geo.id"
+							class="edit-shopping-cart__creative-geo-item"
+						>
+							{{ geo.name }}
+							<template v-if="index < (basket?.expand?.geo?.length ?? 0) - 1">
+								/
+							</template>
+						</span>
+					</div>
 				</div>
 			</div>
 
-			<button class="shopping-cart__creative-edit">
-				Ред
+			<Textarea
+				v-if="basket.expand?.creative?.description !== undefined"
+				v-model="basket.expand.creative.description"
+				class="edit-shopping-cart__creative-description"
+				label="Описание"
+			/>
+
+			<button class="edit-shopping-cart__creative-edit">
+				Сохранить
 			</button>
 		</div>
 
-		<Button>
-			Оплатить
+		<Button to="/shopping-cart">
+			Вернуться
 		</Button>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth.ts'
-import { Button } from '@/components/blocks'
+import { Button, Textarea } from '@/components/blocks'
 import { Image } from '@/components/elements'
 
 const user = useAuthStore()
 </script>
 
 <style scoped lang="scss">
-.shopping-cart {
+.edit-shopping-cart {
 	display: flex;
 	flex-direction: column;
 
@@ -69,16 +78,23 @@ const user = useAuthStore()
 
 	&__creative {
 		display: flex;
+		flex-direction: column;
 		align-items: center;
-
-		width: 100%;
-		padding: 0 15px 0 0;
 
 		background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.08) 100%),
 		radial-gradient(50% 100% at 50% 0%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
 		border: 1px solid;
 		border-radius: 10px;
 		border-image-source: linear-gradient(135.28deg, rgba(255, 255, 255, 0.3) -128.53%, rgba(255, 255, 255, 0) 75.12%);
+	}
+
+	&__creative-head {
+		display: flex;
+		align-items: center;
+
+		width: 100%;
+		padding: 0 15px 0 0;
+
 		gap: 12px;
 	}
 
@@ -108,10 +124,13 @@ const user = useAuthStore()
 		text-transform: uppercase;
 	}
 
+	&__creative-description {
+		width: 100%;
+	}
+
 	&__creative-edit {
 		width: 84px;
 		height: 30px;
-		margin-left: auto;
 
 		font-size: 11px;
 		color: #9297A0;
