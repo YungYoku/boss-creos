@@ -42,7 +42,11 @@
 				label="Описание"
 			/>
 
-			<button class="edit-shopping-cart__creative-edit">
+			<button
+				v-if="basket.expand?.creative"
+				class="edit-shopping-cart__creative-edit"
+				@click="updateCreative(basket.expand.creative)"
+			>
 				Сохранить
 			</button>
 		</div>
@@ -57,8 +61,17 @@
 import { useAuthStore } from '@/stores/auth.ts'
 import { Button, Textarea } from '@/components/blocks'
 import { Image } from '@/components/elements'
+import { ICreative } from '@/interfaces/Creative.ts'
+import { Http } from '@/plugins'
 
 const user = useAuthStore()
+
+const updateCreative = async (creative: ICreative) => {
+	await Http
+		.patch<ICreative>(`/collections/creatives/records/${creative.id}`, creative)
+		.then(() => {
+		})
+}
 </script>
 
 <style scoped lang="scss">
