@@ -47,6 +47,15 @@ export interface ISlot {
 	name: string
 }
 
+export interface IApproach {
+	id: string
+	collectionId: string
+	collectionName: string
+	created: string
+	updated: string
+	name: string
+}
+
 export interface ICreative {
 	id: string
 	collectionId: string
@@ -64,13 +73,16 @@ export interface ICreative {
 	watermark: boolean
 	video: string
 	description: string
+	approach: string
+	ratio: '1:1' | '2:3' | '3:2' | '3:4' | '4:5' | '9:16' | '16:9'
 	expand?: {
 		creator?: IUser
 		proposals?: Array<IProjectProposal>
 		geo?: IGeo
 		slot?: ISlot
 		preview?: IFile
-		video?: IFile
+		video?: IFile,
+		approach?: IApproach
 	}
 }
 
@@ -105,6 +117,8 @@ export const emptyCreative: ICreative = {
 	watermark: false,
 	video: '',
 	description: '',
+	approach: '',
+	ratio: '1:1',
 	expand: {
 		proposals: []
 	}
