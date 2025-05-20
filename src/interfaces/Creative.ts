@@ -56,6 +56,8 @@ export interface IApproach {
 	name: string
 }
 
+export type Ratio = '1:1' | '2:3' | '3:2' | '3:4' | '4:5' | '9:16' | '16:9'
+
 export interface ICreative {
 	id: string
 	collectionId: string
@@ -74,7 +76,11 @@ export interface ICreative {
 	video: string
 	description: string
 	approach: string
-	ratio: '1:1' | '2:3' | '3:2' | '3:4' | '4:5' | '9:16' | '16:9'
+	ratio: Ratio
+	resize: boolean
+	resizePrice: number
+	reskin: boolean
+	reskinPrice: number
 	expand?: {
 		creator?: IUser
 		proposals?: Array<IProjectProposal>
@@ -119,6 +125,10 @@ export const emptyCreative: ICreative = {
 	description: '',
 	approach: '',
 	ratio: '1:1',
+	resize: false,
+	resizePrice: 0,
+	reskin: false,
+	reskinPrice: 0,
 	expand: {
 		proposals: []
 	}

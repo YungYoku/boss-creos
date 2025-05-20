@@ -63,41 +63,49 @@
 
 					<Grid vertical>
 						<Select
-							v-model="creative.geo.value"
+							v-model="creative.ratio.value"
 							:disabled="loading"
-							:error="creative.geo.error"
+							:error="creative.ratio.error"
+							:items="ratioItems"
 							label="Размер"
 						/>
 
-						<SelectLive
-							v-model="creative.geo.value"
+						<Checkbox
+							v-model="creative.resize.value"
 							:disabled="loading"
-							:error="creative.geo.error"
+							:error="creative.resize.error"
+							label="Ресайз"
+						/>
+
+						<Input
+							v-if="creative.resize.value"
+							v-model="creative.resizePrice.value"
+							:disabled="loading"
+							:error="creative.resizePrice.error"
 							label="Цена ресайза"
-							api="geo"
-						/>
-
-						<SelectLive
-							v-model="creative.slot.value"
-							:disabled="loading"
-							:error="creative.slot.error"
-							label="Рескин"
-							api="slots"
-						/>
-
-						<Select
-							v-model="creative.type.value"
-							:disabled="loading"
-							:error="creative.type.error"
-							:items="creativeTypeItems"
-							label="Цена рескина"
 						/>
 
 						<Checkbox
-							v-model="creative.watermark.value"
+							v-model="creative.reskin.value"
 							:disabled="loading"
-							:error="creative.watermark.error"
+							:error="creative.reskin.error"
+							label="Рескин"
+						/>
+
+						<Input
+							v-if="creative.reskin.value"
+							v-model="creative.reskinPrice.value"
+							:disabled="loading"
+							:error="creative.reskinPrice.error"
+							label="Цена рескина"
+						/>
+
+						<SelectLive
+							v-model="creative.approach.value"
+							:disabled="loading"
+							:error="creative.approach.error"
 							label="Подход"
+							api="approaches"
 						/>
 
 						<InputFile
@@ -134,15 +142,8 @@ import { useAuthStore } from '@/stores/auth'
 import { useToast } from '@/stores/toast'
 
 import { Grid, Island } from '@/components/structures'
-import {
-	Input,
-	InputFile,
-	Button,
-	Checkbox,
-	Select,
-	Textarea
-} from '@/components/blocks'
-import { Http, Form } from '@/plugins'
+import { Button, Checkbox, Input, InputFile, Select, Textarea } from '@/components/blocks'
+import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
 import { emptyCreative, ICreative } from '@/interfaces/Creative.ts'
 import SelectLive from '@/components/blocks/selectLive.vue'
@@ -187,4 +188,10 @@ const creativeTypeItems = [
 	{ id: 'static', name: 'Static' },
 	{ id: 'pwa', name: 'PWA' },
 ]
+
+const ratioItems = ['1:1', '2:3', '3:2', '3:4', '4:5', '9:16', '16:9']
+	.map(item => ({
+		id: item,
+		name: item
+	}))
 </script>

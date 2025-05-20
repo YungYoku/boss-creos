@@ -35,8 +35,20 @@
 				</div>
 			</div>
 
+			<Input
+				v-if="basket.expand?.creative?.resizePrice != undefined"
+				v-model="basket.expand.creative.resizePrice"
+				label="Цена ресайза"
+			/>
+
+			<Input
+				v-if="basket.expand?.creative?.reskinPrice != undefined"
+				v-model="basket.expand.creative.reskinPrice"
+				label="Цена рескина"
+			/>
+
 			<Textarea
-				v-if="basket.expand?.creative?.description !== undefined"
+				v-if="basket.expand?.creative?.description != undefined"
 				v-model="basket.expand.creative.description"
 				class="edit-shopping-cart__creative-description"
 				label="Описание"
@@ -59,7 +71,7 @@
 
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth.ts'
-import { Button, Textarea } from '@/components/blocks'
+import { Button, Input, Textarea } from '@/components/blocks'
 import { Image } from '@/components/elements'
 import { ICreative } from '@/interfaces/Creative.ts'
 import { Http } from '@/plugins'
