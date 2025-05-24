@@ -1,85 +1,84 @@
 <template>
 	<AuthLayout class="registration">
-		<Card
-			width="300px"
-			title="Регистрация"
-			@keyup.enter="register"
-		>
-			<Input
-				v-model.trim="form.email.value"
-				:error="form.email.error"
-				label="Почта"
-				type="text"
-			/>
-
-			<Input
-				v-model.trim="form.name.value"
-				:error="form.name.error"
-				label="Имя"
-				type="text"
-			/>
-
-			<Input
-				v-model.trim="form.username.value"
-				:error="form.username.error"
-				label="Имя пользователя"
-				type="text"
-			/>
-
-			<Input
-				v-model.trim="form.password.value"
-				:error="form.password.error"
-				label="Пароль"
-				type="password"
-				autocomplete="new-password"
-			/>
-
-			<Input
-				v-model.trim="form.passwordConfirm.value"
-				:error="form.passwordConfirm.error"
-				label="Повторите пароль"
-				type="password"
-				autocomplete="new-password"
-			/>
-
-			<Input
-				v-model.trim="refCode"
-				label="Реферальный код"
-			/>
-
-			<Select
-				v-model="form.role.value"
-				:error="form.role.error"
-				:items="roleItems"
-				label="Роль"
-				:clearable="false"
-			/>
-
-			<Button
-				:disabled="loading"
-				type="submit"
-				@click="register"
+		<div class="registration__content">
+			<Card
+				width="300px"
+				title="Регистрация"
+				@keyup.enter="register"
 			>
-				Зарегистрироваться
-			</Button>
+				<Input
+					v-model.trim="form.username.value"
+					:error="form.username.error"
+					label="Имя"
+					type="text"
+				/>
 
-			<template #footer>
-				<div class="registration__have-account">
-					<Text size="xs">
-						Есть аккаунт?
-					</Text>
-					<router-link
-						to="/login"
-						class="registration__link"
-					>
+				<Input
+					v-model.trim="form.telegram.value"
+					:error="form.telegram.error"
+					label="Telegram"
+					type="text"
+				/>
+
+				<Input
+					v-model.trim="form.email.value"
+					:error="form.email.error"
+					label="Почта"
+					type="text"
+				/>
+
+				<Input
+					v-model.trim="form.password.value"
+					:error="form.password.error"
+					label="Пароль"
+					type="password"
+					autocomplete="new-password"
+				/>
+
+				<Input
+					v-model.trim="form.passwordConfirm.value"
+					:error="form.passwordConfirm.error"
+					label="Повторите пароль"
+					type="password"
+					autocomplete="new-password"
+				/>
+
+				<Select
+					v-model="form.role.value"
+					:error="form.role.error"
+					:items="roleItems"
+					label="Роль"
+					:clearable="false"
+				/>
+
+				<Button
+					:disabled="loading"
+					type="submit"
+					@click="register"
+				>
+					Зарегистрироваться
+				</Button>
+
+				<template #footer>
+					<div class="registration__have-account">
 						<Text size="xs">
-							Войти
+							Есть аккаунт?
 						</Text>
-					</router-link>
-				</div>
-			</template>
-		</Card>
-	</AuthLayout>
+						<router-link
+							to="/login"
+							class="registration__link"
+						>
+							<Text size="xs">
+								Войти
+							</Text>
+						</router-link>
+					</div>
+				</template>
+			</Card>
+
+			<AuthSlots/>
+		</div>
+	</authlayout>
 </template>
 
 <script lang="ts" setup>
@@ -89,15 +88,16 @@ import { useToast } from '@/stores/toast'
 
 import { AuthLayout } from '@/components/layouts'
 import { Card } from '@/components/structures'
+import { AuthSlots } from '@/components/sections'
 import { Select, Input, Button } from '@/components/blocks'
 import { Text } from '@/components/elements'
 import { Http, Form } from '@/plugins'
 import { IUser } from '@/interfaces/User.ts'
 
 interface RegistrationForm {
-	email: string
-	name: string
 	username: string
+	telegram: string
+	email: string
 	password: string
 	passwordConfirm: string
 	role: string
@@ -106,9 +106,9 @@ interface RegistrationForm {
 }
 
 const form = Form<RegistrationForm>({
-	email: '',
-	name: '',
 	username: '',
+	telegram: '',
+	email: '',
 	password: '',
 	passwordConfirm: '',
 	role: 'customer',
@@ -160,6 +160,12 @@ const isRegistrationPossible = computed(() => {
 
 <style scoped lang="scss">
 .registration {
+	&__content {
+		display: flex;
+		align-items: center;
+		gap: 5%;
+	}
+
 	&__have-account {
 		text-align: center;
 	}

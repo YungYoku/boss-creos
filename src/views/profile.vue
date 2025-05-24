@@ -11,17 +11,10 @@
 		/>
 
 		<Input
-			v-model="form.name.value"
-			:error="form.name.error"
+			v-model="form.username.value"
+			:error="form.username.error"
 			:disabled="loading"
 			label="Имя"
-		/>
-
-		<Input
-			v-model="form.surname.value"
-			:error="form.surname.error"
-			:disabled="loading"
-			label="Фамилия"
 		/>
 
 		<Input

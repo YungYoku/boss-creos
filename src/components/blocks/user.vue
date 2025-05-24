@@ -21,11 +21,11 @@
 
 		<div class="user__info">
 			<div class="user__name">
-				{{ user.name }}
+				{{ user.username }}
 			</div>
 
 			<div class="user__bought-amount">
-				Купили {{boughtAmount}} раз
+				Купили {{ boughtAmount }} раз
 			</div>
 		</div>
 	</component>
@@ -62,6 +62,7 @@ withDefaults(defineProps<Props>(), {
 	&__info {
 		display: flex;
 		flex-direction: column;
+
 		line-height: 1.5;
 	}
 

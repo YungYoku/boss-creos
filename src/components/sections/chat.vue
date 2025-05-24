@@ -124,7 +124,7 @@
 			<Rating
 				v-if="project.status === 'ended'"
 				v-model="newRating"
-				:user="chatMember?.name"
+				:user="chatMember?.username"
 				:loading="loading"
 				@update:model-value="sendRating"
 				@back="back"

@@ -22,7 +22,7 @@
 							:user="rating.expand?.by"
 						/>
 						<div>
-							{{ rating.expand?.by?.name }} {{ rating.expand?.by?.surname }}
+							{{ rating.expand?.by?.username }}
 						</div>
 					</Grid>
 				</router-link>

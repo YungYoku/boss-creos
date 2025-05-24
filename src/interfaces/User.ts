@@ -14,9 +14,7 @@ export interface IUser {
     email: string
     emailVisibility: boolean
     id: string
-    name: string
     description: string
-    surname: string
     username: string
     verified: boolean
     role: 'admin' | 'customer' | 'executor' | 'guest'
@@ -26,6 +24,7 @@ export interface IUser {
     rating: Array<string>
 	notifications: Array<string>
 	baskets: Array<string>
+	telegram: string
     expand?: {
         referral_code?: IReferralCode
         favorite?: Array<IProject>
@@ -50,9 +49,7 @@ export const emptyUser: IUser = {
 	checked_at: new Date(),
 	emailVisibility: false,
 	id: '',
-	name: '',
 	description: '',
-	surname: '',
 	rating: [],
 	username: '',
 	verified: false,
@@ -61,7 +58,8 @@ export const emptyUser: IUser = {
 	favorite: [],
 	referral_code: '',
 	notifications: [],
-	baskets: []
+	baskets: [],
+	telegram: '',
 }
 
 export interface IUsers {

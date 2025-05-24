@@ -36,10 +36,9 @@ export const useAuthStore = defineStore('auth', {
 
 		},
 		isPersonalInfoIncomplete: state => {
-			const { name, surname } = state.user
+			const { username } = state.user
 			const rules = [
-				name.length > 0,
-				surname.length > 0,
+				username.length > 0,
 			]
 
 			for (const rule of rules) {

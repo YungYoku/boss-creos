@@ -1,4 +1,4 @@
-import stylisticJs from '@stylistic/eslint-plugin-js'
+import stylisticJs from '@stylistic/eslint-plugin'
 import js from '@eslint/js'
 import pluginVue from 'eslint-plugin-vue'
 import vueTsEslintConfig from '@vue/eslint-config-typescript'

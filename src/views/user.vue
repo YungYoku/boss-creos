@@ -36,7 +36,7 @@
 					:loading="loading"
 					size="m"
 				>
-					{{ user?.name }} {{ user?.surname }} | {{ user?.username }}
+					{{ user?.username }}
 				</Text>
 
 				<Grid :columns="['100px', '200px']">

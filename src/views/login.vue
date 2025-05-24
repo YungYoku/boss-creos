@@ -1,56 +1,60 @@
 <template>
 	<AuthLayout class="login">
-		<Card
-			width="300px"
-			title="Вход"
-			@keyup.enter="login"
-		>
-			<Input
-				v-model.trim="form.identity.value"
-				:error="form.identity.error"
-				label="Логин или почта"
-				type="text"
-			/>
-
-			<Input
-				v-model.trim="form.password.value"
-				:error="form.password.error"
-				label="Пароль"
-				type="password"
-			/>
-
-			<Button
-				:disabled="loading"
-				type="submit"
-				@click="login"
+		<div class="login__content">
+			<Card
+				width="300px"
+				title="Вход"
+				@keyup.enter="login"
 			>
-				Войти
-			</Button>
+				<Input
+					v-model.trim="form.identity.value"
+					:error="form.identity.error"
+					label="Логин или почта"
+					type="text"
+				/>
 
-			<template #footer>
-				<Text
-					size="xs"
-					class="login__no-account"
+				<Input
+					v-model.trim="form.password.value"
+					:error="form.password.error"
+					label="Пароль"
+					type="password"
+				/>
+
+				<Button
+					:disabled="loading"
+					type="submit"
+					@click="login"
 				>
-					Нет аккаунта?
-					<router-link
-						to="/registration"
-						class="login__link"
+					Войти
+				</Button>
+
+				<template #footer>
+					<Text
+						size="xs"
+						class="login__no-account"
 					>
-						Зарегистрироваться
-					</router-link>
-				</Text>
-
-				<router-link
-					class="login__link"
-					to="/login"
-				>
-					<Text size="xs">
-						Забыли пароль?
+						Нет аккаунта?
+						<router-link
+							to="/registration"
+							class="login__link"
+						>
+							Зарегистрироваться
+						</router-link>
 					</Text>
-				</router-link>
-			</template>
-		</Card>
+
+					<router-link
+						class="login__link"
+						to="/login"
+					>
+						<Text size="xs">
+							Забыли пароль?
+						</Text>
+					</router-link>
+				</template>
+			</Card>
+
+			<AuthSlots/>
+		</div>
 	</AuthLayout>
 </template>
 
@@ -62,6 +66,7 @@ import { useToast } from '@/stores/toast'
 
 import { AuthLayout } from '@/components/layouts'
 import { Card } from '@/components/structures'
+import { AuthSlots } from '@/components/sections'
 import { Input, Button } from '@/components/blocks'
 import { Text } from '@/components/elements'
 import { Http, Form } from '@/plugins'
@@ -114,6 +119,12 @@ const isLoginPossible = computed(() => {
 
 <style scoped lang="scss">
 .login {
+	&__content {
+		display: flex;
+		align-items: center;
+		gap: 5%;
+	}
+
 	&__no-account {
 		text-align: center;
 	}
