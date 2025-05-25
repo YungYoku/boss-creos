@@ -45,7 +45,14 @@
 					:creative="creative"
 				/>
 			</template>
+
+			<router-link
+				to="/shop"
+			>
+				Смотреть ещё
+			</router-link>
 		</div>
+
 		<Text
 			v-else
 			size="xs"

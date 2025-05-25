@@ -12,14 +12,6 @@
 				label="Поиск"
 			/>
 
-			<Select
-				v-model="form.entity.value"
-				:error="form.entity.error"
-				:items="entitiesItems"
-				label="Сущность"
-				:clearable="false"
-			/>
-
 			<Input
 				v-model="form.priceFrom.value"
 				:error="form.priceFrom.error"
@@ -36,7 +28,7 @@
 				:disabled="loading"
 				@click="loadData"
 			>
-				Поиск
+				Применить
 			</Button>
 
 			<Button
@@ -47,48 +39,28 @@
 			</Button>
 		</Grid>
 
-		<template v-if="form.entity.value === 'creative'">
-			<Grid
-				v-if="creatives.length || loading"
-				:columns-xl="3"
-				:columns-l="2"
-				:columns-m="1"
-			>
-				<template v-if="loading">
-					<EmptyCreativeCard
-						v-for="i in 8"
-						:key="i"
-					/>
-				</template>
-				<template v-else>
-					<CreativeCard
-						v-for="creative in creatives"
-						:key="creative.id"
-						:creative="creative"
-						:loading="loading"
-					/>
-				</template>
-			</Grid>
-			<span v-else>Нет доступных объявлений.</span>
-		</template>
-
-		<template v-else>
-			<Grid
-				v-if="executors.length || loading"
-				:columns-xl="3"
-				:columns-l="2"
-				:columns-m="1"
-			>
-				<UserCard
-					v-for="executor in executors"
-					:key="executor.id"
-					:user="executor"
-					:loading="loading"
-					link
+		<Grid
+			v-if="creatives.length || loading"
+			:columns-xl="3"
+			:columns-l="2"
+			:columns-m="1"
+		>
+			<template v-if="loading">
+				<EmptyCreativeCard
+					v-for="i in 8"
+					:key="i"
 				/>
-			</Grid>
-			<span v-else>Нет доступных исполнителей.</span>
-		</template>
+			</template>
+			<template v-else>
+				<CreativeCard
+					v-for="creative in creatives"
+					:key="creative.id"
+					:creative="creative"
+					:loading="loading"
+				/>
+			</template>
+		</Grid>
+		<span v-else>Нет доступных объявлений.</span>
 	</Grid>
 </template>
 
@@ -102,21 +74,16 @@ import {
 	CreativeCard,
 	Button,
 	Input,
-	Select,
-	UserCard
 } from '@/components/blocks'
 import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
 import { Form, Http } from '@/plugins'
-import { emptyUser, IUser, IUsers } from '@/interfaces/User.ts'
 
 interface SearchForm {
 	priceFrom: string
 	priceTo: string
-	entity: 'creative' | 'executor'
 }
 
 const creatives = ref<Array<ICreative>>([])
-const executors = ref<Array<IUser>>(Array(8).fill(emptyUser))
 
 const searchStore = useSearchStore()
 
@@ -135,12 +102,7 @@ watch(() => searchStore.search, (value) => {
 const form = Form<SearchForm>({
 	priceFrom: '',
 	priceTo: '',
-	entity: 'creative'
 })
-const entitiesItems = [
-	{ id: 'creative', name: 'Креатив' },
-	{ id: 'executor', name: 'Исполнитель' }
-]
 
 const loading = ref(true)
 const loadCreatives = async () => {
@@ -170,30 +132,14 @@ const loadCreatives = async () => {
 		})
 }
 
-const loadUsers = async () => {
-	await Http
-		.get<IUsers>('/collections/users/records', {
-			filter: '(role=\'executor\')',
-			expand: ['rating'],
-			perPage: 12
-		})
-		.then(res => {
-			executors.value = res.items
-		})
-}
-
 const loadData = async () => {
 	loading.value = true
 	searchStore.setLoading(true)
 
-	if (form.entity.value === 'creative') {
-		await loadCreatives()
-	} else {
-		await loadUsers()
-	}
+	await loadCreatives()
 
 	loading.value = false
 	searchStore.setLoading(false)
 }
-watch(() => form.entity.value, loadData, { immediate: true })
+loadData()
 </script>

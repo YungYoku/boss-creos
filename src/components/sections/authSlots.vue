@@ -31,10 +31,16 @@
 	overflow: hidden;
 	gap: 20px;
 
+	transform: translateY(-50px);
+
 	&__column {
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
+
+		&:nth-child(2) {
+			transform: translateY(100px);
+		}
 	}
 
 	&__slot {
