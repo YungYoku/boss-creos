@@ -19,7 +19,10 @@
 			</nav>
 
 			<nav class="header__account">
-				<router-link to="/shopping-cart">
+				<router-link
+					v-if="auth.isLoggedIn"
+					to="/shopping-cart"
+				>
 					Корзина
 				</router-link>
 
@@ -74,7 +77,9 @@ const nav = [
 <style scoped lang="scss">
 .header {
     width: 100%;
+	max-width: 1240px;
     min-height: 48px;
+	margin: 0 auto;
 	padding: 5px 0;
 
 	&__nav {

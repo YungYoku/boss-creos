@@ -6,9 +6,26 @@
 	>
 		<div class="main__prologue">
 			<div class="main__prologue-info">
+				<div class="main__prologue-fee">
+					Комиссия 0%
+				</div>
+
 				<div class="main__prologue-text">
 					<span>Закажи крео по своему ТЗ</span>
 					<span>Или выбери уже готовое прямо сейчас</span>
+				</div>
+
+				<div class="main__prologue-buttons">
+					<div class="main__prologue-made-creatives">
+						Готовые крео
+					</div>
+					<div class="main__prologue-order-from-scratch">
+						Заказать с нуля
+					</div>
+				</div>
+
+				<div class="main__prologue-fb-approve">
+					100% аппрув на FB
 				</div>
 			</div>
 			
@@ -94,6 +111,7 @@ loadProject()
 	&__prologue {
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 
 		width: 1240px;
 		max-width: 100%;
@@ -103,14 +121,30 @@ loadProject()
 	}
 
 	&__prologue-info {
+		position: relative;
+
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 	}
 
+	&__prologue-fee {
+		position: absolute;
+		top: -60px;
+		right: -60px;
+
+		font-size: 15px;
+		font-weight: 700;
+		color: #F5FF00;
+
+		transform: rotate(20deg);
+	}
+
 	&__prologue-text {
 		display: flex;
 		flex-direction: column;
+
+		margin-bottom: 56px;
 
 		font-weight: 700;
 
@@ -122,6 +156,49 @@ loadProject()
 		}
 	}
 
+	&__prologue-buttons {
+		display: flex;
+		gap: 45px;
+	}
+
+	&__prologue-made-creatives {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		width: 240px;
+		height: 44px;
+
+		font-size: 12px;
+		font-weight: 700;
+		color:#000000;
+		text-transform: uppercase;
+
+		background-color: #F5FF00;
+	}
+
+	&__prologue-order-from-scratch {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		font-size: 12px;
+		font-weight: 700;
+	}
+
+	&__prologue-fb-approve {
+		position: absolute;
+		right: 25%;
+		bottom: -70px;
+
+		font-size: 12px;
+		font-weight: 700;
+		color: #F5FF00;
+		text-transform: uppercase;
+
+		transform: rotate(-4deg);
+	}
+
 	&__prologue-creatives {
 		position: relative;
 
@@ -129,12 +206,11 @@ loadProject()
 	}
 
 	&__prologue-creative {
-		position: absolute;
 		&:nth-child(1) {
-			right: 0;
-			z-index: 1;
+			margin: 0 0 90px auto;
 		}
 		&:nth-child(2) {
+			position: absolute;
 			top: 90px;
 			left: 0;
 			z-index: 2;
