@@ -56,7 +56,12 @@ export interface IApproach {
 	name: string
 }
 
-export type Ratio = '1:1' | '2:3' | '3:2' | '3:4' | '4:5' | '9:16' | '16:9'
+export type IRatio = '1:1' | '2:3' | '3:2' | '3:4' | '4:5' | '9:16' | '16:9'
+export const ratioItems = ['1:1', '2:3', '3:2', '3:4', '4:5', '9:16', '16:9']
+	.map(item => ({
+		id: item,
+		name: item
+	}))
 
 export interface ICreative {
 	id: string
@@ -76,7 +81,7 @@ export interface ICreative {
 	video: string
 	description: string
 	approach: string
-	ratio: Ratio
+	ratio: IRatio
 	resize: boolean
 	resizePrice: number
 	reskin: boolean

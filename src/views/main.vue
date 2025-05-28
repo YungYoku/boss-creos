@@ -3,6 +3,7 @@
 		vertical
 		:columns="1"
 		gap="l"
+		class="main"
 	>
 		<div class="main__prologue">
 			<div class="main__prologue-info">
@@ -64,18 +65,12 @@
 			</template>
 
 			<router-link
+				class="main__show-more"
 				to="/shop"
 			>
 				Смотреть ещё
 			</router-link>
 		</div>
-
-		<Text
-			v-else
-			size="xs"
-		>
-			Нет доступных объявлений.
-		</Text>
 	</Grid>
 </template>
 
@@ -84,7 +79,6 @@ import { ref } from 'vue'
 import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
 import { Grid } from '@/components/structures'
 import { CreativeCard, EmptyCreativeCard } from '@/components/blocks'
-import { Text } from '@/components/elements'
 import { Http } from '@/plugins'
 
 const loadingProject = ref(true)
@@ -94,7 +88,7 @@ const loadProject = async () => {
 
 	await Http
 		.get<ICreatives>('/collections/creatives/records', {
-			expand: ['preview', 'creator'],
+			expand: ['preview', 'video', 'creator'],
 			perPage: 12
 		})
 		.then(res => {
@@ -174,7 +168,10 @@ loadProject()
 		color:#000000;
 		text-transform: uppercase;
 
-		background-color: #F5FF00;
+		background-image: url('@/assets/img/button__main.webp');
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
 	}
 
 	&__prologue-order-from-scratch {
@@ -248,6 +245,10 @@ loadProject()
 		@media (max-width: 600px) {
 			max-width: 100%;
 		}
+	}
+
+	&__show-more {
+		margin: 0 auto;
 	}
 }
 </style>

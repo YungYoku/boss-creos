@@ -1,9 +1,10 @@
 <template>
 	<div class="creative-card">
-		<Image
-			v-if="creative.expand?.preview"
-			class="creative-card__preview"
-			:src="creative.expand.preview"
+		<Video
+			v-if="creative.expand?.video"
+			class="creative-card__video"
+			:src="creative.expand.video"
+			:preview="creative.expand.preview"
 		/>
 
 		<div class="creative-card__fade"/>
@@ -55,7 +56,7 @@
 <script setup lang="ts">
 import { PropType, ref } from 'vue'
 import { SelectLive, User } from '@/components/blocks'
-import { Icon, Image } from '@/components/elements'
+import { Icon, Video } from '@/components/elements'
 import { emptyUser } from '@/interfaces/User.ts'
 import { ICreative } from '@/interfaces/Creative.ts'
 import { Http } from '@/plugins'
@@ -90,7 +91,7 @@ const addToBasket = async () => {
 	border: 1px solid #1D1D20;
 	border-radius: 16px;
 
-	&__preview {
+	&__video {
 		width: 100%;
 		max-width: 100%;
 

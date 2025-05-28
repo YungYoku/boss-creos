@@ -18,7 +18,8 @@ const routes: Array<RouteRecordRaw> = [
 				name: 'Main',
 				component: () => import('@/views/main.vue'),
 				meta: {
-					rules: []
+					rules: [],
+					bgClass: 'main'
 				},
 			},
 			{
@@ -122,7 +123,8 @@ const routes: Array<RouteRecordRaw> = [
 				name: 'Shop',
 				component: () => import('@/views/shop.vue'),
 				meta: {
-					rules: []
+					rules: [],
+					bgClass: 'shop'
 				}
 			},
 			{
@@ -158,9 +160,17 @@ const router = createRouter({
 	routes,
 })
 
-router.beforeEach((to) => {
+const body = document.querySelector('body')
+
+router.beforeEach((to, from) => {
 	const authStore = useAuthStore()
 	const toRules = to.meta.rules as Array<string> ?? []
+
+
+	const previousBgClass = from.meta?.bgClass ?? 'default'
+	const currentBgClass = to.meta?.bgClass ?? 'default'
+	body?.classList.remove(previousBgClass + '-bg')
+	body?.classList.add(currentBgClass + '-bg')
 
 	if (toRules.length === 0) {
 		return true

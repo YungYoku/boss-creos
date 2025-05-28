@@ -82,11 +82,22 @@ body {
 	color: hsl(var(--foreground));
 
 	background-color: #000000;
-	background-image: url("@/assets/img/bg.webp");
 	background-repeat: no-repeat;
 	background-position-x: left;
 	background-position-y: top;
 	background-size: 100% auto;
+
+	&.main-bg {
+		background-image: url("@/assets/img/bg__main.webp");
+	}
+
+	&.shop-bg {
+		background-image: url("@/assets/img/bg__shop.webp");
+	}
+
+	&.default-bg {
+		background-image: url("@/assets/img/bg__default.webp");
+	}
 }
 
 a,

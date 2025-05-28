@@ -10,6 +10,7 @@ const PageTitle = defineAsyncComponent(() => import('./pageTitle.vue'))
 const Separator = defineAsyncComponent(() => import('./separator.vue'))
 const Skeleton = defineAsyncComponent(() => import('./skeleton.vue'))
 const Text = defineAsyncComponent(() => import('./text.vue'))
+const Video = defineAsyncComponent(() => import('./video.vue'))
 
 export {
 	Badge,
@@ -21,5 +22,6 @@ export {
 	PageTitle,
 	Separator,
 	Skeleton,
-	Text
+	Text,
+	Video
 }

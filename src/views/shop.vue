@@ -1,10 +1,9 @@
 <template>
 	<Grid
-		:columns-xl="['300px', 1]"
-		:columns-s="1"
+		:columns="1"
 	>
 		<Grid
-			vertical
+			:columns="4"
 			@keyup.enter="loadData"
 		>
 			<Input
@@ -12,17 +11,30 @@
 				label="Поиск"
 			/>
 
-			<Input
-				v-model="form.priceFrom.value"
-				:error="form.priceFrom.error"
-				label="Оплата от"
+			<SelectLive
+				v-model="form.geo.value"
+				label="Гео"
+				api="geo"
 			/>
 
-			<Input
-				v-model="form.priceTo.value"
-				:error="form.priceTo.error"
-				label="Оплата до"
+			<SelectLive
+				v-model="form.slot.value"
+				label="Слот"
+				api="slots"
 			/>
+
+			<SelectLive
+				v-model="form.approach.value"
+				label="Подход"
+				api="approaches"
+			/>
+
+			<Select
+				v-model="form.ratio.value"
+				label="Размер"
+				:items="ratioItems"
+			/>
+			
 
 			<Button
 				:disabled="loading"
@@ -69,18 +81,15 @@ import { computed, ref, watch } from 'vue'
 import { useSearchStore } from '@/stores/search.ts'
 
 import { Grid } from '@/components/structures'
-import {
-	EmptyCreativeCard,
-	CreativeCard,
-	Button,
-	Input,
-} from '@/components/blocks'
-import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
+import { Button, CreativeCard, EmptyCreativeCard, Input, Select, SelectLive } from '@/components/blocks'
+import { ICreative, ICreatives, IRatio, ratioItems } from '@/interfaces/Creative.ts'
 import { Form, Http } from '@/plugins'
 
 interface SearchForm {
-	priceFrom: string
-	priceTo: string
+	geo: string
+	slot: string
+	approach: string
+	ratio: IRatio | ''
 }
 
 const creatives = ref<Array<ICreative>>([])
@@ -100,8 +109,10 @@ watch(() => searchStore.search, (value) => {
 }, { immediate: true })
 
 const form = Form<SearchForm>({
-	priceFrom: '',
-	priceTo: '',
+	geo: '',
+	slot: '',
+	approach: '',
+	ratio: ''
 })
 
 const loading = ref(true)
@@ -112,8 +123,10 @@ const loadCreatives = async () => {
 
 	const searchValue = search.value?.toLowerCase?.()
 	if (searchValue) filters.push(`(description~'${searchValue}')`)
-	if (form.priceFrom.value) filters.push(`price>=${form.priceFrom.value}`)
-	if (form.priceTo.value) filters.push(`price<=${form.priceTo.value}`)
+	if (form.geo.value) filters.push(`geo='${form.geo.value}'`)
+	if (form.slot.value) filters.push(`slot='${form.slot.value}'`)
+	if (form.approach.value) filters.push(`approach='${form.approach.value}'`)
+	if (form.ratio.value) filters.push(`ratio='${form.ratio.value}'`)
 	if (filters.length) {
 		filter = filters.reduce((acc, filter) => filter ? `${acc} && ${filter}` : acc, '')
 		filter = filter.slice(4)
@@ -124,7 +137,7 @@ const loadCreatives = async () => {
 	await Http
 		.get<ICreatives>('/collections/creatives/records', {
 			filter: encodedFilter,
-			expand: ['preview', 'creator'],
+			expand: ['preview', 'video', 'creator'],
 			perPage: 12
 		})
 		.then(res => {
