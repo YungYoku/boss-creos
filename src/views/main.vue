@@ -17,8 +17,10 @@
 				</div>
 
 				<div class="main__prologue-buttons">
-					<div class="main__prologue-made-creatives">
-						Готовые крео
+					<div class="main__prologue-made-creatives-wrap">
+						<div class="main__prologue-made-creatives">
+							Готовые крео
+						</div>
 					</div>
 					<div class="main__prologue-order-from-scratch">
 						Заказать с нуля
@@ -132,6 +134,7 @@ loadProject()
 		color: #F5FF00;
 
 		transform: rotate(20deg);
+		cursor: default;
 	}
 
 	&__prologue-text {
@@ -155,6 +158,10 @@ loadProject()
 		gap: 45px;
 	}
 
+	&__prologue-made-creatives-wrap {
+		filter: drop-shadow(0 0 20px rgba(245, 255, 0, 0.6));
+	}
+
 	&__prologue-made-creatives {
 		display: flex;
 		justify-content: center;
@@ -168,10 +175,11 @@ loadProject()
 		color:#000000;
 		text-transform: uppercase;
 
-		background-image: url('@/assets/img/button__main.webp');
-		background-repeat: no-repeat;
-		background-position: center;
-		background-size: cover;
+		background-color: #F5FF00;
+
+		cursor: default;
+
+		clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
 	}
 
 	&__prologue-order-from-scratch {
@@ -181,6 +189,8 @@ loadProject()
 
 		font-size: 12px;
 		font-weight: 700;
+
+		cursor: default;
 	}
 
 	&__prologue-fb-approve {
@@ -194,6 +204,7 @@ loadProject()
 		text-transform: uppercase;
 
 		transform: rotate(-4deg);
+		cursor: default;
 	}
 
 	&__prologue-creatives {

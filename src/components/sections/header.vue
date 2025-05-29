@@ -22,8 +22,12 @@
 				<router-link
 					v-if="auth.isLoggedIn"
 					to="/shopping-cart"
+					class="header__shopping-cart"
 				>
-					Корзина
+					<Icon
+						name="shopping-cart"
+						size="s"
+					/>
 				</router-link>
 
 				<router-link
@@ -45,6 +49,7 @@ import { useAuthStore } from '@/stores/auth.ts'
 import { Grid } from '@/components/structures'
 import { UserDropdown } from '@/components/blocks'
 import { Logo } from '@/components/elements'
+import Icon from '@/components/elements/icon.vue'
 
 const auth = useAuthStore()
 
@@ -104,6 +109,11 @@ const nav = [
 		gap: 10px;
 
 		margin: 0 0 0 auto;
+	}
+
+	&__shopping-cart {
+		display: flex;
+		align-items: center;
 	}
 }
 </style>

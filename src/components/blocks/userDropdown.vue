@@ -100,18 +100,88 @@ const items = computed(() => [
 <style scoped lang="scss">
 .user-dropdown {
 	&__account {
+		position: relative;
+		z-index: 1;
+
 		display: flex;
 		justify-content: center;
 		align-items: center;
 
 		padding: 8px 22px;
+		overflow: hidden;
 
 		font-size: 14px;
 		line-height: 24px;
 		font-weight: 700;
 
-		border: 1px solid #ffffff;
-		border-radius: 30px;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 50px;
+		outline: none;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+		cursor: pointer;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: -100%;
+			right: -100%;
+			bottom: -100%;
+			left: -100%;
+			z-index: -1;
+
+			background: conic-gradient(
+				transparent 0%,
+				transparent 20%,
+				rgba(255, 255, 255, 0.35) 50%,
+				rgb(255, 255, 255, 0.1) 20%,
+				transparent 50%,
+				transparent 100%
+			);
+			background-size: 100% 100%;
+			border-radius: 50%;
+
+			opacity: 0.8;
+
+			animation: rotate-glow 2s linear infinite;
+
+			pointer-events: none;
+		}
+
+		@keyframes rotate-glow {
+			0% {
+				transform: rotate(-90deg);
+			}
+			25% {
+				transform: rotate(0deg);
+			}
+			50% {
+				transform: rotate(90deg);
+			}
+			75% {
+				transform: rotate(180deg);
+			}
+			100% {
+				transform: rotate(270deg);
+			}
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: 1px;
+			right: 1px;
+			bottom: 1px;
+			left: 1px;
+			z-index: -1;
+
+			background-color: #1a1a1a;
+			border-radius: 50px;
+			box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05),
+			inset 0 0 20px rgba(255, 255, 255, 0.02);
+
+			pointer-events: none;
+		}
 	}
 }
 </style>
