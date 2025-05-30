@@ -135,6 +135,7 @@ loadProject()
 
 		transform: rotate(20deg);
 		cursor: default;
+		filter: drop-shadow(0 0 15px rgba(245, 255, 0, 0.6));
 	}
 
 	&__prologue-text {
@@ -205,6 +206,7 @@ loadProject()
 
 		transform: rotate(-4deg);
 		cursor: default;
+		filter: drop-shadow(0 0 15px rgba(245, 255, 0, 0.6));
 	}
 
 	&__prologue-creatives {

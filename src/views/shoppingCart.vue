@@ -18,6 +18,10 @@
 					{{ basket.expand?.creative?.expand?.slot?.name }}
 				</div>
 
+				<div class="shopping-cart__creative-price">
+					Price: ${{ basket.expand?.creative?.price }}
+				</div>
+
 				<div class="shopping-cart__creative-geo">
 					Geo:
 					<span
@@ -41,7 +45,7 @@
 			</router-link>
 		</div>
 
-		<Button>
+		<Button class="shopping-cart__pay">
 			Оплатить
 		</Button>
 	</div>
@@ -59,6 +63,7 @@ const user = useAuthStore()
 .shopping-cart {
 	display: flex;
 	flex-direction: column;
+	gap: 20px;
 
 	width: 800px;
 	max-width: 100%;
@@ -102,6 +107,7 @@ const user = useAuthStore()
 		font-size: 14px;
 	}
 
+	&__creative-price,
 	&__creative-geo {
 		font-size: 10px;
 		color: #AFAFB7;
@@ -126,6 +132,10 @@ const user = useAuthStore()
 		background: transparent;
 		border: 1px solid #FFFFFF1A;
 		border-radius: 8px;
+	}
+
+	&__pay {
+		margin: 0 auto;
 	}
 }
 </style>

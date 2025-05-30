@@ -1,55 +1,58 @@
 <template>
-	<Grid
-		:columns="1"
-	>
-		<Grid
-			:columns="4"
-			@keyup.enter="loadData"
-		>
-			<Input
-				v-model="search"
-				label="Поиск"
-			/>
+	<div class="shop">
+		<Island>
+			<Grid :columns="[6, 1]">
+				<Grid
+					:columns="4"
+					@keyup.enter="loadData"
+				>
+					<Input
+						v-model="search"
+						label="Поиск"
+					/>
 
-			<SelectLive
-				v-model="form.geo.value"
-				label="Гео"
-				api="geo"
-			/>
+					<SelectLive
+						v-model="form.geo.value"
+						label="Гео"
+						api="geo"
+					/>
 
-			<SelectLive
-				v-model="form.slot.value"
-				label="Слот"
-				api="slots"
-			/>
+					<SelectLive
+						v-model="form.slot.value"
+						label="Слот"
+						api="slots"
+					/>
 
-			<SelectLive
-				v-model="form.approach.value"
-				label="Подход"
-				api="approaches"
-			/>
+					<SelectLive
+						v-model="form.approach.value"
+						label="Подход"
+						api="approaches"
+					/>
 
-			<Select
-				v-model="form.ratio.value"
-				label="Размер"
-				:items="ratioItems"
-			/>
-			
+					<Select
+						v-model="form.ratio.value"
+						label="Размер"
+						:items="ratioItems"
+					/>
+				</Grid>
 
-			<Button
-				:disabled="loading"
-				@click="loadData"
-			>
-				Применить
-			</Button>
+				<Grid vertical>
+					<Button
+						:disabled="loading"
+						@click="loadData"
+					>
+						Применить
+					</Button>
 
-			<Button
-				:disabled="loading"
-				@click="form.reset"
-			>
-				Очистить
-			</Button>
-		</Grid>
+					<Button
+						:disabled="loading"
+						@click="form.reset"
+					>
+						Очистить
+					</Button>
+				</Grid>
+			</Grid>
+		</Island>
 
 		<Grid
 			v-if="creatives.length || loading"
@@ -73,7 +76,7 @@
 			</template>
 		</Grid>
 		<span v-else>Нет доступных объявлений.</span>
-	</Grid>
+	</div>
 </template>
 
 <script lang="ts" setup>
@@ -84,6 +87,7 @@ import { Grid } from '@/components/structures'
 import { Button, CreativeCard, EmptyCreativeCard, Input, Select, SelectLive } from '@/components/blocks'
 import { ICreative, ICreatives, IRatio, ratioItems } from '@/interfaces/Creative.ts'
 import { Form, Http } from '@/plugins'
+import Island from '@/components/structures/island.vue'
 
 interface SearchForm {
 	geo: string

@@ -90,6 +90,7 @@ const updateCreative = async (creative: ICreative) => {
 .edit-shopping-cart {
 	display: flex;
 	flex-direction: column;
+	gap: 20px;
 
 	width: 800px;
 	max-width: 100%;

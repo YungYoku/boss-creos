@@ -71,6 +71,14 @@ const routes: Array<RouteRecordRaw> = [
 				}
 			},
 			{
+				path: '/made-creatives',
+				name: 'MadeCreatives',
+				component: () => import('@/views/madeCreatives.vue'),
+				meta: {
+					rules: ['auth', 'customer']
+				}
+			},
+			{
 				path: '/executing-projects',
 				name: 'ExecutingProjects',
 				component: () => import('@/views/executingProjects.vue'),

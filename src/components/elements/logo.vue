@@ -22,6 +22,8 @@
 		font-size: 32px;
 		font-weight: 700;
 		color: #ffffff;
+
+		filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
 	}
 
 	&__descriprion {
@@ -30,6 +32,8 @@
 		font-size: 15px;
 		font-weight: 700;
 		color: #F5FF00;
+
+		filter: drop-shadow(0 0 10px rgba(245, 255, 0, 0.3));
 	}
 }
 </style>
