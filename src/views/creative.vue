@@ -56,16 +56,37 @@
 					{{ creative.expand?.slot?.name }}
 				</div>
 
-				<div class="creative__info">
+				<div class="creative__info-item">
 					Creo ID: {{ creative.id }}
 				</div>
 
-				<div class="creative__info">
+				<div class="creative__info-item">
 					Geo: {{ creative.expand?.geo?.name }}
 				</div>
 
+				<div class="creative__info-item">
+					Size: {{ creative.ratio }}
+				</div>
+
+				<div class="creative__info-item">
+					Resize: {{ creative.resize ? 'Делаю' : 'Не делаю' }}
+				</div>
+
+				<div class="creative__info-item">
+					Reskin: {{ creative.reskin ? 'Делаю' : 'Не делаю' }}
+				</div>
+
+				<div class="creative__info-item">
+					Подход: {{ creative.expand?.approach?.name }}
+				</div>
+
+				<div class="creative__separator"/>
+
 				<div class="creative__description">
-					Описание: {{ creative.description }}
+					<span class="creative__description-title">
+						Описание:
+					</span>
+					{{ creative.description }}
 				</div>
 			</div>
 		</Grid>
@@ -115,7 +136,7 @@ const loadProject = async () => {
 
 	await Http
 		.get<ICreative>(`/collections/creatives/records/${id}`, {
-			expand: ['creator', 'preview', 'slot', 'geo']
+			expand: ['creator', 'preview', 'video', 'slot', 'geo', 'approach']
 		})
 		.then(response => {
 			creative.value = response
@@ -205,9 +226,37 @@ const hideDeleteConfirmation = () => deleteConfirmationModal.show = false
 	}
 
 	&__info {
+		display: flex;
+		flex-direction: column;
+
+		width: 100%;
+		gap: 10px;
+	}
+
+	&__info-item {
 		font-size: 16px;
 		line-height: 1;
 		font-weight: 400;
+	}
+
+	&__separator {
+		width: 60%;
+		height: 1px;
+		margin: 20px 0;
+
+		background: linear-gradient(to right, #ffffff 20%, rgba(255, 255, 255, 0));
+	}
+
+	&__description-title {
+		font-size: 20px;
+		line-height: 1;
+		font-weight: 700;
+	}
+
+	&__description {
+		font-size: 20px;
+		line-height: 1;
+		font-weight: 600;
 	}
 }
 </style>

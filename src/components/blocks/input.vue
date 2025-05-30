@@ -6,25 +6,41 @@
 		/>
 
 		<template v-else>
-			<Label v-if="!placeholder && label">
+			<Label
+				v-if="label"
+				:active="!isEmpty"
+			>
 				{{ label }}
 			</Label>
 
-			<input
-				v-model="value"
-				class="input__field"
+			<div
+				class="input__field-wrap"
 				:class="[variant, {
-					'_empty': !placeholder
+					'_disabled': disabled
 				}]"
-				:style="{
-					cursor
-				}"
-				:placeholder
-				:disabled
-				:type
-				autocomplete="off"
-				@input="onInput"
 			>
+				<div
+					v-if="type ==='file' && fileName"
+					class="input__file-name"
+				>
+					{{ fileName }}
+				</div>
+
+				<input
+					v-model="value"
+					class="input__field"
+					:class="[{
+						'_transparent': transparent
+					}]"
+					:style="{
+						cursor
+					}"
+					:disabled
+					:type
+					autocomplete="off"
+					@input="onInput"
+				>
+			</div>
 
 			<span
 				v-if="error"
@@ -52,7 +68,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 import { Icon, Label, Skeleton } from '@/components/elements'
 
@@ -67,6 +83,7 @@ interface Props {
 	cursor?: 'text' | 'pointer',
 	clearable?: boolean,
 	variant?: 'default' | 'plain'
+	transparent?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -79,38 +96,40 @@ const props = withDefaults(defineProps<Props>(), {
 	autocomplete: 'off',
 	cursor: 'text',
 	clearable: true,
-	variant: 'default'
+	variant: 'default',
+	transparent: false
 })
 
 const value = defineModel<string | number>({
 	type: [String, Number],
 	default: ''
 })
-const clear = () => value.value = ''
+const clear = () => {
+	value.value = ''
+	fileName.value = ''
+}
+
+const fileName = ref('')
 
 const emit = defineEmits(['update-file', 'input', 'action'])
 const onInput = (event: Event) => {
 	const target = event.target as HTMLInputElement
 	if (props.type === 'file') {
 		const file = target.files?.[0]
+		fileName.value = file?.name ?? ''
 		if (file) emit('update-file', file)
 	} else emit('input', target.value)
 }
 const action = () => emit('action')
 
-const placeholder = computed(() => {
-	let hasValue = false
+const isEmpty = computed(() => {
 	if (typeof value.value === 'number') {
-		hasValue = true
+		return false
 	} else if (typeof value.value === 'string') {
-		hasValue = value.value.length > 0
+		return value.value.length === 0
 	}
 
-	if (props.label && !hasValue) {
-		return props.label
-	}
-
-	return ''
+	return true
 })
 
 const filled = computed(() => {
@@ -124,25 +143,16 @@ const filled = computed(() => {
 .input {
 	position: relative;
 
-	&__field {
+	&__field-wrap {
 		width: 100%;
 		height: 48px;
-		padding: 8px 40px 8px 12px;
-
-		font-size: 14px;
-		font-weight: 400;
 
 		background: hsl(var(--background));
 		border: 1px solid hsl(var(--input));
 		border-radius: 14px;
 		outline: none;
 
-		
 		transition: all 0.2s;
-
-		&._empty {
-			padding-top: 20px;
-		}
 
 		&:focus-visible {
 			border-color: rgb(245 245 244 / 1);
@@ -161,8 +171,27 @@ const filled = computed(() => {
 			background: hsl(var(--accent));
 		}
 
-		&:disabled {
+		&._disabled {
 			opacity: 0.5;
+		}
+	}
+
+	&__file-name,
+	&__field {
+		width: 100%;
+		height: 100%;
+		padding: 20px 40px 8px 12px;
+
+		font-size: 14px;
+		font-weight: 400;
+
+		background: transparent;
+		border: none;
+		border-radius: 14px;
+		outline: none;
+
+		&._transparent {
+			opacity: 0;
 		}
 	}
 

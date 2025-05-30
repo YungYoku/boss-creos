@@ -1,7 +1,5 @@
 <template>
-	<div
-		class="input-file"
-	>
+	<div class="input-file">
 		<Button
 			v-if="compact"
 			:disabled="loading"
@@ -18,9 +16,10 @@
 			>
 				<Input
 					:disabled="loading"
-					:error="error"
+					:error
 					type="file"
 					cursor="pointer"
+					transparent
 					@update-file="updateFile"
 				/>
 			</div>
@@ -35,9 +34,11 @@
 		>
 			<Input
 				:disabled="loading"
-				:error="error"
+				:error
 				type="file"
 				cursor="pointer"
+				:label
+				transparent
 				@update-file="updateFile"
 			/>
 		</div>
@@ -55,12 +56,14 @@ interface Props {
 	error?: string | null
 	loading?: boolean
 	compact?: boolean
+	label?: string
 }
 
 withDefaults(defineProps<Props>(), {
 	error: null,
 	loading: false,
 	compact: false,
+	label: ''
 })
 
 

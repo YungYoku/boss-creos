@@ -109,8 +109,7 @@ loadProject()
 		justify-content: space-between;
 		align-items: center;
 
-		width: 1240px;
-		max-width: 100%;
+		width: 100%;
 		min-height: 600px;
 		margin: 0 auto;
 		gap: 20px;
@@ -233,7 +232,7 @@ loadProject()
 		justify-content: flex-start;
 		align-items: center;
 
-		width: 1240px;
+		width: 100%;
 		max-width: 100%;
 		gap: 20px;
 

@@ -82,7 +82,6 @@ const nav = [
 <style scoped lang="scss">
 .header {
     width: 100%;
-	max-width: 1240px;
     min-height: 48px;
 	margin: 0 auto;
 	padding: 5px 0;

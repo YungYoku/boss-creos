@@ -3,12 +3,14 @@
 		vertical
 		:columns="1"
 		gap="l"
+		class="new-creative"
 	>
 		<Island>
 			<Grid vertical>
 				<Text
 					size="m"
 					:loading="loading"
+					class="new-creative__title"
 				>
 					Добавить креатив
 				</Text>
@@ -126,6 +128,7 @@
 
 				<Button
 					:disabled="loading"
+					class="new-creative__submit"
 					@click="create"
 				>
 					Отправить на модерацию
@@ -188,3 +191,15 @@ const creativeTypeItems = [
 	{ id: 'pwa', name: 'PWA' },
 ]
 </script>
+
+<style scoped lang="scss">
+.new-creative {
+	&__title {
+		margin: 0 auto;
+	}
+
+	&__submit {
+		margin: 0 auto;
+	}
+}
+</style>

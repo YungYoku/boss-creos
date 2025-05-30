@@ -2,18 +2,19 @@
 	<Popover class="select">
 		<template #trigger>
 			<div class="select__trigger">
-				<Label v-if="showedValue">
+				<Label
+					v-if="label"
+					:active="!isEmpty"
+				>
 					{{ label }}
 				</Label>
 
 				<Text
+					v-if="showedValue"
 					class="select__showed-value"
-					:class="{
-						'_empty': !showedValue
-					}"
 					size="xs"
 				>
-					{{ showedValue ?? label }}
+					{{ showedValue }}
 				</Text>
 
 				<Icon
@@ -73,8 +74,8 @@
 import { computed, PropType } from 'vue'
 
 import { Popover } from '@/components/structures'
-import { Input, Checkbox } from '@/components/blocks'
-import { Label, Icon, Separator, Text } from '@/components/elements'
+import { Checkbox, Input } from '@/components/blocks'
+import { Icon, Label, Separator, Text } from '@/components/elements'
 
 interface Item {
 	id: string
@@ -115,6 +116,16 @@ const props = defineProps({
 })
 
 const validationError = new Error('Select multiple, but value is not an array')
+
+const isEmpty = computed(() => {
+	const _value = value.value
+
+	if (props.multiple) {
+		if (Array.isArray(_value) === false) throw validationError
+		return _value.length === 0
+	}
+	return _value === ''
+})
 
 const showedValue = computed(() => {
 	const _value = value.value
