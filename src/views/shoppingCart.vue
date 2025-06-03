@@ -46,17 +46,29 @@
 		</div>
 
 		<Button class="shopping-cart__pay">
-			Оплатить
+			Оплатить ${{ totalPrice }}
 		</Button>
 	</div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 import { Button } from '@/components/blocks'
 import { Image } from '@/components/elements'
 
 const user = useAuthStore()
+
+const totalPrice = computed(() => {
+	const baskets = user.user.expand?.baskets
+	if (baskets == null) return 0
+
+	return baskets.reduce((acc, cur) => {
+		const creative = cur.expand?.creative
+		const geo = cur.geo?.length ?? 0
+		return acc + (creative?.price ?? 0) * geo
+	}, 0)
+})
 </script>
 
 <style scoped lang="scss">

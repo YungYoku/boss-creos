@@ -36,14 +36,14 @@
 			</div>
 
 			<Checkbox
-				v-if="basket.expand?.creative?.resize != undefined"
-				v-model="basket.expand.creative.resize"
+				v-if="basket.expand?.creative?.resize"
+				v-model="basket.resize"
 				label="Ресайз"
 			/>
 
 			<Checkbox
-				v-if="basket.expand?.creative?.reskin != undefined"
-				v-model="basket.expand.creative.reskin"
+				v-if="basket.expand?.creative?.reskin"
+				v-model="basket.reskin"
 				label="Рескин"
 			/>
 

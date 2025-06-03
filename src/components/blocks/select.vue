@@ -25,6 +25,13 @@
 					@click.prevent.stop="clear"
 				/>
 			</div>
+
+			<span
+				v-if="error"
+				class="select__error"
+			>
+				{{ error }}
+			</span>
 		</template>
 
 		<Input
@@ -93,6 +100,10 @@ const search = defineModel<string>('search', {
 })
 
 const props = defineProps({
+	error: {
+		type: String as PropType<string | null>,
+		default: null
+	},
 	label: {
 		type: String,
 		default: ''
@@ -225,6 +236,14 @@ const clear = () => {
 		right: 12px;
 
 		cursor: pointer;
+	}
+
+	&__error {
+		padding-left: 12px;
+
+		font-size: 12px;
+		font-weight: 200;
+		color: hsl(var(--destructive));
 	}
 
 	&__content {

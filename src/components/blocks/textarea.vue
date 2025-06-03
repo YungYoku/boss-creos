@@ -1,12 +1,14 @@
 <template>
 	<div class="textarea">
-		<Label v-if="!placeholder">
+		<Label
+			v-if="label"
+			:active="!isEmpty"
+		>
 			{{ label }}
 		</Label>
 
 		<textarea
 			v-model="value"
-			:placeholder="label"
 			class="textarea__field"
 			:class="[{
 				'_empty': value.length === 0
@@ -46,7 +48,7 @@ interface Props {
 	disabled?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
 	error: null,
 	label: '',
 	height: '200px',
@@ -59,12 +61,14 @@ const value = defineModel<string>({
 })
 const clear = () => value.value = ''
 
-const placeholder = computed(() => {
-	if (props.label && value.value.length === 0) {
-		return props.label
+const isEmpty = computed(() => {
+	if (typeof value.value === 'number') {
+		return false
+	} else if (typeof value.value === 'string') {
+		return value.value.length === 0
 	}
 
-	return ''
+	return true
 })
 
 const filled = computed(() => value.value.length > 0)

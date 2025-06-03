@@ -97,6 +97,19 @@ export interface ICreative {
 	}
 }
 
+export interface IBasketDescription {
+	id: string
+	collectionId: string
+	collectionName: string
+	created: string
+	updated: string
+	creative: string
+	geo: string
+	expand?: {
+		geo?: IGeo
+	}
+}
+
 export interface IBasket {
 	id: string
 	collectionId: string
@@ -105,9 +118,13 @@ export interface IBasket {
 	updated: string
 	creative: string
 	geo: Array<string>
+	resize: boolean
+	reskin: boolean
+	descriptions: Array<string>
 	expand?: {
 		creative?: ICreative
 		geo?: Array<IGeo>
+		descriptions?: Array<IBasketDescription>
 	}
 }
 

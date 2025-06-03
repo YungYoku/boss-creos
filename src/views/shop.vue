@@ -54,16 +54,15 @@
 			</Grid>
 		</Island>
 
-		<Grid
+		<div
 			v-if="creatives.length || loading"
-			:columns-xl="3"
-			:columns-l="2"
-			:columns-m="1"
+			class="shop__creatives"
 		>
 			<template v-if="loading">
 				<EmptyCreativeCard
 					v-for="i in 8"
 					:key="i"
+					class="shop__creatives-item"
 				/>
 			</template>
 			<template v-else>
@@ -72,9 +71,10 @@
 					:key="creative.id"
 					:creative="creative"
 					:loading="loading"
+					class="shop__creatives-item"
 				/>
 			</template>
-		</Grid>
+		</div>
 		<span v-else>Нет доступных объявлений.</span>
 	</div>
 </template>
@@ -160,3 +160,40 @@ const loadData = async () => {
 }
 loadData()
 </script>
+
+<style scoped lang="scss">
+.shop {
+	&__creatives {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		align-items: center;
+
+		width: 100%;
+		max-width: 100%;
+		gap: 20px;
+
+		margin: 0 auto;
+
+		@media (max-width: 1024px) {
+			gap: 15px;
+		}
+
+		@media (max-width: 600px) {
+			gap: 15px;
+		}
+	}
+
+	&__creatives-item.creative-card {
+		max-width: calc((100% - 40px) / 3);
+
+		@media (max-width: 1024px) {
+			max-width: calc((100% - 15px) / 2);
+		}
+
+		@media (max-width: 600px) {
+			max-width: 100%;
+		}
+	}
+}
+</style>

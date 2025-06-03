@@ -5,13 +5,14 @@
 		:items
 		:multiple
 		:label
+		:error
 		searchable
 		@update:search="handleContextChange"
 	/>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 import { Select } from '@/components/blocks'
 import { Http } from '@/plugins'
@@ -53,7 +54,7 @@ const props = withDefaults(defineProps<Props>(), {
 const items = ref<Array<Item>>([])
 
 const emit = defineEmits(['update:model-value'])
-const value = computed<Array<string>| string>({
+const value = computed<Array<string> | string>({
 	get: () => props.modelValue,
 	set(value) {
 		if (props.multiple && Array.isArray(props.modelValue) && Array.isArray(value)) {

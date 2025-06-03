@@ -247,7 +247,7 @@ loadProject()
 		}
 	}
 
-	&__creatives-item {
+	&__creatives-item.creative-card {
 		max-width: calc((100% - 40px) / 3);
 
 		@media (max-width: 1024px) {
