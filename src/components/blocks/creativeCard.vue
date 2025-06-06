@@ -91,6 +91,10 @@ const addToBasket = async () => {
 	border: 1px solid #1D1D20;
 	border-radius: 16px;
 
+	@media (max-width: 1024px) {
+		max-width: 300px;
+	}
+
 	&__video {
 		width: 100%;
 		max-width: 100%;

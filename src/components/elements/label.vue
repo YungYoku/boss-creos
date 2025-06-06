@@ -28,6 +28,9 @@ defineProps({
 
 	transition: all 0.1s linear;
 
+	user-select: none;
+	pointer-events: none;
+
 	&._active {
 		top: 4px;
 		left: 12px;

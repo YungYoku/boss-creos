@@ -26,6 +26,8 @@
 	--destructive: 0 84.2% 60.2%;
 	--destructive-foreground: 0 0% 98%;
 
+	--active: rgb(15, 208, 7);
+
 	--ring: 240 10% 3.9%;
 
 	--radius: 0.5rem;
@@ -58,6 +60,8 @@
 
 	--destructive: 0 62.8% 30.6%;
 	--destructive-foreground: 0 0% 98%;
+
+	--active: rgb(15, 208, 7);
 
 	--ring: 240 4.9% 83.9%;
 }

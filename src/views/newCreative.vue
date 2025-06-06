@@ -48,7 +48,7 @@
 							label="Вид крео"
 						/>
 
-						<Checkbox
+						<Switcher
 							v-model="creative.watermark.value"
 							:disabled="loading"
 							:error="creative.watermark.error"
@@ -72,7 +72,7 @@
 							label="Размер"
 						/>
 
-						<Checkbox
+						<Switcher
 							v-model="creative.resize.value"
 							:disabled="loading"
 							:error="creative.resize.error"
@@ -87,7 +87,7 @@
 							label="Цена ресайза"
 						/>
 
-						<Checkbox
+						<Switcher
 							v-model="creative.reskin.value"
 							:disabled="loading"
 							:error="creative.reskin.error"
@@ -145,7 +145,7 @@ import { useAuthStore } from '@/stores/auth'
 import { useToast } from '@/stores/toast'
 
 import { Grid, Island } from '@/components/structures'
-import { Button, Checkbox, Input, InputFile, Select, SelectLive, Textarea } from '@/components/blocks'
+import { Button, Input, InputFile, Select, SelectLive, Switcher, Textarea } from '@/components/blocks'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
 import { emptyCreative, ICreative, ratioItems } from '@/interfaces/Creative.ts'

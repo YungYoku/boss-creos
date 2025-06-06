@@ -12,13 +12,13 @@ const EmptyCreativeCard = defineAsyncComponent(() => import('./emptyCreativeCard
 const Input = defineAsyncComponent(() => import('./input.vue'))
 const InputFile = defineAsyncComponent(() => import('./inputFile.vue'))
 const ProjectCard = defineAsyncComponent(() => import('./projectCard.vue'))
-const JobSearch = defineAsyncComponent(() => import('./jobSearch.vue'))
 const Message = defineAsyncComponent(() => import('./message.vue'))
 const RatingStars = defineAsyncComponent(() => import('./ratingStars.vue'))
 const RatingStarsEditable = defineAsyncComponent(() => import('./ratingStartEditable.vue'))
 const Notifications = defineAsyncComponent(() => import('./notifications.vue'))
 const Select = defineAsyncComponent(() => import('./select.vue'))
 const SelectLive = defineAsyncComponent(() => import('./selectLive.vue'))
+const Switcher = defineAsyncComponent(() => import('./switcher.vue'))
 const Textarea = defineAsyncComponent(() => import('./textarea.vue'))
 const Toast = defineAsyncComponent(() => import('./toast.vue'))
 const User = defineAsyncComponent(() => import('./user.vue'))
@@ -38,13 +38,13 @@ export {
 	Input,
 	InputFile,
 	ProjectCard,
-	JobSearch,
 	Message,
 	RatingStars,
 	RatingStarsEditable,
 	Notifications,
 	Select,
 	SelectLive,
+	Switcher,
 	Textarea,
 	Toast,
 	User,
