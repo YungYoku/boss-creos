@@ -150,7 +150,8 @@ const routes: Array<RouteRecordRaw> = [
 		name: 'Login',
 		component: () => import('@/views/login.vue'),
 		meta: {
-			rules: ['no-auth']
+			rules: ['no-auth'],
+			bgClass: 'auth'
 		}
 	},
 	{
@@ -158,7 +159,8 @@ const routes: Array<RouteRecordRaw> = [
 		name: 'Registration',
 		component: () => import('@/views/registration.vue'),
 		meta: {
-			rules: ['no-auth']
+			rules: ['no-auth'],
+			bgClass: 'auth'
 		}
 	},
 ]

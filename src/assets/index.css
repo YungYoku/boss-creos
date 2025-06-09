@@ -102,6 +102,10 @@ body {
 	&.default-bg {
 		background-image: url("@/assets/img/bg__default.webp");
 	}
+
+	&.auth-bg {
+		background-image: url("@/assets/img/bg__auth.webp");
+	}
 }
 
 a,

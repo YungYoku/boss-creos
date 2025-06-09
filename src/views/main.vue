@@ -1,10 +1,5 @@
 <template>
-	<Grid
-		vertical
-		:columns="1"
-		gap="l"
-		class="main"
-	>
+	<div class="main">
 		<div class="main__prologue">
 			<div class="main__prologue-info">
 				<div class="main__prologue-fee">
@@ -31,17 +26,19 @@
 					100% аппрув на FB
 				</div>
 			</div>
-			
+
 			<div class="main__prologue-creatives">
 				<CreativeCard
 					v-if="creatives[0]"
 					class="main__prologue-creative"
 					:creative="creatives[0]"
+					:badge="false"
 				/>
 				<CreativeCard
 					v-if="creatives[1]"
 					class="main__prologue-creative"
 					:creative="creatives[1]"
+					:badge="false"
 				/>
 			</div>
 		</div>
@@ -73,13 +70,12 @@
 				Смотреть ещё
 			</router-link>
 		</div>
-	</Grid>
+	</div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
-import { Grid } from '@/components/structures'
 import { CreativeCard, EmptyCreativeCard } from '@/components/blocks'
 import { Http } from '@/plugins'
 
@@ -104,6 +100,10 @@ loadProject()
 
 <style scoped lang="scss">
 .main {
+	display: flex;
+	flex-direction: column;
+	gap: 120px;
+
 	&__prologue {
 		display: flex;
 		justify-content: space-between;
@@ -141,7 +141,7 @@ loadProject()
 		display: flex;
 		flex-direction: column;
 
-		margin-bottom: 56px;
+		margin-bottom: 30px;
 
 		font-weight: 700;
 
@@ -155,7 +155,8 @@ loadProject()
 
 	&__prologue-buttons {
 		display: flex;
-		gap: 45px;
+		align-items: center;
+		gap: 20px;
 	}
 
 	&__prologue-made-creatives-wrap {
@@ -187,10 +188,19 @@ loadProject()
 		justify-content: center;
 		align-items: center;
 
+		width: 180px;
+		height: 100px;
+
 		font-size: 12px;
 		font-weight: 700;
 
+		background-image: url("@/assets/img/main__order-from-scratch.svg");
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+
 		cursor: default;
+		filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
 	}
 
 	&__prologue-fb-approve {

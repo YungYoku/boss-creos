@@ -24,19 +24,18 @@
 .auth-slots {
 	display: flex;
 
-	width: 640px;
-	min-width: 640px;
+	width: 780px;
 	height: 100vh;
 	max-height: 100vh;
 	overflow: hidden;
-	gap: 20px;
+	gap: 30px;
 
-	transform: translateY(-50px);
+	transform: translateY(-100px);
 
 	&__column {
 		display: flex;
 		flex-direction: column;
-		gap: 20px;
+		gap: 30px;
 
 		&:nth-child(2) {
 			transform: translateY(100px);
@@ -44,7 +43,7 @@
 	}
 
 	&__slot {
-		max-width: 200px;
+		max-width: 100%;
 	}
 }
 </style>

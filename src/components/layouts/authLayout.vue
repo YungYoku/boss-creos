@@ -20,11 +20,13 @@ import { Header } from '@/components/sections'
     display: flex;
     flex-direction: column;
     align-items: center;
+
+	width: 100%;
+	min-height: 100vh;
     gap: 10px;
 
-	min-height: 100vh;
-
 	&__content {
+		width: 100%;
 		margin: auto;
 	}
 }

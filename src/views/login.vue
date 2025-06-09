@@ -2,7 +2,7 @@
 	<AuthLayout class="login">
 		<div class="login__content">
 			<Card
-				width="300px"
+				width="400px"
 				title="Вход"
 				@keyup.enter="login"
 			>
@@ -59,7 +59,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.ts'
 import { useToast } from '@/stores/toast'
@@ -67,9 +67,9 @@ import { useToast } from '@/stores/toast'
 import { AuthLayout } from '@/components/layouts'
 import { Card } from '@/components/structures'
 import { AuthSlots } from '@/components/sections'
-import { Input, Button } from '@/components/blocks'
+import { Button, Input } from '@/components/blocks'
 import { Text } from '@/components/elements'
-import { Http, Form } from '@/plugins'
+import { Form, Http } from '@/plugins'
 import { IUserLogin } from '@/interfaces/User.ts'
 
 interface LoginForm {
@@ -121,7 +121,10 @@ const isLoginPossible = computed(() => {
 .login {
 	&__content {
 		display: flex;
+		justify-content: center;
 		align-items: center;
+
+		width: 100%;
 		gap: 5%;
 	}
 

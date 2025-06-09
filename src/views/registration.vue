@@ -2,7 +2,7 @@
 	<AuthLayout class="registration">
 		<div class="registration__content">
 			<Card
-				width="300px"
+				width="400px"
 				title="Регистрация"
 				@keyup.enter="register"
 			>
@@ -43,21 +43,22 @@
 					autocomplete="new-password"
 				/>
 
-				<Select
-					v-model="form.role.value"
-					:error="form.role.error"
-					:items="roleItems"
-					label="Роль"
-					:clearable="false"
-				/>
-
-				<Button
-					:disabled="loading"
-					type="submit"
-					@click="register"
-				>
-					Зарегистрироваться
-				</Button>
+				<Grid :columns="2">
+					<Button
+						:disabled="loading"
+						type="submit"
+						@click="register('customer')"
+					>
+						Зарегистрироваться Как баер
+					</Button>
+					<Button
+						:disabled="loading"
+						type="submit"
+						@click="register('executor')"
+					>
+						Зарегистрироваться Как дизайнер
+					</Button>
+				</Grid>
 
 				<template #footer>
 					<div class="registration__have-account">
@@ -82,17 +83,20 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useToast } from '@/stores/toast'
 
 import { AuthLayout } from '@/components/layouts'
 import { Card } from '@/components/structures'
 import { AuthSlots } from '@/components/sections'
-import { Select, Input, Button } from '@/components/blocks'
+import { Button, Input } from '@/components/blocks'
 import { Text } from '@/components/elements'
-import { Http, Form } from '@/plugins'
+import { Form, Http } from '@/plugins'
 import { IUser } from '@/interfaces/User.ts'
+import Grid from '@/components/structures/grid.vue'
+
+type Role = 'customer' | 'executor'
 
 interface RegistrationForm {
 	username: string
@@ -100,7 +104,7 @@ interface RegistrationForm {
 	email: string
 	password: string
 	passwordConfirm: string
-	role: string
+	role: Role
 	energy: number
 	checked_at: Date
 }
@@ -121,16 +125,13 @@ const toast = useToast()
 
 const loading = ref(false)
 
-const roleItems = [
-	{ id: 'customer', name: 'Заказчик' },
-	{ id: 'executor', name: 'Исполнитель' }
-]
-
 const refCode = ref('')
 refCode.value = router.currentRoute.value.query.ref as string
 
-const register = async () => {
+const register = async (role: Role) => {
 	if (isRegistrationPossible.value) {
+		form.role.value = role
+		
 		loading.value = true
 		form.clearErrors()
 
@@ -162,7 +163,10 @@ const isRegistrationPossible = computed(() => {
 .registration {
 	&__content {
 		display: flex;
+		justify-content: center;
 		align-items: center;
+
+		width: 100%;
 		gap: 5%;
 	}
 

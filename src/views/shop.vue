@@ -163,6 +163,10 @@ loadData()
 
 <style scoped lang="scss">
 .shop {
+	display: flex;
+	flex-direction: column;
+	gap: 56px;
+
 	&__creatives {
 		display: flex;
 		flex-wrap: wrap;

@@ -1,7 +1,14 @@
 <template>
 	<div class="creative-card">
+		<img
+			v-if="badge"
+			src="@/assets/img/creative__badge.webp"
+			class="creative-card__badge"
+			alt=""
+		>
+
 		<Video
-			v-if="creative.expand?.video"
+			v-if="creative.expand?.video && creative.expand?.preview"
 			class="creative-card__video"
 			:src="creative.expand.video"
 			:preview="creative.expand.preview"
@@ -69,6 +76,10 @@ const props = defineProps({
 	forSale: {
 		type: Boolean,
 		default: false
+	},
+	badge: {
+		type: Boolean,
+		default: true
 	}
 })
 
@@ -84,15 +95,27 @@ const addToBasket = async () => {
 
 <style scoped lang="scss">
 .creative-card {
+
+	position: relative;
+
 	max-width: 400px;
 	padding: 16px 8px;
 
 	background: #0F0F10;
 	border: 1px solid #1D1D20;
 	border-radius: 16px;
-
+	
 	@media (max-width: 1024px) {
 		max-width: 300px;
+	}
+
+	&__badge {
+		position: absolute;
+		top: -35px;
+		left: calc(50% - 47px);
+
+		width: 95px;
+		height: 70px;
 	}
 
 	&__video {

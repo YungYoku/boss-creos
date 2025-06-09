@@ -31,7 +31,7 @@
 				</router-link>
 
 				<router-link
-					v-if="!auth.isLoggedIn"
+					v-if="!auth.isLoggedIn && !isAuthPage"
 					to="/login"
 				>
 					Авторизация
@@ -44,6 +44,8 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.ts'
 
 import { Grid } from '@/components/structures'
@@ -77,6 +79,9 @@ const nav = [
 	},
 	*/
 ]
+
+const route = useRoute()
+const isAuthPage = computed(() => route.name === 'Login' || route.name === 'Registration')
 </script>
 
 <style scoped lang="scss">
