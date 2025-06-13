@@ -56,6 +56,13 @@ export interface IApproach {
 	name: string
 }
 
+export type ICreativeType = 'video' | 'static' | 'pwa'
+export const cretiveTypeItems = ['video', 'static', 'pwa']
+	.map(item => ({
+		id: item,
+		name: item
+	}))
+
 export type IRatio = '1:1' | '2:3' | '3:2' | '3:4' | '4:5' | '9:16' | '16:9'
 export const ratioItems = ['1:1', '2:3', '3:2', '3:4', '4:5', '9:16', '16:9']
 	.map(item => ({
@@ -73,8 +80,9 @@ export interface ICreative {
 	creator: string
 	price: number
 	proposals: Array<string>
-	type: 'video' | 'static' | 'pwa'
+	type: ICreativeType
 	geo: string
+	unavailableGeo: Array<string>
 	slot: string
 	preview: string
 	watermark: boolean
@@ -90,6 +98,7 @@ export interface ICreative {
 		creator?: IUser
 		proposals?: Array<IProjectProposal>
 		geo?: IGeo
+		unavailableGeo?: Array<IGeo>
 		slot?: ISlot
 		preview?: IFile
 		video?: IFile,
@@ -140,6 +149,7 @@ export const emptyCreative: ICreative = {
 	proposals: [],
 	type: 'video',
 	geo: '',
+	unavailableGeo: [],
 	slot: '',
 	preview: '',
 	watermark: false,

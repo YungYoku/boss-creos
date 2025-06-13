@@ -6,15 +6,16 @@
 					:columns="4"
 					@keyup.enter="loadData"
 				>
-					<Input
-						v-model="search"
-						label="Поиск"
-					/>
-
 					<SelectLive
 						v-model="form.geo.value"
-						label="Гео"
+						label="Свободные гео"
 						api="geo"
+					/>
+
+					<Select
+						v-model="form.type.value"
+						label="Вид крео"
+						:items="cretiveTypeItems"
 					/>
 
 					<SelectLive
@@ -80,19 +81,19 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue'
+import { ref } from 'vue'
 import { useSearchStore } from '@/stores/search.ts'
 
-import { Grid } from '@/components/structures'
-import { Button, CreativeCard, EmptyCreativeCard, Input, Select, SelectLive } from '@/components/blocks'
-import { ICreative, ICreatives, IRatio, ratioItems } from '@/interfaces/Creative.ts'
+import { Grid, Island } from '@/components/structures'
+import { Button, CreativeCard, EmptyCreativeCard, Select, SelectLive } from '@/components/blocks'
+import { cretiveTypeItems, ICreative, ICreatives, ICreativeType, IRatio, ratioItems } from '@/interfaces/Creative.ts'
 import { Form, Http } from '@/plugins'
-import Island from '@/components/structures/island.vue'
 
 interface SearchForm {
 	geo: string
 	slot: string
 	approach: string
+	type: ICreativeType | ''
 	ratio: IRatio | ''
 }
 
@@ -100,22 +101,11 @@ const creatives = ref<Array<ICreative>>([])
 
 const searchStore = useSearchStore()
 
-const _search = ref('')
-const search = computed({
-	get: () => _search.value,
-	set: (value) => {
-		_search.value = value
-		searchStore.update(value)
-	}
-})
-watch(() => searchStore.search, (value) => {
-	search.value = value
-}, { immediate: true })
-
 const form = Form<SearchForm>({
 	geo: '',
 	slot: '',
 	approach: '',
+	type: '',
 	ratio: ''
 })
 
@@ -125,12 +115,11 @@ const loadCreatives = async () => {
 	let filter = ''
 	let encodedFilter = ''
 
-	const searchValue = search.value?.toLowerCase?.()
-	if (searchValue) filters.push(`(description~'${searchValue}')`)
 	if (form.geo.value) filters.push(`geo='${form.geo.value}'`)
 	if (form.slot.value) filters.push(`slot='${form.slot.value}'`)
 	if (form.approach.value) filters.push(`approach='${form.approach.value}'`)
 	if (form.ratio.value) filters.push(`ratio='${form.ratio.value}'`)
+	if (form.type.value) filters.push(`type='${form.type.value}'`)
 	if (filters.length) {
 		filter = filters.reduce((acc, filter) => filter ? `${acc} && ${filter}` : acc, '')
 		filter = filter.slice(4)

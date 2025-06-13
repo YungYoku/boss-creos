@@ -61,6 +61,15 @@
 							:error="creative.preview.error"
 							label="Обложка"
 						/>
+
+						<SelectLive
+							v-model="creative.unavailableGeo.value"
+							:disabled="loading"
+							multiple
+							:error="creative.unavailableGeo.error"
+							label="Недоступные гео"
+							api="geo"
+						/>
 					</Grid>
 
 					<Grid vertical>
