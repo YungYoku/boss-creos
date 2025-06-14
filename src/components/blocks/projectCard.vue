@@ -1,7 +1,7 @@
 <template>
 	<Island class="project">
 		<div class="project__actions">
-			<template v-if="project.executor && showingChat">
+			<template v-if="project.designer && showingChat">
 				<Skeleton
 					v-if="loading"
 					width="24px"
@@ -37,7 +37,7 @@
 				</div>
 			</template>
 
-			<template v-if="authStore.isExecutor">
+			<template v-if="authStore.isDesigner">
 				<Skeleton
 					v-if="loading"
 					width="24px"
@@ -192,16 +192,16 @@ const remove = () => emit('remove', props.project)
 
 const status = computed(() => {
 	switch (props.project?.status) {
-	case 'created':
-		return 'Создано'
-	case 'in_progress':
-		return 'В работе'
-	case 'on_review':
-		return 'На проверке'
-	case 'ended':
-		return 'Завершено'
-	default:
-		return null
+		case 'created':
+			return 'Создано'
+		case 'in_progress':
+			return 'В работе'
+		case 'on_review':
+			return 'На проверке'
+		case 'ended':
+			return 'Завершено'
+		default:
+			return null
 	}
 })
 

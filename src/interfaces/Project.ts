@@ -33,49 +33,49 @@ export const emptyProposal: IProjectProposal = {
 }
 
 export interface IProject {
-    id: string
-    collectionId: string
-    collectionName: string
-    created: string
-    updated: string
-    title: string
-    title_lowercase: string
-    description: string
-    description_lowercase: string
-    price: number
-    creator: string
-    status: IProjectStatus
-    ratingCreator: string
-    ratingExecutor: string
-    deadline: Date
-    executor: string
-    proposals: Array<string>
-    chat: string
-    file: string | null
+	id: string
+	collectionId: string
+	collectionName: string
+	created: string
+	updated: string
+	title: string
+	title_lowercase: string
+	description: string
+	description_lowercase: string
+	price: number
+	buyer: string
+	status: IProjectStatus
+	ratingBuyer: string
+	ratingDesigner: string
+	deadline: Date
+	designer: string
+	proposals: Array<string>
+	chat: string
+	file: string | null
 	tutoring: false
-    expand?: {
-        creator?: IUser
-        executor?: IUser
-        chat?: IChat
-        proposals?: Array<IProjectProposal>
-        file?: {
-            value: File
-        },
-        ratingCreator?: IRating
-        ratingExecutor?: IRating
-    }
+	expand?: {
+		buyer?: IUser
+		designer?: IUser
+		chat?: IChat
+		proposals?: Array<IProjectProposal>
+		file?: {
+			value: File
+		},
+		ratingBuyer?: IRating
+		ratingDesigner?: IRating
+	}
 }
 
 export const emptyProject: IProject = {
-	ratingCreator: '',
-	ratingExecutor: '',
+	ratingBuyer: '',
+	ratingDesigner: '',
 	chat: '',
 	collectionId: '',
 	collectionName: '',
 	created: '',
-	creator: '',
+	buyer: '',
 	deadline: new Date(),
-	executor: '',
+	designer: '',
 	id: '',
 	proposals: [],
 	status: 'created',
@@ -93,9 +93,9 @@ export const emptyProject: IProject = {
 }
 
 export interface IProjects {
-    items: Array<IProject>
-    page: number
-    perPage: number
-    totalItems: number
-    totalPages: number
+	items: Array<IProject>
+	page: number
+	perPage: number
+	totalItems: number
+	totalPages: number
 }

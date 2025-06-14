@@ -47,14 +47,14 @@
 					<Button
 						:disabled="loading"
 						type="submit"
-						@click="register('customer')"
+						@click="register('buyer')"
 					>
 						Зарегистрироваться Как баер
 					</Button>
 					<Button
 						:disabled="loading"
 						type="submit"
-						@click="register('executor')"
+						@click="register('designer')"
 					>
 						Зарегистрироваться Как дизайнер
 					</Button>
@@ -96,7 +96,7 @@ import { Form, Http } from '@/plugins'
 import { IUser } from '@/interfaces/User.ts'
 import Grid from '@/components/structures/grid.vue'
 
-type Role = 'customer' | 'executor'
+type Role = 'buyer' | 'designer'
 
 interface RegistrationForm {
 	username: string
@@ -115,7 +115,7 @@ const form = Form<RegistrationForm>({
 	email: '',
 	password: '',
 	passwordConfirm: '',
-	role: 'customer',
+	role: 'buyer',
 	energy: 100,
 	checked_at: new Date()
 })

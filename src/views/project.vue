@@ -31,7 +31,7 @@
 					Редактировать
 				</Button>
 
-				<template v-else-if="authStore.isExecutor">
+				<template v-else-if="authStore.isDesigner">
 					<span/>
 					<span v-if="isAlreadyProposed"/>
 					<Button
@@ -112,7 +112,7 @@
 					</Grid>
 
 					<Grid
-						v-if="project.expand?.executor"
+						v-if="project.expand?.designer"
 						:columns="[0, 0]"
 						ver-align="center"
 					>
@@ -125,7 +125,7 @@
 
 						<UserCard
 							link
-							:user="project.expand.executor"
+							:user="project.expand.designer"
 							:loading="loading"
 						/>
 					</Grid>
@@ -197,7 +197,7 @@ const loadProject = async () => {
 
 	await Http
 		.get<IProject>(`/collections/projects/records/${id}`, {
-			expand: ['creator', 'executor', 'proposals', 'discipline', 'type', 'university']
+			expand: ['buyer', 'designer', 'proposals', 'discipline', 'type', 'university']
 		})
 		.then(response => {
 			project.value = response

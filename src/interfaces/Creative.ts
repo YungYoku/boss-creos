@@ -63,8 +63,8 @@ export const cretiveTypeItems = ['video', 'static', 'pwa']
 		name: item
 	}))
 
-export type IRatio = '1:1' | '2:3' | '3:2' | '3:4' | '4:5' | '9:16' | '16:9'
-export const ratioItems = ['1:1', '2:3', '3:2', '3:4', '4:5', '9:16', '16:9']
+export type IRatio = '1:1' | '2:3' | '3:2' | '3:4' | '4:3' | '4:5' | '9:16' | '16:9'
+export const ratioItems = ['1:1', '2:3', '3:2', '3:4', '4:3', '4:5', '9:16', '16:9']
 	.map(item => ({
 		id: item,
 		name: item
@@ -91,7 +91,14 @@ export interface ICreative {
 	approach: string
 	ratio: IRatio
 	resize: boolean
-	resizePrice: number
+	resizePrice11: number
+	resizePrice23: number
+	resizePrice32: number
+	resizePrice34: number
+	resizePrice43: number
+	resizePrice45: number
+	resizePrice916: number
+	resizePrice169: number
 	reskin: boolean
 	reskinPrice: number
 	expand?: {
@@ -106,19 +113,6 @@ export interface ICreative {
 	}
 }
 
-export interface IBasketDescription {
-	id: string
-	collectionId: string
-	collectionName: string
-	created: string
-	updated: string
-	creative: string
-	geo: string
-	expand?: {
-		geo?: IGeo
-	}
-}
-
 export interface IBasket {
 	id: string
 	collectionId: string
@@ -127,13 +121,12 @@ export interface IBasket {
 	updated: string
 	creative: string
 	geo: Array<string>
-	resize: boolean
+	resize: Array<IRatio>
 	reskin: boolean
-	descriptions: Array<string>
+	comment: string
 	expand?: {
 		creative?: ICreative
 		geo?: Array<IGeo>
-		descriptions?: Array<IBasketDescription>
 	}
 }
 
@@ -158,7 +151,14 @@ export const emptyCreative: ICreative = {
 	approach: '',
 	ratio: '1:1',
 	resize: false,
-	resizePrice: 0,
+	resizePrice11: 0,
+	resizePrice169: 0,
+	resizePrice23: 0,
+	resizePrice32: 0,
+	resizePrice34: 0,
+	resizePrice43: 0,
+	resizePrice45: 0,
+	resizePrice916: 0,
 	reskin: false,
 	reskinPrice: 0,
 	expand: {

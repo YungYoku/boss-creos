@@ -27,7 +27,7 @@ const routes: Array<RouteRecordRaw> = [
 				name: 'NewProject',
 				component: () => import('@/views/newProject.vue'),
 				meta: {
-					rules: ['auth', 'customer']
+					rules: ['auth', 'buyer']
 				}
 			},
 			{
@@ -51,7 +51,8 @@ const routes: Array<RouteRecordRaw> = [
 				name: 'NewCreative',
 				component: () => import('@/views/newCreative.vue'),
 				meta: {
-					rules: ['auth', 'customer']
+					rules: ['auth', 'designer'],
+					bgClass: 'new-creative'
 				}
 			},
 			{
@@ -67,7 +68,7 @@ const routes: Array<RouteRecordRaw> = [
 				name: 'MadeProjects',
 				component: () => import('@/views/madeProjects.vue'),
 				meta: {
-					rules: ['auth', 'customer']
+					rules: ['auth', 'buyer']
 				}
 			},
 			{
@@ -75,7 +76,7 @@ const routes: Array<RouteRecordRaw> = [
 				name: 'MadeCreatives',
 				component: () => import('@/views/madeCreatives.vue'),
 				meta: {
-					rules: ['auth', 'customer']
+					rules: ['auth', 'buyer']
 				}
 			},
 			{
@@ -83,7 +84,7 @@ const routes: Array<RouteRecordRaw> = [
 				name: 'ExecutingProjects',
 				component: () => import('@/views/executingProjects.vue'),
 				meta: {
-					rules: ['auth', 'executor']
+					rules: ['auth', 'designer']
 				}
 			},
 			{
@@ -91,7 +92,7 @@ const routes: Array<RouteRecordRaw> = [
 				name: 'Favorite',
 				component: () => import('@/views/favorite.vue'),
 				meta: {
-					rules: ['auth', 'executor']
+					rules: ['auth', 'designer']
 				}
 			},
 			{
@@ -188,12 +189,12 @@ router.beforeEach((to, from) => {
 	if (toRules.includes('auth')) {
 		if (!authStore.isLoggedIn) return '/login'
 
-		if (toRules.includes('customer')) {
-			if (authStore.isCustomer) return true
+		if (toRules.includes('buyer')) {
+			if (authStore.isBuyer) return true
 			return '/'
 		}
-		if (toRules.includes('executor')) {
-			if (authStore.isExecutor) return true
+		if (toRules.includes('designer')) {
+			if (authStore.isDesigner) return true
 			return '/'
 		}
 

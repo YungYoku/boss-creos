@@ -22,7 +22,7 @@
 					<span/>
 
 					<Badge
-						v-if="auth.isExecutor && project.status === 'on_review'"
+						v-if="auth.isDesigner && project.status === 'on_review'"
 						bg="yellow"
 					>
 						Проверяется
@@ -76,7 +76,7 @@
 				</Grid>
 
 				<Button
-					v-if="auth.isExecutor && project.status === 'in_progress'"
+					v-if="auth.isDesigner && project.status === 'in_progress'"
 					:loading="loading"
 					@click="sendToReview"
 				>
@@ -84,7 +84,7 @@
 				</Button>
 
 				<Grid
-					v-if="auth.isCustomer && project.status === 'on_review'"
+					v-if="auth.isBuyer && project.status === 'on_review'"
 					:columns="[1, 1]"
 				>
 					<Button
@@ -152,13 +152,13 @@ const toast = useToast()
 
 interface Props {
 	project: IProject,
-	userType: 'executor' | 'creator'
-	ratingType: 'ratingExecutor' | 'ratingCreator'
+	userType: 'designer' | 'buyer'
+	ratingType: 'ratingDesigner' | 'ratingBuyer'
 }
 const props = withDefaults(defineProps<Props>(), {
 	project: () => emptyProject,
-	userType: 'creator',
-	ratingType: 'ratingCreator',
+	userType: 'designer',
+	ratingType: 'ratingDesigner',
 })
 
 const messagesRef = useTemplateRef('messages-ref')

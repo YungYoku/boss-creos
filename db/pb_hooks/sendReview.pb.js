@@ -28,10 +28,10 @@ routerAdd('POST', '/api/send-review/{offerId}', (c) => {
 	}
 
 
-	if (role === 'customer') {
-		const currentRatingExecutor = offer.get('ratingExecutor')
-		if (currentRatingExecutor.length > 0) {
-			const currentRating = $app.findRecordById('ratings', currentRatingExecutor)
+	if (role === 'buyer') {
+		const currentRatingBuyer = offer.get('ratingBuyer')
+		if (currentRatingBuyer.length > 0) {
+			const currentRating = $app.findRecordById('ratings', currentRatingBuyer)
 			currentRating.set('stars', stars)
 			currentRating.set('review', review)
 
@@ -39,24 +39,24 @@ routerAdd('POST', '/api/send-review/{offerId}', (c) => {
 
 			return c.json(200, currentRating)
 		} else {
-			const executorId = offer.get('executor')
-			const executor = $app.findRecordById('users', executorId)
-			const currentUserRating = executor.get('rating')
+			const designerId = offer.get('designer')
+			const designer = $app.findRecordById('users', designerId)
+			const currentUserRating = designer.get('rating')
 
 			const record = addReview()
 			const ratingId = record.get('id')
 
-			offer.set('ratingExecutor', ratingId)
+			offer.set('ratingDesigner', ratingId)
 			$app.save(offer)
 
-			executor.set('rating', [...currentUserRating, ratingId])
-			$app.save(executor)
+			designer.set('rating', [...currentUserRating, ratingId])
+			$app.save(designer)
 
 			const currentRating = $app.findRecordById('ratings', ratingId)
 			return c.json(200, currentRating)
 		}
 	}
-	if (role === 'executor') {
+	if (role === 'designer') {
 		const currentRatingCreator = offer.get('ratingCreator')
 		if (currentRatingCreator.length > 0) {
 			const currentRating = $app.findRecordById('ratings', currentRatingCreator)

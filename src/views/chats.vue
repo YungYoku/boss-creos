@@ -84,30 +84,30 @@ const headerColumns = computed(() => {
 const chats = ref<Array<IProject>>([])
 const loading = ref(true)
 
-const chatRatingType = computed(() => auth.isCustomer ? 'ratingExecutor' : 'ratingCreator')
+const chatRatingType = computed(() => auth.isBuyer ? 'ratingDesigner' : 'ratingBuyer')
 const getUserForChar = (chat: IProject) => {
 	if (loading.value) return emptyUser
 
-	const executor = chat.expand?.executor
-	const creator = chat.expand?.creator
-	if (executor && creator) {
-		return auth.isCustomer ? executor : creator
+	const designer = chat.expand?.designer
+	const buyer = chat.expand?.buyer
+	if (designer && buyer) {
+		return auth.isBuyer ? designer : buyer
 	}
 
 	return emptyUser
 }
-const chatUserType = computed(() => auth.isCustomer ? 'executor' : 'creator')
+const chatUserType = computed(() => auth.isBuyer ? 'designer' : 'buyer')
 
 const getChats = async () => {
 	if (auth.user.id === '') return
 	loading.value = true
 
-	const filter = auth.isCustomer ? `creator='${auth.user.id}'` : `executor='${auth.user.id}'`
+	const filter = auth.isBuyer ? `buyer='${auth.user.id}'` : `designer='${auth.user.id}'`
 	const encodedFilter = encodeURIComponent(`(${filter} && status!='created')`)
 
 	await Http.get<IProjects>('/collections/projects/records', {
 		filter: `(${encodedFilter})`,
-		expand: ['proposals', 'type', 'discipline', 'creator', 'ratingCreator', 'executor', 'ratingExecutor']
+		expand: ['proposals', 'type', 'discipline', 'buyer', 'ratingBuyer', 'designer', 'ratingDesigner']
 	})
 		.then(({ items }) => {
 			chats.value = items
@@ -125,12 +125,12 @@ const updateStatus = async (status: IProjectStatus) => {
 
 const updateRating = async (rating: IRating) => {
 	if (openedChat.value && openedChat.value.expand) {
-		if (auth.isCustomer) {
-			openedChat.value.ratingExecutor = rating.id
-			openedChat.value.expand.ratingExecutor = rating
-		} else if (auth.isExecutor) {
-			openedChat.value.ratingCreator = rating.id
-			openedChat.value.expand.ratingCreator = rating
+		if (auth.isBuyer) {
+			openedChat.value.ratingDesigner = rating.id
+			openedChat.value.expand.ratingDesigner = rating
+		} else if (auth.isDesigner) {
+			openedChat.value.ratingBuyer = rating.id
+			openedChat.value.expand.ratingBuyer = rating
 		}
 	}
 }

@@ -106,6 +106,10 @@ body {
 	&.auth-bg {
 		background-image: url("@/assets/img/bg__auth.webp");
 	}
+
+	&.new-creative-bg {
+		background-image: url("@/assets/img/bg__new-creative.webp");
+	}
 }
 
 a,

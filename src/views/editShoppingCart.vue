@@ -35,9 +35,11 @@
 				</div>
 			</div>
 
-			<Checkbox
+			<Select
 				v-if="basket.expand?.creative?.resize"
 				v-model="basket.resize"
+				multiple
+				:items="ratioItems"
 				label="Ресайз"
 			/>
 
@@ -48,19 +50,17 @@
 			/>
 
 			<Textarea
-				v-if="basket.expand?.creative?.description != undefined"
-				v-model="basket.expand.creative.description"
+				v-model="basket.comment"
 				class="edit-shopping-cart__creative-description"
 				label="Описание"
 			/>
 
-			<button
-				v-if="basket.expand?.creative"
+			<Button
 				class="edit-shopping-cart__creative-edit"
-				@click="updateCreative(basket.expand.creative)"
+				@click="updateBasket(basket)"
 			>
 				Сохранить
-			</button>
+			</Button>
 		</div>
 
 		<Button to="/shopping-cart">
@@ -71,16 +71,16 @@
 
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth.ts'
-import { Button, Checkbox, Textarea } from '@/components/blocks'
+import { Button, Checkbox, Select, Textarea } from '@/components/blocks'
 import { Image } from '@/components/elements'
-import { ICreative } from '@/interfaces/Creative.ts'
+import { IBasket, ratioItems } from '@/interfaces/Creative.ts'
 import { Http } from '@/plugins'
 
 const user = useAuthStore()
 
-const updateCreative = async (creative: ICreative) => {
+const updateBasket = async (basket: IBasket) => {
 	await Http
-		.patch<ICreative>(`/collections/creatives/records/${creative.id}`, creative)
+		.patch<IBasket>(`/collections/baskets/records/${basket.id}`, basket)
 		.then(() => {
 		})
 }
@@ -94,18 +94,13 @@ const updateCreative = async (creative: ICreative) => {
 
 	width: 800px;
 	max-width: 100%;
-	padding: 24px 15px;
-
-	background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.08) 100%),
-	radial-gradient(50% 100% at 50% 0%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
-	border: 1px solid;
-	border-radius: 10px;
-	border-image-source: linear-gradient(135.28deg, rgba(255, 255, 255, 0.3) -128.53%, rgba(255, 255, 255, 0) 75.12%);
 
 	&__creative {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		gap: 5px;
+
+		padding: 5px;
 
 		background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.08) 100%),
 		radial-gradient(50% 100% at 50% 0%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);

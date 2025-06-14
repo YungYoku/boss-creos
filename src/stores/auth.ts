@@ -3,8 +3,8 @@ import { emptyUser, IUser } from '@/interfaces/User'
 import { Storage } from '@/plugins'
 
 export interface State {
-    user: IUser
-    token: string
+	user: IUser
+	token: string
 }
 
 export const useAuthStore = defineStore('auth', {
@@ -19,8 +19,8 @@ export const useAuthStore = defineStore('auth', {
 
 	getters: {
 		isLoggedIn: state => state.token?.length > 0,
-		isCustomer: state => state.user.role === 'customer',
-		isExecutor: state => state.user.role === 'executor',
+		isBuyer: state => state.user.role === 'buyer',
+		isDesigner: state => state.user.role === 'designer',
 		isAdmin: state => state.user.role === 'admin',
 		isRewardClaimable: state => {
 			if (!state.user) return false

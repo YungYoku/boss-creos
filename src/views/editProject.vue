@@ -119,7 +119,7 @@ const loadProject = async () => {
 
 	await Http
 		.get<IProject>(`/collections/projects/records/${id}`, {
-			expand: ['creator', 'executor', 'discipline', 'type', 'university']
+			expand: ['creator', 'designer', 'discipline', 'type', 'university']
 		})
 		.then(response => {
 			form.set(response)

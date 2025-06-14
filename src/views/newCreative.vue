@@ -82,21 +82,6 @@
 						/>
 
 						<Switcher
-							v-model="creative.resize.value"
-							:disabled="loading"
-							:error="creative.resize.error"
-							label="Ресайз"
-						/>
-
-						<Input
-							v-if="creative.resize.value"
-							v-model="creative.resizePrice.value"
-							:disabled="loading"
-							:error="creative.resizePrice.error"
-							label="Цена ресайза"
-						/>
-
-						<Switcher
 							v-model="creative.reskin.value"
 							:disabled="loading"
 							:error="creative.reskin.error"
@@ -126,6 +111,79 @@
 							label="Загрузите крео"
 						/>
 					</Grid>
+				</Grid>
+
+				<Grid>
+					<Switcher
+						v-model="creative.resize.value"
+						:disabled="loading"
+						:error="creative.resize.error"
+						label="Ресайз"
+					/>
+
+					<Input
+						v-if="creative.resize.value"
+						v-model="creative.resizePrice11.value"
+						:disabled="loading"
+						:error="creative.resizePrice11.error"
+						label="Цена ресайза 1:1"
+					/>
+
+					<Input
+						v-if="creative.resize.value"
+						v-model="creative.resizePrice23.value"
+						:disabled="loading"
+						:error="creative.resizePrice23.error"
+						label="Цена ресайза 2:3"
+					/>
+
+					<Input
+						v-if="creative.resize.value"
+						v-model="creative.resizePrice32.value"
+						:disabled="loading"
+						:error="creative.resizePrice32.error"
+						label="Цена ресайза 3:3"
+					/>
+
+					<Input
+						v-if="creative.resize.value"
+						v-model="creative.resizePrice34.value"
+						:disabled="loading"
+						:error="creative.resizePrice34.error"
+						label="Цена ресайза 3:4"
+					/>
+
+					<Input
+						v-if="creative.resize.value"
+						v-model="creative.resizePrice43.value"
+						:disabled="loading"
+						:error="creative.resizePrice43.error"
+						label="Цена ресайза 4:3"
+					/>
+
+					<Input
+						v-if="creative.resize.value"
+						v-model="creative.resizePrice45.value"
+						:disabled="loading"
+						:error="creative.resizePrice45.error"
+						label="Цена ресайза 4:5"
+					/>
+
+					<Input
+						v-if="creative.resize.value"
+						v-model="creative.resizePrice916.value"
+						:disabled="loading"
+						:error="creative.resizePrice916.error"
+						label="Цена ресайза 9:16"
+					/>
+
+					<Input
+						v-if="creative.resize.value"
+						v-model="creative.resizePrice169.value"
+						:disabled="loading"
+						:error="creative.resizePrice169.error"
+						label="Цена ресайза 16:9"
+					/>
 				</Grid>
 
 				<Textarea
@@ -203,8 +261,10 @@ const creativeTypeItems = [
 
 <style scoped lang="scss">
 .new-creative {
+	max-width: 585px;
+
 	&__title {
-		margin: 0 auto;
+		margin: 0 auto 20px auto;
 	}
 
 	&__submit {

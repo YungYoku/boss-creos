@@ -31,7 +31,7 @@
 					Редактировать
 				</Button>
 
-				<template v-else-if="authStore.isExecutor">
+				<template v-else-if="authStore.isDesigner">
 					<span/>
 					<span v-if="isAlreadyProposed"/>
 					<Button

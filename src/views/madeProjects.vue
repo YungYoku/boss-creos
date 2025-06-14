@@ -43,7 +43,7 @@
 	<ModalProposals
 		v-if="openedProject"
 		:project="openedProject"
-		@chose-proposal="pickExecutor"
+		@chose-proposal="pickDesigner"
 		@close="closeResponses"
 	/>
 
@@ -54,8 +54,8 @@
 	>
 		<Chat
 			:project="openedChat"
-			rating-type="ratingExecutor"
-			user-type="executor"
+			rating-type="ratingDesigner"
+			user-type="designer"
 			@update:status="updateStatus"
 			@update:rating="updateRating"
 		/>
@@ -96,7 +96,7 @@ const getUserProjects = async () => {
 	await Http
 		.get<IProjects>('/collections/projects/records', {
 			filter: `(creator='${auth.user.id}')`,
-			expand: ['proposals', 'proposals.user', 'type', 'discipline', 'executor', 'ratingExecutor']
+			expand: ['proposals', 'proposals.user', 'type', 'discipline', 'designer', 'ratingDesigner']
 		})
 		.then(response => {
 			projects.value = response.items
@@ -117,17 +117,17 @@ const closeResponses = () => {
 	openedProject.value = null
 }
 
-const pickExecutor = async (user: IUser) => {
+const pickDesigner = async (user: IUser) => {
 	if (!openedProject.value || loading.value) return
-	const executorChat = openedProject.value.expand?.proposals?.find(proposal => proposal.user === user.id)?.chat
+	const designerChat = openedProject.value.expand?.proposals?.find(proposal => proposal.user === user.id)?.chat
 
 	loading.value = true
 
 	await Http
 		.patch(`/collections/projects/records/${openedProject.value.id}`, {
-			executor: user.id,
+			designer: user.id,
 			status: 'in_progress',
-			chat: executorChat
+			chat: designerChat
 		})
 		.then(() => {
 			closeResponses()
@@ -161,8 +161,8 @@ const updateStatus = async (status: IProjectStatus) => {
 
 const updateRating = async (rating: IRating) => {
 	if (openedChat.value && openedChat.value.expand) {
-		openedChat.value.ratingExecutor = rating.id
-		openedChat.value.expand.ratingExecutor = rating
+		openedChat.value.ratingDesigner = rating.id
+		openedChat.value.expand.ratingDesigner = rating
 	}
 }
 

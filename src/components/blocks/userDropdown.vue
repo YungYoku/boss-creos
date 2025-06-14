@@ -70,23 +70,23 @@ const items = computed(() => [
 		{
 			text: 'Мои креативы',
 			to: '/made-creatives',
-			can: auth.isCustomer
+			can: auth.isBuyer
 		},
 		{
 			text: 'Создать креатив',
 			to: '/new-creative',
-			can: auth.isCustomer
+			can: auth.isDesigner
 		},
-		{
-			text: 'Выполняемые объявления',
-			to: '/executing-projects',
-			can: auth.isExecutor
-		},
-		{
-			text: 'Избранное',
-			to: '/favorite',
-			can: auth.isExecutor
-		}
+		// {
+		// 	text: 'Выполняемые объявления',
+		// 	to: '/executing-projects',
+		// 	can: auth.isDesigner
+		// },
+		// {
+		// 	text: 'Избранное',
+		// 	to: '/favorite',
+		// 	can: auth.isDesigner
+		// }
 	],
 	[
 		{
