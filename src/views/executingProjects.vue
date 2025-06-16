@@ -43,8 +43,8 @@
 	>
 		<Chat
 			:project="openedChat"
-			rating-type="ratingCreator"
-			user-type="creator"
+			rating-type="ratingBuyer"
+			user-type="buyer"
 			@update:status="updateStatus"
 			@update:rating="updateRating"
 		/>
@@ -102,8 +102,8 @@ const updateStatus = async (status: IProjectStatus) => {
 
 const updateRating = async (rating: IRating) => {
 	if (openedChat.value && openedChat.value.expand) {
-		openedChat.value.ratingCreator = rating.id
-		openedChat.value.expand.ratingCreator = rating
+		openedChat.value.ratingBuyer = rating.id
+		openedChat.value.expand.ratingBuyer = rating
 	}
 }
 </script>

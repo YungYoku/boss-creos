@@ -93,16 +93,9 @@ import { useAuthStore } from '@/stores/auth'
 import { useToast } from '@/stores/toast'
 
 import { Grid, Island } from '@/components/structures'
-import {
-	Input,
-	Textarea,
-	Button,
-	DatePicker,
-	InputFile,
-	Checkbox
-} from '@/components/blocks'
+import { Button, Checkbox, DatePicker, Input, InputFile, Textarea } from '@/components/blocks'
 import { emptyProject, IProject } from '@/interfaces/Project.ts'
-import { Http, Form } from '@/plugins'
+import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
 
 const auth = useAuthStore()
@@ -112,7 +105,7 @@ const project = Form<IProject>({ ...emptyProject })
 const router = useRouter()
 const toast = useToast()
 
-watch(() => auth.user.id, () => project.creator.value = auth.user.id, { immediate: true })
+watch(() => auth.user.id, () => project.buyer.value = auth.user.id, { immediate: true })
 
 const loading = ref(false)
 const create = async () => {

@@ -93,7 +93,7 @@
 					</Text>
 
 					<Grid
-						v-if="project.expand?.creator"
+						v-if="project.expand?.buyer"
 						:columns="[0, 0]"
 						ver-align="center"
 					>
@@ -106,7 +106,7 @@
 
 						<UserCard
 							link
-							:user="project.expand.creator"
+							:user="project.expand.buyer"
 							:loading="loading"
 						/>
 					</Grid>
@@ -183,7 +183,7 @@ import { ModalDeleteConfirmation, ModalMakeProposal } from '@/components/section
 import { Button, User as UserCard } from '@/components/blocks'
 import { PageTitle, Text } from '@/components/elements'
 import { Http } from '@/plugins'
-import { IProject, emptyProject, IProjectProposal } from '@/interfaces/Project.ts'
+import { emptyProject, IProject, IProjectProposal } from '@/interfaces/Project.ts'
 
 const router = useRouter()
 
@@ -261,7 +261,7 @@ const makeProposal = async (proposal: IProjectProposal) => {
 	hideMakeProposal()
 }
 
-const isItMyProject = computed(() => project.value.creator === authStore.user.id)
+const isItMyProject = computed(() => project.value.buyer === authStore.user.id)
 const isAlreadyProposed = computed(() => {
 	const proposals = project.value.expand?.proposals ?? []
 	const proposal = proposals.find(proposal => proposal.user === authStore.user.id)

@@ -116,11 +116,11 @@
 
 		<div class="project__footer">
 			<User
-				v-if="project?.expand?.creator"
+				v-if="project?.expand?.buyer"
 				:loading
 				class="project__user"
 				link
-				:user="project.expand.creator"
+				:user="project.expand.buyer"
 			/>
 
 			<Text
@@ -138,7 +138,7 @@
 import { computed, PropType } from 'vue'
 
 import { Island } from '@/components/structures'
-import { Icon, Badge, Skeleton, Text } from '@/components/elements'
+import { Badge, Icon, Skeleton, Text } from '@/components/elements'
 import User from './user.vue'
 import { Http } from '@/plugins'
 import { useAuthStore } from '@/stores/auth.ts'
