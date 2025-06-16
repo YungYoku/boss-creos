@@ -57,18 +57,24 @@ export interface IApproach {
 }
 
 export type ICreativeType = 'video' | 'static' | 'pwa'
-export const cretiveTypeItems = ['video', 'static', 'pwa']
+const _creativeTypeItems: Array<ICreativeType> = ['video', 'static', 'pwa']
+export const creativeTypeItems = _creativeTypeItems
 	.map(item => ({
 		id: item,
 		name: item
 	}))
 
 export type IRatio = '1:1' | '2:3' | '3:2' | '3:4' | '4:3' | '4:5' | '9:16' | '16:9'
-export const ratioItems = ['1:1', '2:3', '3:2', '3:4', '4:3', '4:5', '9:16', '16:9']
+const _ratioItems: Array<IRatio> = ['1:1', '2:3', '3:2', '3:4', '4:3', '4:5', '9:16', '16:9']
+export const ratioItems = _ratioItems
 	.map(item => ({
 		id: item,
 		name: item
 	}))
+
+export type ResizePrices = {
+	[_ in IRatio]?: number
+}
 
 export interface ICreative {
 	id: string
@@ -91,14 +97,9 @@ export interface ICreative {
 	approach: string
 	ratio: IRatio
 	resize: boolean
-	resizePrice11: number
-	resizePrice23: number
-	resizePrice32: number
-	resizePrice34: number
-	resizePrice43: number
-	resizePrice45: number
-	resizePrice916: number
-	resizePrice169: number
+	resizePrices: ResizePrices | null
+	changes: ICreative | null
+	status: 'moderation' | 'approved'
 	reskin: boolean
 	reskinPrice: number
 	expand?: {
@@ -151,14 +152,18 @@ export const emptyCreative: ICreative = {
 	approach: '',
 	ratio: '1:1',
 	resize: false,
-	resizePrice11: 0,
-	resizePrice169: 0,
-	resizePrice23: 0,
-	resizePrice32: 0,
-	resizePrice34: 0,
-	resizePrice43: 0,
-	resizePrice45: 0,
-	resizePrice916: 0,
+	resizePrices: {
+		'1:1': 0,
+		'2:3': 0,
+		'3:2': 0,
+		'3:4': 0,
+		'4:3': 0,
+		'4:5': 0,
+		'9:16': 0,
+		'16:9': 0
+	},
+	changes: null,
+	status: 'moderation',
 	reskin: false,
 	reskinPrice: 0,
 	expand: {

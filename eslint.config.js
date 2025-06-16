@@ -21,6 +21,10 @@ export default [
 		},
 
 		rules: {
+			'no-unused-vars': ['error', {
+				'argsIgnorePattern': '^_',
+				'varsIgnorePattern': '^_'
+			}],
 			'vue/multi-word-component-names': 'off',
 			'vue/no-reserved-component-names': 'off',
 			'vue/no-v-html': 'off',

@@ -15,7 +15,7 @@
 					<Select
 						v-model="form.type.value"
 						label="Вид крео"
-						:items="cretiveTypeItems"
+						:items="creativeTypeItems"
 					/>
 
 					<SelectLive
@@ -86,7 +86,7 @@ import { useSearchStore } from '@/stores/search.ts'
 
 import { Grid, Island } from '@/components/structures'
 import { Button, CreativeCard, EmptyCreativeCard, Select, SelectLive } from '@/components/blocks'
-import { cretiveTypeItems, ICreative, ICreatives, ICreativeType, IRatio, ratioItems } from '@/interfaces/Creative.ts'
+import { creativeTypeItems, ICreative, ICreatives, ICreativeType, IRatio, ratioItems } from '@/interfaces/Creative.ts'
 import { Form, Http } from '@/plugins'
 
 interface SearchForm {

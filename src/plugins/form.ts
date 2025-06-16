@@ -1,35 +1,41 @@
 import { reactive, UnwrapRef } from 'vue'
 
-type FormField<T> = {
+interface IFormField<T> {
 	value: T,
 	error: string | null
 }
-type TransformedForm<T> = {
-	[key in keyof T]: UnwrapRef<FormField<T[key]>>
+type TransformedFormFields<T> = {
+	[key in keyof T]: UnwrapRef<IFormField<T[key]>>
+}
+type IForm<I> = TransformedFormFields<I> & {
+	set(_: I): void
+	get(): I
+	setErrors(_: Errors<I>): void
+	clearErrors(): void
+	reset(): void
 }
 
-type Error = {
+interface IError {
 	code: string
 	message: string
 }
 type Errors<T> = {
-	// eslint-disable-next-line no-unused-vars
-	[key in keyof T]: Error
+	[_ in keyof T]: IError
 }
 
-const Form = <I>(base: I) => {
-	const form = {} as TransformedForm<I>
-	const keys: Array<keyof I> = [] as Array<keyof I>
-	for (const key in base) {
-		keys.push(key)
+const Form = <I>(base: I): IForm<I> => {
+	const keys = Object.keys(base as object) as Array<keyof I>
 
-		form[key] = reactive({
+	const form = keys.reduce((acc, key) => {
+		acc[key] = reactive({
 			value: base[key],
 			error: null
 		})
-	}
 
-	const set = (data: I) => {
+		return acc
+	}, {} as TransformedFormFields<I>)
+
+	const set = (data: I): void => {
 		for (const key of keys) {
 			Object.assign(form[key], {
 				value: data[key],
