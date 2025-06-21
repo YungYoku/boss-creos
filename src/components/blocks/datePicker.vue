@@ -18,18 +18,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, PropType } from 'vue'
 
 import { Popover } from '@/components/structures'
 import { Button, Calendar } from '@/components/blocks'
 import { Label } from '@/components/elements'
 
-interface Props {
-	label: string
-}
-
-withDefaults(defineProps<Props>(), {
-	label: 'Дата'
+defineProps({
+	label: {
+		type: String,
+		default: 'Дата'
+	}
 })
 
 const months = [
@@ -47,7 +46,8 @@ const months = [
 	'декабря'
 ]
 
-const value = defineModel<Date>({
+const value = defineModel({
+	type: Object as PropType<Date>,
 	default: () => new Date()
 })
 const printedValue = computed(() => {

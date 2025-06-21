@@ -121,21 +121,21 @@
 						label="Ресайз"
 					/>
 
-					<!--					<template v-if="creative.resize.value">-->
-					<!--						<template-->
-					<!--							v-for="item in ratioItems"-->
-					<!--							:key="item.id"-->
-					<!--						>-->
-					<!--							<Input-->
-					<!--								v-if="creative.resizePrices.value?.[item.name]"-->
-					<!--								v-model="creative.resizePrices.value[item.name].value"-->
-					<!--								:disabled="loading"-->
-					<!--								:error="creative.resizePrices.value[item.name].error"-->
-					<!--								:label="`Цена ресайза ${item.name}`"-->
-					<!--								type="number"-->
-					<!--							/>-->
-					<!--						</template>-->
-					<!--					</template>-->
+					<template v-if="creative.resize.value">
+						<template
+							v-for="item in ratioItems"
+							:key="item.id"
+						>
+							<Input
+								v-if="creative.resizePrices.value?.[item.name]"
+								v-model="creative.resizePrices.value[item.name].value"
+								:disabled="loading"
+								:error="creative.resizePrices.value[item.name]?.error"
+								:label="`Цена ресайза ${item.name}`"
+								type="number"
+							/>
+						</template>
+					</template>
 				</Grid>
 
 				<Textarea

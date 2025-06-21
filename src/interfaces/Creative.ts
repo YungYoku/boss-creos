@@ -73,7 +73,7 @@ export const ratioItems = _ratioItems
 	}))
 
 export type ResizePrices = {
-	[_ in IRatio]?: number
+	[_ in IRatio]: number
 }
 
 export interface ICreative {
@@ -165,10 +165,7 @@ export const emptyCreative: ICreative = {
 	changes: null,
 	status: 'moderation',
 	reskin: false,
-	reskinPrice: 0,
-	expand: {
-		proposals: []
-	}
+	reskinPrice: 0
 }
 
 export interface ICreatives {

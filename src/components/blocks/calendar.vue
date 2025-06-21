@@ -38,7 +38,7 @@
 				:class="{
 					'_active': isDayActive(day)
 				}"
-				@click="value = new Date(year, month, day)"
+				@click="updateDate(day)"
 			>
 				{{ day }}
 			</div>
@@ -47,11 +47,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, PropType } from 'vue'
 
-const value = defineModel<Date>({
+const value = defineModel({
+	type: Object as PropType<Date>,
 	default: () => new Date(),
 })
+const updateDate = (day: number) => {
+	value.value = new Date(year.value, month.value, day)
+}
 
 const year = ref(new Date().getFullYear())
 
