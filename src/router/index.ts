@@ -154,6 +154,15 @@ const routes: Array<RouteRecordRaw> = [
 				}
 			},
 			{
+				path: '/moderation',
+				name: 'Moderation',
+				component: () => import('@/views/moderation.vue'),
+				meta: {
+					rules: ['auth', 'admin'],
+					bgClass: 'shop'
+				}
+			},
+			{
 				path: '/chats',
 				name: 'Chats',
 				component: () => import('@/views/chats.vue'),
@@ -212,6 +221,10 @@ router.beforeEach((to, from) => {
 		}
 		if (toRules.includes('designer')) {
 			if (authStore.isDesigner) return true
+			return '/'
+		}
+		if (toRules.includes('admin')) {
+			if (authStore.isAdmin) return true
 			return '/'
 		}
 

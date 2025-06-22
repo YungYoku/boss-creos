@@ -95,6 +95,7 @@ interface SearchForm {
 	approach: string
 	type: ICreativeType | ''
 	ratio: IRatio | ''
+	status: 'approved'
 }
 
 const creatives = ref<Array<ICreative>>([])
@@ -106,7 +107,8 @@ const form = Form<SearchForm>({
 	slot: '',
 	approach: '',
 	type: '',
-	ratio: ''
+	ratio: '',
+	status: 'approved'
 })
 
 const loading = ref(true)
@@ -120,6 +122,7 @@ const loadCreatives = async () => {
 	if (form.approach.value) filters.push(`approach='${form.approach.value}'`)
 	if (form.ratio.value) filters.push(`ratio='${form.ratio.value}'`)
 	if (form.type.value) filters.push(`type='${form.type.value}'`)
+	if (form.status.value) filters.push(`status='${form.status.value}'`)
 	if (filters.length) {
 		filter = filters.reduce((acc, filter) => filter ? `${acc} && ${filter}` : acc, '')
 		filter = filter.slice(4)
@@ -152,6 +155,7 @@ loadData()
 
 <style scoped lang="scss">
 .shop {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: 56px;

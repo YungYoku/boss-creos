@@ -1,162 +1,62 @@
 <template>
-	<div class="shop">
-		<Island>
-			<Grid :columns="[6, 1]">
-				<Grid
-					:columns="4"
-					@keyup.enter="loadData"
-				>
-					<SelectLive
-						v-model="form.geo.value"
-						label="Свободные гео"
-						api="geo"
-					/>
-
-					<Select
-						v-model="form.type.value"
-						label="Вид крео"
-						:items="creativeTypeItems"
-					/>
-
-					<SelectLive
-						v-model="form.slot.value"
-						label="Слот"
-						api="slots"
-					/>
-
-					<SelectLive
-						v-model="form.approach.value"
-						label="Подход"
-						api="approaches"
-					/>
-
-					<Select
-						v-model="form.ratio.value"
-						label="Размер"
-						:items="ratioItems"
-					/>
-				</Grid>
-
-				<Grid vertical>
-					<Button
-						:disabled="loading"
-						@click="loadData"
-					>
-						Применить
-					</Button>
-
-					<Button
-						:disabled="loading"
-						@click="form.reset"
-					>
-						Очистить
-					</Button>
-				</Grid>
-			</Grid>
-		</Island>
-
+	<div class="designers">
 		<div
-			v-if="creatives.length || loading"
-			class="shop__creatives"
+			v-if="users.length || loading"
+			class="designers__content"
 		>
-			<template v-if="loading">
-				<EmptyCreativeCard
-					v-for="i in 8"
-					:key="i"
-					class="shop__creatives-item"
-				/>
-			</template>
-			<template v-else>
-				<CreativeCard
-					v-for="creative in creatives"
-					:key="creative.id"
-					:creative="creative"
-					:loading="loading"
-					class="shop__creatives-item"
-				/>
-			</template>
+			<UserCard
+				v-for="user in users"
+				:key="user.id"
+				:user="user"
+				link
+				:loading="loading"
+				class="designers__item"
+			/>
 		</div>
-		<span v-else>Нет доступных объявлений.</span>
+		<span v-else>Нет дизайнеров.</span>
 	</div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { useSearchStore } from '@/stores/search.ts'
 
-import { Grid, Island } from '@/components/structures'
-import { Button, CreativeCard, EmptyCreativeCard, Select, SelectLive } from '@/components/blocks'
-import { creativeTypeItems, ICreative, ICreatives, ICreativeType, IRatio, ratioItems } from '@/interfaces/Creative.ts'
-import { Form, Http } from '@/plugins'
+import { UserCard } from '@/components/blocks'
+import { IUser, IUsers } from '@/interfaces/User.ts'
+import { Http } from '@/plugins'
 
-interface SearchForm {
-	geo: string
-	slot: string
-	approach: string
-	type: ICreativeType | ''
-	ratio: IRatio | ''
-}
-
-const creatives = ref<Array<ICreative>>([])
-
-const searchStore = useSearchStore()
-
-const form = Form<SearchForm>({
-	geo: '',
-	slot: '',
-	approach: '',
-	type: '',
-	ratio: ''
-})
+const users = ref<Array<IUser>>([])
 
 const loading = ref(true)
-const loadCreatives = async () => {
-	const filters = []
-	let filter = ''
-	let encodedFilter = ''
-
-	if (form.geo.value) filters.push(`geo='${form.geo.value}'`)
-	if (form.slot.value) filters.push(`slot='${form.slot.value}'`)
-	if (form.approach.value) filters.push(`approach='${form.approach.value}'`)
-	if (form.ratio.value) filters.push(`ratio='${form.ratio.value}'`)
-	if (form.type.value) filters.push(`type='${form.type.value}'`)
-	if (filters.length) {
-		filter = filters.reduce((acc, filter) => filter ? `${acc} && ${filter}` : acc, '')
-		filter = filter.slice(4)
-
-		encodedFilter = encodeURIComponent(filter)
-	}
-
+const loadDesigners = async () => {
 	await Http
-		.get<ICreatives>('/collections/creatives/records', {
-			filter: encodedFilter,
-			expand: ['preview', 'video', 'creator'],
+		.get<IUsers>('/collections/users/records', {
+			filter: 'role=\'designer\'',
 			perPage: 12
 		})
 		.then(res => {
-			creatives.value = res.items
+			users.value = res.items
+			console.log(res.items)
 		})
 }
 
 const loadData = async () => {
 	loading.value = true
-	searchStore.setLoading(true)
 
-	await loadCreatives()
+	await loadDesigners()
 
 	loading.value = false
-	searchStore.setLoading(false)
 }
 loadData()
 </script>
 
 <style scoped lang="scss">
-.shop {
+.designers {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: 56px;
 
-	&__creatives {
+	&__content {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-start;
@@ -177,7 +77,7 @@ loadData()
 		}
 	}
 
-	&__creatives-item.creative-card {
+	&__item {
 		max-width: calc((100% - 40px) / 3);
 
 		@media (max-width: 1024px) {

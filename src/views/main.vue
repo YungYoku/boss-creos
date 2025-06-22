@@ -62,14 +62,14 @@
 					:creative="creative"
 				/>
 			</template>
-
-			<router-link
-				class="main__show-more"
-				to="/shop"
-			>
-				Смотреть ещё
-			</router-link>
 		</div>
+
+		<router-link
+			class="main__show-more"
+			to="/shop"
+		>
+			Смотреть ещё
+		</router-link>
 	</div>
 </template>
 
@@ -86,6 +86,7 @@ const loadProject = async () => {
 
 	await Http
 		.get<ICreatives>('/collections/creatives/records', {
+			filter: 'status=\'approved\'',
 			expand: ['preview', 'video', 'creator'],
 			perPage: 12
 		})
@@ -102,7 +103,7 @@ loadProject()
 .main {
 	display: flex;
 	flex-direction: column;
-	gap: 120px;
+	padding: 0 0 40px 0;
 
 	&__prologue {
 		display: flex;
@@ -246,7 +247,7 @@ loadProject()
 		max-width: 100%;
 		gap: 20px;
 
-		margin: 0 auto;
+		margin: 120px auto 40px auto;
 
 		@media (max-width: 1024px) {
 			gap: 15px;

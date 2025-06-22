@@ -28,7 +28,6 @@
 	</Island>
 </template>
 
-
 <script setup lang="ts">
 import { computed } from 'vue'
 
@@ -40,7 +39,7 @@ import { emptyUser, IUser } from '@/interfaces/User'
 interface Props {
 	user: IUser,
 	loading?: boolean
-	link: boolean
+	link?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

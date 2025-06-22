@@ -72,6 +72,7 @@ const items = computed(() => [
 			to: '/shopping-cart',
 			can: auth.isBuyer
 		},
+
 		{
 			text: 'Мои креативы',
 			to: '/made-creatives',
@@ -82,6 +83,13 @@ const items = computed(() => [
 			to: '/new-creative',
 			can: auth.isDesigner
 		},
+
+		{
+			text: 'На модерации',
+			to: '/moderation',
+			can: auth.isAdmin
+		},
+
 		// {
 		// 	text: 'Выполняемые объявления',
 		// 	to: '/executing-projects',
