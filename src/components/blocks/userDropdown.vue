@@ -68,9 +68,14 @@ const items = computed(() => [
 	],
 	[
 		{
+			text: 'Корзина',
+			to: '/shopping-cart',
+			can: auth.isBuyer
+		},
+		{
 			text: 'Мои креативы',
 			to: '/made-creatives',
-			can: auth.isBuyer
+			can: auth.isDesigner
 		},
 		{
 			text: 'Создать креатив',

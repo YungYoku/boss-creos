@@ -82,7 +82,6 @@ export interface ICreative {
 	collectionName: string
 	created: string
 	updated: string
-	title: string
 	creator: string
 	price: number
 	proposals: Array<string>
@@ -138,7 +137,6 @@ export const emptyCreative: ICreative = {
 	updated: '',
 	creator: '',
 	id: '',
-	title: '',
 	price: 0,
 	proposals: [],
 	type: 'video',

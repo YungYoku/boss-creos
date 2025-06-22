@@ -23,13 +23,20 @@
 			/>
 
 			<Icon
+				v-if="auth.isBuyer"
 				name="heart"
+				size="m"
+			/>
+
+			<Icon
+				v-if="auth.isDesigner && isItMine"
+				name="settings"
 				size="m"
 			/>
 		</div>
 
 		<SelectLive
-			v-if="forSale"
+			v-if="auth.isBuyer && forSale"
 			v-model="geo"
 			class="creative-card__select-geo"
 			label="Указать гео"
@@ -43,12 +50,19 @@
 			</div>
 
 			<button
-				v-if="forSale"
+				v-if="auth.isBuyer && forSale"
 				class="creative-card__action"
 				@click="addToBasket"
 			>
 				Купить
 			</button>
+			<router-link
+				v-else-if="auth.isDesigner && isItMine"
+				:to="`/creative/${creative.id}/edit`"
+				class="creative-card__action"
+			>
+				Редактировать
+			</router-link>
 			<router-link
 				v-else
 				:to="`/creative/${creative.id}`"
@@ -61,12 +75,15 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref } from 'vue'
+import { ref, computed, PropType } from 'vue'
+import { useAuthStore } from '@/stores/auth.ts'
 import { SelectLive, User } from '@/components/blocks'
 import { Icon, Video } from '@/components/elements'
 import { emptyUser } from '@/interfaces/User.ts'
 import { ICreative } from '@/interfaces/Creative.ts'
 import { Http } from '@/plugins'
+
+const auth = useAuthStore()
 
 const props = defineProps({
 	creative: {
@@ -84,6 +101,8 @@ const props = defineProps({
 })
 
 const geo = ref([])
+
+const isItMine = computed(() => props.creative?.creator === auth.user.id)
 
 const addToBasket = async () => {
 	await Http.post('/baskets/add', {

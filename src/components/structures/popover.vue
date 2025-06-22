@@ -8,7 +8,10 @@
 			ref="trigger"
 			class="popover__trigger"
 		>
-			<slot name="trigger"/>
+			<slot
+				name="trigger"
+				:opened="contentShowed"
+			/>
 		</div>
 
 		<Transition name="popover">

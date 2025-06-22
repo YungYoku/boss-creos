@@ -1,6 +1,6 @@
 <template>
 	<Popover class="select">
-		<template #trigger>
+		<template #trigger="{ opened }">
 			<div class="select__trigger">
 				<Label
 					v-if="label"
@@ -23,6 +23,12 @@
 					name="close"
 					size="s"
 					@click.prevent.stop="clear"
+				/>
+
+				<Icon
+					class="select__state"
+					:name="opened ? 'arrow-up' : 'arrow-down'"
+					size="s"
 				/>
 			</div>
 
@@ -231,6 +237,14 @@ const clear = () => {
 	}
 
 	&__clear {
+		position: absolute;
+		top: 14px;
+		right: 34px;
+
+		cursor: pointer;
+	}
+
+	&__state {
 		position: absolute;
 		top: 14px;
 		right: 12px;

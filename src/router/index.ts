@@ -64,6 +64,14 @@ const routes: Array<RouteRecordRaw> = [
 				}
 			},
 			{
+				path: '/creative/:id/edit',
+				name: 'EditCreative',
+				component: () => import('@/views/editCreative.vue'),
+				meta: {
+					rules: []
+				}
+			},
+			{
 				path: '/made-projects',
 				name: 'MadeProjects',
 				component: () => import('@/views/madeProjects.vue'),
@@ -131,6 +139,15 @@ const routes: Array<RouteRecordRaw> = [
 				path: '/shop',
 				name: 'Shop',
 				component: () => import('@/views/shop.vue'),
+				meta: {
+					rules: [],
+					bgClass: 'shop'
+				}
+			},
+			{
+				path: '/designers',
+				name: 'Designers',
+				component: () => import('@/views/designers.vue'),
 				meta: {
 					rules: [],
 					bgClass: 'shop'

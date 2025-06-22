@@ -20,17 +20,6 @@
 
 			<nav class="header__account">
 				<router-link
-					v-if="auth.isLoggedIn"
-					to="/shopping-cart"
-					class="header__shopping-cart"
-				>
-					<Icon
-						name="shopping-cart"
-						size="s"
-					/>
-				</router-link>
-
-				<router-link
 					v-if="!auth.isLoggedIn && !isAuthPage"
 					to="/login"
 				>
@@ -51,7 +40,6 @@ import { useAuthStore } from '@/stores/auth.ts'
 import { Grid } from '@/components/structures'
 import { UserDropdown } from '@/components/blocks'
 import { Logo } from '@/components/elements'
-import Icon from '@/components/elements/icon.vue'
 
 const auth = useAuthStore()
 
@@ -63,6 +51,10 @@ const nav = [
 	{
 		text: 'Магазин',
 		to: '/shop',
+	},
+	{
+		text: 'Дизайнеры',
+		to: '/designers',
 	},
 	/*
 	{

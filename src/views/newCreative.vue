@@ -45,6 +45,7 @@
 							:disabled="loading"
 							:error="creative.type.error"
 							:items="creativeTypeItems"
+							:clearable="false"
 							label="Вид крео"
 						/>
 
@@ -167,7 +168,7 @@ import { Grid, Island } from '@/components/structures'
 import { Button, Input, InputFile, Select, SelectLive, Switcher, Textarea } from '@/components/blocks'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
-import { emptyCreative, ICreative, ratioItems } from '@/interfaces/Creative.ts'
+import { creativeTypeItems, emptyCreative, ICreative, ratioItems } from '@/interfaces/Creative.ts'
 
 const auth = useAuthStore()
 
@@ -198,17 +199,11 @@ const create = async () => {
 		.catch(({ data }) => {
 			creative.setErrors(data)
 
-			toast.set('Ошибка при создании объявления')
+			toast.set('Ошибка при создании креатива')
 
 			loading.value = false
 		})
 }
-
-const creativeTypeItems = [
-	{ id: 'video', name: 'Video' },
-	{ id: 'static', name: 'Static' },
-	{ id: 'pwa', name: 'PWA' },
-]
 </script>
 
 <style scoped lang="scss">

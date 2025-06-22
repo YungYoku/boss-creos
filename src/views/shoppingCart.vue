@@ -45,7 +45,10 @@
 			</router-link>
 		</div>
 
-		<Button class="shopping-cart__pay">
+		<Button
+			v-if="totalPrice > 0"
+			class="shopping-cart__pay"
+		>
 			Оплатить ${{ totalPrice }}
 		</Button>
 	</div>
