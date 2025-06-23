@@ -84,7 +84,7 @@ const routes: Array<RouteRecordRaw> = [
 				name: 'MadeCreatives',
 				component: () => import('@/views/madeCreatives.vue'),
 				meta: {
-					rules: ['auth', 'buyer']
+					rules: ['auth', 'designer']
 				}
 			},
 			{

@@ -1,5 +1,6 @@
 import { defineAsyncComponent } from 'vue'
 
+const Table = defineAsyncComponent(() => import('./table/table.vue'))
 const Card = defineAsyncComponent(() => import('./card.vue'))
 const Dropdown = defineAsyncComponent(() => import('./dropdown.vue'))
 const Grid = defineAsyncComponent(() => import('./grid.vue'))
@@ -10,6 +11,7 @@ const Popover = defineAsyncComponent(() => import('./popover.vue'))
 const StepByStep = defineAsyncComponent(() => import('./stepByStep.vue'))
 
 export {
+	Table,
 	Card,
 	Dropdown,
 	Grid,

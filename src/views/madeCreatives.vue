@@ -55,6 +55,7 @@ const getUserCreatives = async () => {
 
 	await Http
 		.get<ICreatives>('/collections/creatives/records', {
+			filter: `creator='${auth.user.id}'`,
 			expand: ['preview', 'video', 'creator', 'slot']
 		})
 		.then(response => {

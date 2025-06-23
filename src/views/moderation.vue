@@ -23,11 +23,14 @@
 		</div>
 		<span v-else>Нет доступных объявлений.</span>
 	</div>
+
+	<Table/>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 
+import { Table } from '@/components/structures'
 import { CreativeCard, EmptyCreativeCard } from '@/components/blocks'
 import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
 import { Http } from '@/plugins'

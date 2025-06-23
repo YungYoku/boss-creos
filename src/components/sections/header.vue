@@ -7,15 +7,19 @@
 			<Logo class="header__logo"/>
 
 			<nav class="header__nav">
-				<router-link
+				<template
 					v-for="item in nav"
 					:key="item.text"
-					class="header__nav-item"
-					exact-active-class="_active"
-					:to="item.to"
 				>
-					{{ item.text }}
-				</router-link>
+					<router-link
+						v-if="item.can"
+						class="header__nav-item"
+						exact-active-class="_active"
+						:to="item.to"
+					>
+						{{ item.text }}
+					</router-link>
+				</template>
 			</nav>
 
 			<nav class="header__account">
@@ -47,14 +51,17 @@ const nav = [
 	{
 		text: 'Главная',
 		to: '/',
+		can: true
 	},
 	{
 		text: 'Магазин',
 		to: '/shop',
+		can: auth.isBuyer || auth.isGuest
 	},
 	{
 		text: 'Дизайнеры',
 		to: '/designers',
+		can: auth.isBuyer || auth.isGuest
 	},
 	/*
 	{

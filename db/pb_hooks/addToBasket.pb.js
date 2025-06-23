@@ -27,5 +27,7 @@ routerAdd('POST', '/api/baskets/add', (c) => {
 	const shoppingCardId = createShoppingCard()
 	updateUserInfo(shoppingCardId)
 
+	$app.expandRecord(user, ['baskets', 'baskets.creative', 'baskets.creative.preview', 'baskets.creative.slot', 'baskets.creative', 'baskets.geo'], null)
+
 	return c.json(200, user)
 })

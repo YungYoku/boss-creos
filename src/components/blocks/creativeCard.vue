@@ -75,15 +75,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, PropType } from 'vue'
+import { computed, PropType, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.ts'
 import { SelectLive, User } from '@/components/blocks'
 import { Icon, Video } from '@/components/elements'
-import { emptyUser } from '@/interfaces/User.ts'
+import { emptyUser, IUser } from '@/interfaces/User.ts'
 import { ICreative } from '@/interfaces/Creative.ts'
 import { Http } from '@/plugins'
-
-const auth = useAuthStore()
 
 const props = defineProps({
 	creative: {
@@ -102,12 +101,17 @@ const props = defineProps({
 
 const geo = ref([])
 
+const auth = useAuthStore()
 const isItMine = computed(() => props.creative?.creator === auth.user.id)
 
+const router = useRouter()
 const addToBasket = async () => {
-	await Http.post('/baskets/add', {
+	await Http.post<IUser>('/baskets/add', {
 		creative: props.creative?.id,
 		geo: [...geo.value]
+	}).then(data => {
+		auth.setUser(data)
+		router.push('/shopping-cart')
 	})
 }
 </script>

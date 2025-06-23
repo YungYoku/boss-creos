@@ -1,0 +1,645 @@
+.desktop
+	.table
+		position relative
+		width 100%
+		display flex
+		box-sizing border-box
+		border-radius 10px
+		overflow hidden
+
+		@media screen and (max-width: 960px)
+			border-radius 0
+
+		&:before
+			content ''
+			position absolute
+			z-index 2
+			top 0
+			right 0
+			width 50px
+			height 50px
+			background linear-gradient(to right, transparent,  var(--color-m105))
+			opacity 0
+			transition 115ms linear
+			pointer-events none
+
+		&:after
+			content ''
+			position absolute
+			z-index 2
+			top 50px
+			right 0
+			width 50px
+			height calc(100% - 50px)
+			background linear-gradient(to right, alpha(#fff, 0), #fff)
+			opacity 0
+			transition 115ms linear
+			pointer-events none
+
+		// Hover element
+		&__hover
+			position absolute
+			top 0
+			left 0
+			right 0
+			background var(--main-light-M105, rgba(34, 34, 34, 0.05))
+
+			&.total
+				top 70px
+
+			&.hide
+				display none
+
+			&.xs
+				height 29px
+
+		&.scroll-x:before
+		&.scroll-x:after
+			opacity 1
+
+		&__fixed
+			overflow hidden
+			z-index 1
+			flex-shrink 0
+
+		&__shadow
+			box-shadow 10px 0 10px -5px var(--color-m120)
+			& .table__col:last-child
+				&::after
+					border-right none
+
+		&__body
+			display table
+			min-width 100%
+
+		&__inner
+			flex-grow 1
+			border-top-right-radius 10px
+
+		&__refresh-row
+			width 30px
+			min-width 30px
+			height 100%
+			display flex
+			align-items center
+			justify-content center
+			margin-left -30px
+			z-index 1
+
+			.icon
+				cursor pointer
+
+		&__text
+		&__link span
+			max-width 100%
+			overflow hidden
+			text-overflow ellipsis
+			white-space nowrap
+
+		.table__inner
+			.table__col
+				&:last-child
+					border-right none
+
+		// Row
+		&__row
+			display table-row
+			position relative
+
+			&._fixed-top
+				top 0
+				position fixed
+				overflow hidden
+
+		// Total column
+		&__total
+			display table-cell
+			position relative
+			box-sizing border-box
+			height 20px
+			padding 5px 10px 2px
+			vertical-align middle
+			text-align right
+			color var(--color-m100)
+			font-size 12px
+			line-height 12px
+			text-transform lowercase
+			background #F3F3F3
+			box-shadow 0 1px 1px 0 rgba(0,0,0,0.1), inset 0px 4px 2px -2px rgba(0,0,0,0.1)
+			overflow hidden
+
+			&._fixed
+				color var(--color-m160)
+				font-size 14px
+				padding-left 20px
+				text-align left
+
+			&._fixed-top
+				position absolute
+				top 0
+				z-index 4
+				&._fixed
+					z-index 5
+
+			.table__content
+				position absolute
+				top 5px
+				right 10px
+				height 12px
+
+
+		// Column
+		&__col
+			box-sizing border-box
+
+			min-width 40px
+			height 50px
+
+			position relative
+
+			display table-cell
+			vertical-align middle
+
+			padding 0
+
+			white-space nowrap
+			text-align right
+			font-size 14px
+			line-height 14px
+			color var(--color-m100)
+			font-weight 400
+			font-variant-numeric tabular-nums
+			border-right 1px dashed var(--color-m110)
+
+			&._align_left
+				.table__content
+				.cell
+					left 10px
+					right initial
+					justify-content flex-start
+
+			&._align_center
+				.table__content
+				.cell
+					justify-content center
+
+			&._align_right
+				.table__content
+				.cell
+					left initial
+					right 10px
+					justify-content flex-end
+
+			&._size_xs
+				height 30px
+
+			&._size_xs._diff
+				height 40px
+
+			&._content
+			&._fixed._expand
+			&_expand
+				overflow hidden
+				.table__content
+				.table__value-wrap
+					height 100%
+					position absolute
+					top 0
+					right 10px
+				.table__value-wrap
+					display flex
+					align-items center
+					justify-content flex-end
+				&._align_left
+					.table__content
+						left 10px
+				&._align_right
+					.table__content
+						right 10px
+			&:first-child._fixed._expand
+				.table__content
+					left 60px
+					right initial
+			&._fixed._header._align_left
+				.table__content
+					left 20px
+
+			&._fixed
+				.table__content
+				.cell
+					justify-content flex-start
+					text-align left
+					left 20px
+					right initial
+
+			&._fixed._large
+				padding-top 13px
+				padding-bottom 13px
+
+			&._large
+				padding-top 0
+				padding-bottom 0
+
+			&._header
+				padding 18px 10px 18px 10px
+				position relative
+				background linear-gradient(180deg, #FCFDFF 0%, #EDEDED 100%)
+				color var(--color-m100)
+				font-size 14px
+				font-weight 500
+				user-select none
+
+				.table__content
+					position absolute
+					top 18px
+					z-index 0
+					justify-content flex-start
+
+			&._header._align_left
+				.table__content
+					left 10px
+
+			&._header._align_right
+				.table__content
+					right 10px
+
+				&:before
+					content none
+
+			&._header._resizable
+				border-right 1px dashed var(--color-m120)
+
+			&._header._pointer
+				cursor pointer
+
+			&._header._fixed
+				padding 18px 10px 18px 20px
+
+			&_empty_buffer._header
+			&_empty_buffer._content
+				min-width 10px
+				padding 0
+
+			// Fixed Row To top
+			&._fixed-top
+				position absolute
+				top 0
+				z-index 4
+			&._fixed-top._header
+				&:last-child
+					border-radius  0 10px 0 0
+			&._fixed-top._header._fixed
+				z-index 5
+				border-radius 10px 0 0 0
+
+			& > .skeleton
+				position absolute
+				display block
+				width calc(100% - 30px)
+				min-width 40px
+				min-height 14px
+				max-height 14px
+				top 18px
+				left 10px
+
+			&._expand > .skeleton
+				left 60px
+				width calc(100% - 80px)
+
+			&._size_xs > .skeleton
+				top 8px
+
+			&._size_m > .skeleton
+				top 18px
+
+			&._expand.deep_0
+				padding-left 50px
+				.table__expand-arrow
+					left 10px
+
+			&._fixed
+				for i in (1..7)
+					&.deep_{i}
+						padding-left (40 + 20 * i)px
+						& > .skeleton
+							left (70 + 20 * i)px
+						&._contains
+							padding-left (70 + 20 * i)px
+							.table__expand-arrow
+								left (30 + 20 * i)px
+
+			&.deep_0._archived
+				background-color rgba(246, 248, 253, 0.7)
+
+		&__col_selectedEntity
+			padding 0 20px
+
+		&__col_child_header_text
+			opacity 0.5
+
+		&__col_sort
+			user-select none
+
+			.table__content
+				margin-left 0
+
+		&__col_with-expand
+			padding 0
+			.table__content
+				padding 18px 10px 18px 15px
+
+			.table__col_expand-text
+				width 100%
+				padding-left 10px
+
+		&__col_expand
+			padding-left 20px
+
+		&__col_value-wrap
+			display flex
+			align-items center
+			justify-content flex-end
+
+		&__col_value:not(.table__col_header)
+			color var(--color-m100)
+			font-variant-numeric lining-nums tabular-nums
+			font-size 14px
+			font-weight 400
+			line-height 1.25
+
+		&__drag-trigger
+			position absolute
+			top 0
+			right -10px
+			width 20px
+			height 100%
+			z-index 1
+			cursor col-resize
+			&:after
+				content ''
+				width 3px
+				display block
+				position absolute
+				top 0
+				bottom 0
+				left 9px
+			&:hover
+				&:after
+					background-color var(--color-accent)
+					opacity 0.5
+
+			&._active
+				width 100%
+				&:after
+					left initial
+					right 8px
+
+		// Expand header
+		&__expand-header
+			display table-cell
+			box-sizing border-box
+			color var(--color-m100)
+			font-size 14px
+			line-height 18px
+			font-weight 500
+			user-select none
+			cursor pointer
+			padding 10px 10px 0 0
+
+			&:before
+				content none
+
+		&__expand-inner
+			display flex
+			align-items center
+			justify-content flex-end
+
+		&__expand-header._fixed
+			display flex
+			align-items center
+			gap 22px
+			text-align left
+
+			for i in (0..7)
+				&.deep_{i}
+					padding-left (40 + 20 * i)px
+
+			.table__refresh-row
+				width 15px
+				min-width 15px
+
+		&__col
+		&__expand-header
+			for i in (0..7)
+				&.deep_{i}
+					background rgba(218, 230, 253, (i / 10))
+
+		&.size_xs
+			.table__text
+			.table__col_value
+				font-size 13px
+
+		&__content
+			height 14px
+			display flex
+			align-items center
+			justify-content flex-end
+
+			& a
+				display flex
+				align-items center
+				gap	10px
+
+		&__arrow
+			margin 0 10px 0 0
+			margin-top -1px
+			margin-bottom -1px
+			transition transform .125s
+
+			&.desc
+				transform rotateX(180deg)
+
+		&__expand-arrow
+			cursor pointer
+			transition transform .125s
+			user-select none
+			position absolute
+			z-index 1
+			top 50%
+			left 10px
+			margin-top -15px
+			padding 5px 10px
+
+			& > .icon
+				display block
+
+			&.open
+				transform rotateX(180deg)
+
+		&__col_color
+			background #ed806f
+			color var(--color-white)
+
+		&__pagination
+			position: relative
+			left: -130px
+			display: flex
+			width: 100%
+			max-width: var(--layout-container-width)
+			margin-left: auto
+			margin-right: auto
+			@media screen and (max-width: 1720px)
+				left: 0
+			@media screen and (max-width: 960px)
+				width calc(100% - 30px)
+
+		&__percent
+			margin 0 0 0 5px
+			color var(--color-m300)
+			font-variant-numeric lining-nums tabular-nums
+			font-size 10px
+			font-weight 400
+			line-height 1.15
+
+		&__archived-icon
+			display flex
+			align-items center
+			justify-content center
+			width 25px
+			height 25px
+			border-radius 14.5px
+			background-color var(--color-a900)
+
+		&__diff
+			font-variant-numeric lining-nums tabular-nums
+			font-size 12px
+			font-weight 400
+			line-height 1.25
+			&._plus
+				color var(--color-a600)
+			&._minus
+				color var(--color-a500)
+
+		&.table_default
+			.table__col
+				&._fixed
+					&:before
+						content ''
+						position absolute
+						top 0
+						right 0
+						bottom 0
+						width 10px
+
+		&.table_universal
+			.table__col
+				padding-right 10px
+				max-width 100%
+				&.first
+					padding-left 45px
+				&._fixed
+					text-align left
+					box-sizing border-box
+					padding-top 18px
+					padding-bottom 18px
+					padding-right 10px
+
+				&._fixed._size_xs
+					padding-top 5px
+					padding-bottom 5px
+
+				&._large
+					.table__content
+						flex-direction column
+						align-items flex-end
+						justify-content center
+						gap 3px
+
+						&.skeleton
+							height 20px
+							margin 10px 0
+
+				&._size_m._large
+					padding-top 5px
+					padding-bottom 5px
+
+				&._size_m._fixed._large
+					padding-top 18px
+					padding-bottom 18px
+
+				&._size_xs._large
+					height 40px
+
+				&._header
+					.table__content
+						justify-content flex-end
+
+				&._header._fixed:first-child
+					.table__content
+						justify-content flex-start
+
+				&._header._fixed._fixed-top
+					.table__content
+						justify-content flex-start
+				&._diff
+					padding-right 10px
+
+			&._fixed
+				&.expand
+					padding-left 45px
+
+				.table__content
+					padding 0
+
+			.table__content
+				justify-content flex-start
+
+
+		.cell__money.negative
+			color var(--color-a500)
+
+		&.flat
+			box-shadow none
+
+			.table__col
+				border-right none
+				border-bottom 1px solid var(--color-m320)
+				padding 5px 10px 4px 10px
+				&._header
+					background none
+				&._fixed
+					padding-left 10px
+					&:first-child
+						padding 5px 10px 4px 10px
+						&._expand
+							padding 5px 10px 4px 50px
+
+				.card-vertical-detail__text
+					color var(--color-m200)
+				.cell__name
+					color var(--color-m100)
+
+			.island__border
+			.island__bg
+				display none
+body.desktop
+	.wide-table-wrap
+		width calc(100% + 20px)
+
+		@media screen and (max-width: 1420px)
+			width calc(100% + 40px)
+
+		@media screen and (max-width: 960px)
+			width 100%
+
+		.table
+			border-radius 10px 0 0 10px
+
+		.table__inner
+			border-top-right-radius 0
+
+	.flat-wrap
+		box-shadow none
+
+	.main__aside_collapsed ~ .main__inner-wrap .table__pagination
+		left 0
