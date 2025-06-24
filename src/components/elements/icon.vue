@@ -13,7 +13,6 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useColorMode } from '@vueuse/core'
 
 import Image from './image.vue'
 
@@ -39,11 +38,10 @@ const props = defineProps({
 	}
 })
 
-const mode = useColorMode({ selector: 'body' })
-const currentTheme = computed(() => mode.state.value)
+const currentTheme = 'dark'
 
 const currentColor = computed(() => {
-	const colorIndex = currentTheme.value === 'dark' ? 0 : 1
+	const colorIndex = currentTheme === 'dark' ? 0 : 1
 
 	return props.colors[colorIndex]
 })
