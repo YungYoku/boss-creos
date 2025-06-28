@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, PropType, watch } from 'vue'
+import { ref, PropType, watch, Ref } from 'vue'
 
 import { Grid } from '@/components/structures'
 import { Button, Textarea, RatingStarsEditable } from '@/components/blocks'
@@ -68,7 +68,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'back'])
 
-const value = ref<IRating>({
+const value: Ref<IRating> = ref({
 	by: '',
 	collectionId: '',
 	collectionName: '',

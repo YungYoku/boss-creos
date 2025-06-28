@@ -18,13 +18,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { Ref, ref } from 'vue'
 
 import { UserCard } from '@/components/blocks'
 import { IUser, IUsers } from '@/interfaces/User.ts'
 import { Http } from '@/plugins'
 
-const users = ref<Array<IUser>>([])
+const users: Ref<Array<IUser>> = ref([])
 
 const loading = ref(true)
 const loadDesigners = async () => {

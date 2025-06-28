@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, Ref, ref, watch } from 'vue'
 
 import { Select } from '@/components/blocks'
 import { Http } from '@/plugins'
@@ -51,7 +51,7 @@ const props = withDefaults(defineProps<Props>(), {
 	multiple: false
 })
 
-const items = ref<Array<Item>>([])
+const items: Ref<Array<Item>> = ref([])
 
 const emit = defineEmits(['update:model-value'])
 const value = computed<Array<string> | string>({

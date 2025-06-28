@@ -66,14 +66,14 @@ import { Island, Grid } from '@/components/structures'
 import { IProject, IProjects, IProjectStatus } from '@/interfaces/Project.ts'
 
 import { Http, Screen } from '@/plugins'
-import { computed, ref, watch } from 'vue'
+import { computed, Ref, ref, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import Text from '@/components/elements/text.vue'
 import { IRating } from '@/interfaces/Rating.ts'
 import { emptyUser } from '@/interfaces/User.ts'
 
 const auth = useAuthStore()
-const openedChat = ref<IProject | null>(null)
+const openedChat: Ref<IProject | null> = ref(null)
 const isChatOpened = computed(() => openedChat.value !== null)
 const headerColumns = computed(() => {
 	if (Screen.isSize('s') && isChatOpened.value) {
@@ -81,7 +81,7 @@ const headerColumns = computed(() => {
 	}
 	return 1
 })
-const chats = ref<Array<IProject>>([])
+const chats: Ref<Array<IProject>> = ref([])
 const loading = ref(true)
 
 const chatRatingType = computed(() => auth.isBuyer ? 'ratingDesigner' : 'ratingBuyer')

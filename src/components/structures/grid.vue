@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, watch, Ref } from 'vue'
 
 import { Screen } from '@/plugins'
 
@@ -20,7 +20,7 @@ type Columns = number | Array<number | string> | null
 
 interface Props {
 	vertical?: boolean
-	gap?: 'xs' | 's' | 'm' |'l'
+	gap?: 'xs' | 's' | 'm' | 'l'
 	verAlign?: Align
 	horAlign?: Align
 	columns?: Columns
@@ -42,7 +42,7 @@ const props = withDefaults(defineProps<Props>(), {
 	columnsS: null
 })
 
-const activeColumns = ref<Array<number | string> | number | null>(1)
+const activeColumns: Ref<Array<number | string> | number | null> = ref(1)
 const updateActiveColumns = () => {
 	if (props.columns) {
 		activeColumns.value = props.columns
@@ -75,18 +75,18 @@ watch(() => [props.columns, props.columnsXl, props.columnsL, props.columnsM, pro
 
 const getAlign = (align: Align) => {
 	switch (align) {
-	case 'start':
-		return 'flex-start'
-	case 'center':
-		return 'center'
-	case 'end':
-		return 'flex-end'
-	case 'initial':
-		return 'initial'
-	case 'stretch':
-		return 'stretch'
-	default:
-		return 'initial'
+		case 'start':
+			return 'flex-start'
+		case 'center':
+			return 'center'
+		case 'end':
+			return 'flex-end'
+		case 'initial':
+			return 'initial'
+		case 'stretch':
+			return 'stretch'
+		default:
+			return 'initial'
 	}
 }
 const style = computed(() => {

@@ -134,7 +134,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, ref, useTemplateRef, watch } from 'vue'
+import { computed, nextTick, ref, useTemplateRef, watch, Ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useToast } from '@/stores/toast'
 
@@ -162,7 +162,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const messagesRef = useTemplateRef('messages-ref')
-const chat = ref<IChat>({
+const chat: Ref<IChat> = ref({
 	created: '',
 	id: '',
 	messages: [],
@@ -205,8 +205,8 @@ watch(() => props.project.status, () => { loading.value = false })
 const auth = useAuthStore()
 
 const newMessage = ref('')
-const file = ref<string | null>(null)
-const fileName = ref<string | null>(null)
+const file: Ref<string | null> = ref(null)
+const fileName: Ref<string | null> = ref(null)
 const sendMessage = async () => {
 	if (loading.value) return
 	if (newMessage.value.length === 0 && file.value === null) return
@@ -247,7 +247,7 @@ const declineReview = () => updateStatus('in_progress')
 const sendToReview = () => updateStatus('on_review')
 const approveReview = () => updateStatus('ended')
 
-const newRating = ref<IRating>({
+const newRating: Ref<IRating> = ref({
 	by: '',
 	collectionId: '',
 	collectionName: '',

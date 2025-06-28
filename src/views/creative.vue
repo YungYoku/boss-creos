@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { Ref, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { Grid } from '@/components/structures'
@@ -62,7 +62,7 @@ import { Http } from '@/plugins'
 import { emptyCreative, ICreative } from '@/interfaces/Creative.ts'
 import CreativeCard from '@/components/blocks/creativeCard.vue'
 
-const creative = ref<ICreative>({ ...emptyCreative })
+const creative: Ref<ICreative> = ref({ ...emptyCreative })
 const route = useRoute()
 const { id } = route.params
 

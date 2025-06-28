@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { Ref, ref, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 
 import { Grid } from '@/components/structures'
@@ -45,7 +45,7 @@ import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
 
 const auth = useAuthStore()
 
-const creatives = ref<Array<ICreative>>([])
+const creatives: Ref<Array<ICreative>> = ref([])
 
 const loading = ref(true)
 const getUserCreatives = async () => {

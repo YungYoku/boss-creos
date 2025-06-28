@@ -1,41 +1,39 @@
 <template>
-	<div class="shop">
-		<div
-			v-if="creatives.length || loading"
-			class="shop__creatives"
-		>
-			<template v-if="loading">
-				<EmptyCreativeCard
-					v-for="i in 8"
-					:key="i"
-					class="shop__creatives-item"
-				/>
-			</template>
-			<template v-else>
-				<CreativeCard
-					v-for="creative in creatives"
-					:key="creative.id"
-					:creative="creative"
-					:loading="loading"
-					class="shop__creatives-item"
-				/>
-			</template>
-		</div>
-		<span v-else>Нет доступных объявлений.</span>
-	</div>
-
-	<Table/>
+	<Table
+		:header
+		:data="body"
+	/>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { Ref, ref } from 'vue'
 
 import { Table } from '@/components/structures'
-import { CreativeCard, EmptyCreativeCard } from '@/components/blocks'
 import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
 import { Http } from '@/plugins'
+import { IHeader, IRow, IRows } from '@/interfaces/Table.ts'
 
-const creatives = ref<Array<ICreative>>([])
+const header: Ref<IHeader> = ref([])
+const body: Ref<IRows> = ref([])
+
+const generateHeader = (item: ICreative) => {
+	const keys = Object.keys(item)
+	header.value = keys.map(name => ({ name }))
+}
+
+const generateBody = (items: Array<ICreative>) => {
+	body.value = items.map(item => {
+		const keys = Object.keys(item) as Array<keyof typeof item>
+		return keys.reduce((result, key) => {
+			const value = item[key]
+			result.push({
+				key,
+				value
+			})
+			return result
+		}, [] as IRow)
+	})
+}
 
 const loading = ref(true)
 const loadCreatives = async () => {
@@ -46,7 +44,8 @@ const loadCreatives = async () => {
 			perPage: 12
 		})
 		.then(res => {
-			creatives.value = res.items
+			generateHeader(res.items[0])
+			generateBody(res.items)
 		})
 }
 

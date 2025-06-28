@@ -8,8 +8,8 @@
    width: 100%;
    overflow: hidden;
 
+	background: #ffffff;
    border-radius: 10px;
-
    &:before {
 	   content: '';
 	   position: absolute;
@@ -20,7 +20,7 @@
 	   width: 50px;
 	   height: 50px;
 
-	   background: linear-gradient(to right, transparent, var(--color-m105));
+	   background: linear-gradient(to right, transparent, #000000);
 
 	   opacity: 0;
 	   transition: 115ms linear;
@@ -99,10 +99,10 @@
 	   font-weight: 400;
 	   text-align: right;
 	   vertical-align: middle;
-	   color: var(--color-m100);
+	   color: #000000;
 	   white-space: nowrap;
 
-	   border-right: 1px dashed var(--color-m110);
+	   border-right: 1px dashed #000000;
 	   font-variant-numeric: tabular-nums;
 
 	   &._content {
@@ -131,7 +131,7 @@
 
 		   font-size: 14px;
 		   font-weight: 500;
-		   color: var(--color-m100);
+		   color: #000000;
 
 		   background: linear-gradient(180deg, #FCFDFF 0%, #EDEDED 100%);
 
@@ -157,7 +157,7 @@
 	   font-size: 14px;
 	   line-height: 1.25;
 	   font-weight: 400;
-	   color: var(--color-m100);
+	   color: #000000;
 	   font-variant-numeric: lining-nums tabular-nums;
    }
 
@@ -176,7 +176,7 @@
    }
 
    &__col_color {
-	   color: var(--color-white);
+	   color: #ffffff;
 
 	   background: #ed806f;
    }

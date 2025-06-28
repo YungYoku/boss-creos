@@ -95,7 +95,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, Ref, ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.ts'
 
@@ -111,7 +111,7 @@ const route = useRoute()
 const router = useRouter()
 
 const loading = ref(true)
-const user = ref<IUser | null>(null)
+const user: Ref<IUser | null> = ref(null)
 const isItMyProfile = ref(false)
 const auth = useAuthStore()
 

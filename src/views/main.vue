@@ -74,13 +74,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { Ref, ref } from 'vue'
 import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
 import { CreativeCard, EmptyCreativeCard } from '@/components/blocks'
 import { Http } from '@/plugins'
 
 const loadingProject = ref(true)
-const creatives = ref<Array<ICreative>>([])
+const creatives: Ref<Array<ICreative>> = ref([])
 const loadProject = async () => {
 	loadingProject.value = true
 

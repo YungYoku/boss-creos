@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { Ref, ref } from 'vue'
 
 type Size = 's' | 'm' | 'l' | 'xl'
 
@@ -19,7 +19,7 @@ class Screen {
 		l: 1280,
 		xl: 1440
 	}
-	#size = ref<Size>('xl')
+	#size: Ref<Size> = ref('xl')
 
 	#update() {
 		const value = document.body.clientWidth

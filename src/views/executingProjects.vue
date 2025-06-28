@@ -52,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { Ref, ref, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 
 import { Http } from '@/plugins'
@@ -65,7 +65,7 @@ import { IRating } from '@/interfaces/Rating.ts'
 
 const auth = useAuthStore()
 
-const projects = ref<Array<IProject>>([])
+const projects: Ref<Array<IProject>> = ref([])
 
 const loading = ref(true)
 const getUserProjects = async () => {
@@ -87,7 +87,7 @@ const getUserProjects = async () => {
 
 watch(() => auth.user.id, getUserProjects, { immediate: true })
 
-const openedChat = ref<IProject | null>(null)
+const openedChat: Ref<IProject | null> = ref(null)
 const openChat = (project: IProject) => {
 	openedChat.value = project
 }

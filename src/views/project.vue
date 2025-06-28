@@ -173,7 +173,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, Ref, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useToast } from '@/stores/toast'
@@ -187,7 +187,7 @@ import { emptyProject, IProject, IProjectProposal } from '@/interfaces/Project.t
 
 const router = useRouter()
 
-const project = ref<IProject>({ ...emptyProject })
+const project: Ref<IProject> = ref({ ...emptyProject })
 const route = useRoute()
 const { id } = route.params
 

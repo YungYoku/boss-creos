@@ -81,7 +81,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { Ref, ref } from 'vue'
 import { useSearchStore } from '@/stores/search.ts'
 
 import { Grid, Island } from '@/components/structures'
@@ -98,7 +98,7 @@ interface SearchForm {
 	status: 'approved'
 }
 
-const creatives = ref<Array<ICreative>>([])
+const creatives: Ref<Array<ICreative>> = ref([])
 
 const searchStore = useSearchStore()
 

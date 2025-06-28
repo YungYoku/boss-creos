@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { Ref, ref, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 
 import { Grid } from '@/components/structures'
@@ -55,7 +55,7 @@ import { IProject, IProjects } from '@/interfaces/Project.ts'
 
 const auth = useAuthStore()
 
-const projects = ref<Array<IProject>>([])
+const projects: Ref<Array<IProject>> = ref([])
 
 const loading = ref(true)
 const getUserProjects = async () => {

@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, Ref, ref } from 'vue'
 
 import { Icon } from '@/components/elements'
 
@@ -40,7 +40,7 @@ const icons = computed(() => {
 	return result
 })
 
-const hoverIndex = ref<number | null>(null)
+const hoverIndex: Ref<number | null> = ref(null)
 const hover = (index: number | null) => hoverIndex.value = index
 </script>
 

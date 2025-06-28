@@ -71,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watch } from 'vue'
+import { ref, reactive, watch, Ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 
 import { Grid, Modal } from '@/components/structures'
@@ -85,7 +85,7 @@ import { IProject, IProjects, IProjectStatus } from '@/interfaces/Project.ts'
 
 const auth = useAuthStore()
 
-const projects = ref<Array<IProject>>([])
+const projects: Ref<Array<IProject>> = ref([])
 
 const loading = ref(true)
 const getUserProjects = async () => {
@@ -107,7 +107,7 @@ const getUserProjects = async () => {
 
 watch(() => auth.user.id, getUserProjects, { immediate: true })
 
-const openedProject = ref<IProject | null>(null)
+const openedProject: Ref<IProject | null> = ref(null)
 
 const showProposals = async (project: IProject) => {
 	openedProject.value = project
@@ -148,7 +148,7 @@ const remove = async () => {
 	hideDeleteConfirmation()
 }
 
-const openedChat = ref<IProject | null>(null)
+const openedChat: Ref<IProject | null> = ref(null)
 const openChat = (project: IProject) => openedChat.value = project
 
 const closeChat = () => openedChat.value = null
