@@ -11,29 +11,13 @@ import { Ref, ref } from 'vue'
 import { Table } from '@/components/structures'
 import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
 import { Http } from '@/plugins'
-import { IHeader, IRow, IRows } from '@/interfaces/Table.ts'
+import { IHeader, IRows } from '@/interfaces/Table.ts'
+import { useAdapter } from '@/views/moderation/adapter.ts'
 
 const header: Ref<IHeader> = ref([])
 const body: Ref<IRows> = ref([])
 
-const generateHeader = (item: ICreative) => {
-	const keys = Object.keys(item)
-	header.value = keys.map(name => ({ name }))
-}
-
-const generateBody = (items: Array<ICreative>) => {
-	body.value = items.map(item => {
-		const keys = Object.keys(item) as Array<keyof typeof item>
-		return keys.reduce((result, key) => {
-			const value = item[key]
-			result.push({
-				key,
-				value
-			})
-			return result
-		}, [] as IRow)
-	})
-}
+const { generateHeader, generateBody } = useAdapter<ICreative>()
 
 const loading = ref(true)
 const loadCreatives = async () => {
@@ -44,8 +28,8 @@ const loadCreatives = async () => {
 			perPage: 12
 		})
 		.then(res => {
-			generateHeader(res.items[0])
-			generateBody(res.items)
+			header.value = generateHeader(res.items[0])
+			body.value = generateBody(res.items)
 		})
 }
 
