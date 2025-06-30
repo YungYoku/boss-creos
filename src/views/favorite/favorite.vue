@@ -44,7 +44,7 @@
 
 <script setup lang="ts">
 import { Ref, ref, watch } from 'vue'
-import { useAuthStore } from '@/stores/auth'
+import { useAuthStore } from '@/stores/auth.ts'
 
 import { Grid } from '@/components/structures'
 import { EmptyProjectCard, ProjectCard } from '@/components/blocks'

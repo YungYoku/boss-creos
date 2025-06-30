@@ -89,8 +89,8 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
-import { useToast } from '@/stores/toast'
+import { useAuthStore } from '@/stores/auth.ts'
+import { useToast } from '@/stores/toast.ts'
 
 import { Grid, Island } from '@/components/structures'
 import { Button, Checkbox, DatePicker, Input, InputFile, Textarea } from '@/components/blocks'

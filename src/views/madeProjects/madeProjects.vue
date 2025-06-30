@@ -71,8 +71,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watch, Ref } from 'vue'
-import { useAuthStore } from '@/stores/auth'
+import { reactive, ref, Ref, watch } from 'vue'
+import { useAuthStore } from '@/stores/auth.ts'
 
 import { Grid, Modal } from '@/components/structures'
 import { Chat, ModalDeleteConfirmation, ModalProposals } from '@/components/sections'

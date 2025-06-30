@@ -58,14 +58,14 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { useAuthStore } from '@/stores/auth'
-import { useToast } from '@/stores/toast'
+import { useAuthStore } from '@/stores/auth.ts'
+import { useToast } from '@/stores/toast.ts'
 
-import { Http, Form } from '@/plugins'
+import { Form, Http } from '@/plugins'
 import { Grid } from '@/components/structures'
-import { Avatar, Button, Textarea, Input } from '@/components/blocks'
+import { Avatar, Button, Input, Textarea } from '@/components/blocks'
 import { IReferralCode } from '@/interfaces/ReferralCode.ts'
-import { IUser, emptyUser } from '@/interfaces/User.ts'
+import { emptyUser, IUser } from '@/interfaces/User.ts'
 
 const auth = useAuthStore()
 const toast = useToast()

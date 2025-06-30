@@ -62,7 +62,7 @@
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.ts'
-import { useToast } from '@/stores/toast'
+import { useToast } from '@/stores/toast.ts'
 
 import { AuthLayout } from '@/components/layouts'
 import { Card } from '@/components/structures'

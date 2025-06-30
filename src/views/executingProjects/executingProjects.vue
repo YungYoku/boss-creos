@@ -53,7 +53,7 @@
 
 <script setup lang="ts">
 import { Ref, ref, watch } from 'vue'
-import { useAuthStore } from '@/stores/auth'
+import { useAuthStore } from '@/stores/auth.ts'
 
 import { Http } from '@/plugins'
 import { IProject, IProjects, IProjectStatus } from '@/interfaces/Project.ts'

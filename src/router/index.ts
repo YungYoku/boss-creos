@@ -16,7 +16,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/',
 				name: 'Main',
-				component: () => import('@/views/main.vue'),
+				component: () => import('@/views/main/main.vue'),
 				meta: {
 					rules: [],
 					bgClass: 'main'
@@ -25,7 +25,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/new-project',
 				name: 'NewProject',
-				component: () => import('@/views/newProject.vue'),
+				component: () => import('@/views/newProject/newProject.vue'),
 				meta: {
 					rules: ['auth', 'buyer']
 				}
@@ -33,7 +33,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/project/:id',
 				name: 'Project',
-				component: () => import('@/views/project.vue'),
+				component: () => import('@/views/project/project.vue'),
 				meta: {
 					rules: []
 				}
@@ -41,7 +41,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/project/:id/edit',
 				name: 'ProjectEditing',
-				component: () => import('@/views/editProject.vue'),
+				component: () => import('@/views/editProject/editProject.vue'),
 				meta: {
 					rules: []
 				}
@@ -49,7 +49,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/new-creative',
 				name: 'NewCreative',
-				component: () => import('@/views/newCreative.vue'),
+				component: () => import('@/views/newCreative/newCreative.vue'),
 				meta: {
 					rules: ['auth', 'designer'],
 					bgClass: 'new-creative'
@@ -58,7 +58,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/creative/:id',
 				name: 'Creative',
-				component: () => import('@/views/creative.vue'),
+				component: () => import('@/views/creative/creative.vue'),
 				meta: {
 					rules: []
 				}
@@ -66,7 +66,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/creative/:id/edit',
 				name: 'EditCreative',
-				component: () => import('@/views/editCreative.vue'),
+				component: () => import('@/views/editCreative/editCreative.vue'),
 				meta: {
 					rules: []
 				}
@@ -74,7 +74,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/made-projects',
 				name: 'MadeProjects',
-				component: () => import('@/views/madeProjects.vue'),
+				component: () => import('@/views/madeProjects/madeProjects.vue'),
 				meta: {
 					rules: ['auth', 'buyer']
 				}
@@ -82,7 +82,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/made-creatives',
 				name: 'MadeCreatives',
-				component: () => import('@/views/madeCreatives.vue'),
+				component: () => import('@/views/madeCreatives/madeCreatives.vue'),
 				meta: {
 					rules: ['auth', 'designer']
 				}
@@ -90,7 +90,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/executing-projects',
 				name: 'ExecutingProjects',
-				component: () => import('@/views/executingProjects.vue'),
+				component: () => import('@/views/executingProjects/executingProjects.vue'),
 				meta: {
 					rules: ['auth', 'designer']
 				}
@@ -98,7 +98,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/favorite',
 				name: 'Favorite',
-				component: () => import('@/views/favorite.vue'),
+				component: () => import('@/views/favorite/favorite.vue'),
 				meta: {
 					rules: ['auth', 'designer']
 				}
@@ -106,7 +106,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/shopping-cart',
 				name: 'ShoppingCard',
-				component: () => import('@/views/shoppingCart.vue'),
+				component: () => import('@/views/shoppingCart/shoppingCart.vue'),
 				meta: {
 					rules: ['auth']
 				}
@@ -114,7 +114,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/shopping-cart/edit',
 				name: 'EditShoppingCard',
-				component: () => import('@/views/editShoppingCart.vue'),
+				component: () => import('@/views/editShoppingCart/editShoppingCart.vue'),
 				meta: {
 					rules: ['auth']
 				}
@@ -122,7 +122,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/users/:id',
 				name: 'User',
-				component: () => import('@/views/user.vue'),
+				component: () => import('@/views/user/user.vue'),
 				meta: {
 					rules: []
 				}
@@ -130,7 +130,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/profile',
 				name: 'Profile',
-				component: () => import('@/views/profile.vue'),
+				component: () => import('@/views/profile/profile.vue'),
 				meta: {
 					rules: ['auth']
 				}
@@ -138,7 +138,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/shop',
 				name: 'Shop',
-				component: () => import('@/views/shop.vue'),
+				component: () => import('@/views/shop/shop.vue'),
 				meta: {
 					rules: [],
 					bgClass: 'shop'
@@ -147,7 +147,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/designers',
 				name: 'Designers',
-				component: () => import('@/views/designers.vue'),
+				component: () => import('@/views/designers/designers.vue'),
 				meta: {
 					rules: [],
 					bgClass: 'shop'
@@ -156,7 +156,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/moderation',
 				name: 'Moderation',
-				component: () => import('@/views/moderation.vue'),
+				component: () => import('@/views/moderation/moderation.vue'),
 				meta: {
 					rules: ['auth', 'admin'],
 					bgClass: 'shop'
@@ -165,7 +165,7 @@ const routes: Array<RouteRecordRaw> = [
 			{
 				path: '/chats',
 				name: 'Chats',
-				component: () => import('@/views/chats.vue'),
+				component: () => import('@/views/chats/chats.vue'),
 				meta: {
 					rules: ['auth']
 				}
@@ -175,7 +175,7 @@ const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/login',
 		name: 'Login',
-		component: () => import('@/views/login.vue'),
+		component: () => import('@/views/login/login.vue'),
 		meta: {
 			rules: ['no-auth'],
 			bgClass: 'auth'
@@ -184,7 +184,7 @@ const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/registration',
 		name: 'Registration',
-		component: () => import('@/views/registration.vue'),
+		component: () => import('@/views/registration/registration.vue'),
 		meta: {
 			rules: ['no-auth'],
 			bgClass: 'auth'

@@ -175,8 +175,8 @@
 <script setup lang="ts">
 import { computed, reactive, Ref, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
-import { useToast } from '@/stores/toast'
+import { useAuthStore } from '@/stores/auth.ts'
+import { useToast } from '@/stores/toast.ts'
 
 import { Grid, Island } from '@/components/structures'
 import { ModalDeleteConfirmation, ModalMakeProposal } from '@/components/sections'

@@ -1,89 +1,54 @@
 .table {
-   position: relative;
+	position: relative;
 
-   display: flex;
+	display: flex;
 
-   box-sizing: border-box;
+	box-sizing: border-box;
 
-   width: 100%;
-   overflow: hidden;
+	width: 100%;
+	overflow: auto;
 
 	background: #ffffff;
-   border-radius: 10px;
-   &:before {
-	   content: '';
-	   position: absolute;
-	   top: 0;
-	   right: 0;
-	   z-index: 2;
+	border-radius: 10px;
 
-	   width: 50px;
-	   height: 50px;
-
-	   background: linear-gradient(to right, transparent, #000000);
-
-	   opacity: 0;
-	   transition: 115ms linear;
-
-	   pointer-events: none;
-   }
-
-   &:after {
-	   content: '';
-	   position: absolute;
-	   top: 50px;
-	   right: 0;
-	   z-index: 2;
-
-	   width: 50px;
-	   height: calc(100% - 50px);
-
-	   background: linear-gradient(to right, rgba(255,255,255,0), #fff);
-
-	   opacity: 0;
-	   transition: 115ms linear;
-
-	   pointer-events: none;
-   }
-
-   &__body {
+	&__body {
 	   display: table;
 
 	   min-width: 100%;
-   }
+	}
 
-   &__inner {
+	&__inner {
 	   flex-grow: 1;
 
 	   border-top-right-radius: 10px;
-   }
+	}
 
-   &__text,
-   &__link span {
+	&__text,
+	&__link span {
 	   max-width: 100%;
 	   overflow: hidden;
 
 	   white-space: nowrap;
 	   text-overflow: ellipsis;
-   }
+	}
 
-   .table__inner {
+	.table__inner {
 	   .table__col {
 		   &:last-child {
 			   border-right: none;
 		   }
 	   }
-   }
+	}
 
-   // Row
-   &__row {
+	// Row
+	&__row {
 	   position: relative;
 
 	   display: table-row;
-   }
+	}
 
-   // Column
-   &__col {
+	// Column
+	&__col {
 	   position: relative;
 
 	   display: table-cell;
@@ -106,14 +71,11 @@
 	   font-variant-numeric: tabular-nums;
 
 	   &._content {
+		   padding: 0 5px;
 		   overflow: hidden;
 
 		   .table__content,
 		   .table__value-wrap {
-			   position: absolute;
-			   top: 0;
-			   right: 10px;
-
 			   height: 100%;
 		   }
 
@@ -138,30 +100,26 @@
 		   user-select: none;
 
 		   .table__content {
-			   position: absolute;
-			   top: 18px;
-			   z-index: 0;
-
 			   justify-content: flex-start;
 		   }
 	   }
-   }
+	}
 
-   &__col_value-wrap {
+	&__col_value-wrap {
 	   display: flex;
 	   justify-content: flex-end;
 	   align-items: center;
-   }
+	}
 
-   &__col_value:not(.table__col_header) {
+	&__col_value:not(.table__col_header) {
 	   font-size: 14px;
 	   line-height: 1.25;
 	   font-weight: 400;
 	   color: #000000;
 	   font-variant-numeric: lining-nums tabular-nums;
-   }
+	}
 
-   &__content {
+	&__content {
 	   display: flex;
 	   justify-content: flex-end;
 	   align-items: center;
@@ -173,11 +131,11 @@
 		   align-items: center;
 		   gap: 10px;
 	   }
-   }
+	}
 
-   &__col_color {
+	&__col_color {
 	   color: #ffffff;
 
 	   background: #ed806f;
-   }
+	}
 }
