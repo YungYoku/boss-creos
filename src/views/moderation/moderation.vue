@@ -6,24 +6,19 @@
 </template>
 
 <script lang="ts" setup>
-import { Ref, ref } from 'vue'
+import { ref } from 'vue'
 
 import { Table } from '@/components/structures'
-import { emptyCreative, ICreative, ICreatives } from '@/interfaces/Creative.ts'
+import { ICreatives } from '@/interfaces/Creative.ts'
 import { Http } from '@/plugins'
-import { IHeader, IRows } from '@/interfaces/Table.ts'
 import { useAdapter } from '@/views/moderation/adapter.ts'
 
-const header: Ref<IHeader> = ref([])
-const body: Ref<IRows> = ref([])
-
-const { getHeader, getBody } = useAdapter<ICreative>()
-
-const unnecessaryFields = [
-	'collectionId',
-	'collectionName',
-]
-const fields = Object.keys(emptyCreative).filter(field => !unnecessaryFields.includes(field))
+const {
+	handleLoadedData,
+	header,
+	body,
+	fields
+} = useAdapter()
 
 const loading = ref(true)
 const loadCreatives = async () => {
@@ -35,8 +30,7 @@ const loadCreatives = async () => {
 			perPage: 12
 		})
 		.then(res => {
-			header.value = getHeader(res.items[0])
-			body.value = getBody(res.items)
+			handleLoadedData(res.items)
 		})
 }
 

@@ -1,27 +1,28 @@
-import { IRow } from '@/interfaces/Table.ts'
+import { emptyCreative, ICreative } from '@/interfaces/Creative.ts'
+import { useAdapter as useAdapterRoot } from '@/plugins/adapter.ts'
 
-export const useAdapter = <T extends object>() => {
-	const getHeader = (item: T) => {
-		const keys = Object.keys(item)
-		return keys.map(name => ({ name }))
-	}
+export const useAdapter = () => {
+	const unnecessaryFieldsForRequest: Array<Partial<keyof ICreative>> = [
+		'collectionId',
+		'collectionName'
+	]
 
-	const getBody = (items: Array<T>) => {
-		return items.map(item => {
-			const keys = Object.keys(item) as Array<keyof T>
-			return keys.reduce((result, key) => {
-				const value = item[key]
-				result.push({
-					key: String(key),
-					value
-				})
-				return result
-			}, [] as IRow)
-		})
-	}
+	const unnecessaryFieldsForTable: Array<Partial<keyof ICreative>> = [
+		'changes',
+		'expand'
+	]
+
+	const {
+		handleLoadedData,
+		header,
+		body,
+		fields
+	} = useAdapterRoot(emptyCreative, unnecessaryFieldsForRequest, unnecessaryFieldsForTable)
 
 	return {
-		getHeader,
-		getBody
+		handleLoadedData,
+		header,
+		body,
+		fields
 	}
 }
