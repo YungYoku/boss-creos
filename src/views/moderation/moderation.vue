@@ -9,7 +9,7 @@
 import { Ref, ref } from 'vue'
 
 import { Table } from '@/components/structures'
-import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
+import { emptyCreative, ICreative, ICreatives } from '@/interfaces/Creative.ts'
 import { Http } from '@/plugins'
 import { IHeader, IRows } from '@/interfaces/Table.ts'
 import { useAdapter } from '@/views/moderation/adapter.ts'
@@ -17,19 +17,26 @@ import { useAdapter } from '@/views/moderation/adapter.ts'
 const header: Ref<IHeader> = ref([])
 const body: Ref<IRows> = ref([])
 
-const { generateHeader, generateBody } = useAdapter<ICreative>()
+const { getHeader, getBody } = useAdapter<ICreative>()
+
+const unnecessaryFields = [
+	'collectionId',
+	'collectionName',
+]
+const fields = Object.keys(emptyCreative).filter(field => !unnecessaryFields.includes(field))
 
 const loading = ref(true)
 const loadCreatives = async () => {
 	await Http
 		.get<ICreatives>('/collections/creatives/records', {
+			fields,
 			filter: 'status=\'moderation\'',
-			expand: ['preview', 'video', 'creator'],
+			expand: ['preview', 'video', 'creator', 'slot'],
 			perPage: 12
 		})
 		.then(res => {
-			header.value = generateHeader(res.items[0])
-			body.value = generateBody(res.items)
+			header.value = getHeader(res.items[0])
+			body.value = getBody(res.items)
 		})
 }
 

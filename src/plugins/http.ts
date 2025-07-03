@@ -1,6 +1,7 @@
 import { useAuthStore } from '@/stores/auth.ts'
 
 interface Query {
+	fields?: Array<string>
 	filter?: string
 	expand?: Array<string>
 	perPage?: number
@@ -16,7 +17,7 @@ interface ConnectOptions<T> {
 	collection: string
 	id: string
 	expand: Array<string>,
-	// eslint-disable-next-line no-unused-vars
+	 
 	cb: (response: T) => void
 }
 
@@ -54,6 +55,9 @@ class Http {
 		}
 		if (query.sort) {
 			result += 'sort=' + query.sort + '&'
+		}
+		if (query.fields) {
+			result += 'fields=' + query.fields.join(',') + '&'
 		}
 		return result.slice(0, -1)
 	}

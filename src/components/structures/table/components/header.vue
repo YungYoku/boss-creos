@@ -6,7 +6,7 @@
 			class="table__col _header"
 		>
 			<div class="table__content">
-				{{ item.name }}
+				{{ $t(item.name) }}
 			</div>
 		</div>
 	</div>

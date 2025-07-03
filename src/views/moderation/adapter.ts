@@ -1,12 +1,12 @@
 import { IRow } from '@/interfaces/Table.ts'
 
 export const useAdapter = <T extends object>() => {
-	const generateHeader = (item: T) => {
+	const getHeader = (item: T) => {
 		const keys = Object.keys(item)
 		return keys.map(name => ({ name }))
 	}
 
-	const generateBody = (items: Array<T>) => {
+	const getBody = (items: Array<T>) => {
 		return items.map(item => {
 			const keys = Object.keys(item) as Array<keyof T>
 			return keys.reduce((result, key) => {
@@ -21,7 +21,7 @@ export const useAdapter = <T extends object>() => {
 	}
 
 	return {
-		generateHeader,
-		generateBody
+		getHeader,
+		getBody
 	}
 }
