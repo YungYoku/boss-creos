@@ -1,6 +1,6 @@
 import { defineAsyncComponent } from 'vue'
 
-const Cell = defineAsyncComponent(() => import('./cell/cell.vue'))
+const CellButton = defineAsyncComponent(() => import('./cells/cellButton.vue'))
 const Icon = defineAsyncComponent(() => import('./icon/icon.vue'))
 const Badge = defineAsyncComponent(() => import('./badge.vue'))
 const File = defineAsyncComponent(() => import('./file.vue'))
@@ -14,7 +14,7 @@ const Text = defineAsyncComponent(() => import('./text.vue'))
 const Video = defineAsyncComponent(() => import('./video.vue'))
 
 export {
-	Cell,
+	CellButton,
 	Icon,
 	Badge,
 	File,

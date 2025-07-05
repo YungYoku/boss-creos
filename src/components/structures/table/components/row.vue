@@ -4,23 +4,35 @@
 		:key="rowIndex"
 		class="table__row"
 	>
-		<slot name="row">
-			<div
-				v-for="cell in row"
-				:key="`${rowIndex}-${cell.key}`"
-				class="table__col _content"
+		<div
+			v-for="cell in row"
+			:key="`${rowIndex}-${cell.key}`"
+			class="table__col _content"
+		>
+			<slot
+				name="cell"
+				:cell="cell"
 			>
-				<slot
-					name="cell"
-					:cell="cell"
-				>
+				<div class="table__content">
+					<template v-if="cell.oldValue != null">
+						<div class="table__cell-value _new">
+							{{ cell.newValue }}
+						</div>
+
+						<div class="table__cell-value _old">
+							{{ cell.oldValue }}
+						</div>
+					</template>
+
 					<div
-						class="table__content"
-						v-html="cell.value"
-					/>
-				</slot>
-			</div>
-		</slot>
+						v-else
+						class="table__cell-value _current"
+					>
+						{{ cell.newValue }}
+					</div>
+				</div>
+			</slot>
+		</div>
 	</div>
 </template>
 

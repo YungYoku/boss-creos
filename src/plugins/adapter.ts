@@ -1,7 +1,12 @@
 import { ref, Ref } from 'vue'
 import { IHeader, IRow, IRows } from '@/interfaces/Table.ts'
 
-export const useAdapter = <T extends object>(
+type NecessaryAdapterFields<T> = {
+	changes: Partial<T> | null
+	[key: string]: unknown
+}
+
+export const useAdapter = <T extends NecessaryAdapterFields<T>>(
 	schema: T,
 	unnecessaryFieldsForRequest: Array<Partial<keyof T>>,
 	unnecessaryFieldsForTable: Array<Partial<keyof T>>
@@ -26,13 +31,14 @@ export const useAdapter = <T extends object>(
 
 			const result = [{
 				key: 'actions',
-				value: null
+				newValue: null
 			}] as IRow
 			filteredKeys.forEach((key) => {
 				const value = item[key]
 				result.push({
 					key: String(key),
-					value
+					newValue: value,
+					oldValue: item.changes?.[key] ?? null
 				})
 			})
 			return result
@@ -55,6 +61,6 @@ export const useAdapter = <T extends object>(
 		handleLoadedData,
 		header,
 		body,
-		fields: fieldsForRequest
+		fields: fieldsForRequest,
 	}
 }

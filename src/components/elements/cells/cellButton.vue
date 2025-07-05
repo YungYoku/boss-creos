@@ -1,5 +1,5 @@
 <template>
-	123
+	<button>Кнопка</button>
 </template>
 
 <script setup lang="ts">

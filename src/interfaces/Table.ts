@@ -6,7 +6,8 @@ export type IHeader = Array<IHeaderItem>
 
 export interface ICell {
 	key: string
-	value: unknown
+	newValue: unknown
+	oldValue?: unknown
 }
 
 export type IRow = Array<ICell>

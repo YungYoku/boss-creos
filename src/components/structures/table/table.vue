@@ -4,17 +4,13 @@
 			<div class="table__body">
 				<Header :data="header"/>
 
-				<Row :data="data">
+				<Row :data="body">
 					<template #cell="{ cell }">
-						<slot
+						<component
+							:is="cells[cell.key]"
+							v-if="cells[cell.key]"
 							name="cell"
 							:cell="cell"
-						/>
-					</template>
-					<template #overlay="{ index }">
-						<slot
-							name="overlay"
-							:index="index"
 						/>
 					</template>
 				</Row>
@@ -34,9 +30,13 @@ defineProps({
 		type: Array as PropType<IHeader>,
 		default: () => ([])
 	},
-	data: {
+	body: {
 		type: Array as PropType<IRows>,
 		default: () => ([])
+	},
+	cells: {
+		type: Object as PropType<{ [key: string]: unknown }>,
+		default: () => ({})
 	}
 })
 </script>

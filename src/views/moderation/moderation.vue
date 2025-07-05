@@ -1,7 +1,8 @@
 <template>
 	<Table
 		:header
-		:data="body"
+		:body
+		:cells
 	/>
 </template>
 
@@ -17,7 +18,8 @@ const {
 	handleLoadedData,
 	header,
 	body,
-	fields
+	fields,
+	cells
 } = useAdapter()
 
 const loading = ref(true)
