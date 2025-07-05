@@ -17,12 +17,12 @@ interface ConnectOptions<T> {
 	collection: string
 	id: string
 	expand: Array<string>,
-	 
+
 	cb: (response: T) => void
 }
 
 class Http {
-	api = import.meta.env.VITE_API
+	api: string = import.meta.env.VITE_API
 
 	getHeaders(token: string, options: HeadersOptions = {
 		isFormData: false,
@@ -51,7 +51,7 @@ class Http {
 			result += 'expand=' + query.expand.join(',') + '&'
 		}
 		if (query.perPage) {
-			result += 'perPage=' + query.perPage + '&'
+			result += 'perPage=' + query.perPage.toString() + '&'
 		}
 		if (query.sort) {
 			result += 'sort=' + query.sort + '&'
@@ -80,11 +80,11 @@ class Http {
 						}
 						return res
 					})
-					.catch((err) => {
+					.catch((err: unknown) => {
 						throw err
 					})
 			})
-			.catch((err) => {
+			.catch((err: unknown) => {
 				throw err
 			})
 	}
@@ -112,11 +112,11 @@ class Http {
 						}
 						return res
 					})
-					.catch((err) => {
+					.catch((err: unknown) => {
 						throw err
 					})
 			})
-			.catch((err) => {
+			.catch((err: unknown) => {
 				throw err
 			})
 	}
@@ -144,11 +144,11 @@ class Http {
 						}
 						return res
 					})
-					.catch((err) => {
+					.catch((err: unknown) => {
 						throw err
 					})
 			})
-			.catch((err) => {
+			.catch((err: unknown) => {
 				throw err
 			})
 	}
@@ -175,11 +175,11 @@ class Http {
 						}
 						return res
 					})
-					.catch((err) => {
+					.catch((err: unknown) => {
 						throw err
 					})
 			})
-			.catch((err) => {
+			.catch((err: unknown) => {
 				throw err
 			})
 	}

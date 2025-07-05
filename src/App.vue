@@ -17,7 +17,7 @@ const router = useRouter()
 
 const loadUserInfo = async () => {
 	if (auth.isLoggedIn) {
-		Http
+		await Http
 			.post<IUserRefresh>('/collections/users/auth-refresh', {
 			}, {
 				expand: ['baskets', 'baskets.creative', 'baskets.creative.preview', 'baskets.creative.slot', 'baskets.creative', 'baskets.geo']
@@ -26,10 +26,10 @@ const loadUserInfo = async () => {
 				auth.setToken(token)
 				auth.setUser(record)
 			})
-			.catch(() => {
+			.catch(async () => {
 				Storage.clear()
 				auth.$reset()
-				router.push('/login')
+				await router.push('/login')
 			})
 	}
 }

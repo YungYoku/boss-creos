@@ -5,7 +5,7 @@ export type FormatType = 'percent' | 'number'
 class Format {
 	get(type: FormatType, value: number, ...props: Array<number>) {
 		const types = {
-			percent: (value: number) => `${value?.toFixed(2)}%`,
+			percent: (value: number) => `${value.toFixed(2)}%`,
 
 			number(value: number, length: number = 1) {
 				return value.toFixed(length)

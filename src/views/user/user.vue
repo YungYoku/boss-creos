@@ -105,7 +105,7 @@ import { Avatar, Button } from '@/components/blocks'
 import { Text } from '@/components/elements'
 import { IUser } from '@/interfaces/User.ts'
 import { CardRating } from '@/components/blocks'
-import Icon from '@/components/elements/icon.vue'
+import Icon from '@/components/elements/icon/icon.vue'
 
 const route = useRoute()
 const router = useRouter()

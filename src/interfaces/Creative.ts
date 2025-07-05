@@ -163,7 +163,8 @@ export const emptyCreative: ICreative = {
 	changes: null,
 	status: 'moderation',
 	reskin: false,
-	reskinPrice: 0
+	reskinPrice: 0,
+	expand: {}
 }
 
 export interface ICreatives {

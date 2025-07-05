@@ -25,23 +25,16 @@ class Localize<Lang extends string = DefaultLang> {
 		ru: {}
 	} as Locales<Lang | DefaultLang>
 
-	static inst: Localize
-	static getInst() {
-		return Localize.inst || (Localize.inst = new Localize())
-	}
-
 	install(app: App, { locales }: { locales: Locales<Lang> }) {
 		const keys = Object.keys(locales) as Lang[]
 		keys.forEach(key => {
-			this.locales[key] = this.locales[key] || {}
 			this.locales[key] = { ...this.locales[key], ...locales[key] }
 		})
 
-		app.config.globalProperties.$t = (key: string, values?: object) => this.t(key, values)
-		app.config.globalProperties.$e = (key: string, values?: object) => this.e(key, values)
+		app.config.globalProperties.$t = (key: string) => this.t(key)
 		app.config.globalProperties.$locale = (locale: Lang) => {
 			if (locale) {
-				return this.setLocale(locale)
+				this.setLocale(locale); return
 			} else {
 				return this.getLocale()
 			}
@@ -49,39 +42,9 @@ class Localize<Lang extends string = DefaultLang> {
 		app.config.globalProperties.$locales = () => Object.keys(this.locales)
 	}
 
-
-	getTemplate(template: string, values?: string | object) {
-		try {
-			if (typeof values === 'string') {
-				values = JSON.parse(values)
-			}
-		} catch (e) {
-			console.warn(e)
-			return template
-		}
-
-		if (typeof values === 'object') {
-			const keys = Object.keys(values) as Array<keyof typeof values>
-			keys.forEach((optionKey) => {
-				const option = values[optionKey]
-				template = template.split(`:${optionKey}`).join(option)
-			})
-		}
-		return template
-	}
-
-	t(key: string, values?: object) {
-		const langData = this.locales[this.getLocale()] || this.locales[this.baseLocale] || {}
-		const template = langData[key]
-
-		return langData[key] ? this.getTemplate(template, values) : key
-	}
-
-	e(key: string, values?: object) {
-		const langData = this.locales[this.getLocale()] || {}
-		const template = langData[key] || key
-
-		return this.getTemplate(template, values)
+	t(key: string) {
+		const langData = this.locales[this.getLocale()]
+		return langData[key]
 	}
 
 	getLocale() {
@@ -90,15 +53,10 @@ class Localize<Lang extends string = DefaultLang> {
 
 	setLocale(locale: Lang | DefaultLang) {
 		this.locale.value = locale
-		this.setToStore(locale)
 	}
 
 	getFromStore() {
 		return this.locale.value
-	}
-
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	setToStore(_: Lang | DefaultLang) {
 	}
 
 	switch(locale: Lang | DefaultLang) {
@@ -115,21 +73,6 @@ class Localize<Lang extends string = DefaultLang> {
 
 		return null
 	}
-
-	addToLocaleFromMeta(data: { [key: string]: { text: string } }, namespace: string) {
-		const keys = Object.keys(data) as Array<keyof typeof data>
-		keys.forEach(key => {
-			const name = `${namespace}.${key}`
-			this.addToLocale(name, data[key].text)
-		})
-	}
-
-	addToLocale(name: string, value: string) {
-		const locale = this.getLocale()
-		const langData = this.locales[locale] as Record<string, string>
-		langData[name] = value
-	}
 }
 
-const localize = Localize.getInst()
-export default localize
+export default new Localize()

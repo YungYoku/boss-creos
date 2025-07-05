@@ -106,7 +106,7 @@ const style = computed(() => {
 		}
 	}
 
-	const _columns = [...activeColumns.value as Array<string | number>]
+	const _columns = [...activeColumns.value]
 	return {
 		gridTemplateColumns: _columns.reduce((result: string, column: string | number) => {
 			if (typeof column === 'string') return `${result} ${column} `

@@ -14,8 +14,9 @@ export const useAdapter = <T extends object>(
 	const getHeader = (item: T) => {
 		const keys = Object.keys(item) as Array<keyof T>
 		const filteredKeys = keys.filter(name => fieldsForTable.includes(name))
+		const result = filteredKeys.map(name => ({ name: String(name) }))
 
-		return filteredKeys.map(name => ({ name: String(name) }))
+		return [{ name: 'actions' }, ...result]
 	}
 
 	const getBody = (items: Array<T>) => {
@@ -23,14 +24,18 @@ export const useAdapter = <T extends object>(
 			const keys = Object.keys(item) as Array<keyof T>
 			const filteredKeys = keys.filter(name => fieldsForTable.includes(name))
 
-			return filteredKeys.reduce((result, key) => {
+			const result = [{
+				key: 'actions',
+				value: null
+			}] as IRow
+			filteredKeys.forEach((key) => {
 				const value = item[key]
 				result.push({
 					key: String(key),
 					value
 				})
-				return result
-			}, [] as IRow)
+			})
+			return result
 		})
 	}
 

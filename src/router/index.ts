@@ -22,30 +22,30 @@ const routes: Array<RouteRecordRaw> = [
 					bgClass: 'main'
 				},
 			},
-			{
-				path: '/new-project',
-				name: 'NewProject',
-				component: () => import('@/views/newProject/newProject.vue'),
-				meta: {
-					rules: ['auth', 'buyer']
-				}
-			},
-			{
-				path: '/project/:id',
-				name: 'Project',
-				component: () => import('@/views/project/project.vue'),
-				meta: {
-					rules: []
-				}
-			},
-			{
-				path: '/project/:id/edit',
-				name: 'ProjectEditing',
-				component: () => import('@/views/editProject/editProject.vue'),
-				meta: {
-					rules: []
-				}
-			},
+			// {
+			// 	path: '/new-project',
+			// 	name: 'NewProject',
+			// 	component: () => import('@/views/newProject/newProject.vue'),
+			// 	meta: {
+			// 		rules: ['auth', 'buyer']
+			// 	}
+			// },
+			// {
+			// 	path: '/project/:id',
+			// 	name: 'Project',
+			// 	component: () => import('@/views/project/project.vue'),
+			// 	meta: {
+			// 		rules: []
+			// 	}
+			// },
+			// {
+			// 	path: '/project/:id/edit',
+			// 	name: 'ProjectEditing',
+			// 	component: () => import('@/views/editProject/editProject.vue'),
+			// 	meta: {
+			// 		rules: []
+			// 	}
+			// },
 			{
 				path: '/new-creative',
 				name: 'NewCreative',
@@ -71,14 +71,14 @@ const routes: Array<RouteRecordRaw> = [
 					rules: []
 				}
 			},
-			{
-				path: '/made-projects',
-				name: 'MadeProjects',
-				component: () => import('@/views/madeProjects/madeProjects.vue'),
-				meta: {
-					rules: ['auth', 'buyer']
-				}
-			},
+			// {
+			// 	path: '/made-projects',
+			// 	name: 'MadeProjects',
+			// 	component: () => import('@/views/madeProjects/madeProjects.vue'),
+			// 	meta: {
+			// 		rules: ['auth', 'buyer']
+			// 	}
+			// },
 			{
 				path: '/made-creatives',
 				name: 'MadeCreatives',
@@ -162,14 +162,14 @@ const routes: Array<RouteRecordRaw> = [
 					bgClass: 'shop'
 				}
 			},
-			{
-				path: '/chats',
-				name: 'Chats',
-				component: () => import('@/views/chats/chats.vue'),
-				meta: {
-					rules: ['auth']
-				}
-			}
+			// {
+			// 	path: '/chats',
+			// 	name: 'Chats',
+			// 	component: () => import('@/views/chats/chats.vue'),
+			// 	meta: {
+			// 		rules: ['auth']
+			// 	}
+			// }
 		],
 	},
 	{
@@ -201,11 +201,11 @@ const body = document.querySelector('body')
 
 router.beforeEach((to, from) => {
 	const authStore = useAuthStore()
-	const toRules = to.meta.rules as Array<string> ?? []
+	const toRules = (to.meta.rules ?? []) as Array<string>
 
 
-	const previousBgClass = from.meta?.bgClass ?? 'default'
-	const currentBgClass = to.meta?.bgClass ?? 'default'
+	const previousBgClass = (from.meta.bgClass ?? 'default') as string
+	const currentBgClass = (to.meta.bgClass ?? 'default') as string
 	body?.classList.remove(previousBgClass + '-bg')
 	body?.classList.add(currentBgClass + '-bg')
 
