@@ -1,15 +1,20 @@
 import { ref, Ref } from 'vue'
-import { IHeader, IRow, IRows } from '@/interfaces/Table.ts'
+import type { ICellOptions, IHeader, IRow, IRows } from '@/interfaces/Table.ts'
 
 type NecessaryAdapterFields<T> = {
 	changes: Partial<T> | null
 	[key: string]: unknown
 }
 
+type Options<T> = {
+	[key in keyof T]?: ICellOptions
+}
+
 export const useAdapter = <T extends NecessaryAdapterFields<T>>(
 	schema: T,
 	unnecessaryFieldsForRequest: Array<Partial<keyof T>>,
-	unnecessaryFieldsForTable: Array<Partial<keyof T>>
+	unnecessaryFieldsForTable: Array<Partial<keyof T>>,
+	options: () => Options<T>
 ) => {
 	const keys = Object.keys(schema) as Array<keyof T>
 
@@ -31,12 +36,14 @@ export const useAdapter = <T extends NecessaryAdapterFields<T>>(
 
 			const result = [{
 				key: 'actions',
-				newValue: null
+				newValue: null,
+				options: options(item).actions
 			}] as IRow
 			filteredKeys.forEach((key) => {
 				const value = item[key]
 				result.push({
 					key: String(key),
+					options: options(item)[key],
 					newValue: value,
 					oldValue: item.changes?.[key] ?? null
 				})

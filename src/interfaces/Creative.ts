@@ -97,7 +97,7 @@ export interface ICreative {
 	ratio: IRatio
 	resize: boolean
 	resizePrices: ResizePrices | null
-	changes: ICreative | null
+	changes: Partial<ICreative> | null
 	status: 'moderation' | 'approved'
 	reskin: boolean
 	reskinPrice: number
