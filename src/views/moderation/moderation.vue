@@ -28,8 +28,9 @@ const loadCreatives = async () => {
 		.get<ICreatives>('/collections/creatives/records', {
 			fields,
 			filter: 'status=\'moderation\'',
-			expand: ['preview', 'video', 'creator', 'slot'],
-			perPage: 12
+			expand: ['approach', 'preview', 'video', 'creator', 'slot', 'geo'],
+			perPage: 12,
+			page: 1
 		})
 		.then(res => {
 			handleLoadedData(res.items)

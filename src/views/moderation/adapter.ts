@@ -29,16 +29,23 @@ export const useAdapter = () => {
 		}
 	})
 
+	const cellFormats = {
+		'approach': ({ name }) => name,
+		'creator': ({ username }) => username,
+		'geo': ({ name }) => name,
+		'slot': ({ name }) => name,
+	}
+
+	const cells = {
+		'actions': CellButton
+	}
+
 	const {
 		handleLoadedData,
 		header,
 		body,
 		fields,
-	} = useAdapterRoot(emptyCreative, unnecessaryFieldsForRequest, unnecessaryFieldsForTable, options)
-
-	const cells = {
-		'actions': CellButton
-	}
+	} = useAdapterRoot(emptyCreative, unnecessaryFieldsForRequest, unnecessaryFieldsForTable, options, cellFormats)
 
 	return {
 		handleLoadedData,

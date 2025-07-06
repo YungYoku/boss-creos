@@ -2,6 +2,7 @@ import { ref, Ref } from 'vue'
 import type { ICellOptions, IHeader, IRow, IRows } from '@/interfaces/Table.ts'
 
 type NecessaryAdapterFields<T> = {
+	expand?: Partial<T> | null
 	changes: Partial<T> | null
 	[key: string]: unknown
 }
@@ -14,7 +15,8 @@ export const useAdapter = <T extends NecessaryAdapterFields<T>>(
 	schema: T,
 	unnecessaryFieldsForRequest: Array<Partial<keyof T>>,
 	unnecessaryFieldsForTable: Array<Partial<keyof T>>,
-	options: () => Options<T>
+	options: (item: T) => Options<T>,
+	cellFormats: Partial<Record<keyof T, (item?: T[keyof T]) => unknown>>,
 ) => {
 	const keys = Object.keys(schema) as Array<keyof T>
 
@@ -44,7 +46,7 @@ export const useAdapter = <T extends NecessaryAdapterFields<T>>(
 				result.push({
 					key: String(key),
 					options: options(item)[key],
-					newValue: value,
+					newValue: cellFormats[key]?.(item.expand?.[key]) ?? value,
 					oldValue: item.changes?.[key] ?? null
 				})
 			})
