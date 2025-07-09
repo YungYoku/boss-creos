@@ -15,21 +15,34 @@
 			>
 				<div class="table__content">
 					<template v-if="cell.oldValue != null">
-						<div class="table__cell-value _new">
+						<component
+							:is="cell.options?.link?.new ? 'a' : 'div'"
+							:href="cell.options?.link?.new"
+							target="_blank"
+							class="table__cell-value _new"
+						>
 							{{ cell.newValue }}
-						</div>
+						</component>
 
-						<div class="table__cell-value _old">
+						<component
+							:is="cell.options?.link?.old ? 'a' : 'div'"
+							:href="cell.options?.link?.old"
+							target="_blank"
+							class="table__cell-value _old"
+						>
 							{{ cell.oldValue }}
-						</div>
+						</component>
 					</template>
 
-					<div
+					<component
+						:is="cell.options?.link?.current ? 'a' : 'div'"
 						v-else
+						:href="cell.options?.link?.current"
+						target="_blank"
 						class="table__cell-value _current"
 					>
 						{{ cell.newValue }}
-					</div>
+					</component>
 				</div>
 			</slot>
 		</div>

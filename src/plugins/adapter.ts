@@ -42,11 +42,13 @@ export const useAdapter = <T extends NecessaryAdapterFields<T>>(
 				options: options(item).actions
 			}] as IRow
 			filteredKeys.forEach((key) => {
-				const value = item[key]
+				const value = item.expand?.[key] ?? item[key]
+				const format = cellFormats?.[key] ? cellFormats[key] : (value: unknown) => value
+
 				result.push({
 					key: String(key),
 					options: options(item)[key],
-					newValue: cellFormats[key]?.(item.expand?.[key]) ?? value,
+					newValue: format(value),
 					oldValue: item.changes?.[key] ?? null
 				})
 			})

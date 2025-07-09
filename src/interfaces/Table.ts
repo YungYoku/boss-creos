@@ -6,6 +6,11 @@ export type IHeader = Array<IHeaderItem>
 
 export type ICellOptions = {
 	handler?: () => void
+	link?: {
+		new: string
+		current: string
+		old: string
+	}
 	[key: string]: unknown
 }
 

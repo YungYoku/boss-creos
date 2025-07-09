@@ -7,7 +7,7 @@ interface Methods {
 	time: () => string
 	fullTime: () => string
 	fullDatetime: () => string
-	monthAndDay:() => string
+	monthAndDay: () => string
 }
 
 class Datetime {
