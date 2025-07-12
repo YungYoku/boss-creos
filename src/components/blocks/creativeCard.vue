@@ -75,7 +75,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, PropType, ref } from 'vue'
+import { computed, PropType, ref, Ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.ts'
 import { SelectLive, User } from '@/components/blocks'
@@ -99,10 +99,17 @@ const props = defineProps({
 	}
 })
 
-const geo = ref([])
-
 const auth = useAuthStore()
 const isItMine = computed(() => props.creative?.creator === auth.user.id)
+
+const geo: Ref<Array<string>> = ref([])
+watch(() => [auth.user.baskets, props.creative], () => {
+	const baskets = auth.user.expand?.baskets ?? []
+	const creativeInBasket = baskets.find((basket) => basket.expand?.creative.id === props.creative?.id)
+	if (creativeInBasket) {
+		geo.value = creativeInBasket.geo
+	}
+}, { immediate: true })
 
 const router = useRouter()
 const addToBasket = async () => {
