@@ -5,6 +5,8 @@
 		:cells
 		@reload="loadCreatives"
 	/>
+
+	<span v-if="body.length === 0">Пусто</span>
 </template>
 
 <script lang="ts" setup>

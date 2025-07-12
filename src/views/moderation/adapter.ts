@@ -1,6 +1,6 @@
 import { emptyCreative, ICreative } from '@/interfaces/Creative.ts'
 import { useAdapter as useAdapterRoot } from '@/plugins/adapter.ts'
-import { CellButton } from '@/components/elements'
+import { CellActions } from '@/components/elements'
 import { Http } from '@/plugins'
 import { datetime } from '@/plugins/datetime.ts'
 import locale from '@/locale'
@@ -48,7 +48,7 @@ export const useAdapter = () => {
 		}
 	}
 
-	const cellFormats = {
+	const cellFormats: Record<keyof ICreative, (param: keyof ICreative) => unknown> = {
 		'approach': ({ name }) => name,
 		'creator': ({ username }) => username,
 		'geo': ({ name }) => name,
@@ -63,7 +63,7 @@ export const useAdapter = () => {
 	}
 
 	const cells = {
-		'actions': CellButton
+		'actions': CellActions,
 	}
 
 	const {

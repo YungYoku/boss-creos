@@ -11,7 +11,7 @@
 							v-if="cells[cell.key]"
 							name="cell"
 							:cell="cell"
-							@reload="reload"
+							@action="handleAction"
 						/>
 					</template>
 				</Row>
@@ -43,6 +43,13 @@ defineProps({
 
 const emit = defineEmits(['reload'])
 const reload = () => emit('reload')
+
+const actions = {
+	'reload': reload
+}
+const handleAction = (key: keyof typeof actions) => {
+	actions[key]()
+}
 </script>
 
 <style lang="scss" src="./style.scss"></style>

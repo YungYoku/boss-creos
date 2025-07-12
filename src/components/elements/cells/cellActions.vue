@@ -1,7 +1,16 @@
 <template>
-	<Button @click="onClick(cell)">
-		Принять
-	</Button>
+	<div class="cell cell__actions">
+		<Button
+			variant="positive"
+			@click="onClick(cell)"
+		>
+			Принять
+		</Button>
+
+		<Button variant="destructive">
+			Отклонить
+		</Button>
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -16,8 +25,8 @@ withDefaults(defineProps<Props>(), {
 	cell: () => ({ ...emptyCell }),
 })
 
-const emit = defineEmits(['reload'])
-const reload = () => emit('reload')
+const emit = defineEmits(['action'])
+const reload = () => emit('action', 'reload')
 
 const onClick = async (cell: ICell) => {
 	if (cell.options?.handler) {
@@ -28,5 +37,10 @@ const onClick = async (cell: ICell) => {
 </script>
 
 <style scoped lang="scss">
-
+.cell {
+	&.cell__actions {
+		display: flex;
+		gap: 5px;
+	}
+}
 </style>
