@@ -3,6 +3,7 @@
 		:header
 		:body
 		:cells
+		@reload="loadCreatives"
 	/>
 </template>
 

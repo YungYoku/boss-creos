@@ -5,7 +5,7 @@ export interface IHeaderItem {
 export type IHeader = Array<IHeaderItem>
 
 export type ICellOptions = {
-	handler?: () => void
+	handler?: () => Promise<void>
 	link?: {
 		new: string
 		current: string

@@ -4,7 +4,7 @@ import router from './router'
 import { createPinia } from 'pinia'
 import { datetimePlugin, formatPlugin } from './plugins'
 import './assets/index.css'
-import localize, { locales } from '@/lcoale'
+import localize, { locales } from '@/locale'
 
 const app = createApp(App)
 

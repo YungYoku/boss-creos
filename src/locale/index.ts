@@ -1,14 +1,20 @@
 import type { Ref } from 'vue'
 import { App, ref } from 'vue'
 
+import en from './en/en.json'
+import enTable from './en/table.json'
+
+import ru from './ru/ru.json'
 import ruTable from './ru/table.json'
 
 export const locales = {
 	ru: {
+		...ru,
 		...ruTable
 	},
 	en: {
-		...ruTable
+		...en,
+		...enTable
 	},
 }
 

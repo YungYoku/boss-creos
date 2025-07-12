@@ -1,5 +1,5 @@
 <template>
-	<Button @click="cell.options?.handler?.()">
+	<Button @click="onClick(cell)">
 		Принять
 	</Button>
 </template>
@@ -15,6 +15,16 @@ type Props = {
 withDefaults(defineProps<Props>(), {
 	cell: () => ({ ...emptyCell }),
 })
+
+const emit = defineEmits(['reload'])
+const reload = () => emit('reload')
+
+const onClick = async (cell: ICell) => {
+	if (cell.options?.handler) {
+		await cell.options.handler()
+		reload()
+	}
+}
 </script>
 
 <style scoped lang="scss">

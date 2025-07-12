@@ -3,6 +3,7 @@ import { useAdapter as useAdapterRoot } from '@/plugins/adapter.ts'
 import { CellButton } from '@/components/elements'
 import { Http } from '@/plugins'
 import { datetime } from '@/plugins/datetime.ts'
+import locale from '@/locale'
 
 export const useAdapter = () => {
 	const unnecessaryFieldsForRequest: Array<Partial<keyof ICreative>> = [
@@ -24,6 +25,7 @@ export const useAdapter = () => {
 					await Http
 						.patch<ICreative>(`/collections/creatives/records/${item.id}`, {
 							...item,
+							changes: null,
 							status: 'approved'
 						})
 						.then(res => {
@@ -55,6 +57,9 @@ export const useAdapter = () => {
 		'video': () => 'Ссылка',
 		'created': (created) => datetime.get(created, 'datetime'),
 		'updated': (updated) => datetime.get(updated, 'datetime'),
+		'resize': (resize) => locale.t(resize),
+		'reskin': (reskin) => locale.t(reskin),
+		'watermark': (watermark) => locale.t(watermark),
 	}
 
 	const cells = {
