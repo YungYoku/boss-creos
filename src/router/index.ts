@@ -105,7 +105,7 @@ const routes: Array<RouteRecordRaw> = [
 			},
 			{
 				path: '/shopping-cart',
-				name: 'ShoppingCard',
+				name: 'ShoppingCart',
 				component: () => import('@/views/shoppingCart/shoppingCart.vue'),
 				meta: {
 					rules: ['auth']
@@ -113,7 +113,7 @@ const routes: Array<RouteRecordRaw> = [
 			},
 			{
 				path: '/shopping-cart/edit',
-				name: 'EditShoppingCard',
+				name: 'EditShoppingCart',
 				component: () => import('@/views/editShoppingCart/editShoppingCart.vue'),
 				meta: {
 					rules: ['auth']

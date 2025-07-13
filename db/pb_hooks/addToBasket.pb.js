@@ -13,6 +13,7 @@ routerAdd('POST', '/api/baskets/add', (c) => {
 
 		record.set('creative', creative)
 		record.set('geo', geo)
+		record.set('status', 'created')
 
 		$app.save(record)
 

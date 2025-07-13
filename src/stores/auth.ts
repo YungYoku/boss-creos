@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { emptyUser, IUser } from '@/interfaces/User'
 import { Storage } from '@/plugins'
+import { IBasket } from '@/interfaces/Creative.ts'
 
 export interface State {
 	user: IUser
@@ -51,6 +52,13 @@ export const useAuthStore = defineStore('auth', {
 			Storage.write('user', {
 				role: user.role
 			})
+		},
+
+		setBaskets(baskets: Array<IBasket>) {
+			this.user.baskets = baskets.map(item => item.id)
+			if (this.user.expand) {
+				this.user.expand.baskets = baskets
+			}
 		},
 
 		setEnergy(energy: number) {

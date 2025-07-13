@@ -124,6 +124,7 @@ export interface IBasket {
 	resize: Array<IRatio>
 	reskin: boolean
 	comment: string
+	status: 'created' | 'pending' | 'in-progress' | 'done'
 	expand?: {
 		creative?: ICreative
 		geo?: Array<IGeo>

@@ -81,7 +81,7 @@ import { useAuthStore } from '@/stores/auth.ts'
 import { SelectLive, User } from '@/components/blocks'
 import { Icon, Video } from '@/components/elements'
 import { emptyUser, IUser } from '@/interfaces/User.ts'
-import { ICreative } from '@/interfaces/Creative.ts'
+import { IBasket, ICreative } from '@/interfaces/Creative.ts'
 import { Http } from '@/plugins'
 
 const props = defineProps({
@@ -103,16 +103,42 @@ const auth = useAuthStore()
 const isItMine = computed(() => props.creative?.creator === auth.user.id)
 
 const geo: Ref<Array<string>> = ref([])
-watch(() => [auth.user.baskets, props.creative], () => {
+const basketWithCreative = computed(() => {
 	const baskets = auth.user.expand?.baskets ?? []
-	const creativeInBasket = baskets.find((basket) => basket.expand?.creative.id === props.creative?.id)
-	if (creativeInBasket) {
-		geo.value = creativeInBasket.geo
+	return baskets.find((basket) => basket.expand?.creative.id === props.creative?.id)
+})
+watch(basketWithCreative, () => {
+	if (basketWithCreative.value) {
+		geo.value = basketWithCreative.value.geo
 	}
 }, { immediate: true })
 
 const router = useRouter()
+const updateBasket = async () => {
+	await Http
+		.patch<IBasket>(`/collections/baskets/records/${basketWithCreative.value.id}`, {
+			...basketWithCreative.value,
+			geo: [...geo.value]
+		}, {
+			expand: ['creative', 'creative.preview', 'creative.slot', 'geo']
+		})
+		.then((updatedBasket) => {
+			const baskets = (auth.user.expand?.baskets ?? []).map(basket => {
+				if (basket.id === updatedBasket.id) {
+					return updatedBasket
+				}
+				return basket
+			})
+			auth.setBaskets(baskets)
+			router.push('/shopping-cart')
+		})
+}
 const addToBasket = async () => {
+	if (basketWithCreative.value) {
+		await updateBasket()
+		return
+	}
+
 	await Http.post<IUser>('/baskets/add', {
 		creative: props.creative?.id,
 		geo: [...geo.value]
