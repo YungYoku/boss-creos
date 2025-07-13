@@ -1,5 +1,5 @@
 <template>
-	Корзина
+	Мои заказы
 	<div class="shopping-cart">
 		<span v-if="baskets.length === 0">Пусто</span>
 
@@ -17,6 +17,14 @@
 			<div class="shopping-cart__creative-info">
 				<div class="shopping-cart__creative-name">
 					{{ basket.expand?.creative?.expand?.slot?.name }}
+
+					<div
+						class="shopping-cart__status"
+						:class="{
+							_pending: basket.status === 'pending',
+							_done: basket.status === 'done',
+						}"
+					/>
 				</div>
 
 				<div class="shopping-cart__creative-price">
@@ -37,54 +45,21 @@
 					</span>
 				</div>
 			</div>
-
-			<router-link
-				to="/shopping-cart/edit"
-				class="shopping-cart__creative-edit"
-			>
-				Ред
-			</router-link>
 		</div>
-
-		<Button
-			v-if="totalPrice > 0"
-			class="shopping-cart__pay"
-			@click="pay"
-		>
-			Оплатить ${{ totalPrice }}
-		</Button>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
-import { Button } from '@/components/blocks'
 import { Image } from '@/components/elements'
-import { Http } from '@/plugins'
-import { IUser } from '@/interfaces/User.ts'
 
 const auth = useAuthStore()
 
 const baskets = computed(() => {
 	const baskets = auth.user.expand?.baskets ?? []
-	return baskets.filter(basket => basket.status === 'created')
+	return baskets.filter(basket => basket.status !== 'created')
 })
-
-const totalPrice = computed(() => {
-	return baskets.value.reduce((acc, cur) => {
-		const creative = cur.expand?.creative
-		const geo = cur.geo?.length ?? 0
-		return acc + (creative?.price ?? 0) * geo
-	}, 0)
-})
-
-const pay = async () => {
-	await Http.post<IUser>('/baskets/pay')
-		.then(data => {
-			auth.setUser(data)
-		})
-}
 </script>
 
 <style scoped lang="scss">
@@ -132,7 +107,26 @@ const pay = async () => {
 	}
 
 	&__creative-name {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		gap: 8px;
+
 		font-size: 14px;
+	}
+
+	&__status {
+		width: 5px;
+		height: 5px;
+		border-radius: 50%;
+
+		&._pending {
+			background: yellow;
+		}
+
+		&._done {
+			background: green;
+		}
 	}
 
 	&__creative-price,
@@ -143,27 +137,6 @@ const pay = async () => {
 
 	&__creative-geo-item {
 		text-transform: uppercase;
-	}
-
-	&__creative-edit {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-
-		width: 84px;
-		height: 30px;
-		margin-left: auto;
-
-		font-size: 11px;
-		color: #9297A0;
-
-		background: transparent;
-		border: 1px solid #FFFFFF1A;
-		border-radius: 8px;
-	}
-
-	&__pay {
-		margin: 0 auto;
 	}
 }
 </style>

@@ -97,7 +97,11 @@ interface Item {
 
 const value = defineModel<string | Array<string>>({
 	type: [String, Array],
-	default: ''
+	default: '',
+	validator: val => {
+		console.log(val)
+		return true
+	}
 })
 
 const search = defineModel<string>('search', {
@@ -174,7 +178,11 @@ const chooseValue = (item: Item) => {
 			value.value.push(item.id)
 		}
 	} else {
-		value.value = item.id
+		if (value.value === item.id) {
+			value.value = ''
+		} else {
+			value.value = item.id
+		}
 	}
 }
 

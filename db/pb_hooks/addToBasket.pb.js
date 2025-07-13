@@ -6,7 +6,7 @@ routerAdd('POST', '/api/baskets/add', (c) => {
 	const creative = data.creative
 	const geo = data.geo
 
-	const createShoppingCard = () => {
+	const createShoppingCart = () => {
 		const collection = $app.findCollectionByNameOrId('baskets')
 
 		const record = new Record(collection)
@@ -25,8 +25,8 @@ routerAdd('POST', '/api/baskets/add', (c) => {
 		$app.save(user)
 	}
 
-	const shoppingCardId = createShoppingCard()
-	updateUserInfo(shoppingCardId)
+	const shoppingCartId = createShoppingCart()
+	updateUserInfo(shoppingCartId)
 
 	$app.expandRecord(user, ['baskets', 'baskets.creative', 'baskets.creative.preview', 'baskets.creative.slot', 'baskets.creative', 'baskets.geo'], null)
 

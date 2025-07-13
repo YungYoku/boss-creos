@@ -1,4 +1,5 @@
 <template>
+	Корзина - редактирование
 	<div class="edit-shopping-cart">
 		<span v-if="user.user.baskets.length === 0">Пусто</span>
 

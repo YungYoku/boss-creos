@@ -120,6 +120,14 @@ const routes: Array<RouteRecordRaw> = [
 				}
 			},
 			{
+				path: '/bought',
+				name: 'Bought',
+				component: () => import('@/views/bought/bought.vue'),
+				meta: {
+					rules: ['auth']
+				}
+			},
+			{
 				path: '/users/:id',
 				name: 'User',
 				component: () => import('@/views/user/user.vue'),

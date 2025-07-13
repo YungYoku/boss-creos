@@ -52,7 +52,9 @@ const value = defineModel<boolean>({
 })
 
 const toggle = () => {
-	value.value = !value.value
+	if (value.value !== null) {
+		value.value = !value.value
+	}
 }
 </script>
 
