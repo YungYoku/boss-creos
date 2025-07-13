@@ -97,11 +97,7 @@ interface Item {
 
 const value = defineModel<string | Array<string>>({
 	type: [String, Array],
-	default: '',
-	validator: val => {
-		console.log(val)
-		return true
-	}
+	default: ''
 })
 
 const search = defineModel<string>('search', {

@@ -117,7 +117,7 @@ const loadCreatives = async () => {
 	let filter = ''
 	let encodedFilter = ''
 
-	if (form.geo.value) filters.push(`geo='${form.geo.value}'`)
+	if (form.geo.value) filters.push(`unavailableGeo!~'${form.geo.value}'`)
 	if (form.slot.value) filters.push(`slot='${form.slot.value}'`)
 	if (form.approach.value) filters.push(`approach='${form.approach.value}'`)
 	if (form.ratio.value) filters.push(`ratio='${form.ratio.value}'`)

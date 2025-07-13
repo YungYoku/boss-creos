@@ -38,6 +38,7 @@ interface Props {
 	label?: string,
 	api: string,
 	filterFields?: Array<string>,
+	exclude?: Array<string>,
 	multiple?: boolean
 }
 
@@ -48,6 +49,7 @@ const props = withDefaults(defineProps<Props>(), {
 	label: 'Значение',
 	api: '',
 	filterFields: () => (['id', 'name']),
+	filter: [],
 	multiple: false
 })
 
@@ -64,6 +66,18 @@ const value = computed<Array<string> | string>({
 		}
 	}
 })
+
+const getExcludedItems = () => {
+	let result = ''
+	if (props.exclude) {
+		props.exclude
+			.forEach(item => {
+				result += `id!='${item}' && `
+			})
+		result = result.slice(0, result.length - 3).trim()
+	}
+	return result
+}
 
 const getPayload = (entity: string | Array<string>, isIncluded: boolean = false) => {
 	const payload: {
@@ -89,18 +103,23 @@ const getPayload = (entity: string | Array<string>, isIncluded: boolean = false)
 		payload.sort = 'name'
 		payload.filter = '('
 
-		entity.forEach(item => {
-			if (isIncluded) payload.filter += `id='${item}' || `
-			else {
-				props.filterFields.forEach((field: string) => {
-					const value = item ?? null
-					if (value) payload.filter += `${field}${sign}'${value.toLowerCase()}' || `
-				})
-			}
-		})
+		entity
+			.filter(item => !(props.exclude ?? []).includes(item))
+			.forEach(item => {
+				if (isIncluded) payload.filter += `id='${item}' || `
+				else {
+					props.filterFields.forEach((field: string) => {
+						const value = item ?? null
+						if (value) payload.filter += `${field}${sign}'${value.toLowerCase()}' || `
+					})
+				}
+			})
+
 
 		payload.filter = payload.filter.slice(0, payload.filter.length - 3).trim()
-		payload.filter += ')'
+		if (payload.filter.length > 0) {
+			payload.filter += ')'
+		}
 	}
 
 	if (Object.keys(payload).length > 0) return payload
@@ -114,7 +133,9 @@ const loadItems = async (include?: string | Array<string>) => {
 
 	const loadDefaultItems = async () => {
 		if (search.value.length === 0) {
-			await Http.get<Items>(`/collections/${props.api}/records`)
+			await Http.get<Items>(`/collections/${props.api}/records`, {
+				filter: getExcludedItems()
+			})
 				.then(response => {
 					_defaultItems = response.items
 				})
@@ -155,5 +176,5 @@ const handleContextChange = () => {
 	}
 }
 
-watch(value, handleContextChange, { immediate: true })
+watch(() => [value.value, props.exclude], handleContextChange, { immediate: true })
 </script>

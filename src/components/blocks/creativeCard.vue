@@ -42,6 +42,7 @@
 			label="Указать гео"
 			api="geo"
 			multiple
+			:exclude="excludeGeo"
 		/>
 
 		<div class="creative-card__info">
@@ -99,6 +100,8 @@ const props = defineProps({
 	}
 })
 
+const excludeGeo = computed(() => props.creative?.unavailableGeo ?? [])
+
 const auth = useAuthStore()
 const isItMine = computed(() => props.creative?.creator === auth.user.id)
 
@@ -108,7 +111,7 @@ const basketWithCreative = computed(() => {
 	return baskets.find((basket) => basket.expand?.creative.id === props.creative?.id)
 })
 watch(basketWithCreative, () => {
-	if (basketWithCreative.value) {
+	if (basketWithCreative.value && basketWithCreative.value.status === 'created') {
 		geo.value = basketWithCreative.value.geo
 	}
 }, { immediate: true })
