@@ -68,15 +68,22 @@ const value = computed<Array<string> | string>({
 })
 
 const getExcludedItems = () => {
-	let result = ''
 	if (props.exclude) {
+		let result = '('
 		props.exclude
 			.forEach(item => {
 				result += `id!='${item}' && `
 			})
 		result = result.slice(0, result.length - 3).trim()
+		if (result) {
+			result += ')'
+			return encodeURIComponent(result)
+		}
+
+		return ''
 	}
-	return result
+
+	return ''
 }
 
 const getPayload = (entity: string | Array<string>, isIncluded: boolean = false) => {

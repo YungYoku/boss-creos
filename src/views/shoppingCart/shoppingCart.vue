@@ -2,9 +2,11 @@
 	Корзина
 	<div class="shopping-cart">
 		<span v-if="baskets.length === 0">Пусто</span>
-		<span v-else>
-			Ваш баланс: {{ auth.user.balance }}$
-		</span>
+		<div v-else>
+			<span>Ваш баланс: ${{ auth.user.balance }}</span>
+			<br>
+			<span>Стоимость ${{ totalPrice }}</span>
+		</div>
 
 		<div
 			v-for="basket in baskets"
@@ -54,7 +56,7 @@
 			class="shopping-cart__pay"
 			@click="pay"
 		>
-			Оплатить ${{ totalPrice }}
+			Оплатить
 		</Button>
 	</div>
 </template>
@@ -66,6 +68,8 @@ import { Button } from '@/components/blocks'
 import { Image } from '@/components/elements'
 import { Http } from '@/plugins'
 import { IUser } from '@/interfaces/User.ts'
+import { useToast } from '@/stores/toast.ts'
+import { useRouter } from 'vue-router'
 
 const auth = useAuthStore()
 
@@ -82,11 +86,18 @@ const totalPrice = computed(() => {
 	}, 0)
 })
 
+const toast = useToast()
+const router = useRouter()
 const pay = async () => {
-	await Http.post<IUser>('/baskets/pay')
-		.then(data => {
-			auth.setUser(data)
-		})
+	if (auth.user.balance < totalPrice.value) {
+		toast.set('Недостаточно средств!')
+	} else {
+		await Http.post<IUser>('/baskets/pay')
+			.then(data => {
+				auth.setUser(data)
+				router.push('/bought')
+			})
+	}
 }
 </script>
 

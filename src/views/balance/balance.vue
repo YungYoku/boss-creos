@@ -1,7 +1,7 @@
 <template>
 	Пополнение баланса
 	<div class="balance">
-		Ваш баланс: {{ auth.user.balance }}$
+		Ваш баланс: ${{ auth.user.balance }}
 		<Button
 			class="shopping-cart__pay"
 			@click="pay"

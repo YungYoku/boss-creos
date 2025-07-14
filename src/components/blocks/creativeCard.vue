@@ -108,10 +108,15 @@ const isItMine = computed(() => props.creative?.creator === auth.user.id)
 const geo: Ref<Array<string>> = ref([])
 const basketWithCreative = computed(() => {
 	const baskets = auth.user.expand?.baskets ?? []
-	return baskets.find((basket) => basket.expand?.creative.id === props.creative?.id)
+	const basket = baskets.find((basket) => basket.expand?.creative.id === props.creative?.id)
+	if (basket && basket.status === 'created') {
+		return basket
+	}
+
+	return null
 })
 watch(basketWithCreative, () => {
-	if (basketWithCreative.value && basketWithCreative.value.status === 'created') {
+	if (basketWithCreative.value) {
 		geo.value = basketWithCreative.value.geo
 	}
 }, { immediate: true })
