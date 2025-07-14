@@ -144,6 +144,14 @@ const routes: Array<RouteRecordRaw> = [
 				}
 			},
 			{
+				path: '/balance',
+				name: 'Balance',
+				component: () => import('@/views/balance/balance.vue'),
+				meta: {
+					rules: ['auth']
+				}
+			},
+			{
 				path: '/shop',
 				name: 'Shop',
 				component: () => import('@/views/shop/shop.vue'),

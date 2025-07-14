@@ -2,6 +2,9 @@
 	Корзина
 	<div class="shopping-cart">
 		<span v-if="baskets.length === 0">Пусто</span>
+		<span v-else>
+			Ваш баланс: {{ auth.user.balance }}$
+		</span>
 
 		<div
 			v-for="basket in baskets"

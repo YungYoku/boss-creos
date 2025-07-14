@@ -25,6 +25,7 @@ export interface IUser {
 	notifications: Array<string>
 	baskets: Array<string>
 	telegram: string
+	balance: number
 	expand?: {
 		referral_code?: IReferralCode
 		favorite?: Array<IProject>
@@ -60,6 +61,7 @@ export const emptyUser: IUser = {
 	notifications: [],
 	baskets: [],
 	telegram: '',
+	balance: 0
 }
 
 export interface IUsers {

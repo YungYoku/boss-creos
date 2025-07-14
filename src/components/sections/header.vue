@@ -63,6 +63,11 @@ const nav = [
 		to: '/designers',
 		can: auth.isBuyer || auth.isGuest
 	},
+	{
+		text: 'Баланс',
+		to: '/balance',
+		can: auth.isBuyer || auth.isDesigner
+	},
 	/*
 	{
 		text: 'Биржа',
