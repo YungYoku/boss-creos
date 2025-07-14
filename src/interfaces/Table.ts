@@ -9,7 +9,6 @@ export type ICellOptions = {
 	link?: {
 		new: string
 		current: string
-		old: string
 	}
 	[key: string]: unknown
 }
@@ -17,14 +16,13 @@ export type ICellOptions = {
 export interface ICell {
 	key: string
 	newValue: unknown
-	oldValue?: unknown
+	currentValue?: unknown
 	options?: ICellOptions
 }
 
 export const emptyCell: ICell = {
 	key: '',
 	newValue: '',
-	oldValue: '',
 	options: {},
 }
 

@@ -25,6 +25,7 @@ export const useAdapter = () => {
 					await Http
 						.patch<ICreative>(`/collections/creatives/records/${item.id}`, {
 							...item,
+							...item.changes,
 							changes: null,
 							status: 'approved'
 						})

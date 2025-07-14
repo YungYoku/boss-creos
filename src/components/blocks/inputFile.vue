@@ -17,6 +17,7 @@
 				<Input
 					:disabled="loading"
 					:error
+					:accept
 					type="file"
 					cursor="pointer"
 					transparent
@@ -35,6 +36,7 @@
 			<Input
 				:disabled="loading"
 				:error
+				:accept
 				type="file"
 				cursor="pointer"
 				:label
@@ -57,13 +59,15 @@ interface Props {
 	loading?: boolean
 	compact?: boolean
 	label?: string
+	accept?: string
 }
 
 withDefaults(defineProps<Props>(), {
 	error: null,
 	loading: false,
 	compact: false,
-	label: ''
+	label: '',
+	accept: ''
 })
 
 

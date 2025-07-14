@@ -14,7 +14,7 @@
 				:cell="cell"
 			>
 				<div class="table__content">
-					<template v-if="cell.oldValue != null">
+					<template v-if="cell.newValue != null">
 						<component
 							:is="cell.options?.link?.new ? 'a' : 'div'"
 							:href="cell.options?.link?.new"
@@ -25,12 +25,12 @@
 						</component>
 
 						<component
-							:is="cell.options?.link?.old ? 'a' : 'div'"
-							:href="cell.options?.link?.old"
+							:is="cell.options?.link?.current ? 'a' : 'div'"
+							:href="cell.options?.link?.current"
 							target="_blank"
 							class="table__cell-value _old"
 						>
-							{{ cell.oldValue }}
+							{{ cell.currentValue }}
 						</component>
 					</template>
 
@@ -41,7 +41,7 @@
 						target="_blank"
 						class="table__cell-value _current"
 					>
-						{{ cell.newValue }}
+						{{ cell.currentValue }}
 					</component>
 				</div>
 			</slot>

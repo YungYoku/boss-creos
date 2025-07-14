@@ -60,6 +60,7 @@
 							v-model="creative.preview.value"
 							:disabled="loading"
 							:error="creative.preview.error"
+							accept=".gif,.jpg,.jpeg,.png,.webp"
 							label="Обложка"
 						/>
 
@@ -109,6 +110,7 @@
 							v-model="creative.video.value"
 							:disabled="loading"
 							:error="creative.video.error"
+							accept=".mp4,.avi,.mov,.3gp"
 							label="Загрузите крео"
 						/>
 					</Grid>

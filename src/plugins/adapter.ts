@@ -48,8 +48,8 @@ export const useAdapter = <T extends NecessaryAdapterFields<T>>(
 				result.push({
 					key: String(key),
 					options: options(item)[key],
-					newValue: format(value),
-					oldValue: item.changes?.[key] ?? null
+					newValue: item.changes?.[key] ?? null,
+					currentValue: format(value)
 				})
 			})
 			return result

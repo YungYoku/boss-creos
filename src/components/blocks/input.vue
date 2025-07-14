@@ -37,6 +37,7 @@
 					}"
 					:disabled
 					:type
+					:accept
 					autocomplete="off"
 					@input="onInput"
 				>
@@ -84,6 +85,7 @@ interface Props {
 	clearable?: boolean,
 	variant?: 'default' | 'plain'
 	transparent?: boolean
+	accept?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -97,7 +99,8 @@ const props = withDefaults(defineProps<Props>(), {
 	cursor: 'text',
 	clearable: true,
 	variant: 'default',
-	transparent: false
+	transparent: false,
+	accept: ''
 })
 
 const value = defineModel<string | number>({

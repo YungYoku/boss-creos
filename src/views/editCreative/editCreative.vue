@@ -1,130 +1,249 @@
 <template>
 	<Grid
-		class="creative"
 		vertical
 		:columns="1"
 		gap="l"
+		class="new-creative"
 	>
-		<Grid :columns="['430px', 1]">
-			<CreativeCard
-				:creative="creative"
-				for-sale
-			/>
+		<Island>
+			<Grid vertical>
+				<Text
+					size="m"
+					:loading="loading"
+					class="new-creative__title"
+				>
+					Добавить креатив
+				</Text>
 
-			<div class="creative__info">
-				<div class="creative__name">
-					{{ creative.expand?.slot?.name }}
-				</div>
+				<Grid :columns="2">
+					<Grid vertical>
+						<Input
+							v-model="creative.price.value"
+							:disabled="loading"
+							:error="creative.price.error"
+							label="Цена"
+						/>
 
-				<div class="creative__info-item">
-					Creo ID: {{ creative.id }}
-				</div>
+						<SelectLive
+							v-model="creative.geo.value"
+							:disabled="loading"
+							:error="creative.geo.error"
+							label="Гео"
+							api="geo"
+						/>
 
-				<div class="creative__info-item">
-					Geo: {{ creative.expand?.geo?.name }}
-				</div>
+						<SelectLive
+							v-model="creative.slot.value"
+							:disabled="loading"
+							:error="creative.slot.error"
+							label="Слот"
+							api="slots"
+						/>
 
-				<div class="creative__info-item">
-					Size: {{ creative.ratio }}
-				</div>
+						<Select
+							v-model="creative.type.value"
+							:disabled="loading"
+							:error="creative.type.error"
+							:items="creativeTypeItems"
+							:clearable="false"
+							label="Вид крео"
+						/>
 
-				<div class="creative__info-item">
-					Resize: {{ creative.resize ? 'Делаю' : 'Не делаю' }}
-				</div>
+						<Switcher
+							v-model="creative.watermark.value"
+							:disabled="loading"
+							:error="creative.watermark.error"
+							label="Водяной знак"
+						/>
 
-				<div class="creative__info-item">
-					Reskin: {{ creative.reskin ? 'Делаю' : 'Не делаю' }}
-				</div>
+						<InputFile
+							v-model="creative.preview.value"
+							:disabled="loading"
+							:error="creative.preview.error"
+							accept=".gif,.jpg,.jpeg,.png,.webp"
+							label="Обложка"
+						/>
 
-				<div class="creative__info-item">
-					Подход: {{ creative.expand?.approach?.name }}
-				</div>
+						<SelectLive
+							v-model="creative.unavailableGeo.value"
+							:disabled="loading"
+							multiple
+							:error="creative.unavailableGeo.error"
+							label="Недоступные гео"
+							api="geo"
+						/>
+					</Grid>
 
-				<div class="creative__separator"/>
+					<Grid vertical>
+						<Select
+							v-model="creative.ratio.value"
+							:disabled="loading"
+							:error="creative.ratio.error"
+							:items="ratioItems"
+							label="Размер"
+						/>
 
-				<div class="creative__description">
-					<span class="creative__description-title">
-						Описание:
-					</span>
-					{{ creative.description }}
-				</div>
-			</div>
-		</Grid>
+						<Switcher
+							v-model="creative.reskin.value"
+							:disabled="loading"
+							:error="creative.reskin.error"
+							label="Рескин"
+						/>
+
+						<Input
+							v-if="creative.reskin.value"
+							v-model="creative.reskinPrice.value"
+							:disabled="loading"
+							:error="creative.reskinPrice.error"
+							label="Цена рескина"
+						/>
+
+						<SelectLive
+							v-model="creative.approach.value"
+							:disabled="loading"
+							:error="creative.approach.error"
+							label="Подход"
+							api="approaches"
+						/>
+
+						<InputFile
+							v-model="creative.video.value"
+							:disabled="loading"
+							:error="creative.video.error"
+							accept=".mp4,.avi,.mov,.3gp"
+							label="Загрузите крео"
+						/>
+					</Grid>
+				</Grid>
+
+				<Grid>
+					<Switcher
+						v-model="creative.resize.value"
+						:disabled="loading"
+						:error="creative.resize.error"
+						label="Ресайз"
+					/>
+
+					<template v-if="creative.resize.value">
+						<template
+							v-for="item in ratioItems"
+							:key="item.id"
+						>
+							<Input
+								v-if="creative.resizePrices.value?.[item.name]"
+								v-model="creative.resizePrices.value[item.name].value"
+								:disabled="loading"
+								:error="creative.resizePrices.value[item.name]?.error"
+								:label="`Цена ресайза ${item.name}`"
+								type="number"
+							/>
+						</template>
+					</template>
+				</Grid>
+
+				<Textarea
+					v-model="creative.description.value"
+					:disabled="loading"
+					:error="creative.description.error"
+					label="Описание"
+				/>
+
+				<Button
+					:disabled="loading"
+					class="new-creative__submit"
+					@click="update"
+				>
+					Отправить на модерацию
+				</Button>
+			</Grid>
+		</Island>
 	</Grid>
 </template>
 
 <script setup lang="ts">
-import { Ref, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useToast } from '@/stores/toast.ts'
 
-import { Grid } from '@/components/structures'
-import { Http } from '@/plugins'
-import { emptyCreative, ICreative } from '@/interfaces/Creative.ts'
-import CreativeCard from '@/components/blocks/creativeCard.vue'
+import { Grid, Island } from '@/components/structures'
+import { Button, Input, InputFile, Select, SelectLive, Switcher, Textarea } from '@/components/blocks'
+import { Form, Http } from '@/plugins'
+import { Text } from '@/components/elements'
+import { creativeTypeItems, emptyCreative, ICreative, ratioItems } from '@/interfaces/Creative.ts'
 
-const creative: Ref<ICreative> = ref({ ...emptyCreative })
-const route = useRoute()
-const { id } = route.params
+const creativeBase = Form<ICreative>({ ...emptyCreative })
+const creative = Form<ICreative>({ ...emptyCreative })
 
-const loading = ref(true)
-const loadProject = async () => {
-	if (!id) return
+const router = useRouter()
+const toast = useToast()
+
+const loadCreative = async () => {
+	const id = router.currentRoute.value.params.id
 
 	await Http
-		.get<ICreative>(`/collections/creatives/records/${id}`, {
-			expand: ['creator', 'preview', 'video', 'slot', 'geo', 'approach']
+		.get<ICreative>(`/collections/creatives/records/${id}`)
+		.then(response => {
+			creativeBase.set(response)
+			creative.set(response)
+		})
+}
+loadCreative()
+
+const getDifferent = () => {
+	const a = creativeBase.get()
+	const b = creative.get()
+
+	const diff = {}
+
+	Object.keys(a).forEach(key => {
+		if (a[key] !== b[key] && key !== 'changes') {
+			diff[key] = b[key]
+		}
+	})
+	
+	return diff
+}
+
+const loading = ref(false)
+const update = async () => {
+	if (JSON.stringify(creativeBase.get()) === JSON.stringify(creative.get())) {
+		toast.set('Никаких изменений не было применено')
+
+		return
+	}
+
+	loading.value = true
+	creative.clearErrors()
+
+	await Http
+		.patch<ICreative>(`/collections/creatives/records/${creativeBase.id.value}`, {
+			...creativeBase.get(),
+			status: 'moderation',
+			changes: getDifferent()
 		})
 		.then(response => {
-			creative.value = response
+			router.push(`/creative/${response.id}`)
 		})
+		.catch(({ data }) => {
+			creative.setErrors(data)
 
-	loading.value = false
+			toast.set('Ошибка при обновлении креатива')
+
+			loading.value = false
+		})
 }
-loadProject()
 </script>
 
 <style scoped lang="scss">
-.creative {
-	padding: 60px 0 0 0;
+.new-creative {
+	max-width: 585px;
 
-	&__name {
-		font-size: 40px;
-		line-height: 1.5;
-		font-weight: 600;
+	&__title {
+		margin: 0 auto 20px auto;
 	}
 
-	&__info {
-		display: flex;
-		flex-direction: column;
-
-		width: 100%;
-		gap: 10px;
-	}
-
-	&__info-item {
-		font-size: 16px;
-		line-height: 1;
-		font-weight: 400;
-	}
-
-	&__separator {
-		width: 60%;
-		height: 1px;
-		margin: 20px 0;
-
-		background: linear-gradient(to right, #ffffff 20%, rgba(255, 255, 255, 0));
-	}
-
-	&__description-title {
-		font-size: 20px;
-		line-height: 1;
-		font-weight: 700;
-	}
-
-	&__description {
-		font-size: 20px;
-		line-height: 1;
-		font-weight: 600;
+	&__submit {
+		margin: 0 auto;
 	}
 }
 </style>
