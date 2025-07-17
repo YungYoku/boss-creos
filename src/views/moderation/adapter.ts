@@ -5,6 +5,9 @@ import { Http } from '@/plugins'
 import { datetime } from '@/plugins/datetime.ts'
 import locale from '@/locale'
 
+type CellFormatParam<K> = ICreative extends { expand: { K: infer T } } ? T : K
+type CellFormats = Record<keyof ICreative, (param: CellFormatParam<keyof ICreative>) => unknown>
+
 export const useAdapter = () => {
 	const unnecessaryFieldsForRequest: Array<Partial<keyof ICreative>> = [
 		'collectionId',
@@ -49,7 +52,7 @@ export const useAdapter = () => {
 		}
 	}
 
-	const cellFormats: Record<keyof ICreative, (param: keyof ICreative) => unknown> = {
+	const cellFormats: CellFormats = {
 		'approach': ({ name }) => name,
 		'creator': ({ username }) => username,
 		'geo': ({ name }) => name,

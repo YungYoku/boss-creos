@@ -5,6 +5,7 @@ interface Query {
 	filter?: string
 	expand?: Array<string>
 	perPage?: number
+	page?: number
 	sort?: string
 }
 

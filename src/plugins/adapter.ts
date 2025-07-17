@@ -1,18 +1,23 @@
 import { ref, Ref } from 'vue'
 import type { ICellOptions, IHeader, IRow, IRows } from '@/interfaces/Table.ts'
 
-type NecessaryAdapterFields<T> = {
-	expand?: Partial<T> | null
+interface BaseAdapterFields<T extends object> {
+	expand?: {
+		[key in keyof T]?: T[key]
+	}
 	changes: Partial<T> | null
-	[key: string]: unknown
 }
+type AdapterItem<T extends object> = T & BaseAdapterFields<T>
 
-type Options<T> = {
+type BaseOptions = {
+	actions?: ICellOptions
+}
+type Options<T> = BaseOptions & {
 	[key in keyof T]?: ICellOptions
 }
 
-export const useAdapter = <T extends NecessaryAdapterFields<T>>(
-	schema: T,
+export const useAdapter = <T extends object>(
+	schema: AdapterItem<T>,
 	unnecessaryFieldsForRequest: Array<Partial<keyof T>>,
 	unnecessaryFieldsForTable: Array<Partial<keyof T>>,
 	options: (item: T) => Options<T>,
@@ -20,7 +25,7 @@ export const useAdapter = <T extends NecessaryAdapterFields<T>>(
 ) => {
 	const keys = Object.keys(schema) as Array<keyof T>
 
-	const fieldsForRequest = keys.filter(field => !unnecessaryFieldsForRequest.includes(field))
+	const fieldsForRequest = keys.filter(field => !unnecessaryFieldsForRequest.includes(field)) as Array<string>
 	const fieldsForTable = keys.filter(field => !unnecessaryFieldsForTable.includes(field))
 
 	const getHeader = (item: T) => {
@@ -31,7 +36,7 @@ export const useAdapter = <T extends NecessaryAdapterFields<T>>(
 		return [{ name: 'actions' }, ...result]
 	}
 
-	const getBody = (items: Array<T>) => {
+	const getBody = (items: Array<AdapterItem<T>>) => {
 		return items.map(item => {
 			const keys = Object.keys(item) as Array<keyof T>
 			const filteredKeys = keys.filter(name => fieldsForTable.includes(name))
@@ -58,7 +63,7 @@ export const useAdapter = <T extends NecessaryAdapterFields<T>>(
 
 	const header: Ref<IHeader> = ref([])
 	const body: Ref<IRows> = ref([])
-	const handleLoadedData = (data: Array<T>) => {
+	const handleLoadedData = (data: Array<AdapterItem<T>>) => {
 		if (data.length > 0) {
 			header.value = getHeader(data[0])
 			body.value = getBody(data)
