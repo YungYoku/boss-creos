@@ -58,9 +58,19 @@ export const useAdapter = () => {
 		'video': () => 'Ссылка',
 		'created': (created) => datetime.get(created, 'datetime'),
 		'updated': (updated) => datetime.get(updated, 'datetime'),
-		'resize': (resize) => locale.t(resize),
-		'reskin': (reskin) => locale.t(reskin),
-		'watermark': (watermark) => locale.t(watermark),
+		'resize': (resize) => resize ? locale.t('true') : locale.t('false'),
+		'reskin': (reskin) => {
+			if (reskin) {
+				return locale.t('true')
+			}
+			return locale.t('false')
+		},
+		'watermark': (watermark) => {
+			if (watermark) {
+				return locale.t('true')
+			}
+			return locale.t('false')
+		},
 	}
 
 	const cells = {

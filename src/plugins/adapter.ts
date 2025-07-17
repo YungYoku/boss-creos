@@ -1,13 +1,22 @@
 import { ref, Ref } from 'vue'
 import type { ICellOptions, IHeader, IRow, IRows } from '@/interfaces/Table.ts'
 
-interface BaseAdapterFields<T extends object> {
-	expand?: {
-		[key in keyof T]?: unknown
-	}
+type GetSpecificExpand<T> = T extends { expand: infer E } ? E : never
+type Item<T> = {
+	expand?: GetSpecificExpand<T>
+}
+
+interface BaseAdapterFields<T extends Item<T>> {
+	expand?: GetSpecificExpand<T>
 	changes: Partial<T> | null
 }
-type AdapterItem<T extends object> = T & BaseAdapterFields<T>
+type AdapterItem<T extends Item<T>> = T & BaseAdapterFields<T>
+
+export type CellValue<I extends Item<I>, K extends keyof I = keyof I> = K extends keyof I['expand'] ? I['expand'][K] : I[K]
+
+export type CellFormats<I extends Item<I>> = {
+	[K in keyof I]?: (param?: CellValue<I, K>) => unknown
+}
 
 type BaseOptions = {
 	actions?: ICellOptions
@@ -16,15 +25,12 @@ type Options<T> = BaseOptions & {
 	[key in keyof T]?: ICellOptions
 }
 
-export type CellValue<I, K extends keyof I = keyof I> = I extends { expand: { K: infer T } } ? T : I[K]
-export type CellFormats<I, K extends keyof I = keyof I> = Partial<Record<K, (param?: CellValue<I, K>) => unknown>>
-
-export const useAdapter = <T extends object>(
+export const useAdapter = <T extends Item<T>>(
 	schema: AdapterItem<T>,
-	unnecessaryFieldsForRequest: Array<Partial<keyof T>>,
-	unnecessaryFieldsForTable: Array<Partial<keyof T>>,
+	unnecessaryFieldsForRequest: Array<keyof T>,
+	unnecessaryFieldsForTable: Array<keyof T>,
 	options: (item: T) => Options<T>,
-	cellFormats: Partial<Record<keyof T, (item?: T[keyof T]) => unknown>>,
+	cellFormats: CellFormats<T>,
 ) => {
 	const keys = Object.keys(schema) as Array<keyof T>
 
