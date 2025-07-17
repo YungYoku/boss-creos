@@ -1,12 +1,9 @@
 import { emptyCreative, ICreative } from '@/interfaces/Creative.ts'
-import { useAdapter as useAdapterRoot } from '@/plugins/adapter.ts'
+import { CellFormats, useAdapter as useAdapterRoot } from '@/plugins/adapter.ts'
 import { CellActions } from '@/components/elements'
 import { Http } from '@/plugins'
 import { datetime } from '@/plugins/datetime.ts'
 import locale from '@/locale'
-
-type CellFormatParam<K> = ICreative extends { expand: { K: infer T } } ? T : K
-type CellFormats = Record<keyof ICreative, (param: CellFormatParam<keyof ICreative>) => unknown>
 
 export const useAdapter = () => {
 	const unnecessaryFieldsForRequest: Array<Partial<keyof ICreative>> = [
@@ -52,7 +49,7 @@ export const useAdapter = () => {
 		}
 	}
 
-	const cellFormats: CellFormats = {
+	const cellFormats: CellFormats<ICreative> = {
 		'approach': ({ name }) => name,
 		'creator': ({ username }) => username,
 		'geo': ({ name }) => name,

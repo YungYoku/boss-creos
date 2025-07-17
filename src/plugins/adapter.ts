@@ -3,7 +3,7 @@ import type { ICellOptions, IHeader, IRow, IRows } from '@/interfaces/Table.ts'
 
 interface BaseAdapterFields<T extends object> {
 	expand?: {
-		[key in keyof T]?: T[key]
+		[key in keyof T]?: unknown
 	}
 	changes: Partial<T> | null
 }
@@ -15,6 +15,9 @@ type BaseOptions = {
 type Options<T> = BaseOptions & {
 	[key in keyof T]?: ICellOptions
 }
+
+export type CellValue<I, K extends keyof I = keyof I> = I extends { expand: { K: infer T } } ? T : I[K]
+export type CellFormats<I, K extends keyof I = keyof I> = Partial<Record<K, (param?: CellValue<I, K>) => unknown>>
 
 export const useAdapter = <T extends object>(
 	schema: AdapterItem<T>,

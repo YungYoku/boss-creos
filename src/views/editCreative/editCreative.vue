@@ -171,6 +171,8 @@ import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
 import { creativeTypeItems, emptyCreative, ICreative, ratioItems } from '@/interfaces/Creative.ts'
 
+type Diff = Partial<ICreative>
+
 const creativeBase = Form<ICreative>({ ...emptyCreative })
 const creative = Form<ICreative>({ ...emptyCreative })
 
@@ -193,7 +195,7 @@ const getDifferent = () => {
 	const a = creativeBase.get()
 	const b = creative.get()
 
-	const diff = {}
+	const diff: Diff = {}
 
 	const keys = Object.keys(a) as Array<keyof typeof a>
 	keys.forEach(key => {
