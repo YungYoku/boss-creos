@@ -195,7 +195,8 @@ const getDifferent = () => {
 
 	const diff = {}
 
-	Object.keys(a).forEach(key => {
+	const keys = Object.keys(a) as Array<keyof typeof a>
+	keys.forEach(key => {
 		if (a[key] !== b[key] && key !== 'changes') {
 			diff[key] = b[key]
 		}

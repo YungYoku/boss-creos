@@ -108,7 +108,7 @@ const isItMine = computed(() => props.creative?.creator === auth.user.id)
 const geo: Ref<Array<string>> = ref([])
 const basketWithCreative = computed(() => {
 	const baskets = auth.user.expand?.baskets ?? []
-	const basket = baskets.find((basket) => basket.expand?.creative.id === props.creative?.id)
+	const basket = baskets.find((basket) => basket.expand?.creative?.id === props.creative?.id)
 	if (basket && basket.status === 'created') {
 		return basket
 	}
@@ -123,6 +123,8 @@ watch(basketWithCreative, () => {
 
 const router = useRouter()
 const updateBasket = async () => {
+	if (!basketWithCreative.value) return
+
 	await Http
 		.patch<IBasket>(`/collections/baskets/records/${basketWithCreative.value.id}`, {
 			...basketWithCreative.value,
