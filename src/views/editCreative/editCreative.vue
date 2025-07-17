@@ -171,8 +171,6 @@ import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
 import { creativeTypeItems, emptyCreative, ICreative, ratioItems } from '@/interfaces/Creative.ts'
 
-type Diff = Partial<ICreative>
-
 const creativeBase = Form<ICreative>({ ...emptyCreative })
 const creative = Form<ICreative>({ ...emptyCreative })
 
@@ -191,20 +189,24 @@ const loadCreative = async () => {
 }
 loadCreative()
 
-const getDifferent = () => {
-	const a = creativeBase.get()
-	const b = creative.get()
+const getChanges = () => {
+	const currentCreative = creativeBase.get()
+	const updatedCreative = creative.get()
 
-	const diff: Diff = {}
+	const changes: ICreative['changes'] = {}
 
-	const keys = Object.keys(a) as Array<keyof typeof a>
+	const readonlyFields: Array<keyof typeof currentCreative> = ['id', 'collectionId', 'collectionName', 'created', 'proposals', 'changes', 'expand']
+	let keys = Object.keys(currentCreative) as Array<keyof typeof currentCreative>
+	keys = keys.filter(key => !readonlyFields.includes(key)) as Array<keyof typeof currentCreative>
 	keys.forEach(key => {
-		if (a[key] !== b[key] && key !== 'changes') {
-			diff[key] = b[key]
+		const currentValue = currentCreative[key]
+		const newValue = updatedCreative[key]
+		if (currentValue !== newValue && newValue != undefined) {
+			changes[key] = newValue
 		}
 	})
 	
-	return diff
+	return changes
 }
 
 const loading = ref(false)
@@ -222,7 +224,7 @@ const update = async () => {
 		.patch<ICreative>(`/collections/creatives/records/${creativeBase.id.value}`, {
 			...creativeBase.get(),
 			status: 'moderation',
-			changes: getDifferent()
+			changes: getChanges()
 		})
 		.then(response => {
 			router.push(`/creative/${response.id}`)

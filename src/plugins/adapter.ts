@@ -8,14 +8,14 @@ type Item<T> = {
 
 interface BaseAdapterFields<T extends Item<T>> {
 	expand?: GetSpecificExpand<T>
-	changes: Partial<T> | null
+	changes?: Partial<T> | null
 }
 type AdapterItem<T extends Item<T>> = T & BaseAdapterFields<T>
 
 export type CellValue<I extends Item<I>, K extends keyof I = keyof I> = K extends keyof I['expand'] ? I['expand'][K] : I[K]
 
 export type CellFormats<I extends Item<I>> = {
-	[K in keyof I]?: (param?: CellValue<I, K>) => unknown
+	[K in keyof I]?: (param: CellValue<I, K>) => unknown
 }
 
 type BaseOptions = {
