@@ -2,10 +2,10 @@ import { ref, Ref } from 'vue'
 import type { ICellOptions, IHeader, IRow, IRows } from '@/interfaces/Table.ts'
 
 type ItemExpand<T> = T extends { expand?: infer E } ? E : never
-type GetExpandedProperty<T, K extends keyof T> = K extends keyof ItemExpand<T>
+type ExpandedProperty<T, K extends keyof T> = K extends keyof ItemExpand<T>
 	? ItemExpand<T>[K]
 	: never
-type GetExpandedOrDirectProperty<T, K extends keyof T> = K extends keyof ItemExpand<T>
+type ExpandedOrDirectProperty<T, K extends keyof T> = K extends keyof ItemExpand<T>
 	? ItemExpand<T>[K]
 	: K extends keyof T
 		? T[K]
@@ -13,14 +13,14 @@ type GetExpandedOrDirectProperty<T, K extends keyof T> = K extends keyof ItemExp
 
 type AdditionalAdapterFields<T> = {
 	expand?: {
-		[key in keyof T]?: GetExpandedProperty<T, key>
+		[key in keyof T]?: ExpandedProperty<T, key>
 	}
 	changes?: Partial<T> | null
 }
 type AdapterItem<T> = T & AdditionalAdapterFields<T>
 
-export type CellFormats<I> = {
-	[K in keyof I]?: (param: GetExpandedOrDirectProperty<I, K>) => unknown
+export type CellFormats<T> = {
+	[K in keyof T]?: (param: ExpandedOrDirectProperty<T, K>) => unknown
 }
 
 type BaseOptions = {
@@ -31,13 +31,13 @@ type Options<T> = BaseOptions & {
 }
 
 export const useAdapter = <T extends AdditionalAdapterFields<T>>(
-	schema: T,
+	elementSchema: T,
 	unnecessaryFieldsForRequest: Array<keyof T>,
 	unnecessaryFieldsForTable: Array<keyof T>,
 	options: (item: T) => Options<T>,
 	cellFormats: CellFormats<T>,
 ) => {
-	const keys = Object.keys(schema) as Array<keyof T>
+	const keys = Object.keys(elementSchema) as Array<keyof T>
 
 	const fieldsForRequest = keys.filter(field => !unnecessaryFieldsForRequest.includes(field)) as Array<string>
 	const fieldsForTable = keys.filter(field => !unnecessaryFieldsForTable.includes(field))
@@ -48,6 +48,13 @@ export const useAdapter = <T extends AdditionalAdapterFields<T>>(
 		const result = filteredKeys.map(name => ({ name: String(name) }))
 
 		return [{ name: 'actions' }, ...result]
+	}
+	
+	const getValue = (item: AdapterItem<T>, key: keyof AdapterItem<T>) => {
+		if (item.expand?.[key]) {
+			return item.expand?.[key] as ExpandedOrDirectProperty<T, keyof T>
+		}
+		return item[key] as ExpandedOrDirectProperty<T, keyof T>
 	}
 
 	const getBody = (items: Array<AdapterItem<T>>) => {
@@ -61,7 +68,7 @@ export const useAdapter = <T extends AdditionalAdapterFields<T>>(
 				options: options(item).actions
 			}] as IRow
 			filteredKeys.forEach((key) => {
-				const value = item.expand?.[key] ?? item[key]
+				const value = getValue(item, key)
 				const format = cellFormats?.[key] ? cellFormats[key] : <V>(value: V) => value
 
 				result.push({
