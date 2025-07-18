@@ -194,7 +194,7 @@ const getChanges = () => {
 	const currentCreative = creativeBase.get()
 	const updatedCreative = creative.get()
 
-	const changes: ICreative['changes'] = {}
+	const changes: Exclude<ICreative['changes'], null> = {}
 
 	const readonlyFields: Array<keyof ICreative> = ['id', 'collectionId', 'collectionName', 'created', 'proposals', 'changes', 'expand'] as const
 	const currentCreativeKeys = Object.keys(currentCreative) as Array<keyof ICreative>

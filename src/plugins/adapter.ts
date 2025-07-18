@@ -62,7 +62,7 @@ export const useAdapter = <T extends AdditionalAdapterFields<T>>(
 			}] as IRow
 			filteredKeys.forEach((key) => {
 				const value = item.expand?.[key] ?? item[key]
-				const format = cellFormats?.[key] ? cellFormats[key] : (value: unknown) => value
+				const format = cellFormats?.[key] ? cellFormats[key] : <V>(value: V) => value
 
 				result.push({
 					key: String(key),
