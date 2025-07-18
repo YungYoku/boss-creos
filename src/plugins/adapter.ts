@@ -30,20 +30,20 @@ type Options<T> = BaseOptions & {
 	[key in keyof T]?: ICellOptions
 }
 
-export const useAdapter = <T extends AdditionalAdapterFields<T>>(
+export const useAdapter = <T extends AdditionalAdapterFields<T>, Keys extends keyof T = keyof T>(
 	elementSchema: T,
-	unnecessaryFieldsForRequest: Array<keyof T>,
-	unnecessaryFieldsForTable: Array<keyof T>,
+	unnecessaryFieldsForRequest: Array<Keys>,
+	unnecessaryFieldsForTable: Array<Keys>,
 	options: (item: T) => Options<T>,
 	cellFormats: CellFormats<T>,
 ) => {
-	const keys = Object.keys(elementSchema) as Array<keyof T>
+	const keys = Object.keys(elementSchema) as Array<Keys>
 
 	const fieldsForRequest = keys.filter(field => !unnecessaryFieldsForRequest.includes(field)) as Array<string>
 	const fieldsForTable = keys.filter(field => !unnecessaryFieldsForTable.includes(field))
 
 	const getHeader = (item: T) => {
-		const keys = Object.keys(item) as Array<keyof T>
+		const keys = Object.keys(item) as Array<Keys>
 		const filteredKeys = keys.filter(name => fieldsForTable.includes(name))
 		const result = filteredKeys.map(name => ({ name: String(name) }))
 
@@ -52,14 +52,14 @@ export const useAdapter = <T extends AdditionalAdapterFields<T>>(
 	
 	const getValue = (item: AdapterItem<T>, key: keyof AdapterItem<T>) => {
 		if (item.expand?.[key]) {
-			return item.expand?.[key] as ExpandedOrDirectProperty<T, keyof T>
+			return item.expand?.[key] as ExpandedOrDirectProperty<T, Keys>
 		}
-		return item[key] as ExpandedOrDirectProperty<T, keyof T>
+		return item[key] as ExpandedOrDirectProperty<T, Keys>
 	}
 
 	const getBody = (items: Array<AdapterItem<T>>) => {
 		return items.map(item => {
-			const keys = Object.keys(item) as Array<keyof AdapterItem<T>>
+			const keys = Object.keys(item) as Array<Keys>
 			const filteredKeys = keys.filter(name => fieldsForTable.includes(name))
 
 			const result = [{
