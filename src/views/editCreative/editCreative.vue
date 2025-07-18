@@ -189,16 +189,17 @@ const loadCreative = async () => {
 }
 loadCreative()
 
+type ReadOnlyCreativeFields = 'id' | 'collectionId' | 'collectionName' | 'created' | 'proposals' | 'changes' | 'expand'
 const getChanges = () => {
 	const currentCreative = creativeBase.get()
 	const updatedCreative = creative.get()
 
 	const changes: ICreative['changes'] = {}
 
-	const readonlyFields: Array<keyof typeof currentCreative> = ['id', 'collectionId', 'collectionName', 'created', 'proposals', 'changes', 'expand']
-	let keys = Object.keys(currentCreative) as Array<keyof typeof currentCreative>
-	keys = keys.filter(key => !readonlyFields.includes(key)) as Array<keyof typeof currentCreative>
-	keys.forEach(key => {
+	const readonlyFields: Array<keyof ICreative> = ['id', 'collectionId', 'collectionName', 'created', 'proposals', 'changes', 'expand'] as const
+	const currentCreativeKeys = Object.keys(currentCreative) as Array<keyof ICreative>
+	const filteredKeys = currentCreativeKeys.filter(key => !readonlyFields.includes(key)) as Array<keyof Omit<ICreative, ReadOnlyCreativeFields>>
+	filteredKeys.forEach(key => {
 		const currentValue = currentCreative[key]
 		const newValue = updatedCreative[key]
 		if (currentValue !== newValue && newValue != undefined) {
