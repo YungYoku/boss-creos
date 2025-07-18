@@ -1,21 +1,26 @@
 import { ref, Ref } from 'vue'
 import type { ICellOptions, IHeader, IRow, IRows } from '@/interfaces/Table.ts'
 
-type GetSpecificExpand<T> = T extends { expand: infer E } ? E : never
-type Item<T> = {
-	expand?: GetSpecificExpand<T>
-}
+type ItemExpand<T> = T extends { expand?: infer E } ? E : never
+type GetExpandedProperty<T, K extends keyof T> = K extends keyof ItemExpand<T>
+	? ItemExpand<T>[K]
+	: never
+type GetExpandedOrDirectProperty<T, K extends keyof T> = K extends keyof ItemExpand<T>
+	? ItemExpand<T>[K]
+	: K extends keyof T
+		? T[K]
+		: never
 
-interface BaseAdapterFields<T extends Item<T>> {
-	expand?: GetSpecificExpand<T>
+type AdditionalAdapterFields<T> = {
+	expand?: {
+		[key in keyof T]?: GetExpandedProperty<T, key>
+	}
 	changes?: Partial<T> | null
 }
-type AdapterItem<T extends Item<T>> = T & BaseAdapterFields<T>
+type AdapterItem<T> = T & AdditionalAdapterFields<T>
 
-export type CellValue<I extends Item<I>, K extends keyof I = keyof I> = K extends keyof I['expand'] ? I['expand'][K] : I[K]
-
-export type CellFormats<I extends Item<I>> = {
-	[K in keyof I]?: (param: CellValue<I, K>) => unknown
+export type CellFormats<I> = {
+	[K in keyof I]?: (param: GetExpandedOrDirectProperty<I, K>) => unknown
 }
 
 type BaseOptions = {
@@ -25,8 +30,8 @@ type Options<T> = BaseOptions & {
 	[key in keyof T]?: ICellOptions
 }
 
-export const useAdapter = <T extends Item<T>>(
-	schema: AdapterItem<T>,
+export const useAdapter = <T extends AdditionalAdapterFields<T>>(
+	schema: T,
 	unnecessaryFieldsForRequest: Array<keyof T>,
 	unnecessaryFieldsForTable: Array<keyof T>,
 	options: (item: T) => Options<T>,
@@ -47,7 +52,7 @@ export const useAdapter = <T extends Item<T>>(
 
 	const getBody = (items: Array<AdapterItem<T>>) => {
 		return items.map(item => {
-			const keys = Object.keys(item) as Array<keyof T>
+			const keys = Object.keys(item) as Array<keyof AdapterItem<T>>
 			const filteredKeys = keys.filter(name => fieldsForTable.includes(name))
 
 			const result = [{

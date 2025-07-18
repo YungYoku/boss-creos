@@ -50,10 +50,10 @@ export const useAdapter = () => {
 	}
 
 	const cellFormats: CellFormats<ICreative> = {
-		'approach': ({ name }) => name,
-		'creator': ({ username }) => username,
-		'geo': ({ name }) => name,
-		'slot': ({ name }) => name,
+		'approach': (approach) => approach?.name ?? null,
+		'creator': (creator) => creator?.username ?? null,
+		'geo': (geo) => geo?.name ?? null,
+		'slot': (slot) => slot?.name ?? null,
 		'preview': () => 'Ссылка',
 		'video': () => 'Ссылка',
 		'created': (created) => datetime.get(created, 'datetime'),
