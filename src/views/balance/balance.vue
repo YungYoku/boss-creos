@@ -1,36 +1,79 @@
 <template>
-	Пополнение баланса
-	<div class="balance">
+	Баланс
+	<div class="balance-top-up">
 		Ваш баланс: ${{ auth.user.balance }}
+
+		<Input
+			v-model="topUpValue"
+			label="Введите сумму"
+			type="number"
+		/>
 		<Button
 			class="shopping-cart__pay"
-			@click="pay"
+			@click="topUp"
 		>
 			Пополнить
+		</Button>
+	</div>
+	<div class="balance-pay-out">
+		Ваш баланс: ${{ auth.user.balance }}
+
+		<Input
+			v-model="payOutValue"
+			label="Введите сумму"
+			type="number"
+		/>
+		<Button
+			class="shopping-cart__pay"
+			@click="payOut"
+		>
+			Вывести
 		</Button>
 	</div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 import { Button } from '@/components/blocks'
 import { Http } from '@/plugins'
 import { IUser } from '@/interfaces/User.ts'
+import { Input } from '@/components/blocks'
 
 const auth = useAuthStore()
 
-const pay = async () => {
+const topUpValue = ref(0)
+const topUp = async () => {
+	if (typeof topUpValue.value !== 'number' || topUpValue.value === 0) return
+
 	await Http.patch<IUser>(`/collections/users/records/${auth.user.id}`, {
 		...auth.user,
-		balance: auth.user.balance + 50
+		balance: auth.user.balance + topUpValue.value
 	}).then(data => {
 		auth.setUser(data)
+		topUpValue.value = 0
+	})
+}
+
+const payOutValue = ref(0)
+const payOut = async () => {
+	if (typeof payOutValue.value !== 'number' || payOutValue.value === 0) return
+
+	if (payOutValue.value > auth.user.balance) return
+
+	await Http.patch<IUser>(`/collections/users/records/${auth.user.id}`, {
+		...auth.user,
+		balance: auth.user.balance - payOutValue.value
+	}).then(data => {
+		auth.setUser(data)
+		payOutValue.value = 0
 	})
 }
 </script>
 
 <style scoped lang="scss">
-.balance {
+.balance-top-up,
+.balance-pay-out {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
