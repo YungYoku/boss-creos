@@ -94,6 +94,8 @@ const isAuthPage = computed(() => route.name === 'Login' || route.name === 'Regi
     min-height: 48px;
 	margin: 0 auto;
 	padding: 5px 0;
+	position: relative;
+	z-index: 2;
 
 	&__nav {
 		display: flex;

@@ -11,6 +11,8 @@ const EmptyProjectCard = defineAsyncComponent(() => import('./emptyProjectCard.v
 const EmptyCreativeCard = defineAsyncComponent(() => import('./emptyCreativeCard.vue'))
 const Input = defineAsyncComponent(() => import('./input.vue'))
 const InputFile = defineAsyncComponent(() => import('./inputFile.vue'))
+const InputImage = defineAsyncComponent(() => import('./inputImage.vue'))
+const InputVideo = defineAsyncComponent(() => import('./inputVideo.vue'))
 const ProjectCard = defineAsyncComponent(() => import('./projectCard.vue'))
 const Message = defineAsyncComponent(() => import('./message.vue'))
 const RatingStars = defineAsyncComponent(() => import('./ratingStars.vue'))
@@ -37,6 +39,8 @@ export {
 	EmptyCreativeCard,
 	Input,
 	InputFile,
+	InputImage,
+	InputVideo,
 	ProjectCard,
 	Message,
 	RatingStars,

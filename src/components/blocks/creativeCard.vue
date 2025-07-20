@@ -233,8 +233,9 @@ const addToBasket = async () => {
 	}
 
 	&__action {
-		width: 158px;
+		width: 100%;
 
+		font-size: 16px;
 		text-align: center;
 
 		background: #525252;

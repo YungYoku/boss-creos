@@ -8,10 +8,10 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { IFile } from '@/interfaces/File.ts'
+import { IImage } from '@/interfaces/File.ts'
 
 interface Props {
-	src: string | IFile,
+	src: string | IImage,
 	alt?: string
 }
 
@@ -25,6 +25,6 @@ const image = computed(() => {
 
 	if (typeof src === 'string') return src
 
-	return `${import.meta.env.VITE_API}/files/${src.collectionId}/${src.id}/${src.file}`
+	return `${import.meta.env.VITE_API}/images/${src.collectionId}/${src.id}/${src.watermarked_image}`
 })
 </script>

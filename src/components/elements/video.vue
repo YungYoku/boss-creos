@@ -8,11 +8,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { IFile } from '@/interfaces/File.ts'
+import { IImage, IVideo } from '@/interfaces/File.ts'
 
 interface Props {
-	src: string | IFile,
-	preview: string | IFile,
+	src: string | IVideo,
+	preview: string | IImage,
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -20,23 +20,23 @@ const props = withDefaults(defineProps<Props>(), {
 	preview: '',
 })
 
-const getFileSrc = (file: IFile) => {
-	return `${import.meta.env.VITE_API}/files/${file.collectionId}/${file.id}/${file.file}`
+const getFileSrc = (file: IVideo | IImage, src: string) => {
+	return `${import.meta.env.VITE_API}/files/${file.collectionId}/${file.id}/${src}`
 }
 
 const videoSrc = computed(() => {
-	const src = props.src
+	const file = props.src
 
-	if (typeof src === 'string') return src
+	if (typeof file === 'string') return file
 
-	return getFileSrc(src)
+	return getFileSrc(file, file.watermarked_video)
 })
 
 const previewSrc = computed(() => {
-	const src = props.preview
+	const file = props.preview
 
-	if (typeof src === 'string') return src
+	if (typeof file === 'string') return file
 
-	return getFileSrc(src)
+	return getFileSrc(file, file.watermarked_image)
 })
 </script>

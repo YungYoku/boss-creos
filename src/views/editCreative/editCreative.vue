@@ -56,7 +56,7 @@
 							label="Водяной знак"
 						/>
 
-						<InputFile
+						<InputImage
 							v-model="creative.preview.value"
 							:disabled="loading"
 							:error="creative.preview.error"
@@ -106,7 +106,7 @@
 							api="approaches"
 						/>
 
-						<InputFile
+						<InputVideo
 							v-model="creative.video.value"
 							:disabled="loading"
 							:error="creative.video.error"
@@ -166,7 +166,7 @@ import { useRouter } from 'vue-router'
 import { useToast } from '@/stores/toast.ts'
 
 import { Grid, Island } from '@/components/structures'
-import { Button, Input, InputFile, Select, SelectLive, Switcher, Textarea } from '@/components/blocks'
+import { Button, Input, InputVideo, InputImage, Select, SelectLive, Switcher, Textarea } from '@/components/blocks'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
 import { creativeTypeItems, emptyCreative, ICreative, ratioItems } from '@/interfaces/Creative.ts'
