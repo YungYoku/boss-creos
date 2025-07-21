@@ -83,11 +83,10 @@ const updateFile = async (file: File) => {
 
 	const formData = new FormData()
 
-	formData.append('original_video', file)
-	formData.append('watermarked_video', file)
+	formData.append('video', file)
 
 	value.value = await Http
-		.post<{ id: string }>('/collections/videos/records', formData)
+		.post<{ id: string }>('/upload/video', formData)
 		.then(({ id }) => id)
 }
 </script>
