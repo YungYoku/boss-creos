@@ -81,19 +81,19 @@ func main() {
 
 				err = cmd.Run()
 				if err != nil {
-// 					return apis.NewApiError(http.StatusInternalServerError, "Ошибка FFmpeg для видео", err)
+					// return apis.NewApiError(http.StatusInternalServerError, "Ошибка FFmpeg для видео", err)
 					return
 				}
 
 				watermarkedFileFS, err := filesystem.NewFileFromPath(watermarkedFilename)
 				if err != nil {
-// 					return apis.NewApiError(http.StatusInternalServerError, "Ошибка при подготовке файла вотермарки для PB", err)
+					// return apis.NewApiError(http.StatusInternalServerError, "Ошибка при подготовке файла вотермарки для PB", err)
 					return
 				}
 
 				record.Set("watermarked_video", watermarkedFileFS)
 				if err := app.Save(record); err != nil {
-// 					return apis.NewApiError(http.StatusInternalServerError, "Ошибка при сохранении вотермаркированного видео в PB", err)
+					// return apis.NewApiError(http.StatusInternalServerError, "Ошибка при сохранении вотермаркированного видео в PB", err)
 					return
 				}
 			}()
