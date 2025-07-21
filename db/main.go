@@ -59,39 +59,44 @@ func main() {
 			}
 			app.Save(record)
 
-			tempDir := os.TempDir()
-			watermarkedFilename := filepath.Join(tempDir, fmt.Sprintf("watermarked_%s", record.GetString("original_video")))
-			defer os.Remove(watermarkedFilename)
+			go func() {
+				tempDir := os.TempDir()
+				watermarkedFilename := filepath.Join(tempDir, fmt.Sprintf("watermarked_%s", record.GetString("original_video")))
+				defer os.Remove(watermarkedFilename)
 
-			originalFilename := "./pb_data/storage/" + record.BaseFilesPath() + "/" + record.GetString("original_video")
-			watermarkPath := "./pb_assets/watermark.png"
-			cmd := exec.Command(
-				"ffmpeg",
-				"-i", originalFilename,
-				"-i", watermarkPath,
-				"-filter_complex", "overlay",
-				"-c:a", "copy",
-				watermarkedFilename,
-			)
+				originalFilename := "./pb_data/storage/" + record.BaseFilesPath() + "/" + record.GetString("original_video")
+				watermarkPath := "./pb_assets/watermark.png"
+				cmd := exec.Command(
+					"ffmpeg",
+					"-i", originalFilename,
+					"-i", watermarkPath,
+					"-filter_complex", "overlay",
+					"-c:a", "copy",
+					watermarkedFilename,
+				)
 
-			// Для отладки: выводим команду и ошибки
-			cmd.Stdout = os.Stdout
-			cmd.Stderr = os.Stderr
+				// Для отладки: выводим команду и ошибки
+				cmd.Stdout = os.Stdout
+				cmd.Stderr = os.Stderr
 
-			err = cmd.Run()
-			if err != nil {
-				return apis.NewApiError(http.StatusInternalServerError, "Ошибка FFmpeg для видео", err)
-			}
+				err = cmd.Run()
+				if err != nil {
+// 					return apis.NewApiError(http.StatusInternalServerError, "Ошибка FFmpeg для видео", err)
+					return
+				}
 
-			watermarkedFileFS, err := filesystem.NewFileFromPath(watermarkedFilename)
-			if err != nil {
-				return apis.NewApiError(http.StatusInternalServerError, "Ошибка при подготовке файла вотермарки для PB", err)
-			}
+				watermarkedFileFS, err := filesystem.NewFileFromPath(watermarkedFilename)
+				if err != nil {
+// 					return apis.NewApiError(http.StatusInternalServerError, "Ошибка при подготовке файла вотермарки для PB", err)
+					return
+				}
 
-			record.Set("watermarked_video", watermarkedFileFS)
-			if err := app.Save(record); err != nil {
-				return apis.NewApiError(http.StatusInternalServerError, "Ошибка при сохранении вотермаркированного видео в PB", err)
-			}
+				record.Set("watermarked_video", watermarkedFileFS)
+				if err := app.Save(record); err != nil {
+// 					return apis.NewApiError(http.StatusInternalServerError, "Ошибка при сохранении вотермаркированного видео в PB", err)
+					return
+				}
+			}()
 
 			return c.JSON(http.StatusOK, map[string]string{
 				"message":  "Видео загружено и обрабатывается.",
