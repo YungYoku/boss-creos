@@ -83,11 +83,10 @@ const updateFile = async (file: File) => {
 
 	const formData = new FormData()
 
-	formData.append('original_image', file)
-	formData.append('watermarked_image', file)
+	formData.append('image', file)
 
 	value.value = await Http
-		.post<{ id: string }>('/collections/images/records', formData)
+		.post<{ id: string }>('/upload/image', formData)
 		.then(({ id }) => id)
 }
 </script>
