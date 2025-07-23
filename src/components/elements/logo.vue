@@ -3,8 +3,10 @@
 		to="/"
 		class="logo"
 	>
-		<span class="logo__name">Boss Creos</span>
-		<span class="logo__descriprion">Работаем 24/7</span>
+		<div class="logo__text">
+			<span class="logo__name">Boss Creos</span>
+			<span class="logo__descriprion">Работаем 24/7</span>
+		</div>
 	</router-link>
 </template>
 
@@ -12,11 +14,17 @@
 .logo {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-end;
+	align-items: flex-start;
 
 	max-width: 182px;
 
 	line-height: 1;
+
+	&__text {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+	}
 
 	&__name {
 		font-size: 32px;

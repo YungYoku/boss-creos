@@ -104,6 +104,7 @@ loadProject()
 	display: flex;
 	flex-direction: column;
 	padding: 0 0 40px 0;
+	width: 100%;
 
 	&__prologue {
 		display: flex;

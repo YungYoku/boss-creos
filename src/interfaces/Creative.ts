@@ -1,7 +1,7 @@
 import { IUser } from '@/interfaces/User.ts'
 import { IChat } from '@/interfaces/Chat.ts'
 import { IProjectProposal } from '@/interfaces/Project.ts'
-import { IFile } from '@/interfaces/File.ts'
+import { IImage, IVideo } from '@/interfaces/File.ts'
 
 export interface ICreativeProposal {
 	id: string
@@ -107,8 +107,8 @@ export interface ICreative {
 		geo?: IGeo
 		unavailableGeo?: Array<IGeo>
 		slot?: ISlot
-		preview?: IFile
-		video?: IFile,
+		preview?: IImage
+		video?: IVideo,
 		approach?: IApproach
 	}
 }

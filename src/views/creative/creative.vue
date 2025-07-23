@@ -1,5 +1,10 @@
 <template>
+	<div v-if="loading">
+		Загрузка
+	</div>
+
 	<Grid
+		v-else-if="isAvailable"
 		class="creative"
 		vertical
 		:columns="1"
@@ -51,6 +56,10 @@
 			</div>
 		</Grid>
 	</Grid>
+
+	<div v-else>
+		Креатив с ID {{ id }} не существует
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -66,16 +75,28 @@ const creative: Ref<ICreative> = ref({ ...emptyCreative })
 const route = useRoute()
 const { id } = route.params
 
+const isAvailable = ref(true)
+
 const loading = ref(true)
 const loadProject = async () => {
 	if (!id) return
+
+	loading.value = true
+	isAvailable.value = true
 
 	await Http
 		.get<ICreative>(`/collections/creatives/records/${id}`, {
 			expand: ['creator', 'preview', 'video', 'slot', 'geo', 'approach']
 		})
 		.then(response => {
+			if (response.status === 'moderation') {
+				isAvailable.value = false
+			}
+			
 			creative.value = response
+		})
+		.catch(() => {
+			isAvailable.value = false
 		})
 
 	loading.value = false
