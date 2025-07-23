@@ -1,5 +1,6 @@
 <template>
 	<Grid
+		v-if="isAvailable"
 		vertical
 		:columns="1"
 		gap="l"
@@ -158,15 +159,20 @@
 			</Grid>
 		</Island>
 	</Grid>
+
+	<div v-else>
+		Креатив с ID {{ id }} не существует или был создан не вами
+	</div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useToast } from '@/stores/toast.ts'
+import { useAuthStore } from '@/stores/auth.ts'
 
 import { Grid, Island } from '@/components/structures'
-import { Button, Input, InputVideo, InputImage, Select, SelectLive, Switcher, Textarea } from '@/components/blocks'
+import { Button, Input, InputImage, InputVideo, Select, SelectLive, Switcher, Textarea } from '@/components/blocks'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
 import { creativeTypeItems, emptyCreative, ICreative, ratioItems } from '@/interfaces/Creative.ts'
@@ -174,18 +180,36 @@ import { creativeTypeItems, emptyCreative, ICreative, ratioItems } from '@/inter
 const creativeBase = Form<ICreative>({ ...emptyCreative })
 const creative = Form<ICreative>({ ...emptyCreative })
 
-const router = useRouter()
+const auth = useAuthStore()
 const toast = useToast()
+const router = useRouter()
+const route = useRoute()
+const { id } = route.params
 
+const isAvailable = ref(true)
+
+const loading = ref(true)
 const loadCreative = async () => {
-	const id = router.currentRoute.value.params.id
+	if (!id) return
+
+	loading.value = true
+	isAvailable.value = true
 
 	await Http
 		.get<ICreative>(`/collections/creatives/records/${id}`)
 		.then(response => {
+			if (response.creator !== auth.user.id) {
+				isAvailable.value = false
+			}
+
 			creativeBase.set(response)
 			creative.set(response)
 		})
+		.catch(() => {
+			isAvailable.value = false
+		})
+
+	loading.value = false
 }
 loadCreative()
 
@@ -210,7 +234,6 @@ const getChanges = () => {
 	return changes
 }
 
-const loading = ref(false)
 const update = async () => {
 	if (JSON.stringify(creativeBase.get()) === JSON.stringify(creative.get())) {
 		toast.set('Никаких изменений не было применено')

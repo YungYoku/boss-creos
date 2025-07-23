@@ -1,13 +1,16 @@
 <template>
 	<video
+		ref="video"
+		class="video"
 		:src="videoSrc"
 		:loading="typeof props.src === 'string' ? 'eager' : 'lazy'"
 		:poster="previewSrc"
+		@click="playVideo"
 	/>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useTemplateRef } from 'vue'
 import { IImage, IVideo } from '@/interfaces/File.ts'
 
 interface Props {
@@ -39,4 +42,25 @@ const previewSrc = computed(() => {
 
 	return getFileSrc(file, file.watermarked_image)
 })
+
+const videoRef = useTemplateRef('video')
+
+const playVideo = () => {
+	const video = videoRef.value
+	if (!video) return
+
+	if (video.paused) {
+		video.play()
+	} else {
+		video.pause()
+		video.currentTime = 0
+		video.load()
+	}
+}
 </script>
+
+<style lang="scss" scoped>
+.video {
+	cursor: pointer;
+}
+</style>
