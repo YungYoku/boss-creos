@@ -253,6 +253,26 @@ const update = async () => {
 		return
 	}
 
+	if (creative.type.value !== 'static') {
+		const isNoApproach = !creative.approach.value
+		if (isNoApproach) {
+			creative.setErrors({
+				approach: { code: 'validation_required', message: 'Cannot be blank.' }
+			})
+		}
+
+		const isNoVideo = !creative.video.value
+		if (isNoVideo) {
+			creative.setErrors({
+				video: { code: 'validation_required', message: 'Cannot be blank.' }
+			})
+		}
+
+		if (isNoApproach || isNoVideo) {
+			return
+		}
+	}
+
 	loading.value = true
 	creative.clearErrors()
 

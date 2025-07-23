@@ -61,7 +61,7 @@
 							:disabled="loading"
 							:error="creative.preview.error"
 							accept=".gif,.jpg,.jpeg,.png,.webp"
-							label="Обложка"
+							:label="creative.type.value === 'static' ? 'Загрузите крео' : 'Обложка'"
 						/>
 
 						<SelectLive
@@ -114,6 +114,7 @@
 						/>
 
 						<SelectLive
+							v-if="creative.type.value !== 'static'"
 							v-model="creative.approach.value"
 							:disabled="loading"
 							:error="creative.approach.error"
@@ -122,6 +123,7 @@
 						/>
 
 						<InputVideo
+							v-if="creative.type.value !== 'static'"
 							v-model="creative.video.value"
 							:disabled="loading"
 							:error="creative.video.error"
@@ -195,9 +197,24 @@ watch(() => auth.user.id, () => creative.creator.value = auth.user.id, { immedia
 
 const loading = ref(false)
 const create = async () => {
-	if (auth.isPersonalInfoIncomplete) {
-		toast.set('Для создания объявления требуется заполнить свои имя и фамилию!')
-		return
+	if (creative.type.value !== 'static') {
+		const isNoApproach = !creative.approach.value
+		if (isNoApproach) {
+			creative.setErrors({
+				approach: { code: 'validation_required', message: 'Cannot be blank.' }
+			})
+		}
+
+		const isNoVideo = !creative.video.value
+		if (isNoVideo) {
+			creative.setErrors({
+				video: { code: 'validation_required', message: 'Cannot be blank.' }
+			})
+		}
+
+		if (isNoApproach || isNoVideo) {
+			return
+		}
 	}
 
 	loading.value = true

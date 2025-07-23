@@ -10,7 +10,7 @@ type TransformedFormFields<T> = {
 type IForm<I> = TransformedFormFields<I> & {
 	set(_: I): void
 	get(): I
-	setErrors(_: Errors<I>): void
+	setErrors(_: Partial<Errors<I>>): void
 	clearErrors(): void
 	reset(): void
 }

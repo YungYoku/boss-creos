@@ -5,12 +5,13 @@
 		:src="videoSrc"
 		:loading="typeof props.src === 'string' ? 'eager' : 'lazy'"
 		:poster="previewSrc"
-		@click="playVideo"
+		:controls="showControls"
+		@click="showVideo"
 	/>
 </template>
 
 <script setup lang="ts">
-import { computed, useTemplateRef } from 'vue'
+import { ref, computed, useTemplateRef } from 'vue'
 import { IImage, IVideo } from '@/interfaces/File.ts'
 
 interface Props {
@@ -44,17 +45,15 @@ const previewSrc = computed(() => {
 })
 
 const videoRef = useTemplateRef('video')
+const showControls = ref(false)
 
-const playVideo = () => {
+const showVideo = () => {
 	const video = videoRef.value
 	if (!video) return
 
+	showControls.value = true
 	if (video.paused) {
 		video.play()
-	} else {
-		video.pause()
-		video.currentTime = 0
-		video.load()
 	}
 }
 </script>
