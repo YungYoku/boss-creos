@@ -30,11 +30,9 @@ const props = defineProps({
 	}
 })
 
-const style = computed(() => {
-	return {
-		width: `${props.width}px`
-	}
-})
+const style = computed(() => ({
+	width: `${props.width}px`
+}))
 
 const emit = defineEmits(['close'])
 

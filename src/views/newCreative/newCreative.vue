@@ -84,6 +84,21 @@
 						/>
 
 						<Switcher
+							v-model="creative.resize.value"
+							:disabled="loading"
+							:error="creative.resize.error"
+							label="Ресайз"
+						/>
+
+						<Button
+							v-if="creative.resize.value"
+							:disabled="loading"
+							@click="modalShowing = true"
+						>
+							Ресайз
+						</Button>
+
+						<Switcher
 							v-model="creative.reskin.value"
 							:disabled="loading"
 							:error="creative.reskin.error"
@@ -116,31 +131,6 @@
 					</Grid>
 				</Grid>
 
-				<Grid>
-					<Switcher
-						v-model="creative.resize.value"
-						:disabled="loading"
-						:error="creative.resize.error"
-						label="Ресайз"
-					/>
-
-					<template v-if="creative.resize.value">
-						<template
-							v-for="item in ratioItems"
-							:key="item.id"
-						>
-							<Input
-								v-if="creative.resizePrices.value?.[item.name]"
-								v-model="creative.resizePrices.value[item.name].value"
-								:disabled="loading"
-								:error="creative.resizePrices.value[item.name]?.error"
-								:label="`Цена ресайза ${item.name}`"
-								type="number"
-							/>
-						</template>
-					</template>
-				</Grid>
-
 				<Textarea
 					v-model="creative.description.value"
 					:disabled="loading"
@@ -158,6 +148,28 @@
 			</Grid>
 		</Island>
 	</Grid>
+
+	<Modal
+		v-if="modalShowing"
+		:width="585"
+		@close="modalShowing = false"
+	>
+		<Grid>
+			<template
+				v-for="item in ratioItems"
+				:key="item.id"
+			>
+				<Input
+					v-if="creative.resizePrices.value?.[item.name]"
+					v-model="creative.resizePrices.value[item.name].value"
+					:disabled="loading"
+					:error="creative.resizePrices.value[item.name]?.error"
+					:label="`Цена ресайза ${item.name}`"
+					type="number"
+				/>
+			</template>
+		</Grid>
+	</Modal>
 </template>
 
 <script setup lang="ts">
@@ -166,8 +178,8 @@ import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.ts'
 import { useToast } from '@/stores/toast.ts'
 
-import { Grid, Island } from '@/components/structures'
-import { Button, Input, InputVideo, InputImage, Select, SelectLive, Switcher, Textarea } from '@/components/blocks'
+import { Grid, Island, Modal } from '@/components/structures'
+import { Button, Input, InputImage, InputVideo, Select, SelectLive, Switcher, Textarea } from '@/components/blocks'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
 import { creativeTypeItems, emptyCreative, ICreative, ratioItems } from '@/interfaces/Creative.ts'
@@ -206,6 +218,8 @@ const create = async () => {
 			loading.value = false
 		})
 }
+
+const modalShowing = ref(false)
 </script>
 
 <style scoped lang="scss">
