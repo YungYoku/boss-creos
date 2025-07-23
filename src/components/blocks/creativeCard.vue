@@ -65,7 +65,7 @@
 				Редактировать
 			</router-link>
 			<router-link
-				v-else
+				v-else-if="!isDetailPage"
 				:to="`/creative/${creative.id}`"
 				class="creative-card__action"
 			>
@@ -77,7 +77,7 @@
 
 <script setup lang="ts">
 import { computed, PropType, ref, Ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.ts'
 import { SelectLive, User } from '@/components/blocks'
 import { Icon, Video } from '@/components/elements'
@@ -104,6 +104,9 @@ const excludeGeo = computed(() => props.creative?.unavailableGeo ?? [])
 
 const auth = useAuthStore()
 const isItMine = computed(() => props.creative?.creator === auth.user.id)
+
+const route = useRoute()
+const isDetailPage = computed(() => route.name === 'Creative')
 
 const geo: Ref<Array<string>> = ref([])
 const basketWithCreative = computed(() => {

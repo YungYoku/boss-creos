@@ -7,7 +7,7 @@ import (
    	"os"
    	"os/exec"
    	"path/filepath"
-   	"slices"
+//    	"slices"
 
     "github.com/pocketbase/pocketbase"
     "github.com/pocketbase/pocketbase/apis"
@@ -31,10 +31,10 @@ func main() {
             }
             //defer file.Close()
 
-			h := header.Header.Get("Content-Type")
-			if !slices.Contains([]string{"video/mp4", "video/mp4"}, h) {
-				return apis.NewApiError(http.StatusBadRequest, "bad_request", err)
-			}
+// 			h := header.Header.Get("Content-Type")
+// 			if !slices.Contains([]string{"video/mp4", "video/mp4"}, h) {
+// 				return apis.NewApiError(http.StatusBadRequest, "bad_request", err)
+// 			}
 
 			file, errFs := filesystem.NewFileFromMultipart(header)
 			if errFs != nil {
