@@ -1,15 +1,15 @@
 <template>
 	<div class="auth-slots">
 		<div
-			v-for="column in 3"
+			v-for="column in columns"
 			:key="`column-${column}`"
 			class="auth-slots__column"
 		>
 			<img
-				v-for="slot in 5"
+				v-for="slot in column"
 				:key="`slot-${slot}`"
 				class="auth-slots__slot"
-				src="@/assets/img/slot.webp"
+				:src="slot.image"
 				alt=""
 			>
 		</div>
@@ -17,33 +17,48 @@
 </template>
 
 <script setup lang="ts">
+import { reactive } from 'vue'
+import image from '@/assets/img/slot.webp'
 
+const slot = {
+	image
+}
+const columns = reactive([
+	[slot, slot, slot, slot, slot, slot, slot],
+	[slot, slot, slot, slot, slot, slot, slot],
+	[slot, slot, slot, slot, slot, slot, slot],
+])
 </script>
 
 <style scoped lang="scss">
 .auth-slots {
 	display: flex;
 
-	width: 780px;
 	height: 100vh;
 	max-height: 100vh;
 	overflow: hidden;
 	gap: 30px;
 
-	transform: translateY(-100px);
+	transform: translateY(-94px);
 
 	&__column {
+		height: calc(100% / 6 * 7);
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 		gap: 30px;
 
 		&:nth-child(2) {
-			transform: translateY(100px);
+			margin-top: calc((100% - 150px) / 7);
 		}
 	}
 
 	&__slot {
 		max-width: 100%;
+		min-height: calc((100% - 150px) / 7);
+		max-height: calc((100% - 150px) / 7);
+		user-select: none;
+		pointer-events: none;
 	}
 }
 </style>
