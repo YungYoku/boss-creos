@@ -39,7 +39,7 @@ const columns = reactive([
 	overflow: hidden;
 	gap: 30px;
 
-	transform: translateY(-94px);
+	margin: -94px 0 0 0;
 
 	&__column {
 		height: calc(100% / 6 * 7);

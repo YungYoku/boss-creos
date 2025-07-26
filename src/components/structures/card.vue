@@ -24,6 +24,7 @@
 			v-if="$slots.footer"
 			vertical
 			class="card__footer"
+			gap="xs"
 		>
 			<slot name="footer"/>
 		</Grid>
