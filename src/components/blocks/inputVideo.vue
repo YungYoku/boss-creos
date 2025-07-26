@@ -134,6 +134,8 @@ const updateFile = async (file: File) => {
 		position: absolute;
 		right: 15px;
 		top: 15px;
+		pointer-events: none;
+		user-select: none;
 	}
 }
 </style>
