@@ -14,6 +14,7 @@
 
 		<Grid
 			vertical
+			gap="l"
 			class="card__content"
 		>
 			<slot/>
@@ -48,15 +49,11 @@ defineProps({
 .card {
 	max-width: 100%;
 
-	border: 1px solid hsl(var(--input));
-	border-radius: 12px;
-	--tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-	box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-
 	&__title {
 		padding: 16px 20px 4px 20px;
 
-		font-weight: 600;
+		font-size: 32px;
+		font-weight: 700;
 	}
 
 	&__content {

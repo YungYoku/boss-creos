@@ -43,6 +43,13 @@
 				transparent
 				@update-file="updateFile"
 			/>
+
+			<Icon
+				class="input-video__icon"
+				name="download"
+				size="s"
+				:colors="['dark', 'light']"
+			/>
 		</div>
 	</div>
 </template>
@@ -110,8 +117,9 @@ const updateFile = async (file: File) => {
 	&__field-wrap {
 		width: 100%;
 
-		&._compact {
+		position: relative;
 
+		&._compact {
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -120,6 +128,12 @@ const updateFile = async (file: File) => {
 
 			opacity: 0;
 		}
+	}
+
+	&__icon {
+		position: absolute;
+		right: 15px;
+		top: 15px;
 	}
 }
 </style>

@@ -47,16 +47,28 @@
 					<Button
 						:disabled="loading"
 						type="submit"
+						variant="outline"
+						class="registration__btn"
 						@click="register('buyer')"
 					>
-						Зарегистрироваться Как баер
+						<span class="registration__btn-text-head">
+							Зарегистрироваться
+						</span>
+
+						Как баер
 					</Button>
 					<Button
 						:disabled="loading"
 						type="submit"
+						variant="outline"
+						class="registration__btn"
 						@click="register('designer')"
 					>
-						Зарегистрироваться Как дизайнер
+						<span class="registration__btn-text-head">
+							Зарегистрироваться
+						</span>
+
+						Как дизайнер
 					</Button>
 				</Grid>
 
@@ -176,6 +188,16 @@ const isRegistrationPossible = computed(() => {
 
 	&__link {
 		text-decoration: underline;
+	}
+
+	&__btn {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__btn-text-head {
+		font-size: 10px;
+		color: #9E9E9E;
 	}
 }
 </style>

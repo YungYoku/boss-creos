@@ -23,6 +23,7 @@
 				<Button
 					:disabled="loading"
 					type="submit"
+					variant="outline"
 					@click="login"
 				>
 					Войти

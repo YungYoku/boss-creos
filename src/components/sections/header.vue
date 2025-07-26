@@ -106,8 +106,34 @@ const isAuthPage = computed(() => route.name === 'Login' || route.name === 'Regi
 	}
 	
 	&__nav-item {
+		position: relative;
+		
+		&::after {
+			content: '';
+			width: 0;
+			height: 2px;
+			background: #fff;
+			position: absolute;
+			bottom: -2px;
+			left: 50%;
+			border-radius: 2px;
+			transition: all 0.2s;
+		}
+
+		&:hover {
+			&::after {
+				width: 6px;
+				left: calc(50% - 3px);
+				transition: all 0.2s;
+			}
+		}
+		
 		&._active {
-			border-bottom: 1px solid #ffffff;
+			&::after {
+				width: 14px;
+				left: calc(50% - 7px);
+				transition: all 0.2s;
+			}
 		}
 	}
 
