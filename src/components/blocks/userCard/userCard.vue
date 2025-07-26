@@ -34,7 +34,7 @@ import { computed } from 'vue'
 import { Island, Grid } from '@/components/structures'
 import { User } from '@/components/blocks'
 import { Badge, Skeleton } from '@/components/elements'
-import { emptyUser, IUser } from '@/interfaces/User'
+import { emptyUser, IUser } from '@/interfaces/User.ts'
 
 interface Props {
 	user: IUser,

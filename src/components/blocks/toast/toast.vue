@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { useToast } from '@/stores/toast'
+import { useToast } from '@/stores/toast.ts'
 
 import { Text, Icon } from '@/components/elements'
 

@@ -69,7 +69,7 @@ import { useRoute } from 'vue-router'
 import { Grid } from '@/components/structures'
 import { Http } from '@/plugins'
 import { emptyCreative, ICreative } from '@/interfaces/Creative.ts'
-import CreativeCard from '@/components/blocks/creativeCard.vue'
+import CreativeCard from '@/components/blocks/creativeCard/creativeCard.vue'
 
 const creative: Ref<ICreative> = ref({ ...emptyCreative })
 const route = useRoute()

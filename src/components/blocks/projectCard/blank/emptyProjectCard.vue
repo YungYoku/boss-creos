@@ -6,6 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import ProjectCard from './projectCard.vue'
+import ProjectCard from '../projectCard.vue'
 import { emptyProject } from '@/interfaces/Project.ts'
 </script>

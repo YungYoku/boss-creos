@@ -33,9 +33,9 @@
 
 
 <script setup lang="ts">
-import { emptyUser, IUser } from '@/interfaces/User'
+import { emptyUser, IUser } from '@/interfaces/User.ts'
 import { Skeleton } from '@/components/elements'
-import Avatar from './avatar.vue'
+import Avatar from '../avatar/avatar.vue'
 
 interface Props {
 	user: IUser,
