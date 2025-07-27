@@ -130,7 +130,7 @@ const items = computed(() => [
 
 		font-size: 14px;
 		line-height: 24px;
-		font-weight: 700;
+		font-weight: 500;
 
 		border: 1px solid rgba(255, 255, 255, 0.1);
 		border-radius: 50px;
@@ -193,9 +193,9 @@ const items = computed(() => [
 			left: 1px;
 			z-index: -1;
 
-			background-color: #1a1a1a;
+			background-color: #090909;
 			border-radius: 50px;
-			box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05),
+			box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.05),
 			inset 0 0 20px rgba(255, 255, 255, 0.02);
 
 			pointer-events: none;

@@ -3,6 +3,7 @@ import { defineAsyncComponent } from 'vue'
 const Table = defineAsyncComponent(() => import('./table/table.vue'))
 const Card = defineAsyncComponent(() => import('./card.vue'))
 const Dropdown = defineAsyncComponent(() => import('./dropdown.vue'))
+const FieldWrapperRich = defineAsyncComponent(() => import('./fieldWrapperRich.vue'))
 const Grid = defineAsyncComponent(() => import('./grid.vue'))
 const Island = defineAsyncComponent(() => import('./island.vue'))
 const Modal = defineAsyncComponent(() => import('./modal.vue'))
@@ -14,6 +15,7 @@ export {
 	Table,
 	Card,
 	Dropdown,
+	FieldWrapperRich,
 	Grid,
 	Island,
 	Modal,

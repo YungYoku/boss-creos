@@ -84,16 +84,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, PropType } from 'vue'
+import { computed } from 'vue'
 
 import { Popover } from '@/components/structures'
 import { Checkbox, Input } from '@/components/blocks'
 import { Icon, Label, Separator, Text } from '@/components/elements'
 
-interface Item {
-	id: string
-	name: string
-}
+import { defaultProps } from './props'
+import type { Props, Item } from './props'
 
 const value = defineModel<string | Array<string>>({
 	type: [String, Array],
@@ -105,32 +103,7 @@ const search = defineModel<string>('search', {
 	default: ''
 })
 
-const props = defineProps({
-	error: {
-		type: String as PropType<string | null>,
-		default: null
-	},
-	label: {
-		type: String,
-		default: ''
-	},
-	items: {
-		type: Array as PropType<Array<Item>>,
-		default: () => ([])
-	},
-	multiple: {
-		type: Boolean,
-		default: false
-	},
-	clearable: {
-		type: Boolean,
-		default: true
-	},
-	searchable: {
-		type: Boolean,
-		default: false
-	}
-})
+const props = withDefaults(defineProps<Props>(), defaultProps)
 
 const validationError = new Error('Select multiple, but value is not an array')
 

@@ -9,7 +9,8 @@ const CreativeCard = defineAsyncComponent(() => import('./creativeCard/creativeC
 const DatePicker = defineAsyncComponent(() => import('./datePicker/datePicker.vue'))
 const EmptyProjectCard = defineAsyncComponent(() => import('./projectCard/blank/emptyProjectCard.vue'))
 const EmptyCreativeCard = defineAsyncComponent(() => import('./creativeCard/blank/emptyCreativeCard.vue'))
-const Input = defineAsyncComponent(() => import('./input/input.vue'))
+const Input = defineAsyncComponent(() => import('./input/default/input.vue'))
+const InputRich = defineAsyncComponent(() => import('./input/rich/inputRich.vue'))
 const InputFile = defineAsyncComponent(() => import('./inputFile/inputFile.vue'))
 const InputImage = defineAsyncComponent(() => import('./inputImage/inputImage.vue'))
 const InputVideo = defineAsyncComponent(() => import('./inputVideo/inputVideo.vue'))
@@ -17,8 +18,10 @@ const ProjectCard = defineAsyncComponent(() => import('./projectCard/projectCard
 const RatingStars = defineAsyncComponent(() => import('./ratingStars/ratingStars.vue'))
 const RatingStarsEditable = defineAsyncComponent(() => import('./ratingStarsEditable/ratingStartEditable.vue'))
 const Notifications = defineAsyncComponent(() => import('./notifications/notifications.vue'))
-const Select = defineAsyncComponent(() => import('./select/select.vue'))
-const SelectLive = defineAsyncComponent(() => import('./selectLive/selectLive.vue'))
+const Select = defineAsyncComponent(() => import('./select/default/select.vue'))
+const SelectRich = defineAsyncComponent(() => import('./select/rich/selectRich.vue'))
+const SelectLive = defineAsyncComponent(() => import('./selectLive/default/selectLive.vue'))
+const SelectLiveRich = defineAsyncComponent(() => import('./selectLive/rich/selectLiveRich.vue'))
 const Switcher = defineAsyncComponent(() => import('./switcher/switcher.vue'))
 const Textarea = defineAsyncComponent(() => import('./textarea/textarea.vue'))
 const Toast = defineAsyncComponent(() => import('./toast/toast.vue'))
@@ -37,6 +40,7 @@ export {
 	EmptyProjectCard,
 	EmptyCreativeCard,
 	Input,
+	InputRich,
 	InputFile,
 	InputImage,
 	InputVideo,
@@ -45,7 +49,9 @@ export {
 	RatingStarsEditable,
 	Notifications,
 	Select,
+	SelectRich,
 	SelectLive,
+	SelectLiveRich,
 	Switcher,
 	Textarea,
 	Toast,

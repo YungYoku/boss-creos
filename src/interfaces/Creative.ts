@@ -58,19 +58,17 @@ export interface IApproach {
 
 export type ICreativeType = 'video' | 'static' | 'pwa'
 const _creativeTypeItems: Array<ICreativeType> = ['video', 'static', 'pwa']
-export const creativeTypeItems = _creativeTypeItems
-	.map(item => ({
-		id: item,
-		name: item
-	}))
+export const creativeTypeItems = _creativeTypeItems.map(item => ({
+	id: item,
+	name: item
+}))
 
 export type IRatio = '1:1' | '2:3' | '3:2' | '3:4' | '4:3' | '4:5' | '9:16' | '16:9'
 const _ratioItems: Array<IRatio> = ['1:1', '2:3', '3:2', '3:4', '4:3', '4:5', '9:16', '16:9']
-export const ratioItems = _ratioItems
-	.map(item => ({
-		id: item,
-		name: item
-	}))
+export const ratioItems = _ratioItems.map(item => ({
+	id: item,
+	name: item
+}))
 
 export type ResizePrices = {
 	[_ in IRatio]: number

@@ -17,14 +17,15 @@
 
 				<Grid :columns="2">
 					<Grid vertical>
-						<Input
+						<InputRich
 							v-model="creative.price.value"
 							:disabled="loading"
 							:error="creative.price.error"
+							type="number"
 							label="Цена"
 						/>
 
-						<SelectLive
+						<SelectLiveRich
 							v-model="creative.geo.value"
 							:disabled="loading"
 							:error="creative.geo.error"
@@ -32,7 +33,7 @@
 							api="geo"
 						/>
 
-						<SelectLive
+						<SelectLiveRich
 							v-model="creative.slot.value"
 							:disabled="loading"
 							:error="creative.slot.error"
@@ -40,7 +41,7 @@
 							api="slots"
 						/>
 
-						<Select
+						<SelectRich
 							v-model="creative.type.value"
 							:disabled="loading"
 							:error="creative.type.error"
@@ -64,7 +65,7 @@
 							:label="creative.type.value === 'static' ? 'Загрузите крео' : 'Обложка'"
 						/>
 
-						<SelectLive
+						<SelectLiveRich
 							v-model="creative.unavailableGeo.value"
 							:disabled="loading"
 							multiple
@@ -75,7 +76,7 @@
 					</Grid>
 
 					<Grid vertical>
-						<Select
+						<SelectRich
 							v-model="creative.ratio.value"
 							:disabled="loading"
 							:error="creative.ratio.error"
@@ -113,7 +114,7 @@
 							label="Цена рескина"
 						/>
 
-						<SelectLive
+						<SelectLiveRich
 							v-if="creative.type.value !== 'static'"
 							v-model="creative.approach.value"
 							:disabled="loading"
@@ -143,6 +144,7 @@
 				<Button
 					:disabled="loading"
 					class="new-creative__submit"
+					variant="outline"
 					@click="create"
 				>
 					Отправить на модерацию
@@ -181,7 +183,7 @@ import { useAuthStore } from '@/stores/auth.ts'
 import { useToast } from '@/stores/toast.ts'
 
 import { Grid, Island, Modal } from '@/components/structures'
-import { Button, Input, InputImage, InputVideo, Select, SelectLive, Switcher, Textarea } from '@/components/blocks'
+import { Button, Input, InputRich, InputImage, InputVideo, SelectRich, SelectLiveRich, Switcher, Textarea } from '@/components/blocks'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
 import { creativeTypeItems, emptyCreative, ICreative, ratioItems } from '@/interfaces/Creative.ts'
@@ -241,7 +243,7 @@ const modalShowing = ref(false)
 
 <style scoped lang="scss">
 .new-creative {
-	max-width: 585px;
+	max-width: 630px;
 
 	&__title {
 		margin: 0 auto 20px auto;

@@ -17,41 +17,10 @@ import { computed, Ref, ref, watch } from 'vue'
 import { Select } from '@/components/blocks'
 import { Http } from '@/plugins'
 
-interface Item {
-	id: string
-	name: string
-	[key: string]: unknown
-}
+import type { Props, Items, Item } from './props'
+import { defaultProps } from './props'
 
-interface Items {
-	page: number,
-	perPage: number,
-	totalPages: number,
-	totalItems: number,
-	items: Array<Item>
-}
-
-interface Props {
-	modelValue: Array<string> | string
-	error?: string | null
-	typeKey?: string
-	label?: string,
-	api: string,
-	filterFields?: Array<string>,
-	exclude?: Array<string>,
-	multiple?: boolean
-}
-
-const props = withDefaults(defineProps<Props>(), {
-	modelValue: () => ([]),
-	error: null,
-	typeKey: 'name',
-	label: 'Значение',
-	api: '',
-	filterFields: () => (['id', 'name']),
-	filter: [],
-	multiple: false
-})
+const props = withDefaults(defineProps<Props>(), defaultProps)
 
 const items: Ref<Array<Item>> = ref([])
 
