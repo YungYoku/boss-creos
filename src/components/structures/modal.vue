@@ -44,6 +44,7 @@ const close = () => emit('close')
 	position: fixed;
 	top: 0;
 	left: 0;
+	z-index: 2;
 
     display: flex;
     flex-direction: column;

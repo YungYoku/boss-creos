@@ -29,19 +29,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-interface Props {
-	error?: string | null,
-	checked?: boolean,
-	disabled?: boolean
-	label: string
-}
+import type { Props } from './props'
+import { defaultProps } from './props'
 
-const props = withDefaults(defineProps<Props>(), {
-	error: null,
-	checked: false,
-	disabled: false,
-	label: ''
-})
+const props = withDefaults(defineProps<Props>(), defaultProps)
 
 const value = defineModel<boolean>({
 	type: Boolean,
@@ -69,13 +60,13 @@ const isActive = computed(() => value.value ?? props.checked)
 	}
 
 	&__content {
-		width: 120px;
-		height: 48px;
-		padding: 12px;
+		width: 80px;
+		height: 25px;
+		padding: 4px 8px;
 
 		background: hsl(var(--background));
 		border: 1px solid hsl(var(--input));
-		border-radius: 14px;
+		border-radius: 8px;
 
 		&._active {
 			background: var(--active);
@@ -83,15 +74,15 @@ const isActive = computed(() => value.value ?? props.checked)
 	}
 
 	&__content-icon {
-		width: 22px;
-		height: 22px;
+		width: 15px;
+		height: 15px;
 		margin: 0 calc(100% - 24px) 0 0;
 
 		background: #ffffff;
 		border-radius: 6px;
 
 		&._active {
-			margin: 0 0 0 calc(100% - 24px);
+			margin: 0 0 0 calc(100% - 15px);
 		}
 	}
 }

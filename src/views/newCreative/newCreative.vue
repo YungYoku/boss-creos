@@ -50,7 +50,7 @@
 							label="Вид крео"
 						/>
 
-						<Switcher
+						<SwitcherRich
 							v-model="creative.watermark.value"
 							:disabled="loading"
 							:error="creative.watermark.error"
@@ -84,7 +84,7 @@
 							label="Размер"
 						/>
 
-						<Switcher
+						<SwitcherRich
 							v-model="creative.resize.value"
 							:disabled="loading"
 							:error="creative.resize.error"
@@ -94,19 +94,20 @@
 						<Button
 							v-if="creative.resize.value"
 							:disabled="loading"
+							variant="outline"
 							@click="modalShowing = true"
 						>
 							Ресайз
 						</Button>
 
-						<Switcher
+						<SwitcherRich
 							v-model="creative.reskin.value"
 							:disabled="loading"
 							:error="creative.reskin.error"
 							label="Рескин"
 						/>
 
-						<Input
+						<InputRich
 							v-if="creative.reskin.value"
 							v-model="creative.reskinPrice.value"
 							:disabled="loading"
@@ -163,7 +164,7 @@
 				v-for="item in ratioItems"
 				:key="item.id"
 			>
-				<Input
+				<InputRich
 					v-if="creative.resizePrices.value?.[item.name]"
 					v-model="creative.resizePrices.value[item.name].value"
 					:disabled="loading"
@@ -183,7 +184,16 @@ import { useAuthStore } from '@/stores/auth.ts'
 import { useToast } from '@/stores/toast.ts'
 
 import { Grid, Island, Modal } from '@/components/structures'
-import { Button, Input, InputRich, InputImage, InputVideo, SelectRich, SelectLiveRich, Switcher, Textarea } from '@/components/blocks'
+import {
+	Button,
+	InputImage,
+	InputRich,
+	InputVideo,
+	SelectLiveRich,
+	SelectRich,
+	SwitcherRich,
+	Textarea
+} from '@/components/blocks'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
 import { creativeTypeItems, emptyCreative, ICreative, ratioItems } from '@/interfaces/Creative.ts'

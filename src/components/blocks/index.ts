@@ -22,7 +22,8 @@ const Select = defineAsyncComponent(() => import('./select/default/select.vue'))
 const SelectRich = defineAsyncComponent(() => import('./select/rich/selectRich.vue'))
 const SelectLive = defineAsyncComponent(() => import('./selectLive/default/selectLive.vue'))
 const SelectLiveRich = defineAsyncComponent(() => import('./selectLive/rich/selectLiveRich.vue'))
-const Switcher = defineAsyncComponent(() => import('./switcher/switcher.vue'))
+const Switcher = defineAsyncComponent(() => import('./switcher/default/switcher.vue'))
+const SwitcherRich = defineAsyncComponent(() => import('./switcher/rich/switcherRich.vue'))
 const Textarea = defineAsyncComponent(() => import('./textarea/textarea.vue'))
 const Toast = defineAsyncComponent(() => import('./toast/toast.vue'))
 const User = defineAsyncComponent(() => import('./user/user.vue'))
@@ -53,6 +54,7 @@ export {
 	SelectLive,
 	SelectLiveRich,
 	Switcher,
+	SwitcherRich,
 	Textarea,
 	Toast,
 	User,
