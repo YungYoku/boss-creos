@@ -41,12 +41,7 @@ withDefaults(defineProps<Props>(), {
 
 <style lang="scss">
 .field-wrapper-rich {
-	position: relative;
-	z-index: 1;
-
 	&__content {
-		position: relative;
-
 		padding: 7px 20px 7px 10px;
 		display: flex;
 		align-items: center;
@@ -60,8 +55,6 @@ withDefaults(defineProps<Props>(), {
 		border-image-source: linear-gradient(135.28deg, rgba(255, 255, 255, 0.3) -128.53%, rgba(255, 255, 255, 0) 75.12%),
 		linear-gradient(174.85deg, rgba(255, 255, 255, 0.1) 0.61%, rgba(255, 255, 255, 0) 18.03%);
 		border-radius: 9px;
-
-		backdrop-filter: blur(23px);
 	}
 
 	&__label {

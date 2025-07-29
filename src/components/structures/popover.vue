@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, useTemplateRef, onUpdated, nextTick } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, onUpdated, ref, useTemplateRef } from 'vue'
 
 const contentShowed = ref(false)
 const showContent = () => {
