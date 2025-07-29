@@ -25,6 +25,6 @@ const image = computed(() => {
 
 	if (typeof src === 'string') return src
 
-	return `${import.meta.env.VITE_API}/images/${src.collectionId}/${src.id}/${src.watermarked_image}`
+	return `${import.meta.env.VITE_API}/files/${src.collectionId}/${src.id}/${src.watermarked_image}`
 })
 </script>

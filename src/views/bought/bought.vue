@@ -94,6 +94,7 @@ const baskets = computed(() => {
 	}
 
 	&__creative-image {
+		min-width: 57px;
 		max-width: 57px;
 		max-height: 57px;
 		aspect-ratio: 1/1;
