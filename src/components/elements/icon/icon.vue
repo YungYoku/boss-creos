@@ -58,9 +58,9 @@ const src = computed(() => {
 	}
 
     &_xs {
-		width: 10px;
-        max-width: 10px;
-        max-height: 10px;
+		width: 15px;
+        max-width: 15px;
+        max-height: 15px;
     }
 
     &_s {

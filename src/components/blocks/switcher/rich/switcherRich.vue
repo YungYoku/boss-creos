@@ -26,3 +26,13 @@ const value = defineModel<boolean>({
 	default: null
 })
 </script>
+
+<style lang="scss">
+.switcher-rich {
+	.switcher__content {
+		border-radius: 8px;
+		border: 1px solid #FFFFFF1A;
+		background: transparent;
+	}
+}
+</style>

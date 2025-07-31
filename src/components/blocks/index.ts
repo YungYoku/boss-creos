@@ -12,8 +12,10 @@ const EmptyCreativeCard = defineAsyncComponent(() => import('./creativeCard/blan
 const Input = defineAsyncComponent(() => import('./input/default/input.vue'))
 const InputRich = defineAsyncComponent(() => import('./input/rich/inputRich.vue'))
 const InputFile = defineAsyncComponent(() => import('./inputFile/inputFile.vue'))
-const InputImage = defineAsyncComponent(() => import('./inputImage/inputImage.vue'))
-const InputVideo = defineAsyncComponent(() => import('./inputVideo/inputVideo.vue'))
+const InputImage = defineAsyncComponent(() => import('./inputImage/default/inputImage.vue'))
+const InputImageRich = defineAsyncComponent(() => import('./inputImage/rich/inputImageRich.vue'))
+const InputVideo = defineAsyncComponent(() => import('./inputVideo/default/inputVideo.vue'))
+const InputVideoRich = defineAsyncComponent(() => import('./inputVideo/rich/inputVideoRich.vue'))
 const ProjectCard = defineAsyncComponent(() => import('./projectCard/projectCard.vue'))
 const RatingStars = defineAsyncComponent(() => import('./ratingStars/ratingStars.vue'))
 const RatingStarsEditable = defineAsyncComponent(() => import('./ratingStarsEditable/ratingStartEditable.vue'))
@@ -44,7 +46,9 @@ export {
 	InputRich,
 	InputFile,
 	InputImage,
+	InputImageRich,
 	InputVideo,
+	InputVideoRich,
 	ProjectCard,
 	RatingStars,
 	RatingStarsEditable,

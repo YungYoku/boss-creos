@@ -73,8 +73,8 @@ import { computed, ref } from 'vue'
 
 import { Icon, Label, Skeleton } from '@/components/elements'
 
-import { defaultProps } from './props'
 import type { Props } from './props'
+import { defaultProps } from './props'
 
 const props = withDefaults(defineProps<Props>(), defaultProps)
 
@@ -85,11 +85,12 @@ const value = defineModel<string | number>({
 const clear = () => {
 	value.value = ''
 	fileName.value = ''
+	emit('clear')
 }
 
 const fileName = ref('')
 
-const emit = defineEmits(['update-file', 'input', 'action'])
+const emit = defineEmits(['update-file', 'input', 'action', 'clear'])
 const onInput = (event: Event) => {
 	const target = event.target as HTMLInputElement
 	if (props.type === 'file') {

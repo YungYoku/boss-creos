@@ -47,7 +47,7 @@
 			<Icon
 				class="input-video__icon"
 				name="download"
-				size="s"
+				size="xs"
 				:colors="['dark', 'light']"
 			/>
 		</div>
@@ -61,21 +61,10 @@ import { Button, Input } from '@/components/blocks'
 import { Icon } from '@/components/elements'
 import { Http } from '@/plugins'
 
-interface Props {
-	error?: string | null
-	loading?: boolean
-	compact?: boolean
-	label?: string
-	accept?: string
-}
+import type { Props } from './props'
+import { defaultProps } from './props'
 
-withDefaults(defineProps<Props>(), {
-	error: null,
-	loading: false,
-	compact: false,
-	label: '',
-	accept: ''
-})
+withDefaults(defineProps<Props>(), defaultProps)
 
 
 const emit = defineEmits(['update:name'])

@@ -57,7 +57,7 @@
 							label="Водяной знак"
 						/>
 
-						<InputImage
+						<InputImageRich
 							v-model="creative.preview.value"
 							:disabled="loading"
 							:error="creative.preview.error"
@@ -124,7 +124,7 @@
 							api="approaches"
 						/>
 
-						<InputVideo
+						<InputVideoRich
 							v-if="creative.type.value !== 'static'"
 							v-model="creative.video.value"
 							:disabled="loading"
@@ -186,9 +186,9 @@ import { useToast } from '@/stores/toast.ts'
 import { Grid, Island, Modal } from '@/components/structures'
 import {
 	Button,
-	InputImage,
+	InputImageRich,
 	InputRich,
-	InputVideo,
+	InputVideoRich,
 	SelectLiveRich,
 	SelectRich,
 	SwitcherRich,
