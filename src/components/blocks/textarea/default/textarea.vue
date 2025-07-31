@@ -41,19 +41,10 @@ import { computed } from 'vue'
 
 import { Icon, Label } from '@/components/elements'
 
-interface Props {
-	error?: string | null
-	label: string
-	height?: string
-	disabled?: boolean
-}
+import type { Props } from './props'
+import { defaultProps } from './props'
 
-withDefaults(defineProps<Props>(), {
-	error: null,
-	label: '',
-	height: '200px',
-	disabled: false
-})
+withDefaults(defineProps<Props>(), defaultProps)
 
 const value = defineModel<string>({
 	type: String,

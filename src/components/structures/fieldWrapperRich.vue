@@ -58,6 +58,8 @@ withDefaults(defineProps<Props>(), {
 	}
 
 	&__label {
+		flex-shrink: 0;
+		
 		display: flex;
 		align-items: center;
 		justify-content: flex-start;

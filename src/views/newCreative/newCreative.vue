@@ -135,7 +135,7 @@
 					</Grid>
 				</Grid>
 
-				<Textarea
+				<TextareaRich
 					v-model="creative.description.value"
 					:disabled="loading"
 					:error="creative.description.error"
@@ -192,7 +192,7 @@ import {
 	SelectLiveRich,
 	SelectRich,
 	SwitcherRich,
-	Textarea
+	TextareaRich
 } from '@/components/blocks'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
