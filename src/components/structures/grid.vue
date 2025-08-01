@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount, watch, Ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, Ref, watch } from 'vue'
 
 import { Screen } from '@/plugins'
 
@@ -20,7 +20,7 @@ type Columns = number | Array<number | string> | null
 
 interface Props {
 	vertical?: boolean
-	gap?: 'xs' | 's' | 'm' | 'l'
+	gap?: 'xs' | 's' | 'm' | 'l' | 'xl'
 	verAlign?: Align
 	horAlign?: Align
 	columns?: Columns
@@ -141,6 +141,9 @@ const style = computed(() => {
 	}
 	&._gap-l {
 		gap: 16px;
+	}
+	&._gap-xl {
+		gap: 20px;
 	}
 }
 </style>

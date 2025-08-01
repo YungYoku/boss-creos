@@ -56,7 +56,7 @@ import { emptyUser, IUser } from '@/interfaces/User.ts'
 interface Props {
 	user?: IUser | null | undefined
 	self?: boolean
-	size?: 'xs' | 's' | 'm' | 'l'
+	size?: 'xs' | 's' | 'm' | 'l' | 'xl'
 	editable?: boolean
 }
 
@@ -70,17 +70,10 @@ const props = withDefaults(defineProps<Props>(), {
 const auth = useAuthStore()
 
 const avatar = computed(() => {
-	if (props.user && !props.self) {
-		if (props.user.avatar) {
-			return `${import.meta.env.VITE_API}/files/users/${props.user.id}/${props.user.avatar}`
-		}
-	} else {
-		if (auth.user.avatar) {
-			return `${import.meta.env.VITE_API}/files/_pb_users_auth_/${auth.user.id}/${auth.user.avatar}`
-		}
-	}
+	const avatar = props.user?.expand?.avatar
+	if (!avatar) return null
 
-	return null
+	return `${import.meta.env.VITE_API}/files/${avatar.collectionId}/${avatar.id}/${avatar.original_image}`
 })
 
 const style = computed(() => {
@@ -181,6 +174,13 @@ const removeAvatar = () => loadImage('')
 		max-width: 160px;
 		min-height: 160px;
 		max-height: 160px;
+	}
+
+	&._xl {
+		min-width: 400px;
+		max-width: 400px;
+		min-height: 400px;
+		max-height: 400px;
 	}
 
 	&._editable {

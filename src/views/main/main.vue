@@ -44,10 +44,10 @@
 		</div>
 
 		<div
-			v-if="creatives.length || loadingProject"
+			v-if="creatives.length || loadingCreatives"
 			class="main__creatives"
 		>
-			<template v-if="loadingProject">
+			<template v-if="loadingCreatives">
 				<EmptyCreativeCard
 					v-for="i in 8"
 					:key="i"
@@ -79,24 +79,24 @@ import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
 import { CreativeCard, EmptyCreativeCard } from '@/components/blocks'
 import { Http } from '@/plugins'
 
-const loadingProject = ref(true)
+const loadingCreatives = ref(true)
 const creatives: Ref<Array<ICreative>> = ref([])
-const loadProject = async () => {
-	loadingProject.value = true
+const loadCreatives = async () => {
+	loadingCreatives.value = true
 
 	await Http
 		.get<ICreatives>('/collections/creatives/records', {
 			filter: 'status=\'approved\'',
-			expand: ['preview', 'video', 'creator'],
+			expand: ['preview', 'video', 'creator', 'creator.avatar'],
 			perPage: 12
 		})
 		.then(res => {
 			creatives.value = res.items
 		})
 
-	loadingProject.value = false
+	loadingCreatives.value = false
 }
-loadProject()
+loadCreatives()
 </script>
 
 <style scoped lang="scss">

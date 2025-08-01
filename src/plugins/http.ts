@@ -48,7 +48,7 @@ class Http {
 		if (query.filter) {
 			result += 'filter=' + query.filter + '&'
 		}
-		if (query.expand) {
+		if (query.expand && query.expand.length > 0) {
 			result += 'expand=' + query.expand.join(',') + '&'
 		}
 		if (query.perPage) {
@@ -57,7 +57,7 @@ class Http {
 		if (query.sort) {
 			result += 'sort=' + query.sort + '&'
 		}
-		if (query.fields) {
+		if (query.fields && query.fields.length > 0) {
 			result += 'fields=' + query.fields.join(',') + '&'
 		}
 		return result.slice(0, -1)

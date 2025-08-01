@@ -25,7 +25,7 @@ const props = defineProps({
 		type: String,
 		default: 's',
 		validator: (size: string) => {
-			return ['xs', 's', 'm', 'l'].includes(size)
+			return ['xs', 's', 'm', 'l', 'xl'].includes(size)
 		}
 	},
 	colors: {
@@ -75,10 +75,16 @@ const src = computed(() => {
         max-height: 30px;
     }
 
-    &_l {
+	&_l {
 		width: 40px;
-        max-width: 40px;
-        max-height: 40px;
-    }
+		max-width: 40px;
+		max-height: 40px;
+	}
+
+	&_xl {
+		width: 50px;
+		max-width: 50px;
+		max-height: 50px;
+	}
 }
 </style>

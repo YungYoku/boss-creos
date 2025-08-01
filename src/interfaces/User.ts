@@ -3,6 +3,7 @@ import { IProject } from '@/interfaces/Project.ts'
 import { IRating } from '@/interfaces/Rating.ts'
 import { INotification } from '@/interfaces/Notification.ts'
 import { IBasket } from '@/interfaces/Creative.ts'
+import { IImage } from '@/interfaces/File.ts'
 
 export type TransactionType = 'deposit' | 'withdraw'
 
@@ -39,7 +40,9 @@ export interface IUser {
 	telegram: string
 	balance: number
 	transactions: Array<string>
+	status: 'approved' | 'moderation'
 	expand?: {
+		avatar?: IImage
 		referral_code?: IReferralCode
 		favorite?: Array<IProject>
 		rating?: Array<IRating>
@@ -76,7 +79,8 @@ export const emptyUser: IUser = {
 	baskets: [],
 	telegram: '',
 	balance: 0,
-	transactions: []
+	transactions: [],
+	status: 'moderation',
 }
 
 export interface IUsers {

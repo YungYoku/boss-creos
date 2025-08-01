@@ -6,31 +6,31 @@
 					:columns="4"
 					@keyup.enter="loadData"
 				>
-					<SelectLive
+					<SelectLiveRich
 						v-model="form.geo.value"
 						label="Свободные гео"
 						api="geo"
 					/>
 
-					<Select
+					<SelectRich
 						v-model="form.type.value"
 						label="Вид крео"
 						:items="creativeTypeItems"
 					/>
 
-					<SelectLive
+					<SelectLiveRich
 						v-model="form.slot.value"
 						label="Слот"
 						api="slots"
 					/>
 
-					<SelectLive
+					<SelectLiveRich
 						v-model="form.approach.value"
 						label="Подход"
 						api="approaches"
 					/>
 
-					<Select
+					<SelectRich
 						v-model="form.ratio.value"
 						label="Размер"
 						:items="ratioItems"
@@ -40,6 +40,7 @@
 				<Grid vertical>
 					<Button
 						:disabled="loading"
+						variant="outline"
 						@click="loadData"
 					>
 						Применить
@@ -47,6 +48,7 @@
 
 					<Button
 						:disabled="loading"
+						variant="outline"
 						@click="form.reset"
 					>
 						Очистить
@@ -85,7 +87,7 @@ import { Ref, ref } from 'vue'
 import { useSearchStore } from '@/stores/search.ts'
 
 import { Grid, Island } from '@/components/structures'
-import { Button, CreativeCard, EmptyCreativeCard, Select, SelectLive } from '@/components/blocks'
+import { Button, CreativeCard, EmptyCreativeCard, SelectLiveRich, SelectRich } from '@/components/blocks'
 import { creativeTypeItems, ICreative, ICreatives, ICreativeType, IRatio, ratioItems } from '@/interfaces/Creative.ts'
 import { Form, Http } from '@/plugins'
 

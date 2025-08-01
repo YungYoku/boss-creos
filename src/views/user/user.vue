@@ -1,13 +1,8 @@
 <template>
-	<Grid
-		:columns="1"
-		vertical
-		class="user"
-	>
+	<div class="user">
 		<Grid
-			:columns-xl="['160px', 1, '48px']"
-			:columns-m="1"
-			gap="l"
+			:columns-xl="['400px', 1]"
+			gap="xl"
 		>
 			<Grid
 				vertical
@@ -15,124 +10,98 @@
 				hor-align="center"
 			>
 				<Avatar
-					size="l"
+					size="xl"
 					:user="user"
 				/>
-
-				<Text
-					:loading="loading"
-					loading-width="100px"
-					size="xs"
-				>
-					Рейтинг: {{ $format('number', averageRating, 2) }}
-				</Text>
 			</Grid>
 
 			<Grid
 				:columns="1"
 				vertical
 			>
-				<Text
-					:loading="loading"
+				<div
+					class="user__name"
 					size="m"
 				>
 					{{ user?.username }}
-				</Text>
+				</div>
 
-				<Grid :columns="['100px', '200px']">
-					<Text
-						:loading="loading"
-						loading-width="100px"
-						size="xs"
-					>
-						Отзывы: {{ user?.rating.length }}
-					</Text>
-
-					<Text
-						:loading="loading"
-						loading-width="200px"
-						size="xs"
-					>
-						Завершенных заданий: {{ user?.rating.length ?? 0 }}
-					</Text>
-				</Grid>
+				<div
+					class="user__description"
+					size="m"
+				>
+					{{ user?.description }}
+				</div>
 			</Grid>
-
-			<Button
-				v-if="isItMyProfile"
-				:disabled="loading"
-				@click="router.push(`/profile`)"
-			>
-				<Icon
-					:colors="['dark', 'light']"
-					name="pencil"
-				/>
-			</Button>
 		</Grid>
 
-		<Text
-			class="user__about-me"
-			size="m"
+		<div
+			v-if="creatives.length || loadingCreatives"
+			class="user__creatives"
 		>
-			Обо мне
-		</Text>
-		<Text
-			:loading="loading"
-			loading-width="600px"
-			size="xs"
-		>
-			{{ user?.description }}
-		</Text>
-
-		<template v-if="!loading">
-			<CardRating
-				v-for="rating in user?.expand?.rating"
-				:key="rating.id"
-				:rating="rating"
-			/>
-		</template>
-	</Grid>
+			<template v-if="loadingCreatives">
+				<EmptyCreativeCard
+					v-for="i in 8"
+					:key="i"
+					class="main__creatives-item"
+				/>
+			</template>
+			<template v-else>
+				<CreativeCard
+					v-for="creative in creatives"
+					:key="creative.id"
+					class="main__creatives-item"
+					:creative="creative"
+				/>
+			</template>
+		</div>
+	</div>
 </template>
 
 <script setup lang="ts">
-import { computed, Ref, ref, watch } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import { useAuthStore } from '@/stores/auth.ts'
+import { Ref, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 
 import { Http } from '@/plugins'
 import { Grid } from '@/components/structures'
-import { Avatar, Button } from '@/components/blocks'
-import { Text } from '@/components/elements'
+import { Avatar, CreativeCard, EmptyCreativeCard } from '@/components/blocks'
 import { IUser } from '@/interfaces/User.ts'
-import { CardRating } from '@/components/blocks'
-import Icon from '@/components/elements/icon/icon.vue'
+import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
 
 const route = useRoute()
-const router = useRouter()
 
 const loading = ref(true)
 const user: Ref<IUser | null> = ref(null)
-const isItMyProfile = ref(false)
-const auth = useAuthStore()
 
-const averageRating = computed(() => {
-	const rating = user.value?.expand?.rating
-	if (rating) {
-		return rating.reduce((result, current) => result + current.stars, 0) / rating.length
-	}
-	return 0
-})
+const loadingCreatives = ref(true)
+const creatives: Ref<Array<ICreative>> = ref([])
+
+const loadCreatives = async () => {
+	loadingCreatives.value = true
+
+	await Http
+		.get<ICreatives>('/collections/creatives/records', {
+			filter: `status='approved'&&creator=${route.params.id}`,
+			expand: ['preview', 'video', 'creator'],
+			perPage: 12
+		})
+		.then(res => {
+			creatives.value = res.items
+		})
+
+	loadingCreatives.value = false
+}
+loadCreatives()
 
 const loadUser = async () => {
 	loading.value = true
 
 	await Http
 		.get<IUser>(`/collections/users/records/${route.params.id}`, {
-			expand: ['university', 'disciplines', 'rating', 'rating.by']
+			expand: ['avatar']
 		})
 		.then(res => {
 			user.value = res
-			isItMyProfile.value = user.value.id === auth.user.id
 		})
 
 	loading.value = false
@@ -142,10 +111,50 @@ watch(() => route.params.id, loadUser, { immediate: true })
 
 <style scoped lang="scss">
 .user {
-	max-width: 768px;
+	width: 1240px;
+	max-width: 100%;
 
-	&__about-me {
-		margin-top: 32px;
+	&__name {
+		font-weight: 600;
+		font-size: 40px;
+	}
+
+	&__description {
+		font-weight: 300;
+		font-size: 16px;
+	}
+
+	&__creatives {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		align-items: center;
+
+		width: 100%;
+		max-width: 100%;
+		gap: 20px;
+
+		margin: 120px auto 40px auto;
+
+		@media (max-width: 1024px) {
+			gap: 15px;
+		}
+
+		@media (max-width: 600px) {
+			gap: 15px;
+		}
+	}
+
+	&__creatives-item.creative-card {
+		max-width: calc((100% - 40px) / 3);
+
+		@media (max-width: 1024px) {
+			max-width: calc((100% - 15px) / 2);
+		}
+
+		@media (max-width: 600px) {
+			max-width: 100%;
+		}
 	}
 }
 </style>

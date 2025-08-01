@@ -31,11 +31,11 @@ const loadDesigners = async () => {
 	await Http
 		.get<IUsers>('/collections/users/records', {
 			filter: 'role=\'designer\'',
+			expand: ['avatar'],
 			perPage: 12
 		})
 		.then(res => {
 			users.value = res.items
-			console.log(res.items)
 		})
 }
 
