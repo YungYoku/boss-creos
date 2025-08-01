@@ -1,84 +1,80 @@
 <template>
-	<div class="creative-card">
-		<img
-			v-if="badge"
-			src="@/assets/img/creative__badge.webp"
-			class="creative-card__badge"
-			alt=""
-		>
-
-		<Video
-			v-if="creative.expand?.video && creative.expand?.preview"
-			class="creative-card__video"
-			:src="creative.expand.video"
-			:preview="creative.expand.preview"
-		/>
-
-		<div class="creative-card__fade"/>
-
-		<div class="creative-card__user">
-			<User
-				link
-				:user="creative.expand?.creator ?? emptyUser"
+	<Card class="creative-card">
+		<template #video>
+			<Video
+				v-if="creative.expand?.video && creative.expand?.preview"
+				class="creative-card__video"
+				:src="creative.expand.video"
+				:preview="creative.expand.preview"
 			/>
+		</template>
 
-			<Icon
-				v-if="auth.isBuyer"
-				name="heart"
-				size="m"
-			/>
+		<template #footer>
+			<div class="creative-card__user">
+				<User
+					link
+					:user="creative.expand?.creator ?? emptyUser"
+				/>
 
-			<Icon
-				v-if="auth.isDesigner && isItMine"
-				name="settings"
-				size="m"
-			/>
-		</div>
+				<Icon
+					v-if="auth.isBuyer"
+					name="heart"
+					size="m"
+				/>
 
-		<SelectLive
-			v-if="auth.isBuyer && forSale"
-			v-model="geo"
-			class="creative-card__select-geo"
-			label="Указать гео"
-			api="geo"
-			multiple
-			:exclude="excludeGeo"
-		/>
-
-		<div class="creative-card__info">
-			<div class="creative-card__price">
-				{{ creative.price }}$
+				<Icon
+					v-if="auth.isDesigner && isItMine"
+					name="settings"
+					size="m"
+				/>
 			</div>
 
-			<button
+			<SelectLive
 				v-if="auth.isBuyer && forSale"
-				class="creative-card__action"
-				@click="addToBasket"
-			>
-				Купить
-			</button>
-			<router-link
-				v-else-if="auth.isDesigner && isItMine"
-				:to="`/creative/${creative.id}/edit`"
-				class="creative-card__action"
-			>
-				Редактировать
-			</router-link>
-			<router-link
-				v-else-if="!isDetailPage"
-				:to="`/creative/${creative.id}`"
-				class="creative-card__action"
-			>
-				Подробнее
-			</router-link>
-		</div>
-	</div>
+				v-model="geo"
+				class="creative-card__select-geo"
+				label="Указать гео"
+				api="geo"
+				multiple
+				:exclude="excludeGeo"
+			/>
+
+			<div class="creative-card__info">
+				<div class="creative-card__price">
+					{{ creative.price }}$
+				</div>
+
+				<button
+					v-if="auth.isBuyer && forSale"
+					class="creative-card__action"
+					@click="addToBasket"
+				>
+					Купить
+				</button>
+				<router-link
+					v-else-if="auth.isDesigner && isItMine"
+					:to="`/creative/${creative.id}/edit`"
+					class="creative-card__action"
+				>
+					Редактировать
+				</router-link>
+				<router-link
+					v-else-if="!isDetailPage"
+					:to="`/creative/${creative.id}`"
+					class="creative-card__action"
+				>
+					Подробнее
+				</router-link>
+			</div>
+		</template>
+	</Card>
 </template>
 
 <script setup lang="ts">
 import { computed, PropType, ref, Ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.ts'
+import { Card } from '@/components/structures'
 import { SelectLive, User } from '@/components/blocks'
 import { Icon, Video } from '@/components/elements'
 import { emptyUser, IUser } from '@/interfaces/User.ts'
@@ -164,28 +160,6 @@ const addToBasket = async () => {
 
 <style scoped lang="scss">
 .creative-card {
-	position: relative;
-
-	max-width: 400px;
-	padding: 16px 8px;
-
-	background: #0F0F10;
-	border: 1px solid #1D1D20;
-	border-radius: 16px;
-	
-	@media (max-width: 1024px) {
-		max-width: 300px;
-	}
-
-	&__badge {
-		position: absolute;
-		top: -35px;
-		left: calc(50% - 47px);
-
-		width: 95px;
-		height: 70px;
-	}
-
 	&__video {
 		width: 100%;
 		max-width: 100%;
@@ -241,17 +215,6 @@ const addToBasket = async () => {
 		text-align: center;
 
 		background: #525252;
-	}
-
-	&__fade {
-		position: relative;
-		z-index: 1;
-
-		width: 100%;
-		height: 80px;
-		margin: -80px 0 0 0;
-
-		background: linear-gradient(to top, rgba(15, 15, 16, 1) 5px, transparent);
 	}
 }
 </style>

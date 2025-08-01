@@ -1,13 +1,13 @@
 <template>
 	<div
-		class="card"
+		class="card-auth"
 		:style="{
 			width
 		}"
 	>
 		<div
 			v-if="title"
-			class="card__title"
+			class="card-auth__title"
 		>
 			{{ title }}
 		</div>
@@ -15,7 +15,7 @@
 		<Grid
 			vertical
 			gap="l"
-			class="card__content"
+			class="card-auth__content"
 		>
 			<slot/>
 		</Grid>
@@ -23,7 +23,7 @@
 		<Grid
 			v-if="$slots.footer"
 			vertical
-			class="card__footer"
+			class="card-auth__footer"
 			gap="xs"
 		>
 			<slot name="footer"/>
@@ -47,7 +47,7 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-.card {
+.card-auth {
 	max-width: 100%;
 
 	&__title {
