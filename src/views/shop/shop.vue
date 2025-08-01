@@ -185,6 +185,7 @@ loadData()
 
 	&__creatives-item.creative-card {
 		max-width: calc((100% - 40px) / 3);
+		width: 100%;
 
 		@media (max-width: 1024px) {
 			max-width: calc((100% - 15px) / 2);

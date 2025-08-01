@@ -1,6 +1,6 @@
 <template>
 	<Card class="creative-card">
-		<template #video>
+		<template #image>
 			<Video
 				v-if="creative.expand?.video && creative.expand?.preview"
 				class="creative-card__video"
@@ -160,6 +160,8 @@ const addToBasket = async () => {
 
 <style scoped lang="scss">
 .creative-card {
+	max-width: 378px;
+
 	&__video {
 		width: 100%;
 		max-width: 100%;

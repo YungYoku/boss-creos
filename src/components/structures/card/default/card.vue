@@ -7,7 +7,7 @@
 			alt=""
 		>
 
-		<slot name="video"/>
+		<slot name="image"/>
 
 		<div class="card__fade"/>
 
@@ -28,7 +28,6 @@ defineProps({
 .card {
 	position: relative;
 
-	max-width: 400px;
 	padding: 16px 8px;
 
 	background: #0F0F10;
