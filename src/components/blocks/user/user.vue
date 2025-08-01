@@ -25,7 +25,7 @@
 			</div>
 
 			<div class="user__bought-amount">
-				Купили {{ boughtAmount }} раз
+				Кол-во продаж: {{ boughtAmount }}
 			</div>
 		</div>
 	</component>

@@ -1,7 +1,7 @@
 <template>
 	<AuthLayout class="registration">
 		<div class="registration__content">
-			<Card
+			<CardAuth
 				width="400px"
 				title="Регистрация"
 				@keyup.enter="register"
@@ -87,7 +87,7 @@
 						</router-link>
 					</div>
 				</template>
-			</Card>
+			</CardAuth>
 
 			<AuthSlots/>
 		</div>
@@ -100,7 +100,7 @@ import { useRouter } from 'vue-router'
 import { useToast } from '@/stores/toast.ts'
 
 import { AuthLayout } from '@/components/layouts'
-import { Card } from '@/components/structures'
+import { CardAuth } from '@/components/structures'
 import { AuthSlots } from '@/components/sections'
 import { Button, Input } from '@/components/blocks'
 import { Text } from '@/components/elements'

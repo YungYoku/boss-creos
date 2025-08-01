@@ -2,6 +2,7 @@ import { defineAsyncComponent } from 'vue'
 
 const Table = defineAsyncComponent(() => import('./table/table.vue'))
 const Card = defineAsyncComponent(() => import('./card/default/card.vue'))
+const CardAuth = defineAsyncComponent(() => import('./card/auth/cardAuth.vue'))
 const CardLong = defineAsyncComponent(() => import('./card/long/cardLong.vue'))
 const Dropdown = defineAsyncComponent(() => import('./dropdown.vue'))
 const FieldWrapperRich = defineAsyncComponent(() => import('./fieldWrapperRich.vue'))
@@ -15,6 +16,7 @@ const StepByStep = defineAsyncComponent(() => import('./stepByStep.vue'))
 export {
 	Table,
 	Card,
+	CardAuth,
 	CardLong,
 	Dropdown,
 	FieldWrapperRich,

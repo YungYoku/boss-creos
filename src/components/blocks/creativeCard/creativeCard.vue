@@ -164,7 +164,6 @@ const addToBasket = async () => {
 
 <style scoped lang="scss">
 .creative-card {
-
 	position: relative;
 
 	max-width: 400px;

@@ -3,7 +3,6 @@ import { defineAsyncComponent } from 'vue'
 const Avatar = defineAsyncComponent(() => import('./avatar/avatar.vue'))
 const Button = defineAsyncComponent(() => import('./button/button.vue'))
 const Calendar = defineAsyncComponent(() => import('./calendar/calendar.vue'))
-const CardRating = defineAsyncComponent(() => import('./cardRating/cardRating.vue'))
 const Checkbox = defineAsyncComponent(() => import('./checkbox/checkbox.vue'))
 const CreativeCard = defineAsyncComponent(() => import('./creativeCard/creativeCard.vue'))
 const DatePicker = defineAsyncComponent(() => import('./datePicker/datePicker.vue'))
@@ -37,7 +36,6 @@ export {
 	Avatar,
 	Button,
 	Calendar,
-	CardRating,
 	Checkbox,
 	CreativeCard,
 	DatePicker,

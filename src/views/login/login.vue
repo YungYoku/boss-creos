@@ -1,7 +1,7 @@
 <template>
 	<AuthLayout class="login">
 		<div class="login__content">
-			<Card
+			<CardAuth
 				width="400px"
 				title="Вход"
 				@keyup.enter="login"
@@ -52,7 +52,7 @@
 						</Text>
 					</router-link>
 				</template>
-			</Card>
+			</CardAuth>
 
 			<AuthSlots/>
 		</div>
@@ -66,7 +66,7 @@ import { useAuthStore } from '@/stores/auth.ts'
 import { useToast } from '@/stores/toast.ts'
 
 import { AuthLayout } from '@/components/layouts'
-import { Card } from '@/components/structures'
+import { CardAuth } from '@/components/structures'
 import { AuthSlots } from '@/components/sections'
 import { Button, Input } from '@/components/blocks'
 import { Text } from '@/components/elements'

@@ -1,0 +1,68 @@
+<template>
+	<div
+		class="card"
+		:style="{
+			width
+		}"
+	>
+		<div
+			v-if="title"
+			class="card__title"
+		>
+			{{ title }}
+		</div>
+
+		<Grid
+			vertical
+			gap="l"
+			class="card__content"
+		>
+			<slot/>
+		</Grid>
+
+		<Grid
+			v-if="$slots.footer"
+			vertical
+			class="card__footer"
+			gap="xs"
+		>
+			<slot name="footer"/>
+		</Grid>
+	</div>
+</template>
+
+<script setup lang="ts">
+import { Grid } from '@/components/structures'
+
+defineProps({
+	width: {
+		type: String,
+		default: '300px'
+	},
+	title: {
+		type: String,
+		default: null
+	}
+})
+</script>
+
+<style lang="scss" scoped>
+.card {
+	max-width: 100%;
+
+	&__title {
+		padding: 16px 20px 4px 20px;
+
+		font-size: 32px;
+		font-weight: 700;
+	}
+
+	&__content {
+		padding: 20px;
+	}
+
+	&__footer {
+		padding: 0 20px 20px 20px;
+	}
+}
+</style>

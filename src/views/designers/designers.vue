@@ -78,10 +78,11 @@ loadData()
 	}
 
 	&__item {
-		max-width: calc((100% - 40px) / 3);
+		max-width: calc((100% / 3) - 40px);
+		width: 100%;
 
 		@media (max-width: 1024px) {
-			max-width: calc((100% - 15px) / 2);
+			max-width: calc((100% / 2) - 15px);
 		}
 
 		@media (max-width: 600px) {
