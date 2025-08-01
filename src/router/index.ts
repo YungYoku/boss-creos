@@ -148,7 +148,8 @@ const routes: Array<RouteRecordRaw> = [
 				name: 'Balance',
 				component: () => import('@/views/balance/balance.vue'),
 				meta: {
-					rules: ['auth']
+					rules: ['auth'],
+					bgClass: 'shop'
 				}
 			},
 			{

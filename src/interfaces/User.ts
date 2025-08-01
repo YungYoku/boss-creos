@@ -4,6 +4,18 @@ import { IRating } from '@/interfaces/Rating.ts'
 import { INotification } from '@/interfaces/Notification.ts'
 import { IBasket } from '@/interfaces/Creative.ts'
 
+export type TransactionType = 'deposit' | 'withdraw'
+
+export interface Transaction {
+	collectionId: string
+	collectionName: string
+	created: Date
+	updated: Date
+	id: string
+	amount: number
+	type: TransactionType
+}
+
 export interface IUser {
 	avatar: string
 	collectionId: string
@@ -26,12 +38,14 @@ export interface IUser {
 	baskets: Array<string>
 	telegram: string
 	balance: number
+	transactions: Array<string>
 	expand?: {
 		referral_code?: IReferralCode
 		favorite?: Array<IProject>
 		rating?: Array<IRating>
 		notifications?: Array<INotification>
 		baskets?: Array<IBasket>
+		transactions?: Array<Transaction>
 	}
 }
 
@@ -61,7 +75,8 @@ export const emptyUser: IUser = {
 	notifications: [],
 	baskets: [],
 	telegram: '',
-	balance: 0
+	balance: 0,
+	transactions: []
 }
 
 export interface IUsers {

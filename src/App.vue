@@ -20,7 +20,7 @@ const loadUserInfo = async () => {
 		await Http
 			.post<IUserRefresh>('/collections/users/auth-refresh', {
 			}, {
-				expand: ['baskets', 'baskets.creative', 'baskets.creative.preview', 'baskets.creative.slot', 'baskets.geo']
+				expand: ['baskets', 'baskets.creative', 'baskets.creative.preview', 'baskets.creative.slot', 'baskets.geo', 'transactions']
 			})
 			.then(({ token, record }) => {
 				auth.setToken(token)

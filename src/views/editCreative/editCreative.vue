@@ -4,28 +4,29 @@
 		vertical
 		:columns="1"
 		gap="l"
-		class="new-creative"
+		class="edit-creative"
 	>
 		<Island>
 			<Grid vertical>
 				<Text
 					size="m"
 					:loading="loading"
-					class="new-creative__title"
+					class="edit-creative__title"
 				>
 					Добавить креатив
 				</Text>
 
 				<Grid :columns="2">
 					<Grid vertical>
-						<Input
+						<InputRich
 							v-model="creative.price.value"
 							:disabled="loading"
 							:error="creative.price.error"
+							type="number"
 							label="Цена"
 						/>
 
-						<SelectLive
+						<SelectLiveRich
 							v-model="creative.geo.value"
 							:disabled="loading"
 							:error="creative.geo.error"
@@ -33,7 +34,7 @@
 							api="geo"
 						/>
 
-						<SelectLive
+						<SelectLiveRich
 							v-model="creative.slot.value"
 							:disabled="loading"
 							:error="creative.slot.error"
@@ -41,7 +42,7 @@
 							api="slots"
 						/>
 
-						<Select
+						<SelectRich
 							v-model="creative.type.value"
 							:disabled="loading"
 							:error="creative.type.error"
@@ -50,22 +51,22 @@
 							label="Вид крео"
 						/>
 
-						<Switcher
+						<SwitcherRich
 							v-model="creative.watermark.value"
 							:disabled="loading"
 							:error="creative.watermark.error"
 							label="Водяной знак"
 						/>
 
-						<InputImage
+						<InputImageRich
 							v-model="creative.preview.value"
 							:disabled="loading"
 							:error="creative.preview.error"
 							accept=".gif,.jpg,.jpeg,.png,.webp"
-							label="Обложка"
+							:label="creative.type.value === 'static' ? 'Загрузите крео' : 'Обложка'"
 						/>
 
-						<SelectLive
+						<SelectLiveRich
 							v-model="creative.unavailableGeo.value"
 							:disabled="loading"
 							multiple
@@ -76,7 +77,7 @@
 					</Grid>
 
 					<Grid vertical>
-						<Select
+						<SelectRich
 							v-model="creative.ratio.value"
 							:disabled="loading"
 							:error="creative.ratio.error"
@@ -84,7 +85,7 @@
 							label="Размер"
 						/>
 
-						<Switcher
+						<SwitcherRich
 							v-model="creative.resize.value"
 							:disabled="loading"
 							:error="creative.resize.error"
@@ -94,19 +95,20 @@
 						<Button
 							v-if="creative.resize.value"
 							:disabled="loading"
+							variant="outline"
 							@click="modalShowing = true"
 						>
 							Ресайз
 						</Button>
 
-						<Switcher
+						<SwitcherRich
 							v-model="creative.reskin.value"
 							:disabled="loading"
 							:error="creative.reskin.error"
 							label="Рескин"
 						/>
 
-						<Input
+						<InputRich
 							v-if="creative.reskin.value"
 							v-model="creative.reskinPrice.value"
 							:disabled="loading"
@@ -114,7 +116,8 @@
 							label="Цена рескина"
 						/>
 
-						<SelectLive
+						<SelectLiveRich
+							v-if="creative.type.value !== 'static'"
 							v-model="creative.approach.value"
 							:disabled="loading"
 							:error="creative.approach.error"
@@ -122,7 +125,8 @@
 							api="approaches"
 						/>
 
-						<InputVideo
+						<InputVideoRich
+							v-if="creative.type.value !== 'static'"
 							v-model="creative.video.value"
 							:disabled="loading"
 							:error="creative.video.error"
@@ -132,7 +136,7 @@
 					</Grid>
 				</Grid>
 
-				<Textarea
+				<TextareaRich
 					v-model="creative.description.value"
 					:disabled="loading"
 					:error="creative.description.error"
@@ -141,7 +145,8 @@
 
 				<Button
 					:disabled="loading"
-					class="new-creative__submit"
+					class="edit-creative__submit"
+					variant="outline"
 					@click="update"
 				>
 					Отправить на модерацию
@@ -164,7 +169,7 @@
 				v-for="item in ratioItems"
 				:key="item.id"
 			>
-				<Input
+				<InputRich
 					v-if="creative.resizePrices.value?.[item.name]"
 					v-model="creative.resizePrices.value[item.name].value"
 					:disabled="loading"
@@ -184,7 +189,16 @@ import { useToast } from '@/stores/toast.ts'
 import { useAuthStore } from '@/stores/auth.ts'
 
 import { Grid, Island, Modal } from '@/components/structures'
-import { Button, Input, InputImage, InputVideo, Select, SelectLive, Switcher, Textarea } from '@/components/blocks'
+import {
+	Button,
+	InputImageRich,
+	InputRich,
+	InputVideoRich,
+	SelectLiveRich,
+	SelectRich,
+	SwitcherRich,
+	TextareaRich
+} from '@/components/blocks'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
 import { creativeTypeItems, emptyCreative, ICreative, ratioItems } from '@/interfaces/Creative.ts'
@@ -298,7 +312,7 @@ const modalShowing = ref(false)
 </script>
 
 <style scoped lang="scss">
-.new-creative {
+.edit-creative {
 	max-width: 585px;
 
 	&__title {
