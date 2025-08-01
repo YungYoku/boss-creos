@@ -135,7 +135,7 @@ const loadCreatives = async () => {
 	await Http
 		.get<ICreatives>('/collections/creatives/records', {
 			filter: encodedFilter,
-			expand: ['preview', 'video', 'creator'],
+			expand: ['preview', 'video', 'creator', 'creator.avatar'],
 			perPage: 12
 		})
 		.then(res => {

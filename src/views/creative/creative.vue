@@ -86,7 +86,7 @@ const loadProject = async () => {
 
 	await Http
 		.get<ICreative>(`/collections/creatives/records/${id}`, {
-			expand: ['creator', 'preview', 'video', 'slot', 'geo', 'approach']
+			expand: ['creator', 'creator.avatar', 'preview', 'video', 'slot', 'geo', 'approach']
 		})
 		.then(response => {
 			if (response.status === 'moderation') {

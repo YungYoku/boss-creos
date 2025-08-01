@@ -82,7 +82,7 @@ const loadCreatives = async () => {
 	await Http
 		.get<ICreatives>('/collections/creatives/records', {
 			filter: `status='approved'&&creator=${route.params.id}`,
-			expand: ['preview', 'video', 'creator'],
+			expand: ['preview', 'video', 'creator', 'creator.avatar'],
 			perPage: 12
 		})
 		.then(res => {
