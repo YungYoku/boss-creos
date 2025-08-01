@@ -30,15 +30,34 @@
 			</div>
 		</div>
 
-		<div class="balance__history">
-			<div
-				v-for="transaction in transactions"
-				:key="transaction.id"
-				class="balance__transaction"
-			>
-				${{ transaction.amount }}, type: {{ transaction.type }}
+		<CardLong
+			v-for="transaction in transactions"
+			:key="transaction.id"
+			class="balance__transaction"
+		>
+			<template #icon>
+				<img
+					src="./icons/tether.svg"
+					alt=""
+				>
+			</template>
+
+			<div class="balance__transaction-content">
+				<div class="balance__transaction-value">
+					{{ transaction.type === 'deposit' ? 'Пополнение' : 'Списание' }} ${{ transaction.amount }}
+				</div>
+				<div class="balance__transaction-date">
+					{{ $date(transaction.created) }}
+				</div>
 			</div>
-		</div>
+		</CardLong>
+
+		<CardLong
+			v-if="transactions?.length === 0"
+			class="balance__transaction"
+		>
+			Нет данных
+		</CardLong>
 	</div>
 
 	<Modal
@@ -65,7 +84,7 @@
 <script setup lang="ts">
 import { computed, Ref, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
-import { Modal } from '@/components/structures'
+import { CardLong, Modal } from '@/components/structures'
 import { Input } from '@/components/blocks'
 import { Http } from '@/plugins'
 import { IUser, Transaction, TransactionType } from '@/interfaces/User.ts'
@@ -177,19 +196,15 @@ const showWithdrawModal = () => {
 		cursor: pointer;
 	}
 
-	&__history {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		gap: 20px;
+	&__transaction-value {
+		font-weight: 500;
+		font-size: 14px;
+	}
 
-		padding: 24px 15px;
-
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.08) 100%),
-		radial-gradient(50% 100% at 50% 0%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
-		border: 1px solid;
-		border-radius: 10px;
-		border-image-source: linear-gradient(135.28deg, rgba(255, 255, 255, 0.3) -128.53%, rgba(255, 255, 255, 0) 75.12%);
+	&__transaction-date {
+		font-weight: 500;
+		font-size: 11px;
+		color: #AFAFB7;
 	}
 }
 </style>

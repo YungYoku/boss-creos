@@ -1,7 +1,8 @@
 import { defineAsyncComponent } from 'vue'
 
 const Table = defineAsyncComponent(() => import('./table/table.vue'))
-const Card = defineAsyncComponent(() => import('./card.vue'))
+const Card = defineAsyncComponent(() => import('./card/default/card.vue'))
+const CardLong = defineAsyncComponent(() => import('./card/long/cardLong.vue'))
 const Dropdown = defineAsyncComponent(() => import('./dropdown.vue'))
 const FieldWrapperRich = defineAsyncComponent(() => import('./fieldWrapperRich.vue'))
 const Grid = defineAsyncComponent(() => import('./grid.vue'))
@@ -14,6 +15,7 @@ const StepByStep = defineAsyncComponent(() => import('./stepByStep.vue'))
 export {
 	Table,
 	Card,
+	CardLong,
 	Dropdown,
 	FieldWrapperRich,
 	Grid,

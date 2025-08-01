@@ -3,55 +3,55 @@
 	<div class="shopping-cart">
 		<span v-if="baskets.length === 0">Пусто</span>
 
-		<div
+		<CardLong
 			v-for="basket in baskets"
 			:key="basket.id"
-			class="shopping-cart__creative"
 		>
-			<Image
-				v-if="basket.expand?.creative?.expand?.preview"
-				class="shopping-cart__creative-image"
-				:src="basket.expand.creative.expand.preview"
-			/>
+			<template #icon>
+				<Image
+					v-if="basket.expand?.creative?.expand?.preview"
+					class="shopping-cart__creative-image"
+					:src="basket.expand.creative.expand.preview"
+				/>
+			</template>
 
-			<div class="shopping-cart__creative-info">
-				<div class="shopping-cart__creative-name">
-					{{ basket.expand?.creative?.expand?.slot?.name }}
+			<div class="shopping-cart__creative-name">
+				{{ basket.expand?.creative?.expand?.slot?.name }}
 
-					<div
-						class="shopping-cart__status"
-						:class="{
-							_pending: basket.status === 'pending',
-							_done: basket.status === 'done',
-						}"
-					/>
-				</div>
-
-				<div class="shopping-cart__creative-price">
-					Price: ${{ basket.expand?.creative?.price }}
-				</div>
-
-				<div class="shopping-cart__creative-geo">
-					Geo:
-					<span
-						v-for="(geo, index) in basket.expand?.geo"
-						:key="geo.id"
-						class="shopping-cart__creative-geo-item"
-					>
-						{{ geo.name }}
-						<template v-if="index < (basket?.expand?.geo?.length ?? 0) - 1">
-							/
-						</template>
-					</span>
-				</div>
+				<div
+					class="shopping-cart__status"
+					:class="{
+						_pending: basket.status === 'pending',
+						_done: basket.status === 'done',
+					}"
+				/>
 			</div>
-		</div>
+
+			<div class="shopping-cart__creative-price">
+				Price: ${{ basket.expand?.creative?.price }}
+			</div>
+
+			<div class="shopping-cart__creative-geo">
+				Geo:
+				<span
+					v-for="(geo, index) in basket.expand?.geo"
+					:key="geo.id"
+					class="shopping-cart__creative-geo-item"
+				>
+					{{ geo.name }}
+					<template v-if="index < (basket?.expand?.geo?.length ?? 0) - 1">
+						/
+					</template>
+				</span>
+			</div>
+		</CardLong>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
+import { CardLong } from '@/components/structures'
 import { Image } from '@/components/elements'
 
 const auth = useAuthStore()
@@ -78,21 +78,6 @@ const baskets = computed(() => {
 	border-radius: 10px;
 	border-image-source: linear-gradient(135.28deg, rgba(255, 255, 255, 0.3) -128.53%, rgba(255, 255, 255, 0) 75.12%);
 
-	&__creative {
-		display: flex;
-		align-items: center;
-
-		width: 100%;
-		padding: 0 15px 0 0;
-
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.08) 100%),
-		radial-gradient(50% 100% at 50% 0%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
-		border: 1px solid;
-		border-radius: 10px;
-		border-image-source: linear-gradient(135.28deg, rgba(255, 255, 255, 0.3) -128.53%, rgba(255, 255, 255, 0) 75.12%);
-		gap: 12px;
-	}
-
 	&__creative-image {
 		min-width: 57px;
 		max-width: 57px;
@@ -100,11 +85,6 @@ const baskets = computed(() => {
 		aspect-ratio: 1/1;
 
 		border-radius: 10px;
-	}
-
-	&__creative-info {
-		display: flex;
-		flex-direction: column;
 	}
 
 	&__creative-name {

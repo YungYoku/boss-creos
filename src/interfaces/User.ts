@@ -15,6 +15,7 @@ export interface Transaction {
 	id: string
 	amount: number
 	type: TransactionType
+	status: 'pending' | 'done'
 }
 
 export interface IUser {
