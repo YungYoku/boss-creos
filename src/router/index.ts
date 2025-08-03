@@ -177,7 +177,14 @@ const routes: Array<RouteRecordRaw> = [
 				meta: {
 					rules: ['auth', 'admin'],
 					bgClass: 'shop'
-				}
+				},
+				children: [
+					{
+						path: 'creatives',
+						name: 'ModerationCreatives',
+						component: () => import('@/views/moderation/creatives/moderationCreatives.vue'),
+					},
+				],
 			},
 			// {
 			// 	path: '/chats',
@@ -219,7 +226,6 @@ const body = document.querySelector('body')
 router.beforeEach((to, from) => {
 	const authStore = useAuthStore()
 	const toRules = (to.meta.rules ?? []) as Array<string>
-
 
 	const previousBgClass = (from.meta.bgClass ?? 'default') as string
 	const currentBgClass = (to.meta.bgClass ?? 'default') as string

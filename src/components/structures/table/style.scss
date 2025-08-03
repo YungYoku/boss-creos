@@ -153,4 +153,14 @@
 
 		background: #ed806f;
 	}
+
+	&__empty {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		width: 100%;
+
+		color: #000000;
+	}
 }

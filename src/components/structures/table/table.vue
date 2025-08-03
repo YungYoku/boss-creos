@@ -1,6 +1,9 @@
 <template>
 	<div class="table table_default">
-		<div class="table__inner">
+		<div
+			v-if="body.length > 0"
+			class="table__inner"
+		>
 			<div class="table__body">
 				<Header :data="header"/>
 
@@ -16,6 +19,13 @@
 					</template>
 				</Row>
 			</div>
+		</div>
+
+		<div
+			v-else
+			class="table__empty"
+		>
+			Пусто
 		</div>
 	</div>
 </template>
