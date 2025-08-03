@@ -10,23 +10,23 @@
 
 			<Grid :columns="2">
 				<InputRich
-					v-model="form.username.value"
-					:error="form.username.error"
+					v-model="user.username.value"
+					:error="user.username.error"
 					:disabled="loading"
 					label="Имя"
 				/>
 
 				<InputImageRich
-					v-model="form.avatar.value"
-					:error="form.avatar.error"
+					v-model="user.avatar.value"
+					:error="user.avatar.error"
 					:disabled="loading"
 					label="Аватар"
 				/>
 			</Grid>
 
 			<TextareaRich
-				v-model="form.description.value"
-				:error="form.description.error"
+				v-model="user.description.value"
+				:error="user.description.error"
 				:disabled="loading"
 				label="О себе"
 				height="240px"
@@ -50,32 +50,60 @@ import { useAuthStore } from '@/stores/auth.ts'
 import { useToast } from '@/stores/toast.ts'
 
 import { Form, Http } from '@/plugins'
-import { Grid } from '@/components/structures'
+import { Grid, Island } from '@/components/structures'
 import { Button, InputImageRich, InputRich, TextareaRich } from '@/components/blocks'
 import { emptyUser, IUser } from '@/interfaces/User.ts'
-import Island from '@/components/structures/island.vue'
 
 const auth = useAuthStore()
 const toast = useToast()
 
-const form = Form<IUser>({ ...emptyUser })
+const userBase = Form<IUser>({ ...emptyUser })
+const user = Form<IUser>({ ...emptyUser })
 
-watch(() => auth.user, () => form.set(auth.user), { immediate: true })
+watch(() => auth.user, () => {
+	user.set(auth.user)
+	userBase.set(auth.user)
+}, { immediate: true })
 
 const loading = ref(false)
 
+type ReadOnlyUserFields = 'id' | 'collectionId' | 'collectionName' | 'created' | 'changes' | 'expand'
+const getChanges = () => {
+	const currentCreative = userBase.get()
+	const updatedCreative = user.get()
+
+	const readonlyFields: Array<keyof IUser> = ['id', 'collectionId', 'collectionName', 'created', 'changes', 'expand'] as const
+	const currentCreativeKeys = Object.keys(currentCreative) as Array<keyof IUser>
+	const filteredKeys = currentCreativeKeys.filter(key => !readonlyFields.includes(key)) as Array<keyof Omit<IUser, ReadOnlyUserFields>>
+
+	const changes: Record<string, unknown> = {}
+	for (const key of filteredKeys) {
+		const currentValue = currentCreative[key]
+		const newValue = updatedCreative[key]
+		if (currentValue !== newValue && newValue != undefined) {
+			changes[key] = newValue
+		}
+	}
+
+	return changes
+}
+
 const save = async () => {
 	loading.value = true
-	form.clearErrors()
+	user.clearErrors()
 
 	await Http
-		.patch<IUser>(`/collections/users/records/${auth.user.id}`, form.get())
+		.patch<IUser>(`/collections/users/records/${auth.user.id}`, {
+			...userBase.get(),
+			status: 'moderation',
+			changes: getChanges()
+		})
 		.then((res) => {
 			auth.setUser(res)
 			toast.set('Сохранено успешно!')
 		})
 		.catch(({ data }) => {
-			form.setErrors(data)
+			user.setErrors(data)
 			
 			toast.set('Ошибка сохранения')
 		})

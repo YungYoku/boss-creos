@@ -19,5 +19,10 @@
 	"unavailableGeo": "Недоступные гео",
 	"updated": "Дата обновления",
 	"video": "Видео",
-	"watermark": "Водяной знак"
+	"watermark": "Водяной знак",
+	"username": "Имя пользователя",
+	"telegram": "Telegram",
+	"role": "Роль",
+	"balance": "Баланс",
+	"avatar": "Аватар"
 }

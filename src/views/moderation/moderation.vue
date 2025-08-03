@@ -18,23 +18,35 @@
 		</div>
 
 		<router-view/>
+
+		<span
+			v-if="isTabNotSelected"
+			class="moderation__empty"
+		>
+			Не выбран пункт меню
+		</span>
 	</Grid>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { Grid } from '@/components/structures'
 
 const route = useRoute()
-const currentTab = ref(route.path)
+const currentTab = computed(() => route.path)
+const isTabNotSelected = computed(() => route.name === 'Moderation')
 
 const tabs = [
 	{
 		name: 'Креативы',
 		link: 'creatives'
-	}
+	},
+	{
+		name: 'Пользователи',
+		link: 'users'
+	},
 ].map(item => ({
 	...item,
 	link: `/moderation/${item.link}`
@@ -69,6 +81,10 @@ const tabs = [
 		&:hover {
 			background: #032b7e;
 		}
+	}
+
+	&__empty {
+		text-align: center;
 	}
 }
 </style>

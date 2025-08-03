@@ -24,7 +24,6 @@ export interface IUser {
 	collectionName: string
 	created: Date
 	updated: Date
-	checked_at: Date
 	email: string
 	emailVisibility: boolean
 	id: string
@@ -42,6 +41,7 @@ export interface IUser {
 	balance: number
 	transactions: Array<string>
 	status: 'approved' | 'moderation'
+	changes: Partial<Omit<IUser, 'changes' | 'expand'>> | null
 	expand?: {
 		avatar?: IImage
 		referral_code?: IReferralCode
@@ -65,7 +65,6 @@ export const emptyUser: IUser = {
 	email: '',
 	created: new Date(),
 	updated: new Date(),
-	checked_at: new Date(),
 	emailVisibility: false,
 	id: '',
 	description: '',
@@ -82,6 +81,7 @@ export const emptyUser: IUser = {
 	balance: 0,
 	transactions: [],
 	status: 'moderation',
+	changes: null
 }
 
 export interface IUsers {

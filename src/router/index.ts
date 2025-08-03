@@ -184,6 +184,11 @@ const routes: Array<RouteRecordRaw> = [
 						name: 'ModerationCreatives',
 						component: () => import('@/views/moderation/creatives/moderationCreatives.vue'),
 					},
+					{
+						path: 'users',
+						name: 'ModerationUsers',
+						component: () => import('@/views/moderation/users/moderationUsers.vue'),
+					},
 				],
 			},
 			// {
