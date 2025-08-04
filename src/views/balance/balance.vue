@@ -102,6 +102,7 @@ const makeTransaction = async (amount: number, type: TransactionType) => {
 	return await Http.post<Transaction>('/collections/transactions/records', {
 		amount,
 		type,
+		status: 'pending'
 	}).then((res) => {
 		return res.id
 	})
