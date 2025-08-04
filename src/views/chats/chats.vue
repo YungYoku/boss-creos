@@ -68,7 +68,7 @@ import { IProject, IProjects, IProjectStatus } from '@/interfaces/Project.ts'
 import { Http, Screen } from '@/plugins'
 import { computed, Ref, ref, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
-import Text from '@/components/elements/text.vue'
+import Text from '@/components/elements/text/text.vue'
 import { IRating } from '@/interfaces/Rating.ts'
 import { emptyUser } from '@/interfaces/User.ts'
 

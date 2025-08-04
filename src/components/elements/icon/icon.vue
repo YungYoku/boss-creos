@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import Image from '../image.vue'
+import Image from '../image/image.vue'
 
 const props = defineProps({
 	name: {

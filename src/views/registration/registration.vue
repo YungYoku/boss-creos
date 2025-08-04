@@ -106,7 +106,7 @@ import { Button, Input } from '@/components/blocks'
 import { Text } from '@/components/elements'
 import { Form, Http } from '@/plugins'
 import { IUser } from '@/interfaces/User.ts'
-import Grid from '@/components/structures/grid.vue'
+import Grid from '@/components/structures/grid/grid.vue'
 
 type Role = 'buyer' | 'designer'
 

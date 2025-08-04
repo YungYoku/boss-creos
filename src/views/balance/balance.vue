@@ -89,7 +89,7 @@ import { Input } from '@/components/blocks'
 import { Http } from '@/plugins'
 import { IUser, Transaction, TransactionType } from '@/interfaces/User.ts'
 import Button from '@/components/blocks/button/button.vue'
-import Grid from '@/components/structures/grid.vue'
+import Grid from '@/components/structures/grid/grid.vue'
 
 const auth = useAuthStore()
 const transactions = computed(() => auth.user.expand?.transactions)

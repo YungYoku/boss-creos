@@ -24,9 +24,9 @@
 <script setup lang="ts">
 import Input from '../default/input.vue'
 
-import { defaultProps } from '../default/props'
 import type { Props } from '../default/props'
-import FieldWrapperRich from '@/components/structures/fieldWrapperRich.vue'
+import { defaultProps } from '../default/props'
+import FieldWrapperRich from '@/components/structures/fieldWrapperRich/fieldWrapperRich.vue'
 
 withDefaults(defineProps<Props>(), defaultProps)
 

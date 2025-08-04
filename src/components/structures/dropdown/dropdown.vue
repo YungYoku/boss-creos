@@ -54,10 +54,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, PropType, useTemplateRef, onMounted, onUnmounted } from 'vue'
+import {onMounted, onUnmounted, PropType, ref, useTemplateRef} from 'vue'
 
-import { IDropdownMenuItem } from '@/interfaces/DropdownMenuItem.ts'
-import Separator from '@/components/elements/separator.vue'
+import {IDropdownMenuItem} from '@/interfaces/DropdownMenuItem.ts'
+import Separator from '@/components/elements/separator/separator.vue'
 
 defineProps({
 	items: {

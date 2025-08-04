@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import FieldWrapperRich from '@/components/structures/fieldWrapperRich.vue'
+import FieldWrapperRich from '@/components/structures/fieldWrapperRich/fieldWrapperRich.vue'
 import Textarea from '../default/textarea.vue'
 
 import type { Props } from '../default/props'
