@@ -1,5 +1,5 @@
 import { ref, Ref } from 'vue'
-import type { ICellOptions, IHeader, IRow, IRows } from '@/interfaces/Table.ts'
+import type { ICellOptions, IHeader, IRow, IRows } from '@/types/Table.ts'
 
 type ItemExpand<T> = T extends { expand?: infer E } ? E : never
 type ExpandedProperty<T, K extends keyof T> = K extends keyof ItemExpand<T>

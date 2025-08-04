@@ -11,7 +11,7 @@
 import { ref } from 'vue'
 
 import { Table } from '@/components/structures'
-import { ICreatives } from '@/interfaces/Creative.ts'
+import { ICreatives } from '@/types/Creative.ts'
 import { Http } from '@/plugins'
 
 import { useAdapter } from './adapter'

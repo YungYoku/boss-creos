@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { emptyCell, ICell } from '@/interfaces/Table.ts'
+import { emptyCell, ICell } from '@/types/Table.ts'
 
 type Props = {
 	cell: ICell

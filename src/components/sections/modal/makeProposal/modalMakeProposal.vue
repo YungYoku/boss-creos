@@ -40,7 +40,7 @@ import { watch } from 'vue'
 import { Grid, Modal } from '@/components/structures'
 import { Button, Textarea, Input } from '@/components/blocks'
 import { Form } from '@/plugins'
-import { emptyProposal, IProjectProposal } from '@/interfaces/Project.ts'
+import { emptyProposal, IProjectProposal } from '@/types/Project.ts'
 
 const props = defineProps({
 	loading: {

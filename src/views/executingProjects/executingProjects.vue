@@ -56,12 +56,12 @@ import { Ref, ref, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 
 import { Http } from '@/plugins'
-import { IProject, IProjects, IProjectStatus } from '@/interfaces/Project.ts'
+import { IProject, IProjects, IProjectStatus } from '@/types/Project.ts'
 import { Grid, Modal } from '@/components/structures'
 import { Chat } from '@/components/sections'
 import { EmptyProjectCard, ProjectCard } from '@/components/blocks'
 import { PageTitle } from '@/components/elements'
-import { IRating } from '@/interfaces/Rating.ts'
+import { IRating } from '@/types/Rating.ts'
 
 const auth = useAuthStore()
 

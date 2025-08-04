@@ -67,7 +67,7 @@ import { useAuthStore } from '@/stores/auth.ts'
 import { Button } from '@/components/blocks'
 import { Image } from '@/components/elements'
 import { Http } from '@/plugins'
-import { IUser } from '@/interfaces/User.ts'
+import { IUser } from '@/types/User.ts'
 import { useToast } from '@/stores/toast.ts'
 import { useRouter } from 'vue-router'
 

@@ -1,4 +1,4 @@
-import { emptyUser, IUser } from '@/interfaces/User.ts'
+import { emptyUser, IUser } from '@/types/User.ts'
 import { CellFormats, useAdapter as useAdapterRoot } from '@/plugins/adapter.ts'
 import { CellActions } from '@/components/elements'
 import { Http } from '@/plugins'

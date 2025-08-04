@@ -1,5 +1,5 @@
-import { IMessage } from '@/interfaces/Message.ts'
-import type { DBRecord } from '@/interfaces/DBBase.ts'
+import { IMessage } from '@/types/Message.ts'
+import type { DBRecord } from '@/types/DBBase.ts'
 
 export type IChat = DBRecord & {
 	id: string

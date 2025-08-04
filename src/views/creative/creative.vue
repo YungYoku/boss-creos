@@ -72,7 +72,7 @@ import { useRoute } from 'vue-router'
 
 import { Grid } from '@/components/structures'
 import { Http } from '@/plugins'
-import { emptyCreative, ICreative } from '@/interfaces/Creative.ts'
+import { emptyCreative, ICreative } from '@/types/Creative.ts'
 import CreativeCard from '@/components/blocks/creativeCard/creativeCard.vue'
 import { useAuthStore } from '@/stores/auth.ts'
 

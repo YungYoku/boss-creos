@@ -39,7 +39,7 @@ import { useAuthStore } from '@/stores/auth.ts'
 import { Grid } from '@/components/structures'
 import { CreativeCard, EmptyCreativeCard } from '@/components/blocks'
 import { Http } from '@/plugins'
-import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
+import { ICreative, ICreatives } from '@/types/Creative.ts'
 
 const auth = useAuthStore()
 

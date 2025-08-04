@@ -11,7 +11,7 @@
 import { ref } from 'vue'
 
 import { Table } from '@/components/structures'
-import { IUsers } from '@/interfaces/User.ts'
+import { IUsers } from '@/types/User.ts'
 import { Http } from '@/plugins'
 
 import { useAdapter } from './adapter'

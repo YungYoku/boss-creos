@@ -1,11 +1,11 @@
-import { IReferralCode } from '@/interfaces/ReferralCode.ts'
-import { IProject } from '@/interfaces/Project.ts'
-import { IRating } from '@/interfaces/Rating.ts'
-import { INotification } from '@/interfaces/Notification.ts'
-import { IBasket } from '@/interfaces/Basket.ts'
-import { IImage } from '@/interfaces/File.ts'
-import type { DBRecord, DBRecordItems } from '@/interfaces/DBBase.ts'
-import { Transaction } from '@/interfaces/Transaction.ts'
+import { IReferralCode } from '@/types/ReferralCode.ts'
+import { IProject } from '@/types/Project.ts'
+import { IRating } from '@/types/Rating.ts'
+import { INotification } from '@/types/Notification.ts'
+import { IBasket } from '@/types/Basket.ts'
+import { IImage } from '@/types/File.ts'
+import type { DBRecord, DBRecordItems } from '@/types/DBBase.ts'
+import { Transaction } from '@/types/Transaction.ts'
 
 export type IUser = DBRecord & {
 	avatar: string

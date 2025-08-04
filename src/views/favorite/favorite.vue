@@ -51,7 +51,7 @@ import { EmptyProjectCard, ProjectCard } from '@/components/blocks'
 import { PageTitle, Text } from '@/components/elements'
 
 import { Http } from '@/plugins'
-import { IProject, IProjects } from '@/interfaces/Project.ts'
+import { IProject, IProjects } from '@/types/Project.ts'
 
 const auth = useAuthStore()
 

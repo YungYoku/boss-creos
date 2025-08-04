@@ -63,14 +63,14 @@ import { Chat } from '@/components/sections'
 import { User as UserCard } from '@/components/blocks'
 import { Icon, PageTitle } from '@/components/elements'
 import { Grid, Island } from '@/components/structures'
-import { IProject, IProjects, IProjectStatus } from '@/interfaces/Project.ts'
+import { IProject, IProjects, IProjectStatus } from '@/types/Project.ts'
 
 import { Http, Screen } from '@/plugins'
 import { computed, Ref, ref, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 import Text from '@/components/elements/text/text.vue'
-import { IRating } from '@/interfaces/Rating.ts'
-import { emptyUser } from '@/interfaces/User.ts'
+import { IRating } from '@/types/Rating.ts'
+import { emptyUser } from '@/types/User.ts'
 
 const auth = useAuthStore()
 const openedChat: Ref<IProject | null> = ref(null)

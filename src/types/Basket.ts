@@ -1,6 +1,6 @@
-import { ICreative, IRatio } from '@/interfaces/Creative.ts'
-import { IGeo } from '@/interfaces/Geo.ts'
-import type { DBRecord, DBRecordItems } from '@/interfaces/DBBase.ts'
+import { ICreative, IRatio } from '@/types/Creative.ts'
+import { IGeo } from '@/types/Geo.ts'
+import type { DBRecord, DBRecordItems } from '@/types/DBBase.ts'
 
 export type IBasket = DBRecord & {
 	id: string

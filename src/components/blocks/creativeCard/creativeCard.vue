@@ -77,9 +77,9 @@ import { useAuthStore } from '@/stores/auth.ts'
 import { Card } from '@/components/structures'
 import { SelectLive, User } from '@/components/blocks'
 import { Icon, Video } from '@/components/elements'
-import { emptyUser, IUser } from '@/interfaces/User.ts'
-import { IBasket } from '@/interfaces/Basket.ts'
-import { ICreative } from '@/interfaces/Creative.ts'
+import { emptyUser, IUser } from '@/types/User.ts'
+import { IBasket } from '@/types/Basket.ts'
+import { ICreative } from '@/types/Creative.ts'
 import { Http } from '@/plugins'
 
 const props = defineProps({

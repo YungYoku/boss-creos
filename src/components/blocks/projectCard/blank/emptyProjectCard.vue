@@ -7,5 +7,5 @@
 
 <script setup lang="ts">
 import ProjectCard from '../projectCard.vue'
-import { emptyProject } from '@/interfaces/Project.ts'
+import { emptyProject } from '@/types/Project.ts'
 </script>

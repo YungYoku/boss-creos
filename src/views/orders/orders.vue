@@ -57,8 +57,8 @@ import { useAuthStore } from '@/stores/auth.ts'
 import { CardLong } from '@/components/structures'
 import { Image } from '@/components/elements'
 import { Http } from '@/plugins'
-import { IBasket, IBaskets } from '@/interfaces/Basket.ts'
-import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
+import { IBasket, IBaskets } from '@/types/Basket.ts'
+import { ICreative, ICreatives } from '@/types/Creative.ts'
 
 const auth = useAuthStore()
 const creatives: Ref<Array<ICreative>> = ref([])

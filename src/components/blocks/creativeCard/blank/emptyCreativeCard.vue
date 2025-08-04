@@ -7,5 +7,5 @@
 
 <script setup lang="ts">
 import CreativeCard from '../creativeCard.vue'
-import { emptyCreative } from '@/interfaces/Creative.ts'
+import { emptyCreative } from '@/types/Creative.ts'
 </script>

@@ -183,7 +183,7 @@ import { ModalDeleteConfirmation, ModalMakeProposal } from '@/components/section
 import { Button, User as UserCard } from '@/components/blocks'
 import { PageTitle, Text } from '@/components/elements'
 import { Http } from '@/plugins'
-import { emptyProject, IProject, IProjectProposal } from '@/interfaces/Project.ts'
+import { emptyProject, IProject, IProjectProposal } from '@/types/Project.ts'
 
 const router = useRouter()
 

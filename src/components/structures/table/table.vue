@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import { PropType } from 'vue'
-import { IHeader, IRows } from '@/interfaces/Table.ts'
+import { IHeader, IRows } from '@/types/Table.ts'
 import Header from './components/header.vue'
 import Row from './components/row.vue'
 
