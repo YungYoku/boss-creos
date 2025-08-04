@@ -1,51 +1,8 @@
 import { IUser } from '@/interfaces/User.ts'
-import { IChat } from '@/interfaces/Chat.ts'
 import { IProjectProposal } from '@/interfaces/Project.ts'
 import { IImage, IVideo } from '@/interfaces/File.ts'
-
-export interface ICreativeProposal {
-	id: string
-	collectionId: string
-	collectionName: string
-	created: string
-	updated: string
-	user: string
-	chat: string
-	text: string
-	price: number
-	expand?: {
-		user?: IUser
-		chat?: IChat
-	}
-}
-
-export const emptyProposal: ICreativeProposal = {
-	id: '',
-	collectionId: '',
-	collectionName: '',
-	created: '',
-	updated: '',
-	user: '',
-	chat: '',
-	text: '',
-	price: 0
-}
-
-export interface IGeo {
-	id: string
-	collectionId: string
-	collectionName: string
-	name: string
-}
-
-export interface ISlot {
-	id: string
-	collectionId: string
-	collectionName: string
-	created: string
-	updated: string
-	name: string
-}
+import { IGeo } from '@/interfaces/Geo.ts'
+import { ISlot } from '@/interfaces/Slot.ts'
 
 export interface IApproach {
 	id: string

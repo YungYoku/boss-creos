@@ -1,4 +1,5 @@
-import { ICreative, IGeo, IRatio } from '@/interfaces/Creative.ts'
+import { ICreative, IRatio } from '@/interfaces/Creative.ts'
+import { IGeo } from '@/interfaces/Geo.ts'
 
 export interface IBasket {
 	id: string
