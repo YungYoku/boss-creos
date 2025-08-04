@@ -134,13 +134,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, ref, useTemplateRef, watch, Ref } from 'vue'
+import { computed, nextTick, ref, Ref, useTemplateRef, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 import { useToast } from '@/stores/toast.ts'
 
 import { Grid, StepByStep } from '@/components/structures'
 import { Rating } from '@/components/sections'
-import { Input, Button, InputFile, User } from '@/components/blocks'
+import { Button, Input, InputFile, User } from '@/components/blocks'
 import { Badge } from '@/components/elements'
 import { Http } from '@/plugins'
 import { IMessage } from '@/interfaces/Message.ts'
@@ -181,15 +181,15 @@ const loading = ref(true)
 const chatMember = computed(() => props.project.expand?.[props.userType])
 const rating = computed(() => props.project.expand?.[props.ratingType] ?? null)
 
-const loadChat = async () => {
-	await Http.connect<IChat>({
+const loadChat = () => {
+	Http.connect<IChat>({
 		collection: 'chats',
 		id: props.project.chat,
 		expand: ['messages', 'messages.file'],
-		cb: (response) => {
+		cb: async response => {
 			chat.value = response
 
-			nextTick(() => {
+			await nextTick(() => {
 				if (messagesRef.value) {
 					const messagesRefScrollHeight = messagesRef.value.scrollHeight ?? 0
 					messagesRef.value?.scrollTo(0, messagesRefScrollHeight) // Не всегда срабатывает с первого раза

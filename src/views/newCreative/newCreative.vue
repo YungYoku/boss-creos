@@ -236,8 +236,8 @@ const create = async () => {
 
 	await Http
 		.post<ICreative>('/collections/creatives/records', creative.get())
-		.then(response => {
-			router.push(`/creative/${response.id}`)
+		.then(async response => {
+			await router.push(`/creative/${response.id}`)
 		})
 		.catch(({ data }) => {
 			creative.setErrors(data)

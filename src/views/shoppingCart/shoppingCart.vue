@@ -93,9 +93,9 @@ const pay = async () => {
 		toast.set('Недостаточно средств!')
 	} else {
 		await Http.post<IUser>('/baskets/pay')
-			.then(data => {
+			.then(async data => {
 				auth.setUser(data)
-				router.push('/bought')
+				await router.push('/bought')
 			})
 	}
 }

@@ -216,7 +216,7 @@ const isAvailable = ref(true)
 
 const loading = ref(true)
 const loadCreative = async () => {
-	if (!id) return
+	if (!id || Array.isArray(id)) return
 
 	loading.value = true
 	isAvailable.value = true
@@ -237,7 +237,7 @@ const loadCreative = async () => {
 
 	loading.value = false
 }
-loadCreative()
+void loadCreative()
 
 type ReadOnlyCreativeFields = 'id' | 'collectionId' | 'collectionName' | 'created' | 'proposals' | 'changes' | 'expand'
 const getChanges = () => {
@@ -296,8 +296,8 @@ const update = async () => {
 			status: 'moderation',
 			changes: getChanges()
 		})
-		.then(response => {
-			router.push(`/creative/${response.id}`)
+		.then(async response => {
+			await router.push(`/creative/${response.id}`)
 		})
 		.catch(({ data }) => {
 			creative.setErrors(data)

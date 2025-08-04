@@ -95,10 +95,10 @@ const login = async () => {
 
 		await Http
 			.post<IUserLogin>('/collections/users/auth-with-password', form.get())
-			.then((res) => {
+			.then(async res => {
 				auth.setToken(res.token)
 				auth.setUser(res.record)
-				router.push('/')
+				await router.push('/')
 			})
 			.catch(({ data }) => {
 				form.setErrors(data)

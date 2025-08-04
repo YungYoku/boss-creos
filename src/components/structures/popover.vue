@@ -34,9 +34,9 @@
 import { computed, nextTick, onMounted, onUnmounted, onUpdated, ref, useTemplateRef } from 'vue'
 
 const contentShowed = ref(false)
-const showContent = () => {
+const showContent = async () => {
 	contentShowed.value = true
-	nextTick(() => {
+	await nextTick(() => {
 		updateStyles()
 	})
 }

@@ -19,7 +19,7 @@ interface ConnectOptions<T> {
 	id: string
 	expand: Array<string>,
 
-	cb: (response: T) => void
+	cb: (response: T) => Promise<void>
 }
 
 class Http {
@@ -201,12 +201,12 @@ class Http {
 	}
 
 	eventSource: EventSource | null = null
-	async connect<T>(options: ConnectOptions<T> = {
+	connect<T>(options: ConnectOptions<T> = {
 		collection: '',
 		id: '',
 		expand: [],
-		cb: () => {}
-	}): Promise<void> {
+		cb: () => new Promise((resolve) => {resolve()})
+	}): void {
 		const url = `${options.collection}/${options.id}`
 
 		const request = async () => {
@@ -219,11 +219,17 @@ class Http {
 		this.eventSource = new EventSource(this.api + '/realtime')
 		this.eventSource.addEventListener('PB_CONNECT', (event: MessageEvent) => {
 			const data = JSON.parse(event.data)
-			this.setSubscription(url, data.clientId)
+			void this.setSubscription(url, data.clientId)
 		}, { once: true })
 
-		options.cb(await request())
-		this.eventSource.addEventListener(url, async () => options.cb(await request()))
+		void request().then((response) => {
+			void options.cb(response)
+		})
+		this.eventSource.addEventListener(url, () => {
+			void request().then((response) => {
+				void options.cb(response)
+			})
+		})
 	}
 }
 

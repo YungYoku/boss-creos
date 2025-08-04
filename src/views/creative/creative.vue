@@ -87,7 +87,7 @@ const isExists = ref(true)
 
 const loading = ref(true)
 const loadProject = async () => {
-	if (!id) return
+	if (!id || Array.isArray(id)) return
 
 	loading.value = true
 	isOnModeration.value = false
@@ -114,7 +114,7 @@ const loadProject = async () => {
 
 	loading.value = false
 }
-loadProject()
+void loadProject()
 </script>
 
 <style scoped lang="scss">

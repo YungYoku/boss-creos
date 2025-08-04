@@ -152,7 +152,7 @@ const loadData = async () => {
 	loading.value = false
 	searchStore.setLoading(false)
 }
-loadData()
+void loadData()
 </script>
 
 <style scoped lang="scss">

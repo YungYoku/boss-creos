@@ -132,7 +132,7 @@ const updateBasket = async () => {
 		}, {
 			expand: ['creative', 'creative.preview', 'creative.slot', 'geo']
 		})
-		.then((updatedBasket) => {
+		.then(async updatedBasket => {
 			const baskets = (auth.user.expand?.baskets ?? []).map(basket => {
 				if (basket.id === updatedBasket.id) {
 					return updatedBasket
@@ -140,7 +140,7 @@ const updateBasket = async () => {
 				return basket
 			})
 			auth.setBaskets(baskets)
-			router.push('/shopping-cart')
+			await router.push('/shopping-cart')
 		})
 }
 const addToBasket = async () => {
@@ -152,9 +152,9 @@ const addToBasket = async () => {
 	await Http.post<IUser>('/baskets/add', {
 		creative: props.creative?.id,
 		geo: [...geo.value]
-	}).then(data => {
+	}).then(async data => {
 		auth.setUser(data)
-		router.push('/shopping-cart')
+		await router.push('/shopping-cart')
 	})
 }
 </script>

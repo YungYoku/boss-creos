@@ -89,8 +89,8 @@ const loadBaskets = async () => {
 }
 
 watch(() => auth.user, () => {
-	loadCreatives().then(() => {
-		loadBaskets()
+	void loadCreatives().then(() => {
+		void loadBaskets()
 	})
 }, { immediate: true })
 </script>

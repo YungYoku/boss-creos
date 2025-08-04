@@ -149,8 +149,8 @@ const register = async (role: Role) => {
 
 		await Http
 			.post<IUser>('/collections/users/records', form.get())
-			.then(() => {
-				router.push('/login')
+			.then(async () => {
+				await router.push('/login')
 			})
 			.catch(({ data }) => {
 				form.setErrors(data)

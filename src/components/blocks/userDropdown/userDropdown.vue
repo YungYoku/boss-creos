@@ -49,10 +49,10 @@ const router = useRouter()
 // 	toast.set('Ссылка скопирована!')
 // }
 
-const logout = () => {
+const logout = async () => {
 	Storage.clear()
 	auth.$reset()
-	router.push('/login')
+	await router.push('/login')
 }
 
 const items = computed(() => [

@@ -96,7 +96,7 @@ const loadCreatives = async () => {
 
 	loadingCreatives.value = false
 }
-loadCreatives()
+void loadCreatives()
 </script>
 
 <style scoped lang="scss">

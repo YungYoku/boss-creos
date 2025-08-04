@@ -94,13 +94,13 @@ const openChat = (project: IProject) => {
 
 const closeChat = () => openedChat.value = null
 
-const updateStatus = async (status: IProjectStatus) => {
+const updateStatus = (status: IProjectStatus) => {
 	if (openedChat.value) {
 		openedChat.value.status = status
 	}
 }
 
-const updateRating = async (rating: IRating) => {
+const updateRating = (rating: IRating) => {
 	if (openedChat.value && openedChat.value.expand) {
 		openedChat.value.ratingBuyer = rating.id
 		openedChat.value.expand.ratingBuyer = rating

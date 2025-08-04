@@ -17,7 +17,7 @@ import { computed, Ref, ref, watch } from 'vue'
 import { Select } from '@/components/blocks'
 import { Http } from '@/plugins'
 
-import type { Props, Items, Item } from './props'
+import type { Item, Items, Props } from './props'
 import { defaultProps } from './props'
 
 const props = withDefaults(defineProps<Props>(), defaultProps)
@@ -143,12 +143,12 @@ const loadItems = async (include?: string | Array<string>) => {
 
 const search = ref('')
 
-const handleContextChange = () => {
+const handleContextChange = async () => {
 	const selectedValue = value.value
 	if (props.multiple && Array.isArray(selectedValue)) {
-		loadItems(selectedValue)
+		await loadItems(selectedValue)
 	} else if (typeof selectedValue === 'string' && !Array.isArray(selectedValue)) {
-		loadItems(selectedValue)
+		await loadItems(selectedValue)
 	}
 }
 

@@ -94,11 +94,13 @@ const loadImage = async (avatar: File | string) => {
 	auth.setUser(user)
 }
 
-const onImageLoad = (event: Event) => {
+const onImageLoad = async (event: Event) => {
 	const target = event.target as HTMLInputElement
 	const file = target?.files?.[0]
 
-	if (file) loadImage(file)
+	if (file) {
+		await loadImage(file)
+	}
 }
 
 const removeAvatar = () => loadImage('')

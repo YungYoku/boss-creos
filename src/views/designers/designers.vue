@@ -46,7 +46,7 @@ const loadData = async () => {
 
 	loading.value = false
 }
-loadData()
+void loadData()
 </script>
 
 <style scoped lang="scss">

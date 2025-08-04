@@ -77,11 +77,14 @@ const loadingCreatives = ref(true)
 const creatives: Ref<Array<ICreative>> = ref([])
 
 const loadCreatives = async () => {
+	const id = route.params.id
+	if (!id || Array.isArray(id)) return
+
 	loadingCreatives.value = true
 
 	await Http
 		.get<ICreatives>('/collections/creatives/records', {
-			filter: `status='approved'&&creator=${route.params.id}`,
+			filter: `status='approved'&&creator=${id}`,
 			expand: ['preview', 'video', 'creator', 'creator.avatar'],
 			perPage: 12
 		})
@@ -91,13 +94,16 @@ const loadCreatives = async () => {
 
 	loadingCreatives.value = false
 }
-loadCreatives()
+void loadCreatives()
 
 const loadUser = async () => {
+	const id = route.params.id
+	if (!id || Array.isArray(id)) return
+
 	loading.value = true
 
 	await Http
-		.get<IUser>(`/collections/users/records/${route.params.id}`, {
+		.get<IUser>(`/collections/users/records/${id}`, {
 			expand: ['avatar']
 		})
 		.then(res => {
