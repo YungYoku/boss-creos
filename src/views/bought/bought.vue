@@ -3,23 +3,27 @@
 		<div class="bought__title">
 			Мои заказы
 		</div>
-		
-		<div class="bought__filters">
-			<div
-				v-for="filter in filters"
-				:key="filter.value"
-				class="bought__filter"
-				:class="{
-					_passive: activeFilter !== null && activeFilter !== filter.value,
-				}"
-				@click="toggleFilter(filter.value)"
-			>
-				<div
-					class="bought__filter-status"
-					:class="[`_${filter.value}`]"
-				/>
-				{{ filter.name }}
+
+		<div class="bought__action-panel">
+			<div class="bought__filters">
+				<Badge
+					v-for="filter in filters"
+					:key="filter.value"
+					class="bought__filter"
+					:class="{
+						_passive: activeFilter !== null && activeFilter !== filter.value,
+					}"
+					@click="toggleFilter(filter.value)"
+				>
+					<div
+						class="bought__filter-status"
+						:class="[`_${filter.value}`]"
+					/>
+					{{ filter.name }}
+				</Badge>
 			</div>
+			
+			<BadgeBalance/>
 		</div>
 
 		<span v-if="baskets.length === 0">Пусто</span>
@@ -73,7 +77,7 @@
 import { computed, Ref, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 import { CardLong } from '@/components/structures'
-import { Image } from '@/components/elements'
+import { Badge, BadgeBalance, Image } from '@/components/elements'
 
 type Filter = 'done' | 'pending'
 const filters = [
@@ -127,26 +131,24 @@ const baskets = computed(() => {
 		margin: 100px 0 20px 0;
 	}
 
+	&__action-panel {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 20px;
+
+		margin-bottom: 20px;
+	}
+
 	&__filters {
 		display: flex;
 		align-items: center;
 		gap: 15px;
-		
-		margin-bottom: 20px;
 	}
 
 	&__filter {
-		display: flex;
-		align-items: center;
-		gap: 5px;
-
-		border-radius: 40px;
-		border: 1px solid #FFFFFF1F;
-		padding: 3px 8px;
-		
-		cursor: pointer;
 		transition: all 0.2s;
-		user-select: none;
 
 		&._passive {
 			opacity: 0.6;

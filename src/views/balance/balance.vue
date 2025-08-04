@@ -10,23 +10,15 @@
 		</div>
 
 		<div class="balance__action-panel">
-			<div class="balance__value">
-				Ваш баланс: ${{ auth.user.balance }}
-			</div>
+			<BadgeBalance/>
 
 			<div class="balance__actions">
-				<div
-					class="balance__withdraw"
-					@click="showWithdrawModal"
-				>
+				<Badge @click="showWithdrawModal">
 					Вывод денег
-				</div>
-				<div
-					class="balance__deposit"
-					@click="showDepositModal"
-				>
+				</Badge>
+				<Badge @click="showDepositModal">
 					Пополнить баланс
-				</div>
+				</Badge>
 			</div>
 		</div>
 
@@ -91,6 +83,7 @@ import { IUser } from '@/types/User.ts'
 import { Transaction, TransactionType } from '@/types/Transaction.ts'
 import Button from '@/components/blocks/button/button.vue'
 import Grid from '@/components/structures/grid/grid.vue'
+import { Badge, BadgeBalance } from '@/components/elements'
 
 const auth = useAuthStore()
 const transactions = computed(() => auth.user.expand?.transactions)
@@ -173,17 +166,6 @@ const showWithdrawModal = () => {
 		align-items: center;
 		justify-content: space-between;
 		gap: 20px;
-	}
-
-	&__value,
-	&__withdraw,
-	&__deposit {
-		font-weight: 700;
-		font-size: 12px;
-		border-radius: 16px;
-		border: 1px solid #1D1D20;
-		padding: 4px 10px;
-		background: #0F0F10;
 	}
 
 	&__actions {

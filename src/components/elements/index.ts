@@ -3,7 +3,8 @@ import { defineAsyncComponent } from 'vue'
 const CellActions = defineAsyncComponent(() => import('./cells/cellActions.vue'))
 const CellResizePrices = defineAsyncComponent(() => import('./cells/cellResizePrices.vue'))
 const Icon = defineAsyncComponent(() => import('./icon/icon.vue'))
-const Badge = defineAsyncComponent(() => import('./badge/badge.vue'))
+const Badge = defineAsyncComponent(() => import('./badge/default/badge.vue'))
+const BadgeBalance = defineAsyncComponent(() => import('./badge/badgeBalance/badgeBalance.vue'))
 const File = defineAsyncComponent(() => import('./file/file.vue'))
 const Image = defineAsyncComponent(() => import('./image/image.vue'))
 const Label = defineAsyncComponent(() => import('./label/label.vue'))
@@ -19,6 +20,7 @@ export {
 	CellResizePrices,
 	Icon,
 	Badge,
+	BadgeBalance,
 	File,
 	Image,
 	Label,
