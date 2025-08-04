@@ -1,0 +1,133 @@
+<template>
+	<div class="shopping-cart">
+		<div class="shopping-cart__title">
+			Мои заказы
+		</div>
+
+		<span v-if="baskets.length === 0">Пусто</span>
+
+		<CardLong
+			v-for="basket in baskets"
+			:key="basket.id"
+		>
+			<template #icon>
+				<Image
+					v-if="basket.expand?.creative?.expand?.preview"
+					class="shopping-cart__creative-image"
+					:src="basket.expand.creative.expand.preview"
+				/>
+			</template>
+
+			<div class="shopping-cart__creative-content">
+				<div class="shopping-cart__creative-name">
+					<router-link :to="`/creative/${basket.expand?.creative?.id}`">
+						{{ basket.expand?.creative?.expand?.slot?.name }} - ${{ basket.expand?.creative?.price }}
+					</router-link>
+
+					<div
+						class="shopping-cart__status"
+						:class="{
+							_pending: basket.status === 'pending',
+							_done: basket.status === 'done',
+						}"
+					/>
+				</div>
+
+				<div class="shopping-cart__creative-geo">
+					Geo:
+					<span
+						v-for="(geo, index) in basket.expand?.geo"
+						:key="geo.id"
+						class="shopping-cart__creative-geo-item"
+					>
+						{{ geo.name }}
+						<template v-if="index < (basket?.expand?.geo?.length ?? 0) - 1">
+							/
+						</template>
+					</span>
+				</div>
+			</div>
+		</CardLong>
+	</div>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue'
+import { useAuthStore } from '@/stores/auth.ts'
+import { CardLong } from '@/components/structures'
+import { Image } from '@/components/elements'
+
+const auth = useAuthStore()
+
+const baskets = computed(() => {
+	const baskets = auth.user.expand?.baskets ?? []
+	return baskets.filter(basket => basket.status !== 'created')
+})
+</script>
+
+<style scoped lang="scss">
+.shopping-cart {
+	display: flex;
+	flex-direction: column;
+	gap: 7px;
+
+	width: 860px;
+	max-width: 100%;
+
+	&__title {
+		font-size: 32px;
+		font-weight: 700;
+		color: #ffffff;
+		text-align: center;
+		margin: 100px 0 20px 0;
+	}
+
+	&__creative-image {
+		min-width: 57px;
+		max-width: 57px;
+		max-height: 57px;
+		aspect-ratio: 1/1;
+
+		border-radius: 10px;
+	}
+
+	&__creative-content {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+	}
+
+	&__creative-name {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		gap: 8px;
+
+		font-size: 14px;
+	}
+
+	&__status {
+		width: 5px;
+		height: 5px;
+		border-radius: 50%;
+
+		&._pending {
+			background: #fdfd1a;
+		}
+
+		&._done {
+			background: #18e618;
+		}
+	}
+
+	&__creative-geo {
+		font-size: 10px;
+		color: #AFAFB7;
+	}
+
+	&__creative-geo-item {
+		text-transform: uppercase;
+	}
+}
+</style>
