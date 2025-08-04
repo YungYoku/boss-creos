@@ -2,7 +2,7 @@ import { IReferralCode } from '@/interfaces/ReferralCode.ts'
 import { IProject } from '@/interfaces/Project.ts'
 import { IRating } from '@/interfaces/Rating.ts'
 import { INotification } from '@/interfaces/Notification.ts'
-import { IBasket } from '@/interfaces/Creative.ts'
+import { IBasket } from '@/interfaces/Basket.ts'
 import { IImage } from '@/interfaces/File.ts'
 
 export type TransactionType = 'deposit' | 'withdraw'

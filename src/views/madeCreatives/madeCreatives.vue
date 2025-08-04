@@ -3,33 +3,32 @@
 		vertical
 		:columns="1"
 		gap="l"
+		class="made-creatives"
 	>
-		<Grid :columns="1">
-			<PageTitle>
-				Мои креативы
-			</PageTitle>
-		</Grid>
+		<div class="made-creatives__title">
+			Мои креативы
+		</div>
 
-		<Grid
-			:columns-xl="4"
-			:columns-l="3"
-			:columns-m="2"
-			:columns-s="1"
+		<div
+			v-if="creatives.length || loading"
+			class="made-creatives__creatives"
 		>
 			<template v-if="loading">
 				<EmptyCreativeCard
 					v-for="i in 8"
 					:key="i"
+					class="main__creatives-item"
 				/>
 			</template>
 			<template v-else>
 				<CreativeCard
 					v-for="creative in creatives"
 					:key="creative.id"
+					class="main__creatives-item"
 					:creative="creative"
 				/>
 			</template>
-		</Grid>
+		</div>
 	</Grid>
 </template>
 
@@ -39,7 +38,6 @@ import { useAuthStore } from '@/stores/auth.ts'
 
 import { Grid } from '@/components/structures'
 import { CreativeCard, EmptyCreativeCard } from '@/components/blocks'
-import { PageTitle } from '@/components/elements'
 import { Http } from '@/plugins'
 import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
 
@@ -67,3 +65,36 @@ const getUserCreatives = async () => {
 
 watch(() => auth.user.id, getUserCreatives, { immediate: true })
 </script>
+
+<style scoped lang="scss">
+.made-creatives {
+	&__title {
+		font-size: 32px;
+		font-weight: 700;
+		color: #ffffff;
+		text-align: center;
+		margin: 0 0 20px 0;
+	}
+
+	&__creatives {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		align-items: center;
+
+		width: 100%;
+		max-width: 100%;
+		gap: 20px;
+
+		margin: 40px auto 40px auto;
+
+		@media (max-width: 1024px) {
+			gap: 15px;
+		}
+
+		@media (max-width: 600px) {
+			gap: 15px;
+		}
+	}
+}
+</style>

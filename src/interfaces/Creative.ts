@@ -111,24 +111,6 @@ export interface ICreative {
 	}
 }
 
-export interface IBasket {
-	id: string
-	collectionId: string
-	collectionName: string
-	created: string
-	updated: string
-	creative: string
-	geo: Array<string>
-	resize: Array<IRatio>
-	reskin: boolean
-	comment: string
-	status: 'created' | 'pending' | 'in-progress' | 'done'
-	expand?: {
-		creative?: ICreative
-		geo?: Array<IGeo>
-	}
-}
-
 export const emptyCreative: ICreative = {
 	collectionId: '',
 	collectionName: '',

@@ -1,6 +1,6 @@
 <template>
-	<div class="shopping-cart">
-		<div class="shopping-cart__title">
+	<div class="orders">
+		<div class="orders__title">
 			Мои заказы
 		</div>
 
@@ -13,19 +13,19 @@
 			<template #icon>
 				<Image
 					v-if="basket.expand?.creative?.expand?.preview"
-					class="shopping-cart__creative-image"
+					class="orders__creative-image"
 					:src="basket.expand.creative.expand.preview"
 				/>
 			</template>
 
-			<div class="shopping-cart__creative-content">
-				<div class="shopping-cart__creative-name">
+			<div class="orders__creative-content">
+				<div class="orders__creative-name">
 					<router-link :to="`/creative/${basket.expand?.creative?.id}`">
 						{{ basket.expand?.creative?.expand?.slot?.name }} - ${{ basket.expand?.creative?.price }}
 					</router-link>
 
 					<div
-						class="shopping-cart__status"
+						class="orders__status"
 						:class="{
 							_pending: basket.status === 'pending',
 							_done: basket.status === 'done',
@@ -33,12 +33,12 @@
 					/>
 				</div>
 
-				<div class="shopping-cart__creative-geo">
+				<div class="orders__creative-geo">
 					Geo:
 					<span
 						v-for="(geo, index) in basket.expand?.geo"
 						:key="geo.id"
-						class="shopping-cart__creative-geo-item"
+						class="orders__creative-geo-item"
 					>
 						{{ geo.name }}
 						<template v-if="index < (basket?.expand?.geo?.length ?? 0) - 1">
@@ -52,21 +52,51 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, Ref, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 import { CardLong } from '@/components/structures'
 import { Image } from '@/components/elements'
+import { Http } from '@/plugins'
+import { IBasket, IBaskets } from '@/interfaces/Basket.ts'
+import { ICreative, ICreatives } from '@/interfaces/Creative.ts'
 
 const auth = useAuthStore()
+const creatives: Ref<Array<ICreative>> = ref([])
+const creativesIDs = computed(() => creatives.value.map(({ id }) => id))
+const loadCreatives = async () => {
+	if (!auth.user.id) return
 
-const baskets = computed(() => {
-	const baskets = auth.user.expand?.baskets ?? []
-	return baskets.filter(basket => basket.status !== 'created')
-})
+	await Http.get<ICreatives>('/collections/creatives/records', {
+		filter: `creator='${auth.user.id}'`,
+	})
+		.then(({ items }) => {
+			creatives.value = items
+		})
+}
+
+const baskets: Ref<Array<IBasket>> = ref([])
+const loadBaskets = async () => {
+	if (creativesIDs.value.length === 0) return
+
+	const filter = creativesIDs.value.map(id => `creative = '${id}'`).join(' || ')
+	await Http.get<IBaskets>('/collections/baskets/records', {
+		filter,
+		expand: ['creative', 'creative.preview', 'creative.slot', 'geo']
+	})
+		.then(({ items }) => {
+			baskets.value = items
+		})
+}
+
+watch(() => auth.user, () => {
+	loadCreatives().then(() => {
+		loadBaskets()
+	})
+}, { immediate: true })
 </script>
 
 <style scoped lang="scss">
-.shopping-cart {
+.orders {
 	display: flex;
 	flex-direction: column;
 	gap: 7px;

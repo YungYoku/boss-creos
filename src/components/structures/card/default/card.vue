@@ -56,6 +56,7 @@ defineProps({
 		margin: -80px 0 0 0;
 
 		background: linear-gradient(to top, rgba(15, 15, 16, 1) 5px, transparent);
+		pointer-events: none;
 	}
 }
 </style>

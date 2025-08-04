@@ -74,7 +74,8 @@
 import { useAuthStore } from '@/stores/auth.ts'
 import { Button, Checkbox, Select, Textarea } from '@/components/blocks'
 import { Image } from '@/components/elements'
-import { IBasket, ratioItems } from '@/interfaces/Creative.ts'
+import { IBasket } from '@/interfaces/Basket.ts'
+import { ratioItems } from '@/interfaces/Creative.ts'
 import { Http } from '@/plugins'
 
 const user = useAuthStore()

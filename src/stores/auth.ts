@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { emptyUser, IUser } from '@/interfaces/User'
 import { Storage } from '@/plugins'
-import { IBasket } from '@/interfaces/Creative.ts'
+import { IBasket } from '@/interfaces/Basket.ts'
 
 export interface State {
 	user: IUser

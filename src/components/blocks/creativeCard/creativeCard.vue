@@ -78,7 +78,8 @@ import { Card } from '@/components/structures'
 import { SelectLive, User } from '@/components/blocks'
 import { Icon, Video } from '@/components/elements'
 import { emptyUser, IUser } from '@/interfaces/User.ts'
-import { IBasket, ICreative } from '@/interfaces/Creative.ts'
+import { IBasket } from '@/interfaces/Basket.ts'
+import { ICreative } from '@/interfaces/Creative.ts'
 import { Http } from '@/plugins'
 
 const props = defineProps({

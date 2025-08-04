@@ -4,7 +4,7 @@
 	</div>
 
 	<Grid
-		v-else-if="isAvailable"
+		v-else-if="isExists && !isOnModeration"
 		class="creative"
 		vertical
 		:columns="1"
@@ -57,7 +57,11 @@
 		</Grid>
 	</Grid>
 
-	<div v-else>
+	<div v-else-if="isOnModeration">
+		Креатив с ID {{ id }} на модерации
+	</div>
+
+	<div v-else-if="!isExists">
 		Креатив с ID {{ id }} не существует
 	</div>
 </template>
@@ -70,19 +74,24 @@ import { Grid } from '@/components/structures'
 import { Http } from '@/plugins'
 import { emptyCreative, ICreative } from '@/interfaces/Creative.ts'
 import CreativeCard from '@/components/blocks/creativeCard/creativeCard.vue'
+import { useAuthStore } from '@/stores/auth.ts'
+
+const auth = useAuthStore()
 
 const creative: Ref<ICreative> = ref({ ...emptyCreative })
 const route = useRoute()
 const { id } = route.params
 
-const isAvailable = ref(true)
+const isOnModeration = ref(false)
+const isExists = ref(true)
 
 const loading = ref(true)
 const loadProject = async () => {
 	if (!id) return
 
 	loading.value = true
-	isAvailable.value = true
+	isOnModeration.value = false
+	isExists.value = true
 
 	await Http
 		.get<ICreative>(`/collections/creatives/records/${id}`, {
@@ -90,13 +99,17 @@ const loadProject = async () => {
 		})
 		.then(response => {
 			if (response.status === 'moderation') {
-				isAvailable.value = false
+				if (response.creator === auth.user.id) {
+					isOnModeration.value = true
+				}
+				isExists.value = true
 			}
 			
 			creative.value = response
 		})
 		.catch(() => {
-			isAvailable.value = false
+			isOnModeration.value = false
+			isExists.value = false
 		})
 
 	loading.value = false

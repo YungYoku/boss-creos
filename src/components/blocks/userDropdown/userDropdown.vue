@@ -84,6 +84,11 @@ const items = computed(() => [
 			can: auth.isDesigner
 		},
 		{
+			text: 'Мои заказы',
+			to: '/orders',
+			can: auth.isDesigner
+		},
+		{
 			text: 'Создать креатив',
 			to: '/new-creative',
 			can: auth.isDesigner
