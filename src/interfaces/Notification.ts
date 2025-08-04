@@ -1,6 +1,6 @@
-export interface INotification {
-	collectionId: string
-	collectionName:	string
+import type { DBRecord, DBRecordItems } from '@/interfaces/DBBase.ts'
+
+export type INotification = DBRecord & {
 	created: string
 	id:	string
 	text: string
@@ -9,10 +9,6 @@ export interface INotification {
 	checked: boolean
 }
 
-export interface INotifications {
-	page: number,
-	perPage: number,
-	totalPages: number,
-	totalItems: number,
+export type INotifications = DBRecordItems & {
 	items: Array<INotification>
 }

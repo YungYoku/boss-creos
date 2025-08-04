@@ -1,26 +1,22 @@
-export interface IFile {
+import type { DBRecord } from '@/interfaces/DBBase.ts'
+
+export type IFile = DBRecord & {
 	id: string
-	collectionId: string
-	collectionName: string
 	created: string
 	updated: string
 	file: string
 }
 
-export interface IImage {
+export type IImage = DBRecord & {
 	id: string
-	collectionId: string
-	collectionName: string
 	created: string
 	updated: string
 	original_image: string
 	watermarked_image: string
 }
 
-export interface IVideo {
+export type IVideo = DBRecord & {
 	id: string
-	collectionId: string
-	collectionName: string
 	created: string
 	updated: string
 	original_video: string

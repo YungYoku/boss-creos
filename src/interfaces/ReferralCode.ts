@@ -1,8 +1,7 @@
 import { IUser } from '@/interfaces/User.ts'
+import type { DBRecord } from '@/interfaces/DBBase.ts'
 
-export interface IReferralCode {
-	collectionId: string,
-	collectionName: string,
+export type IReferralCode = DBRecord & {
 	created: Date,
 	id: string,
 	updated: Date

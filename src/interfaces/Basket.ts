@@ -1,10 +1,9 @@
 import { ICreative, IRatio } from '@/interfaces/Creative.ts'
 import { IGeo } from '@/interfaces/Geo.ts'
+import type { DBRecord, DBRecordItems } from '@/interfaces/DBBase.ts'
 
-export interface IBasket {
+export type IBasket = DBRecord & {
 	id: string
-	collectionId: string
-	collectionName: string
 	created: string
 	updated: string
 	creative: string
@@ -19,10 +18,6 @@ export interface IBasket {
 	}
 }
 
-export interface IBaskets {
+export type IBaskets = DBRecordItems & {
 	items: Array<IBasket>
-	page: number
-	perPage: number
-	totalItems: number
-	totalPages: number
 }

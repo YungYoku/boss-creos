@@ -1,6 +1,6 @@
-export interface IGeo {
+import type { DBRecord } from '@/interfaces/DBBase.ts'
+
+export type IGeo = DBRecord & {
 	id: string
-	collectionId: string
-	collectionName: string
 	name: string
 }

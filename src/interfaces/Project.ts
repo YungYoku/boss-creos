@@ -1,13 +1,12 @@
 import { IUser } from '@/interfaces/User.ts'
 import { IChat } from '@/interfaces/Chat.ts'
 import { IRating } from '@/interfaces/Rating.ts'
+import type { DBRecord, DBRecordItems } from '@/interfaces/DBBase.ts'
 
 export type IProjectStatus = 'created' | 'in_progress' | 'on_review' | 'ended'
 
-export interface IProjectProposal {
+export type IProjectProposal = DBRecord & {
 	id: string
-	collectionId: string
-	collectionName: string
 	created: string
 	updated: string
 	user: string
@@ -32,10 +31,8 @@ export const emptyProposal: IProjectProposal = {
 	price: 0
 }
 
-export interface IProject {
+export type IProject = DBRecord & {
 	id: string
-	collectionId: string
-	collectionName: string
 	created: string
 	updated: string
 	title: string
@@ -92,10 +89,6 @@ export const emptyProject: IProject = {
 	}
 }
 
-export interface IProjects {
+export type IProjects = DBRecordItems & {
 	items: Array<IProject>
-	page: number
-	perPage: number
-	totalItems: number
-	totalPages: number
 }

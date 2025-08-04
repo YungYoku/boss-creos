@@ -1,9 +1,8 @@
 import { IUser } from '@/interfaces/User.ts'
+import type { DBRecord } from '@/interfaces/DBBase.ts'
 
-export interface IRating {
+export type IRating = DBRecord & {
 	by: string
-	collectionId: string
-	collectionName:	string
 	created: string
 	id:	string
 	review: string

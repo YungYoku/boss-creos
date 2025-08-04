@@ -1,6 +1,6 @@
 import type { DBRecord } from '@/interfaces/DBBase.ts'
 
-export type ISlot = DBRecord & {
+export type IApproach = DBRecord & {
 	id: string
 	created: string
 	updated: string

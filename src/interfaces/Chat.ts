@@ -1,9 +1,8 @@
 import { IMessage } from '@/interfaces/Message.ts'
+import type { DBRecord } from '@/interfaces/DBBase.ts'
 
-export interface IChat {
+export type IChat = DBRecord & {
 	id: string
-	collectionId: string
-	collectionName: string
 	created: string
 	updated: string
 	messages: Array<string>,

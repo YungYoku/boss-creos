@@ -3,15 +3,8 @@ import { IProjectProposal } from '@/interfaces/Project.ts'
 import { IImage, IVideo } from '@/interfaces/File.ts'
 import { IGeo } from '@/interfaces/Geo.ts'
 import { ISlot } from '@/interfaces/Slot.ts'
-
-export interface IApproach {
-	id: string
-	collectionId: string
-	collectionName: string
-	created: string
-	updated: string
-	name: string
-}
+import { IApproach } from '@/interfaces/Approach.ts'
+import type { DBRecord, DBRecordItems } from '@/interfaces/DBBase.ts'
 
 export type ICreativeType = 'video' | 'static' | 'pwa'
 const _creativeTypeItems: Array<ICreativeType> = ['video', 'static', 'pwa']
@@ -31,10 +24,8 @@ export type ResizePrices = {
 	[_ in IRatio]: number
 }
 
-export interface ICreative {
+export type ICreative = DBRecord & {
 	id: string
-	collectionId: string
-	collectionName: string
 	created: string
 	updated: string
 	creator: string
@@ -105,10 +96,6 @@ export const emptyCreative: ICreative = {
 	expand: {}
 }
 
-export interface ICreatives {
+export type ICreatives = DBRecordItems & {
 	items: Array<ICreative>
-	page: number
-	perPage: number
-	totalItems: number
-	totalPages: number
 }

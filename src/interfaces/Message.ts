@@ -1,9 +1,8 @@
 import { IFile } from '@/interfaces/File.ts'
+import type { DBRecord } from '@/interfaces/DBBase.ts'
 
-export interface IMessage {
+export type IMessage = DBRecord & {
 	id: string
-	collectionId: string
-	collectionName: string
 	created: string
 	updated: string
 	text: string

@@ -4,24 +4,11 @@ import { IRating } from '@/interfaces/Rating.ts'
 import { INotification } from '@/interfaces/Notification.ts'
 import { IBasket } from '@/interfaces/Basket.ts'
 import { IImage } from '@/interfaces/File.ts'
+import type { DBRecord, DBRecordItems } from '@/interfaces/DBBase.ts'
+import { Transaction } from '@/interfaces/Transaction.ts'
 
-export type TransactionType = 'deposit' | 'withdraw'
-
-export interface Transaction {
-	collectionId: string
-	collectionName: string
-	created: Date
-	updated: Date
-	id: string
-	amount: number
-	type: TransactionType
-	status: 'pending' | 'done'
-}
-
-export interface IUser {
+export type IUser = DBRecord & {
 	avatar: string
-	collectionId: string
-	collectionName: string
 	created: Date
 	updated: Date
 	email: string
@@ -53,7 +40,7 @@ export interface IUser {
 	}
 }
 
-export interface IUserRefresh {
+export type IUserRefresh = {
 	token: string
 	record: IUser
 }
@@ -84,15 +71,11 @@ export const emptyUser: IUser = {
 	changes: null
 }
 
-export interface IUsers {
-	page: number,
-	perPage: number,
-	totalPages: number,
-	totalItems: number,
+export type IUsers = DBRecordItems & {
 	items: Array<IUser>
 }
 
-export interface IUserLogin {
+export type IUserLogin = {
 	record: IUser
 	token: string
 }
