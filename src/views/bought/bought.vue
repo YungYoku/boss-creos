@@ -3,6 +3,24 @@
 		<div class="bought__title">
 			Мои заказы
 		</div>
+		
+		<div class="bought__filters">
+			<div
+				v-for="filter in filters"
+				:key="filter.value"
+				class="bought__filter"
+				:class="{
+					_passive: activeFilter !== null && activeFilter !== filter.value,
+				}"
+				@click="toggleFilter(filter.value)"
+			>
+				<div
+					class="bought__filter-status"
+					:class="[`_${filter.value}`]"
+				/>
+				{{ filter.name }}
+			</div>
+		</div>
 
 		<span v-if="baskets.length === 0">Пусто</span>
 
@@ -52,16 +70,43 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, Ref, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 import { CardLong } from '@/components/structures'
 import { Image } from '@/components/elements'
+
+type Filter = 'done' | 'pending'
+const filters = [
+	{
+		value: 'done',
+		name: 'Выполненные',
+	},
+	{
+		value: 'pending',
+		name: 'В работе',
+	},
+] as const
+const activeFilter: Ref<null | Filter> = ref(null)
+const toggleFilter = (value: Filter) => {
+	if (activeFilter.value === value) {
+		activeFilter.value = null
+	} else {
+		activeFilter.value = value
+	}
+}
 
 const auth = useAuthStore()
 
 const baskets = computed(() => {
 	const baskets = auth.user.expand?.baskets ?? []
-	return baskets.filter(basket => basket.status !== 'created')
+	return baskets
+		.filter(basket => basket.status !== 'created')
+		.filter(basket => {
+			if (activeFilter.value !== null) {
+				return basket.status === activeFilter.value
+			}
+			return true
+		})
 })
 </script>
 
@@ -80,6 +125,47 @@ const baskets = computed(() => {
 		color: #ffffff;
 		text-align: center;
 		margin: 100px 0 20px 0;
+	}
+
+	&__filters {
+		display: flex;
+		align-items: center;
+		gap: 15px;
+		
+		margin-bottom: 20px;
+	}
+
+	&__filter {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+
+		border-radius: 40px;
+		border: 1px solid #FFFFFF1F;
+		padding: 3px 8px;
+		
+		cursor: pointer;
+		transition: all 0.2s;
+		user-select: none;
+
+		&._passive {
+			opacity: 0.6;
+			transition: all 0.2s;
+		}
+	}
+
+	&__filter-status {
+		width: 5px;
+		height: 5px;
+		border-radius: 50%;
+
+		&._pending {
+			background: #fdfd1a;
+		}
+
+		&._done {
+			background: #18e618;
+		}
 	}
 
 	&__creative-image {
