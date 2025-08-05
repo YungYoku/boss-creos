@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { IImage } from '@/types/File.ts'
+import { IImage } from '@/types/file.ts'
 
 interface Props {
 	src: string | IImage,

@@ -94,7 +94,7 @@ import { useToast } from '@/stores/toast.ts'
 
 import { Grid, Island } from '@/components/structures'
 import { Button, Checkbox, DatePicker, Input, InputFile, Textarea } from '@/components/blocks'
-import { emptyProject, IProject } from '@/types/Project.ts'
+import { emptyProject, IProject } from '@/types/project.ts'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
 

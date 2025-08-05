@@ -88,7 +88,7 @@ import { useSearchStore } from '@/stores/search.ts'
 
 import { Grid, Island } from '@/components/structures'
 import { Button, CreativeCard, EmptyCreativeCard, SelectLiveRich, SelectRich } from '@/components/blocks'
-import { creativeTypeItems, ICreative, ICreatives, ICreativeType, IRatio, ratioItems } from '@/types/Creative.ts'
+import { creativeTypeItems, ICreative, ICreatives, ICreativeType, IRatio, ratioItems } from '@/types/creative.ts'
 import { Form, Http } from '@/plugins'
 
 interface SearchForm {

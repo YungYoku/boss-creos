@@ -56,7 +56,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, PropType, ref, useTemplateRef } from 'vue'
 
-import { IDropdownMenuItem } from '@/types/DropdownMenuItem.ts'
+import { IDropdownMenuItem } from '@/types/dropdownMenuItem.ts'
 import Separator from '@/components/elements/separator/separator.vue'
 
 defineProps({

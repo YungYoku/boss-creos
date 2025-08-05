@@ -52,7 +52,7 @@ import { useToast } from '@/stores/toast.ts'
 import { Form, Http } from '@/plugins'
 import { Grid, Island } from '@/components/structures'
 import { Button, InputImageRich, InputRich, TextareaRich } from '@/components/blocks'
-import { emptyUser, IUser } from '@/types/User.ts'
+import { emptyUser, IUser } from '@/types/user.ts'
 
 const auth = useAuthStore()
 const toast = useToast()

@@ -1,5 +1,5 @@
-import { IFile } from '@/types/File.ts'
-import type { DBRecord } from '@/types/DBBase.ts'
+import type { IFile } from '@/types/file.ts'
+import type { DBRecord } from '@/types/dbBase.ts'
 
 export type IMessage = DBRecord & {
 	id: string

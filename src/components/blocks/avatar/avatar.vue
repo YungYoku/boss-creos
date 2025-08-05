@@ -51,7 +51,7 @@ import { computed } from 'vue'
 import { Icon } from '@/components/elements'
 import { useAuthStore } from '@/stores/auth'
 import { Http } from '@/plugins'
-import { emptyUser, IUser } from '@/types/User.ts'
+import { emptyUser, IUser } from '@/types/user.ts'
 
 interface Props {
 	user?: IUser | null | undefined

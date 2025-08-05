@@ -1,7 +1,7 @@
-import { IUser } from '@/types/User.ts'
-import { IChat } from '@/types/Chat.ts'
-import { IRating } from '@/types/Rating.ts'
-import type { DBRecord, DBRecordItems } from '@/types/DBBase.ts'
+import type { IUser } from '@/types/user.ts'
+import type { IChat } from '@/types/chat.ts'
+import type { IRating } from '@/types/rating.ts'
+import type { DBRecord, DBRecordItems } from '@/types/dbBase.ts'
 
 export type IProjectStatus = 'created' | 'in_progress' | 'on_review' | 'ended'
 

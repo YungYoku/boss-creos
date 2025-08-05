@@ -78,10 +78,10 @@ import { Grid, Modal } from '@/components/structures'
 import { Chat, ModalDeleteConfirmation, ModalProposals } from '@/components/sections'
 import { EmptyProjectCard, ProjectCard } from '@/components/blocks'
 import { PageTitle } from '@/components/elements'
-import { IRating } from '@/types/Rating.ts'
+import { IRating } from '@/types/rating.ts'
 import { Http } from '@/plugins'
-import { IUser } from '@/types/User.ts'
-import { IProject, IProjects, IProjectStatus } from '@/types/Project.ts'
+import { IUser } from '@/types/user.ts'
+import { IProject, IProjects, IProjectStatus } from '@/types/project.ts'
 
 const auth = useAuthStore()
 

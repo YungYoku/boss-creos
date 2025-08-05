@@ -1,10 +1,10 @@
-import { IUser } from '@/types/User.ts'
-import { IProjectProposal } from '@/types/Project.ts'
-import { IImage, IVideo } from '@/types/File.ts'
-import { IGeo } from '@/types/Geo.ts'
-import { ISlot } from '@/types/Slot.ts'
-import { IApproach } from '@/types/Approach.ts'
-import type { DBRecord, DBRecordItems } from '@/types/DBBase.ts'
+import type { IUser } from '@/types/user.ts'
+import type { IProjectProposal } from '@/types/project.ts'
+import type { IImage, IVideo } from '@/types/file.ts'
+import type { IGeo } from '@/types/geo.ts'
+import type { ISlot } from '@/types/slot.ts'
+import type { IApproach } from '@/types/approach.ts'
+import type { DBRecord, DBRecordItems } from '@/types/dbBase.ts'
 
 export type ICreativeType = 'video' | 'static' | 'pwa'
 const _creativeTypeItems: Array<ICreativeType> = ['video', 'static', 'pwa']

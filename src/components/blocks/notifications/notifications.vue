@@ -50,7 +50,7 @@ import { useAuthStore } from '@/stores/auth.ts'
 import { Dropdown, Grid } from '@/components/structures'
 import { Button } from '@/components/blocks'
 import { Icon, Text } from '@/components/elements'
-import { INotification } from '@/types/Notification.ts'
+import { INotification } from '@/types/notification.ts'
 import { Http } from '@/plugins'
 
 const auth = useAuthStore()

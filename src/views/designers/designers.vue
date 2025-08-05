@@ -21,7 +21,7 @@
 import { Ref, ref } from 'vue'
 
 import { UserCard } from '@/components/blocks'
-import { IUser, IUsers } from '@/types/User.ts'
+import { IUser, IUsers } from '@/types/user.ts'
 import { Http } from '@/plugins'
 
 const users: Ref<Array<IUser>> = ref([])

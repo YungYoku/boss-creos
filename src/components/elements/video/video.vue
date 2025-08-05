@@ -11,8 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, useTemplateRef } from 'vue'
-import { IImage, IVideo } from '@/types/File.ts'
+import { computed, ref, useTemplateRef } from 'vue'
+import { IImage, IVideo } from '@/types/file.ts'
 
 interface Props {
 	src: string | IVideo,

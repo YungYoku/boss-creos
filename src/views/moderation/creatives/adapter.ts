@@ -1,4 +1,4 @@
-import { emptyCreative, ICreative } from '@/types/Creative.ts'
+import { emptyCreative, ICreative } from '@/types/creative.ts'
 import { CellFormats, useAdapter as useAdapterRoot } from '@/plugins/adapter.ts'
 import { CellActions } from '@/components/elements'
 import { Http } from '@/plugins'

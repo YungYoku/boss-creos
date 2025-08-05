@@ -9,7 +9,7 @@ import { useRouter } from 'vue-router'
 
 import { useAuthStore } from '@/stores/auth'
 import { Http, Storage } from '@/plugins'
-import { IUserRefresh } from '@/types/User'
+import { IUserRefresh } from '@/types/user.ts'
 import { Toast } from '@/components/blocks'
 
 const auth = useAuthStore()

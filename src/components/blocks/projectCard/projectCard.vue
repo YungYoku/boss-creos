@@ -142,7 +142,7 @@ import { Badge, Icon, Skeleton, Text } from '@/components/elements'
 import User from '../user/user.vue'
 import { Http } from '@/plugins'
 import { useAuthStore } from '@/stores/auth.ts'
-import { IProject } from '@/types/Project.ts'
+import { IProject } from '@/types/project.ts'
 
 const props = defineProps({
 	project: {

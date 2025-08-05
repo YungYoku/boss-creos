@@ -51,7 +51,7 @@
 
 <script setup lang="ts">
 import { PropType } from 'vue'
-import { IRows } from '@/types/Table.ts'
+import { IRows } from '@/types/table.ts'
 
 defineProps({
 	data: {

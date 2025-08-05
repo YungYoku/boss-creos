@@ -201,7 +201,7 @@ import {
 } from '@/components/blocks'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
-import { creativeTypeItems, emptyCreative, ICreative, ratioItems } from '@/types/Creative.ts'
+import { creativeTypeItems, emptyCreative, ICreative, ratioItems } from '@/types/creative.ts'
 
 const creativeBase = Form<ICreative>({ ...emptyCreative })
 const creative = Form<ICreative>({ ...emptyCreative })
