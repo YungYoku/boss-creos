@@ -2,6 +2,8 @@ import type { ICreative, IRatio } from '@/types/creative.ts'
 import type { IGeo } from '@/types/geo.ts'
 import type { DBRecord, DBRecordItems } from '@/types/dbBase.ts'
 
+export type BasketStatus = 'created' | 'in-progress' | 'done'
+
 export type IBasket = DBRecord & {
 	id: string
 	created: string
@@ -11,7 +13,7 @@ export type IBasket = DBRecord & {
 	resize: Array<IRatio>
 	reskin: boolean
 	comment: string
-	status: 'created' | 'pending' | 'in-progress' | 'done'
+	status: BasketStatus
 	expand?: {
 		creative?: ICreative
 		geo?: Array<IGeo>

@@ -27,7 +27,7 @@
 					<div
 						class="orders__status"
 						:class="{
-							_pending: basket.status === 'pending',
+							_pending: basket.status === 'in-progress',
 							_done: basket.status === 'done',
 						}"
 					/>

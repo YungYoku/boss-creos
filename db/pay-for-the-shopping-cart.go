@@ -59,7 +59,7 @@ func payForTheShoppingCart(c *core.RequestEvent) error {
 				continue
 			}
 
-			basketRecord.Set("status", "pending")
+			basketRecord.Set("status", "in-progress")
 			if err := app.Save(basketRecord); err != nil {
 				continue
 			}

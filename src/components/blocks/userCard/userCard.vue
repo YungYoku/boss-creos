@@ -13,7 +13,9 @@
 		</template>
 
 		<template #footer>
-			{{ user.username }}
+			<router-link :to="`/users/${user.id}`">
+				{{ user.username }}
+			</router-link>
 		</template>
 	</Card>
 </template>

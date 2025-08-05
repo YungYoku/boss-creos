@@ -49,7 +49,7 @@
 					<div
 						class="bought__status"
 						:class="{
-							_pending: basket.status === 'pending',
+							_pending: basket.status === 'in-progress',
 							_done: basket.status === 'done',
 						}"
 					/>
@@ -78,20 +78,25 @@ import { computed, Ref, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 import { CardLong } from '@/components/structures'
 import { Badge, BadgeBalance, Image } from '@/components/elements'
+import type { BasketStatus } from '@/types/basket.ts'
 
-type Filter = 'done' | 'pending'
-const filters = [
+type Filter = {
+	value: BasketStatus
+	name: string
+}
+type Filters = Array<Filter>
+const filters: Filters = [
 	{
 		value: 'done',
 		name: 'Выполненные',
 	},
 	{
-		value: 'pending',
+		value: 'in-progress',
 		name: 'В работе',
 	},
 ] as const
-const activeFilter: Ref<null | Filter> = ref(null)
-const toggleFilter = (value: Filter) => {
+const activeFilter: Ref<BasketStatus | null> = ref(null)
+const toggleFilter = (value: BasketStatus) => {
 	if (activeFilter.value === value) {
 		activeFilter.value = null
 	} else {
@@ -161,7 +166,7 @@ const baskets = computed(() => {
 		height: 5px;
 		border-radius: 50%;
 
-		&._pending {
+		&._in-progress {
 			background: #fdfd1a;
 		}
 
