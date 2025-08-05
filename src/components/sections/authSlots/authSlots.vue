@@ -7,6 +7,7 @@
 		>
 			<img
 				v-for="slot in column"
+				ref="slots"
 				:key="`slot-${slot}`"
 				class="auth-slots__slot"
 				:src="slot.image"
@@ -17,17 +18,25 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { computed, reactive, useTemplateRef } from 'vue'
 import image from '@/assets/img/slot.webp'
 
-const slot = {
+const slotsRefs = useTemplateRef('slots')
+const slotBase = {
 	image
 }
 const columns = reactive([
-	[slot, slot, slot, slot, slot, slot, slot],
-	[slot, slot, slot, slot, slot, slot, slot],
-	[slot, slot, slot, slot, slot, slot, slot],
+	[slotBase, slotBase, slotBase, slotBase, slotBase, slotBase, slotBase],
+	[slotBase, slotBase, slotBase, slotBase, slotBase, slotBase, slotBase],
+	[slotBase, slotBase, slotBase, slotBase, slotBase, slotBase, slotBase],
 ])
+
+const slotHeight = computed(() => {
+	if (slotsRefs.value && slotsRefs.value.length > 0) {
+		return `-${slotsRefs.value[0].height + 30}px`
+	}
+	return '0'
+})
 </script>
 
 <style scoped lang="scss">
@@ -50,6 +59,17 @@ const columns = reactive([
 
 		&:nth-child(2) {
 			margin-top: calc((100% - 150px) / 7);
+		}
+
+		animation: down 3s linear infinite;
+
+		@keyframes down {
+			from {
+				transform: translateY(v-bind(slotHeight));
+			}
+			to {
+				transform: translateY(0);
+			}
 		}
 	}
 
