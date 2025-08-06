@@ -1,10 +1,10 @@
 <template>
 	Корзина - редактирование
 	<div class="edit-shopping-cart">
-		<span v-if="user.user.baskets.length === 0">Пусто</span>
+		<span v-if="baskets.length === 0">Пусто</span>
 
 		<div
-			v-for="basket in user.user.expand?.baskets"
+			v-for="basket in baskets"
 			:key="basket.id"
 			class="edit-shopping-cart__creative"
 		>
@@ -44,13 +44,13 @@
 				label="Ресайз"
 			/>
 
-			<Checkbox
+			<SwitcherRich
 				v-if="basket.expand?.creative?.reskin"
 				v-model="basket.reskin"
 				label="Рескин"
 			/>
 
-			<Textarea
+			<TextareaRich
 				v-model="basket.comment"
 				class="edit-shopping-cart__creative-description"
 				label="Описание"
@@ -58,27 +58,36 @@
 
 			<Button
 				class="edit-shopping-cart__creative-edit"
+				variant="outline"
 				@click="updateBasket(basket)"
 			>
 				Сохранить
 			</Button>
 		</div>
 
-		<Button to="/shopping-cart">
+		<Button
+			to="/shopping-cart"
+			variant="outline"
+		>
 			Вернуться
 		</Button>
 	</div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
-import { Button, Checkbox, Select, Textarea } from '@/components/blocks'
+import { Button, Select, SwitcherRich, TextareaRich } from '@/components/blocks'
 import { Image } from '@/components/elements'
 import { IBasket } from '@/types/basket.ts'
 import { ratioItems } from '@/types/creative.ts'
 import { Http } from '@/plugins'
 
-const user = useAuthStore()
+const auth = useAuthStore()
+const baskets = computed(() => {
+	const baskets = auth.user.expand?.baskets ?? []
+	return baskets.filter(basket => basket.status === 'created')
+})
 
 const updateBasket = async (basket: IBasket) => {
 	await Http
