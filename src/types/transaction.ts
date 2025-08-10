@@ -1,6 +1,7 @@
 import type { DBRecord } from '@/types/dbBase.ts'
 
 export type TransactionType = 'deposit' | 'withdraw'
+export type TransactionStatus = 'pending' | 'done'
 
 export type Transaction = DBRecord & {
 	created: Date
@@ -8,5 +9,7 @@ export type Transaction = DBRecord & {
 	id: string
 	amount: number
 	type: TransactionType
-	status: 'pending' | 'done'
+	status: TransactionStatus
+	blockchain?: 'btc' | 'eth'
+	address?: string
 }

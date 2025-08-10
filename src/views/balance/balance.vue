@@ -37,6 +37,14 @@
 			<div class="balance__transaction-content">
 				<div class="balance__transaction-value">
 					{{ transaction.type === 'deposit' ? 'Пополнение' : 'Списание' }} ${{ transaction.amount }}
+
+					<div
+						class="balance__transaction-status"
+						:class="{
+							_pending: transaction.status === 'pending',
+							_done: transaction.status === 'done'
+						}"
+					/>
 				</div>
 				<div class="balance__transaction-date">
 					{{ $date(transaction.created) }}
@@ -60,7 +68,7 @@
 		<Grid vertical>
 			<template v-if="type === 'deposit'">
 				<InputRich
-					v-model="value"
+					v-model="amount"
 					label="Сумма"
 					type="number"
 				/>
@@ -79,12 +87,12 @@
 					type="number"
 				/>
 				<InputRich
-					v-model="address"
+					v-model="blockchain"
 					label="Сеть"
 					type="number"
 				/>
 				<InputRich
-					v-model="value"
+					v-model="amount"
 					label="Сумма"
 					type="number"
 				/>
@@ -107,27 +115,28 @@ import { InputRich, Button } from '@/components/blocks'
 import { Badge, BadgeBalance } from '@/components/elements'
 import { Http } from '@/plugins'
 import { IUser } from '@/types/user.ts'
-import { Transaction, TransactionType } from '@/types/transaction.ts'
+import { Transaction, TransactionStatus, TransactionType } from '@/types/transaction.ts'
 
 const auth = useAuthStore()
 const transactions = computed(() => auth.user.expand?.transactions)
 
 const address = ref('')
-const value = ref(0)
+const blockchain = ref('')
+const amount = ref(0)
 const type: Ref<TransactionType> = ref('deposit')
 
-const makeTransaction = async (amount: number, type: TransactionType) => {
+const makeTransaction = async (status: TransactionStatus) => {
 	return await Http.post<Transaction>('/collections/transactions/records', {
-		amount,
-		type,
-		status: 'pending'
+		amount: amount.value,
+		type: type.value,
+		status
 	}).then((res) => {
 		return res.id
 	})
 }
 
-const updateUser = async (balance: number) => {
-	const newTransactionId = await makeTransaction(value.value, type.value)
+const updateUser = async (balance: number, transactionStatus: TransactionStatus) => {
+	const newTransactionId = await makeTransaction(transactionStatus)
 
 	await Http.patch<IUser>(`/collections/users/records/${auth.user.id}`, {
 		...auth.user,
@@ -137,16 +146,16 @@ const updateUser = async (balance: number) => {
 		expand: ['baskets', 'baskets.creative', 'baskets.creative.preview', 'baskets.creative.slot', 'baskets.geo', 'transactions']
 	}).then(data => {
 		auth.setUser(data)
-		value.value = 0
+		amount.value = 0
 	})
 }
 
 const action = async () => {
-	if (typeof value.value === 'number' && value.value > 0) {
+	if (typeof amount.value === 'number' && amount.value > 0) {
 		if (type.value === 'deposit') {
-			await updateUser(auth.user.balance + value.value)
+			await updateUser(auth.user.balance + amount.value, 'done')
 		} else if (type.value === 'withdraw') {
-			await updateUser(auth.user.balance - value.value)
+			await updateUser(auth.user.balance - amount.value, 'pending')
 		}
 	}
 
@@ -206,6 +215,10 @@ const showWithdrawModal = () => {
 	}
 
 	&__transaction-value {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+
 		font-weight: 500;
 		font-size: 14px;
 	}
@@ -214,6 +227,20 @@ const showWithdrawModal = () => {
 		font-weight: 500;
 		font-size: 11px;
 		color: #AFAFB7;
+	}
+
+	&__transaction-status {
+		width: 5px;
+		height: 5px;
+		border-radius: 50%;
+
+		&._pending {
+			background: #fdfd1a;
+		}
+
+		&._done {
+			background: #18e618;
+		}
 	}
 }
 </style>

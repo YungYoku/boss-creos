@@ -50,7 +50,7 @@
 						class="bought__status"
 						:class="{
 							_pending: basket.status === 'in-progress',
-							_done: basket.status === 'done',
+							_done: basket.status === 'done'
 						}"
 					/>
 				</div>
