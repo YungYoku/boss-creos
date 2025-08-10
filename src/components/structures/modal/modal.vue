@@ -53,7 +53,6 @@ const close = () => emit('close')
 
 	width: 100%;
 	height: 100vh;
-    padding: 10px;
 
 	background-color: rgba(26, 26, 26, 0.7);
 
@@ -68,7 +67,7 @@ const close = () => emit('close')
         justify-content: center;
         align-items: center;
 
-		padding: 10px;
+		padding: 40px 10px 10px 10px;
 
 		border: 1px solid hsl(var(--border));
 		background-color: hsl(var(--card));

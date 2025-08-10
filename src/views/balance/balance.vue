@@ -14,7 +14,7 @@
 
 			<div class="balance__actions">
 				<Badge @click="showWithdrawModal">
-					Вывод денег
+					Вывод средств
 				</Badge>
 				<Badge @click="showDepositModal">
 					Пополнить баланс
@@ -58,17 +58,43 @@
 		@close="modalShowing = false"
 	>
 		<Grid vertical>
-			<Input
-				v-model="value"
-				label="Введите сумму"
-				type="number"
-			/>
-			<Button
-				variant="outline"
-				@click="action"
-			>
-				{{ type === 'deposit' ? 'Пополнить' : 'Вывести' }}
-			</Button>
+			<template v-if="type === 'deposit'">
+				<InputRich
+					v-model="value"
+					label="Сумма"
+					type="number"
+				/>
+				<Button
+					variant="outline"
+					@click="action"
+				>
+					Пополнить
+				</Button>
+			</template>
+
+			<template v-else>
+				<InputRich
+					v-model="address"
+					label="Адрес"
+					type="number"
+				/>
+				<InputRich
+					v-model="address"
+					label="Сеть"
+					type="number"
+				/>
+				<InputRich
+					v-model="value"
+					label="Сумма"
+					type="number"
+				/>
+				<Button
+					variant="outline"
+					@click="action"
+				>
+					Вывод
+				</Button>
+			</template>
 		</Grid>
 	</Modal>
 </template>
@@ -76,18 +102,17 @@
 <script setup lang="ts">
 import { computed, Ref, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
-import { CardLong, Modal } from '@/components/structures'
-import { Input } from '@/components/blocks'
+import { CardLong, Modal, Grid } from '@/components/structures'
+import { InputRich, Button } from '@/components/blocks'
+import { Badge, BadgeBalance } from '@/components/elements'
 import { Http } from '@/plugins'
 import { IUser } from '@/types/user.ts'
 import { Transaction, TransactionType } from '@/types/transaction.ts'
-import Button from '@/components/blocks/button/button.vue'
-import Grid from '@/components/structures/grid/grid.vue'
-import { Badge, BadgeBalance } from '@/components/elements'
 
 const auth = useAuthStore()
 const transactions = computed(() => auth.user.expand?.transactions)
 
+const address = ref('')
 const value = ref(0)
 const type: Ref<TransactionType> = ref('deposit')
 
