@@ -36,7 +36,7 @@
 				</div>
 			</div>
 
-			<Select
+			<SelectRich
 				v-if="basket.expand?.creative?.resize"
 				v-model="basket.resize"
 				multiple
@@ -57,7 +57,7 @@
 			/>
 
 			<Button
-				class="edit-shopping-cart__creative-edit"
+				class="edit-shopping-cart__creative-save"
 				variant="outline"
 				@click="updateBasket(basket)"
 			>
@@ -77,7 +77,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
-import { Button, Select, SwitcherRich, TextareaRich } from '@/components/blocks'
+import { Button, SelectRich, SwitcherRich, TextareaRich } from '@/components/blocks'
 import { Image } from '@/components/elements'
 import { IBasket } from '@/types/basket.ts'
 import { ratioItems } from '@/types/creative.ts'
@@ -163,16 +163,8 @@ const updateBasket = async (basket: IBasket) => {
 		width: 100%;
 	}
 
-	&__creative-edit {
-		width: 84px;
-		height: 30px;
-
-		font-size: 11px;
-		color: #9297A0;
-
-		background: transparent;
-		border: 1px solid #FFFFFF1A;
-		border-radius: 8px;
+	&__creative-save {
+		margin: 0 auto;
 	}
 }
 </style>

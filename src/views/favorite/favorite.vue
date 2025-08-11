@@ -10,7 +10,14 @@
 		</div>
 
 		<div
-			v-if="creatives.length || loading"
+			v-if="favorite.length === 0"
+			class="favorite__empty"
+		>
+			Пусто
+		</div>
+
+		<div
+			v-else-if="creatives.length || loading"
 			class="favorite__creatives"
 		>
 			<template v-if="loading">
@@ -33,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, ref, watch } from 'vue'
+import { computed, Ref, ref, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 
 import { Grid } from '@/components/structures'
@@ -44,12 +51,15 @@ import { ICreative, ICreatives } from '@/types/creative.ts'
 const auth = useAuthStore()
 
 const creatives: Ref<Array<ICreative>> = ref([])
+const favorite = computed(() => auth.user.favorite)
 
 const loading = ref(true)
 const loadFavorite = async () => {
 	if (auth.user.id === '') return
 
-	const favoriteIds = auth.user.favorite.map(id => `id = '${id}'`).join(' || ')
+	if (favorite.value.length === 0) return
+
+	const favoriteIds = favorite.value.map(id => `id = '${id}'`).join(' || ')
 
 	loading.value = true
 

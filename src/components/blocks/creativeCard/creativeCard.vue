@@ -22,12 +22,6 @@
 					size="m"
 					@click="toggleFavorite"
 				/>
-
-				<Icon
-					v-if="auth.isDesigner && isItMine"
-					name="settings"
-					size="m"
-				/>
 			</div>
 
 			<SelectLive
@@ -152,6 +146,8 @@ const updateBasket = async () => {
 		})
 }
 const addToBasket = async () => {
+	if (geo.value.length === 0) return
+
 	if (basketWithCreative.value) {
 		await updateBasket()
 		return
