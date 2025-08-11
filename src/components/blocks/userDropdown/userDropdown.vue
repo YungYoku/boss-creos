@@ -73,6 +73,11 @@ const items = computed(() => [
 			can: auth.isBuyer
 		},
 		{
+			text: 'Избранное',
+			to: '/favorite',
+			can: auth.isBuyer
+		},
+		{
 			text: 'Корзина',
 			to: '/shopping-cart',
 			can: auth.isBuyer

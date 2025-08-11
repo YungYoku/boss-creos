@@ -1,11 +1,11 @@
 import type { IReferralCode } from '@/types/referralCode.ts'
-import type { IProject } from '@/types/project.ts'
 import type { IRating } from '@/types/rating.ts'
 import type { INotification } from '@/types/notification.ts'
 import type { IBasket } from '@/types/basket.ts'
 import type { IImage } from '@/types/file.ts'
 import type { DBRecord, DBRecordItems } from '@/types/dbBase.ts'
 import type { Transaction } from '@/types/transaction.ts'
+import type { ICreative } from '@/types/creative.ts'
 
 export type IUser = DBRecord & {
 	avatar: string
@@ -32,7 +32,7 @@ export type IUser = DBRecord & {
 	expand?: {
 		avatar?: IImage
 		referral_code?: IReferralCode
-		favorite?: Array<IProject>
+		favorite?: Array<ICreative>
 		rating?: Array<IRating>
 		notifications?: Array<INotification>
 		baskets?: Array<IBasket>

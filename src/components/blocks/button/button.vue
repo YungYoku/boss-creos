@@ -60,14 +60,14 @@ const props = defineProps({
 	justify-content: center;
 	align-items: center;
 
-	height: 48px;
+	height: 39px;
 	padding: 12px;
 
 	font-size: 14px;
 	font-weight: 500;
 
 	border: none;
-	border-radius: 14px;
+	border-radius: 9px;
 	outline: none;
 
 	transition: all 0.2s;

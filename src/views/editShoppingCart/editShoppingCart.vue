@@ -82,6 +82,7 @@ import { Image } from '@/components/elements'
 import { IBasket } from '@/types/basket.ts'
 import { ratioItems } from '@/types/creative.ts'
 import { Http } from '@/plugins'
+import { useToast } from '@/stores/toast.ts'
 
 const auth = useAuthStore()
 const baskets = computed(() => {
@@ -89,10 +90,12 @@ const baskets = computed(() => {
 	return baskets.filter(basket => basket.status === 'created')
 })
 
+const toast = useToast()
 const updateBasket = async (basket: IBasket) => {
 	await Http
 		.patch<IBasket>(`/collections/baskets/records/${basket.id}`, basket)
 		.then(() => {
+			toast.set('Успешно сохранено!')
 		})
 }
 </script>

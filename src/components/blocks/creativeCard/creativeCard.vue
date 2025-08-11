@@ -18,8 +18,9 @@
 
 				<Icon
 					v-if="auth.isBuyer"
-					name="heart"
+					:name="isFavorite ? 'heart-active' : 'heart'"
 					size="m"
+					@click="toggleFavorite"
 				/>
 
 				<Icon
@@ -164,6 +165,28 @@ const addToBasket = async () => {
 		await router.push('/shopping-cart')
 	})
 }
+
+const toggleFavorite = async () => {
+	const id = props.creative?.id
+	if (!id) return
+
+	let newFavorite = [...auth.user.favorite]
+	if (newFavorite.includes(id)) {
+		newFavorite = newFavorite.filter(fav => fav !== id)
+	} else {
+		newFavorite.push(id)
+	}
+
+	await Http.patch<IUser>(`/collections/users/records/${auth.user.id}`, {
+		favorite: newFavorite
+	}).then(data => {
+		auth.setUser(data)
+	})
+}
+
+const isFavorite = computed(() => {
+	return auth.user.favorite.includes(props.creative?.id)
+})
 </script>
 
 <style scoped lang="scss">
@@ -193,7 +216,7 @@ const addToBasket = async () => {
 	&__select-geo {
 		margin-bottom: 5px;
 	}
-	
+
 	&__info {
 		display: flex;
 		justify-content: center;

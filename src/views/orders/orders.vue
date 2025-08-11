@@ -47,18 +47,36 @@
 					</span>
 				</div>
 			</div>
+
+			<template #action>
+				<Button
+					variant="outline"
+					@click="showDescription(basket)"
+				>
+					Подробнее
+				</Button>
+			</template>
 		</CardLong>
 	</div>
+
+	<Modal
+		v-if="modalShowing"
+		:width="585"
+		@close="modalShowing = false"
+	>
+		Описание: {{ modalShowingBasket?.comment || 'пусто' }}
+	</Modal>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, Ref, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
-import { CardLong } from '@/components/structures'
+import { CardLong, Modal } from '@/components/structures'
 import { Image } from '@/components/elements'
 import { Http } from '@/plugins'
 import { IBasket, IBaskets } from '@/types/basket.ts'
 import { ICreative, ICreatives } from '@/types/creative.ts'
+import { Button } from '@/components/blocks'
 
 const auth = useAuthStore()
 const creatives: Ref<Array<ICreative>> = ref([])
@@ -93,6 +111,13 @@ watch(() => auth.user, () => {
 		void loadBaskets()
 	})
 }, { immediate: true })
+
+const modalShowing = ref(false)
+const modalShowingBasket: Ref<IBasket | null> = ref(null)
+const showDescription = (basket: IBasket) => {
+	modalShowing.value = true
+	modalShowingBasket.value = basket
+}
 </script>
 
 <style scoped lang="scss">

@@ -3,42 +3,32 @@
 		vertical
 		:columns="1"
 		gap="l"
+		class="favorite"
 	>
-		<Grid :columns="1">
-			<PageTitle>
-				Избранное
-			</PageTitle>
-		</Grid>
+		<div class="favorite__title">
+			Избранное
+		</div>
 
-		<Grid
-			v-if="loading || projects.length"
-			:columns-xl="4"
-			:columns-l="3"
-			:columns-m="2"
-			:columns-s="1"
+		<div
+			v-if="creatives.length || loading"
+			class="favorite__creatives"
 		>
 			<template v-if="loading">
-				<EmptyProjectCard
+				<EmptyCreativeCard
 					v-for="i in 8"
 					:key="i"
+					class="favorite__creatives-item"
 				/>
 			</template>
-			<template v-else-if="projects.length">
-				<ProjectCard
-					v-for="project in projects"
-					:key="project.id"
-					:project="project"
-					:loading="loading"
-					showing-remove
-					showing-status
-					@remove="remove"
+			<template v-else>
+				<CreativeCard
+					v-for="creative in creatives"
+					:key="creative.id"
+					class="favorite__creatives-item"
+					:creative="creative"
 				/>
 			</template>
-		</Grid>
-
-		<Text v-else>
-			Пусто
-		</Text>
+		</div>
 	</Grid>
 </template>
 
@@ -47,46 +37,66 @@ import { Ref, ref, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 
 import { Grid } from '@/components/structures'
-import { EmptyProjectCard, ProjectCard } from '@/components/blocks'
-import { PageTitle, Text } from '@/components/elements'
-
+import { CreativeCard, EmptyCreativeCard } from '@/components/blocks'
 import { Http } from '@/plugins'
-import { IProject, IProjects } from '@/types/project.ts'
+import { ICreative, ICreatives } from '@/types/creative.ts'
 
 const auth = useAuthStore()
 
-const projects: Ref<Array<IProject>> = ref([])
+const creatives: Ref<Array<ICreative>> = ref([])
 
 const loading = ref(true)
-const getUserProjects = async () => {
+const loadFavorite = async () => {
 	if (auth.user.id === '') return
+
+	const favoriteIds = auth.user.favorite.map(id => `id = '${id}'`).join(' || ')
 
 	loading.value = true
 
-	if (auth.user.favorite.length === 0) {
-		loading.value = false
-		return
-	}
-
 	await Http
-		.get<IProjects>('/collections/projects/records', {
-			filter: `(${auth.user.favorite.reduce((result, id) => result + `id='${id}' || `, '').slice(0, -3)})`,
-			expand: ['proposals', 'type', 'discipline']
+		.get<ICreatives>('/collections/creatives/records', {
+			filter: favoriteIds,
+			expand: ['preview', 'video', 'creator', 'creator.avatar', 'slot']
 		})
 		.then(response => {
-			projects.value = response.items
+			creatives.value = response.items
 		})
 
 	loading.value = false
 }
 
-watch(() => auth.user.id, getUserProjects, { immediate: true })
-
-const remove = async (project: IProject) => {
-	await Http
-		.delete(`/collections/projects/records/${project.id}`)
-		.then(() => {
-			projects.value = projects.value.filter((item) => item.id !== project.id)
-		})
-}
+watch(() => auth.user.id, loadFavorite, { immediate: true })
 </script>
+
+<style scoped lang="scss">
+.favorite {
+	&__title {
+		font-size: 32px;
+		font-weight: 700;
+		color: #ffffff;
+		text-align: center;
+		margin: 0 0 20px 0;
+	}
+
+	&__creatives {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		align-items: center;
+
+		width: 100%;
+		max-width: 100%;
+		gap: 20px;
+
+		margin: 40px auto 40px auto;
+
+		@media (max-width: 1024px) {
+			gap: 15px;
+		}
+
+		@media (max-width: 600px) {
+			gap: 15px;
+		}
+	}
+}
+</style>

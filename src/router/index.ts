@@ -100,7 +100,7 @@ const routes: Array<RouteRecordRaw> = [
 				name: 'Favorite',
 				component: () => import('@/views/favorite/favorite.vue'),
 				meta: {
-					rules: ['auth', 'designer']
+					rules: ['auth', 'buyer']
 				}
 			},
 			{
