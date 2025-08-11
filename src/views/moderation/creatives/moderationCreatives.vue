@@ -30,7 +30,7 @@ const loadCreatives = async () => {
 		.get<ICreatives>('/collections/creatives/records', {
 			fields,
 			filter: 'status=\'moderation\'',
-			expand: ['approach', 'preview', 'video', 'creator', 'creator.avatar', 'slot', 'geo'],
+			expand: ['approach', 'preview', 'video', 'creator', 'creator.avatar', 'slot', 'geo', 'unavailableGeo'],
 			perPage: 12,
 			page: 1
 		})

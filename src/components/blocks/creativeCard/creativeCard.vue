@@ -44,8 +44,15 @@
 					{{ creative.price }}$
 				</div>
 
+				<router-link
+					v-if="auth.isGuest && forSale"
+					class="creative-card__action"
+					to="/login"
+				>
+					Купить
+				</router-link>
 				<button
-					v-if="auth.isBuyer && forSale"
+					v-else-if="auth.isBuyer && forSale"
 					class="creative-card__action"
 					@click="addToBasket"
 				>

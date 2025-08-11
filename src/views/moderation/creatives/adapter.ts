@@ -61,6 +61,12 @@ export const useAdapter = () => {
 		'resize': (resize) => locale.t(resize ? 'true' : 'false'),
 		'reskin': (reskin) => locale.t(reskin ? 'true' : 'false'),
 		'watermark': (watermark) => locale.t(watermark ? 'true' : 'false'),
+		'unavailableGeo': (unavailableGeo) => {
+			if (unavailableGeo?.length) {
+				unavailableGeo.map(item => item.name)
+			}
+			return []
+		}
 	}
 
 	const cells = {
