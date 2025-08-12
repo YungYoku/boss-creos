@@ -112,7 +112,7 @@ const routes: Array<RouteRecordRaw> = [
 				}
 			},
 			{
-				path: '/shopping-cart/edit',
+				path: '/shopping-cart/edit/:id',
 				name: 'EditShoppingCart',
 				component: () => import('@/views/editShoppingCart/editShoppingCart.vue'),
 				meta: {

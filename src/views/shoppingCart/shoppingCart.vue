@@ -44,7 +44,7 @@
 			</div>
 
 			<router-link
-				to="/shopping-cart/edit"
+				:to="`/shopping-cart/edit/${basket.id}`"
 				class="shopping-cart__creative-edit"
 			>
 				Ред

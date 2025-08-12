@@ -76,6 +76,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.ts'
 import { Button, SelectRich, SwitcherRich, TextareaRich } from '@/components/blocks'
 import { Image } from '@/components/elements'
@@ -84,10 +85,13 @@ import { ratioItems } from '@/types/creative.ts'
 import { Http } from '@/plugins'
 import { useToast } from '@/stores/toast.ts'
 
+const route = useRoute()
+const { id } = route.params
+
 const auth = useAuthStore()
 const baskets = computed(() => {
 	const baskets = auth.user.expand?.baskets ?? []
-	return baskets.filter(basket => basket.status === 'created')
+	return baskets.filter(basket => basket.status === 'created' && basket.id === id)
 })
 
 const toast = useToast()
