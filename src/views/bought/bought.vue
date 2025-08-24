@@ -72,6 +72,12 @@
 
 			<template #action>
 				<Button
+					v-if="basket.status === 'done'"
+					variant="outline"
+				>
+					Скачать
+				</Button>
+				<Button
 					variant="outline"
 					@click="showDescription(basket)"
 				>

@@ -26,6 +26,5 @@ package-lock.json
 *.sln
 *.sw?
 
-db/pocketbase.exe
-db/pocketbase
+db/bosscreos.exe
 .env

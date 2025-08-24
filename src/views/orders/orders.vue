@@ -51,6 +51,11 @@
 			<template #action>
 				<Button
 					variant="outline"
+				>
+					Загрузить
+				</Button>
+				<Button
+					variant="outline"
 					@click="showDescription(basket)"
 				>
 					Подробнее
