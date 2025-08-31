@@ -49,11 +49,14 @@
 			</div>
 
 			<template #action>
-				<Button
-					variant="outline"
+				<InputVideo
+					v-if="basket.status === 'in-progress'"
+					v-model="basket.video"
+					compact
+					@update:model-value="loadVideo(basket)"
 				>
 					Загрузить
-				</Button>
+				</InputVideo>
 				<Button
 					variant="outline"
 					@click="showDescription(basket)"
@@ -81,7 +84,7 @@ import { Image } from '@/components/elements'
 import { Http } from '@/plugins'
 import { IBasket, IBaskets } from '@/types/basket.ts'
 import { ICreative, ICreatives } from '@/types/creative.ts'
-import { Button } from '@/components/blocks'
+import { Button, InputVideo } from '@/components/blocks'
 
 const auth = useAuthStore()
 const creatives: Ref<Array<ICreative>> = ref([])
@@ -122,6 +125,15 @@ const modalShowingBasket: Ref<IBasket | null> = ref(null)
 const showDescription = (basket: IBasket) => {
 	modalShowing.value = true
 	modalShowingBasket.value = basket
+}
+
+const loadVideo = async (basket: IBasket) => {
+	await Http.patch<IBaskets>(`/collections/baskets/records/${basket.id}`, {
+		status: 'done',
+		video: basket.video,
+	}).then(() => {
+		basket.status = 'done'
+	})
 }
 </script>
 

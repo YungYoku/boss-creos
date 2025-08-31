@@ -74,6 +74,7 @@
 				<Button
 					v-if="basket.status === 'done'"
 					variant="outline"
+					@click="downloadVideo(basket)"
 				>
 					Скачать
 				</Button>
@@ -147,6 +148,13 @@ const modalShowingBasket: Ref<IBasket | null> = ref(null)
 const showDescription = (basket: IBasket) => {
 	modalShowing.value = true
 	modalShowingBasket.value = basket
+}
+
+const downloadVideo = (basket: IBasket) => {
+	const file = basket?.expand?.video
+	if (!file) return
+
+	window.open(`${import.meta.env.VITE_API}/files/${file.collectionId}/${file.id}/${file.original_video}`, '_blank')
 }
 </script>
 

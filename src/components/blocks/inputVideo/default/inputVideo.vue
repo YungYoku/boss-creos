@@ -6,7 +6,8 @@
 			variant="outline"
 			class="input-video__button"
 		>
-			<Icon name="file"/>
+			<Icon name="video"/>
+			<slot/>
 
 			<div
 				class="input-video__field-wrap"
@@ -98,9 +99,7 @@ const updateFile = async (file: File) => {
 	cursor: pointer;
 
 	&__button {
-		position: absolute;
-		top: 0;
-		left: 0;
+		gap: 10px;
 	}
 
 	&__field-wrap {
