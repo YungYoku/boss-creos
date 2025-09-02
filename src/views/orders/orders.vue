@@ -72,7 +72,15 @@
 		:width="585"
 		@close="modalShowing = false"
 	>
-		Описание: {{ modalShowingBasket?.comment || 'пусто' }}
+		<div class="orders__item-description">
+			Описание: {{ modalShowingBasket?.comment || 'пусто' }}
+		</div>
+		<div
+			v-if="modalShowingBasket?.resize?.length"
+			class="orders__item-resize"
+		>
+			Ресайз: {{ modalShowingBasket.resize.join(', ') }}
+		</div>
 	</Modal>
 </template>
 

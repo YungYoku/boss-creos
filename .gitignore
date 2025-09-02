@@ -26,5 +26,6 @@ package-lock.json
 *.sln
 *.sw?
 
+db/bosscreos
 db/bosscreos.exe
 .env

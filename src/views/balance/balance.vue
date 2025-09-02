@@ -84,12 +84,10 @@
 				<InputRich
 					v-model="address"
 					label="Адрес"
-					type="number"
 				/>
 				<InputRich
 					v-model="blockchain"
 					label="Сеть"
-					type="number"
 				/>
 				<InputRich
 					v-model="amount"
@@ -110,8 +108,8 @@
 <script setup lang="ts">
 import { computed, Ref, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
-import { CardLong, Modal, Grid } from '@/components/structures'
-import { InputRich, Button } from '@/components/blocks'
+import { CardLong, Grid, Modal } from '@/components/structures'
+import { Button, InputRich } from '@/components/blocks'
 import { Badge, BadgeBalance } from '@/components/elements'
 import { Http } from '@/plugins'
 import { IUser } from '@/types/user.ts'
