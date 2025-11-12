@@ -10,8 +10,13 @@ class Storage {
 
 	load(key: string) {
 		const data = localStorage[key]
-		if (data) return JSON.parse(localStorage[key])
-		return null
+		try {
+			if (data) {
+				return JSON.parse(data)
+			}
+		} catch {
+			return null
+		}
 	}
 
 	clear() {
