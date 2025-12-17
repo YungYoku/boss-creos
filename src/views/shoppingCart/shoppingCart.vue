@@ -89,7 +89,7 @@ import { CardLong } from '@/components/structures'
 import { Button } from '@/components/blocks'
 import { BadgeBalance, Image } from '@/components/elements'
 import { Http } from '@/plugins'
-import { IUser } from '@/types/user.ts'
+import type { IUser } from '@/types/user.ts'
 import { useToast } from '@/stores/toast.ts'
 
 const auth = useAuthStore()

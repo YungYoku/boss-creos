@@ -59,17 +59,17 @@
 </template>
 
 <script setup lang="ts">
+import { computed, type Ref, ref, watch } from 'vue'
+
 import { Chat } from '@/components/sections'
 import { User as UserCard } from '@/components/blocks'
 import { Icon, PageTitle } from '@/components/elements'
 import { Grid, Island } from '@/components/structures'
-import { IProject, IProjects, IProjectStatus } from '@/types/project.ts'
-
+import type { IProject, IProjects, IProjectStatus } from '@/types/project.ts'
 import { Http, Screen } from '@/plugins'
-import { computed, Ref, ref, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 import Text from '@/components/elements/text/text.vue'
-import { IRating } from '@/types/rating.ts'
+import type { IRating } from '@/types/rating.ts'
 import { emptyUser } from '@/types/user.ts'
 
 const auth = useAuthStore()

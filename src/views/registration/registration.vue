@@ -105,7 +105,7 @@ import { AuthSlots } from '@/components/sections'
 import { Button, Input } from '@/components/blocks'
 import { Text } from '@/components/elements'
 import { Form, Http } from '@/plugins'
-import { IUser } from '@/types/user.ts'
+import type { IUser } from '@/types/user.ts'
 import Grid from '@/components/structures/grid/grid.vue'
 
 type Role = 'buyer' | 'designer'

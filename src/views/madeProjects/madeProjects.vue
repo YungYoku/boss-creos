@@ -71,17 +71,17 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, Ref, watch } from 'vue'
+import { reactive, ref, type Ref, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 
 import { Grid, Modal } from '@/components/structures'
 import { Chat, ModalDeleteConfirmation, ModalProposals } from '@/components/sections'
 import { EmptyProjectCard, ProjectCard } from '@/components/blocks'
 import { PageTitle } from '@/components/elements'
-import { IRating } from '@/types/rating.ts'
+import type { IRating } from '@/types/rating.ts'
 import { Http } from '@/plugins'
-import { IUser } from '@/types/user.ts'
-import { IProject, IProjects, IProjectStatus } from '@/types/project.ts'
+import type { IUser } from '@/types/user.ts'
+import type { IProject, IProjects, IProjectStatus } from '@/types/project.ts'
 
 const auth = useAuthStore()
 

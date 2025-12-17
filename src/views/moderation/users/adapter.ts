@@ -1,5 +1,5 @@
-import { emptyUser, IUser } from '@/types/user.ts'
-import { CellFormats, useAdapter as useAdapterRoot } from '@/plugins/adapter.ts'
+import { emptyUser, type IUser } from '@/types/user.ts'
+import { type CellFormats, useAdapter as useAdapterRoot } from '@/plugins/adapter.ts'
 import { CellActions } from '@/components/elements'
 import { Http } from '@/plugins'
 import { datetime } from '@/plugins/datetime.ts'

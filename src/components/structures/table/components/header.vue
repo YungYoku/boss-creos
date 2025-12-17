@@ -13,8 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from 'vue'
-import { IHeader } from '@/types/table.ts'
+import type { PropType } from 'vue'
+import type { IHeader } from '@/types/table.ts'
 
 defineProps({
 	data: {

@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, PropType } from 'vue'
+import { computed, type PropType } from 'vue'
 
 import { Popover } from '@/components/structures'
 import { Button, Calendar } from '@/components/blocks'

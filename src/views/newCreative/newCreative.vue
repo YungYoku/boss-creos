@@ -196,7 +196,7 @@ import {
 } from '@/components/blocks'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
-import { creativeTypeItems, emptyCreative, ICreative, ratioItems } from '@/types/creative.ts'
+import { creativeTypeItems, emptyCreative, type ICreative, ratioItems } from '@/types/creative.ts'
 
 const auth = useAuthStore()
 

@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from 'vue'
+import type { PropType } from 'vue'
 
 import { Button, Input } from '@/components/blocks'
 import { Icon } from '@/components/elements'

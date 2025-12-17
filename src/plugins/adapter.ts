@@ -1,4 +1,4 @@
-import { ref, Ref } from 'vue'
+import { ref, type Ref } from 'vue'
 import type { ICellOptions, IHeader, IRow, IRows } from '@/types/table.ts'
 
 type ItemExpand<T> = T extends { expand?: infer E } ? E : never

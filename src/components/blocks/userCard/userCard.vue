@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { Card } from '@/components/structures'
 import { Image } from '@/components/elements'
-import { emptyUser, IUser } from '@/types/user.ts'
+import { emptyUser, type IUser } from '@/types/user.ts'
 
 interface Props {
 	user: IUser,

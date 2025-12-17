@@ -1,4 +1,4 @@
-import { reactive, UnwrapNestedRefs } from 'vue'
+import { reactive, type UnwrapNestedRefs } from 'vue'
 
 interface IFormField<T> {
 	value: T extends object ? (T extends unknown[] | Date ? T : IForm<T>) : T;

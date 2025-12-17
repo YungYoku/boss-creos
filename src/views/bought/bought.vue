@@ -98,7 +98,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, Ref, ref } from 'vue'
+import { computed, type Ref, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 import { CardLong, Modal } from '@/components/structures'
 import { Badge, BadgeBalance, Image } from '@/components/elements'

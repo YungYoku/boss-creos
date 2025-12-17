@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, PropType } from 'vue'
+import { computed, type PropType, ref } from 'vue'
 
 const value = defineModel({
 	type: Object as PropType<Date>,

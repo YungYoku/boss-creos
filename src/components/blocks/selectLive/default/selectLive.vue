@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, Ref, ref, watch } from 'vue'
+import { computed, type Ref, ref, watch } from 'vue'
 
 import { Select } from '@/components/blocks'
 import { Http } from '@/plugins'

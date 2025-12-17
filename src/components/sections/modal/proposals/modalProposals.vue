@@ -63,8 +63,8 @@ import { computed } from 'vue'
 import { Grid, Modal } from '@/components/structures'
 import { Button, UserCard } from '@/components/blocks'
 import { Separator, Text } from '@/components/elements'
-import { IUser } from '@/types/user.ts'
-import { emptyProject, IProject } from '@/types/project.ts'
+import { type IUser } from '@/types/user.ts'
+import { emptyProject, type IProject } from '@/types/project.ts'
 
 interface Props {
 	project: IProject

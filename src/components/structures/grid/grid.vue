@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, Ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, type Ref, watch } from 'vue'
 
 import { Screen } from '@/plugins'
 

@@ -85,13 +85,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, Ref, watch } from 'vue'
+import { computed, ref, type Ref, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 import { CardLong, Modal } from '@/components/structures'
 import { Image } from '@/components/elements'
 import { Http } from '@/plugins'
-import { IBasket, IBaskets } from '@/types/basket.ts'
-import { ICreative, ICreatives } from '@/types/creative.ts'
+import type { IBasket, IBaskets } from '@/types/basket.ts'
+import type { ICreative, ICreatives } from '@/types/creative.ts'
 import { Button, InputVideo } from '@/components/blocks'
 
 const auth = useAuthStore()

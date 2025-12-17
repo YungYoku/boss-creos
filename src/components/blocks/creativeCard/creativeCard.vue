@@ -73,15 +73,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, PropType, ref, Ref, watch } from 'vue'
+import { computed, type PropType, ref, type Ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.ts'
 import { Card } from '@/components/structures'
 import { SelectLive, User } from '@/components/blocks'
 import { Icon, Video } from '@/components/elements'
-import { emptyUser, IUser } from '@/types/user.ts'
-import { IBasket } from '@/types/basket.ts'
-import { ICreative } from '@/types/creative.ts'
+import { emptyUser, type IUser } from '@/types/user.ts'
+import type { IBasket } from '@/types/basket.ts'
+import type { ICreative } from '@/types/creative.ts'
 import { Http } from '@/plugins'
 
 const props = defineProps({

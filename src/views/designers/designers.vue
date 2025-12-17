@@ -18,10 +18,10 @@
 </template>
 
 <script lang="ts" setup>
-import { Ref, ref } from 'vue'
+import { type Ref, ref } from 'vue'
 
 import { UserCard } from '@/components/blocks'
-import { IUser, IUsers } from '@/types/user.ts'
+import type { IUser, IUsers } from '@/types/user.ts'
 import { Http } from '@/plugins'
 
 const users: Ref<Array<IUser>> = ref([])

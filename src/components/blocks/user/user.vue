@@ -33,7 +33,7 @@
 
 
 <script setup lang="ts">
-import { emptyUser, IUser } from '@/types/user.ts'
+import { emptyUser, type IUser } from '@/types/user.ts'
 import { Skeleton } from '@/components/elements'
 import Avatar from '../avatar/avatar.vue'
 

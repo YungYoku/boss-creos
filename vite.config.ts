@@ -1,10 +1,10 @@
-import { defineConfig } from 'vite'
+import { defineConfig, type ESBuildOptions } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import eslint from 'vite-plugin-eslint'
 
 export default defineConfig(({ mode }) => {
-	const esbuild = { drop: [] }
+	const esbuild: ESBuildOptions = { drop: [] }
 	if (mode === 'production') {
 		esbuild.drop = ['console', 'debugger']
 	}

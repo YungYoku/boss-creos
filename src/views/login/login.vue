@@ -71,7 +71,7 @@ import { AuthSlots } from '@/components/sections'
 import { Button, Input } from '@/components/blocks'
 import { Text } from '@/components/elements'
 import { Form, Http } from '@/plugins'
-import { IUserLogin } from '@/types/user.ts'
+import type { IUserLogin } from '@/types/user.ts'
 
 interface LoginForm {
 	identity: string

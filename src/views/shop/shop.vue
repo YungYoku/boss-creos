@@ -83,12 +83,13 @@
 </template>
 
 <script lang="ts" setup>
-import { Ref, ref } from 'vue'
+import { type Ref, ref } from 'vue'
 import { useSearchStore } from '@/stores/search.ts'
 
 import { Grid, Island } from '@/components/structures'
 import { Button, CreativeCard, EmptyCreativeCard, SelectLiveRich, SelectRich } from '@/components/blocks'
-import { creativeTypeItems, ICreative, ICreatives, ICreativeType, IRatio, ratioItems } from '@/types/creative.ts'
+import type { ICreative, ICreatives, ICreativeType, IRatio } from '@/types/creative.ts'
+import { creativeTypeItems, ratioItems } from '@/types/creative.ts'
 import { Form, Http } from '@/plugins'
 
 interface SearchForm {

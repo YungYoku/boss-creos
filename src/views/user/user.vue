@@ -59,14 +59,14 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, ref, watch } from 'vue'
+import { type Ref, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { Http } from '@/plugins'
 import { Grid } from '@/components/structures'
 import { Avatar, CreativeCard, EmptyCreativeCard } from '@/components/blocks'
-import { IUser } from '@/types/user.ts'
-import { ICreative, ICreatives } from '@/types/creative.ts'
+import type { IUser } from '@/types/user.ts'
+import type { ICreative, ICreatives } from '@/types/creative.ts'
 
 const route = useRoute()
 

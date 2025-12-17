@@ -106,14 +106,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, Ref, ref } from 'vue'
+import { computed, type Ref, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 import { CardLong, Grid, Modal } from '@/components/structures'
 import { Button, InputRich } from '@/components/blocks'
 import { Badge, BadgeBalance } from '@/components/elements'
 import { Http } from '@/plugins'
-import { IUser } from '@/types/user.ts'
-import { Transaction, TransactionStatus, TransactionType } from '@/types/transaction.ts'
+import type { IUser } from '@/types/user.ts'
+import type { Transaction, TransactionStatus, TransactionType } from '@/types/transaction.ts'
 
 const auth = useAuthStore()
 const transactions = computed(() => auth.user.expand?.transactions)

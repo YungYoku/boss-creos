@@ -1,5 +1,5 @@
-import type { Ref } from 'vue'
-import { App, ref } from 'vue'
+import type { App, Ref } from 'vue'
+import { ref } from 'vue'
 
 import en from './en/en.json'
 import enTable from './en/table.json'

@@ -67,12 +67,12 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, ref } from 'vue'
+import { type Ref, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { Grid } from '@/components/structures'
 import { Http } from '@/plugins'
-import { emptyCreative, ICreative } from '@/types/creative.ts'
+import { emptyCreative, type ICreative } from '@/types/creative.ts'
 import CreativeCard from '@/components/blocks/creativeCard/creativeCard.vue'
 import { useAuthStore } from '@/stores/auth.ts'
 

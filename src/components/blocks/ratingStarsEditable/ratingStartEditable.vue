@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, Ref, ref } from 'vue'
+import { computed, type Ref, ref } from 'vue'
 
 import { Icon } from '@/components/elements'
 
