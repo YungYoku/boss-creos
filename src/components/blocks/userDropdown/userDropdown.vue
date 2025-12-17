@@ -14,10 +14,10 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 // import { useToast } from '@/stores/toast'
 import { Dropdown } from '@/components/structures'
-import { useAuthStore } from '@/stores/auth.ts'
+import { useAuthStore } from '@/stores/auth'
 import { Storage } from '@/plugins'
-// import { IReferralCode } from '@/interfaces/ReferralCode.ts'
-// import { IUser } from '@/interfaces/User.ts'
+// import { IReferralCode } from '@/interfaces/ReferralCode'
+// import { IUser } from '@/interfaces/User'
 
 const auth = useAuthStore()
 const router = useRouter()

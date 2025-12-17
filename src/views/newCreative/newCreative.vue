@@ -180,8 +180,8 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth.ts'
-import { useToast } from '@/stores/toast.ts'
+import { useAuthStore } from '@/stores/auth'
+import { useToast } from '@/stores/toast'
 
 import { Grid, Island, Modal } from '@/components/structures'
 import {
@@ -196,7 +196,7 @@ import {
 } from '@/components/blocks'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
-import { creativeTypeItems, emptyCreative, type ICreative, ratioItems } from '@/types/creative.ts'
+import { creativeTypeItems, emptyCreative, type ICreative, ratioItems } from '@/types/creative'
 
 const auth = useAuthStore()
 

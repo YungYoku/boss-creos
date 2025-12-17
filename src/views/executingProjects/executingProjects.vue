@@ -53,15 +53,15 @@
 
 <script setup lang="ts">
 import { type Ref, ref, watch } from 'vue'
-import { useAuthStore } from '@/stores/auth.ts'
+import { useAuthStore } from '@/stores/auth'
 
 import { Http } from '@/plugins'
-import type { IProject, IProjects, IProjectStatus } from '@/types/project.ts'
+import type { IProject, IProjects, IProjectStatus } from '@/types/project'
 import { Grid, Modal } from '@/components/structures'
 import { Chat } from '@/components/sections'
 import { EmptyProjectCard, ProjectCard } from '@/components/blocks'
 import { PageTitle } from '@/components/elements'
-import type { IRating } from '@/types/rating.ts'
+import type { IRating } from '@/types/rating'
 
 const auth = useAuthStore()
 

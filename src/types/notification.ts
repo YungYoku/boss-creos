@@ -1,4 +1,4 @@
-import type { DBRecord, DBRecordItems } from '@/types/dbBase.ts'
+import type { DBRecord, DBRecordItems } from '@/types/dbBase'
 
 export type INotification = DBRecord & {
 	created: string

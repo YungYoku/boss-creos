@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import type { IHeader } from '@/types/table.ts'
+import type { IHeader } from '@/types/table'
 
 defineProps({
 	data: {

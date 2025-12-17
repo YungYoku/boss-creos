@@ -135,18 +135,18 @@
 
 <script setup lang="ts">
 import { computed, nextTick, ref, type Ref, useTemplateRef, watch } from 'vue'
-import { useAuthStore } from '@/stores/auth.ts'
-import { useToast } from '@/stores/toast.ts'
+import { useAuthStore } from '@/stores/auth'
+import { useToast } from '@/stores/toast'
 
 import { Grid, StepByStep } from '@/components/structures'
 import { Rating } from '@/components/sections'
 import { Button, Input, InputFile, User } from '@/components/blocks'
 import { Badge } from '@/components/elements'
 import { Http } from '@/plugins'
-import type { IMessage } from '@/types/message.ts'
-import type { IChat } from '@/types/chat.ts'
-import { emptyProject, type IProject, type IProjectStatus } from '@/types/project.ts'
-import type { IRating } from '@/types/rating.ts'
+import type { IMessage } from '@/types/message'
+import type { IChat } from '@/types/chat'
+import { emptyProject, type IProject, type IProjectStatus } from '@/types/project'
+import type { IRating } from '@/types/rating'
 
 import { Message } from './components'
 

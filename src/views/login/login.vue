@@ -62,8 +62,8 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth.ts'
-import { useToast } from '@/stores/toast.ts'
+import { useAuthStore } from '@/stores/auth'
+import { useToast } from '@/stores/toast'
 
 import { AuthLayout } from '@/components/layouts'
 import { CardAuth } from '@/components/structures'
@@ -71,7 +71,7 @@ import { AuthSlots } from '@/components/sections'
 import { Button, Input } from '@/components/blocks'
 import { Text } from '@/components/elements'
 import { Form, Http } from '@/plugins'
-import type { IUserLogin } from '@/types/user.ts'
+import type { IUserLogin } from '@/types/user'
 
 interface LoginForm {
 	identity: string

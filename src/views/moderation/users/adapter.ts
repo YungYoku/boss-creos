@@ -1,8 +1,8 @@
-import { emptyUser, type IUser } from '@/types/user.ts'
-import { type CellFormats, useAdapter as useAdapterRoot } from '@/plugins/adapter.ts'
+import { emptyUser, type IUser } from '@/types/user'
+import { type CellFormats, useAdapter as useAdapterRoot } from '@/plugins/adapter'
 import { CellActions } from '@/components/elements'
 import { Http } from '@/plugins'
-import { datetime } from '@/plugins/datetime.ts'
+import { datetime } from '@/plugins/datetime'
 import locale from '@/locale'
 
 export const useAdapter = () => {

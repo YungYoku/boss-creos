@@ -89,12 +89,12 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth.ts'
-import { useToast } from '@/stores/toast.ts'
+import { useAuthStore } from '@/stores/auth'
+import { useToast } from '@/stores/toast'
 
 import { Grid, Island } from '@/components/structures'
 import { Button, Checkbox, DatePicker, Input, InputFile, Textarea } from '@/components/blocks'
-import { emptyProject, type IProject } from '@/types/project.ts'
+import { emptyProject, type IProject } from '@/types/project'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
 

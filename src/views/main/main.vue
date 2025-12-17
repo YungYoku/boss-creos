@@ -75,7 +75,7 @@
 
 <script lang="ts" setup>
 import { type Ref, ref } from 'vue'
-import type { ICreative, ICreatives } from '@/types/creative.ts'
+import type { ICreative, ICreatives } from '@/types/creative'
 import { CreativeCard, EmptyCreativeCard } from '@/components/blocks'
 import { Http } from '@/plugins'
 

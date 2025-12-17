@@ -65,8 +65,8 @@ import { useRoute } from 'vue-router'
 import { Http } from '@/plugins'
 import { Grid } from '@/components/structures'
 import { Avatar, CreativeCard, EmptyCreativeCard } from '@/components/blocks'
-import type { IUser } from '@/types/user.ts'
-import type { ICreative, ICreatives } from '@/types/creative.ts'
+import type { IUser } from '@/types/user'
+import type { ICreative, ICreatives } from '@/types/creative'
 
 const route = useRoute()
 

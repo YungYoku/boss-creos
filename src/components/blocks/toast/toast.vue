@@ -18,9 +18,9 @@
 </template>
 
 <script setup lang="ts">
-import { useToast } from '@/stores/toast.ts'
+import { useToast } from '@/stores/toast'
 
-import { Text, Icon } from '@/components/elements'
+import { Icon, Text } from '@/components/elements'
 
 const toast = useToast()
 

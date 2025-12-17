@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { emptyCell, type ICell } from '@/types/table.ts'
+import { emptyCell, type ICell } from '@/types/table'
 import { Button } from '@/components/blocks'
 
 type Props = {

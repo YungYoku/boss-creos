@@ -1,5 +1,5 @@
-import type { IUser } from '@/types/user.ts'
-import type { DBRecord } from '@/types/dbBase.ts'
+import type { IUser } from '@/types/user'
+import type { DBRecord } from '@/types/dbBase'
 
 export type IReferralCode = DBRecord & {
 	created: Date,

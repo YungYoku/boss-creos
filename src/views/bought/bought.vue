@@ -99,11 +99,11 @@
 
 <script setup lang="ts">
 import { computed, type Ref, ref } from 'vue'
-import { useAuthStore } from '@/stores/auth.ts'
+import { useAuthStore } from '@/stores/auth'
 import { CardLong, Modal } from '@/components/structures'
 import { Badge, BadgeBalance, Image } from '@/components/elements'
 import { Button } from '@/components/blocks'
-import type { BasketStatus, IBasket } from '@/types/basket.ts'
+import type { BasketStatus, IBasket } from '@/types/basket'
 
 type Filter = {
 	value: BasketStatus

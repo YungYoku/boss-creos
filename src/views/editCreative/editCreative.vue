@@ -185,8 +185,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useToast } from '@/stores/toast.ts'
-import { useAuthStore } from '@/stores/auth.ts'
+import { useToast } from '@/stores/toast'
+import { useAuthStore } from '@/stores/auth'
 
 import { Grid, Island, Modal } from '@/components/structures'
 import {
@@ -201,7 +201,7 @@ import {
 } from '@/components/blocks'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
-import { creativeTypeItems, emptyCreative, type ICreative, ratioItems } from '@/types/creative.ts'
+import { creativeTypeItems, emptyCreative, type ICreative, ratioItems } from '@/types/creative'
 
 const creativeBase = Form<ICreative>({ ...emptyCreative })
 const creative = Form<ICreative>({ ...emptyCreative })

@@ -141,8 +141,8 @@ import { Island } from '@/components/structures'
 import { Badge, Icon, Skeleton, Text } from '@/components/elements'
 import User from '../user/user.vue'
 import { Http } from '@/plugins'
-import { useAuthStore } from '@/stores/auth.ts'
-import type { IProject } from '@/types/project.ts'
+import { useAuthStore } from '@/stores/auth'
+import type { IProject } from '@/types/project'
 
 const props = defineProps({
 	project: {

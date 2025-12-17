@@ -1,5 +1,5 @@
-import type { Method } from '@/plugins/datetime.ts'
-import type { FormatType } from '@/plugins/format.ts'
+import type { Method } from '@/plugins/datetime'
+import type { FormatType } from '@/plugins/format'
 
 declare module '*.vue' {
 	import type { DefineComponent } from 'vue'

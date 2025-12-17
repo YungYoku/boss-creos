@@ -1,7 +1,7 @@
-import type { ICreative, IRatio } from '@/types/creative.ts'
-import type { IGeo } from '@/types/geo.ts'
-import type { DBRecord, DBRecordItems } from '@/types/dbBase.ts'
-import type { IVideo } from '@/types/file.ts'
+import type { ICreative, IRatio } from '@/types/creative'
+import type { IGeo } from '@/types/geo'
+import type { DBRecord, DBRecordItems } from '@/types/dbBase'
+import type { IVideo } from '@/types/file'
 
 export type BasketStatus = 'created' | 'in-progress' | 'done'
 

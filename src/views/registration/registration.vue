@@ -97,7 +97,7 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useToast } from '@/stores/toast.ts'
+import { useToast } from '@/stores/toast'
 
 import { AuthLayout } from '@/components/layouts'
 import { CardAuth } from '@/components/structures'
@@ -105,7 +105,7 @@ import { AuthSlots } from '@/components/sections'
 import { Button, Input } from '@/components/blocks'
 import { Text } from '@/components/elements'
 import { Form, Http } from '@/plugins'
-import type { IUser } from '@/types/user.ts'
+import type { IUser } from '@/types/user'
 import Grid from '@/components/structures/grid/grid.vue'
 
 type Role = 'buyer' | 'designer'

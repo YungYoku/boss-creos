@@ -39,7 +39,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { useAuthStore } from '@/stores/auth.ts'
+import { useAuthStore } from '@/stores/auth'
 
 import { Grid } from '@/components/structures'
 import { UserDropdown } from '@/components/blocks'

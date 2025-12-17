@@ -46,13 +46,13 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { useAuthStore } from '@/stores/auth.ts'
-import { useToast } from '@/stores/toast.ts'
+import { useAuthStore } from '@/stores/auth'
+import { useToast } from '@/stores/toast'
 
 import { Form, Http } from '@/plugins'
 import { Grid, Island } from '@/components/structures'
 import { Button, InputImageRich, InputRich, TextareaRich } from '@/components/blocks'
-import { emptyUser, type IUser } from '@/types/user.ts'
+import { emptyUser, type IUser } from '@/types/user'
 
 const auth = useAuthStore()
 const toast = useToast()

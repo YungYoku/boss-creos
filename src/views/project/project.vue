@@ -175,16 +175,16 @@
 <script setup lang="ts">
 import { computed, reactive, type Ref, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth.ts'
-import { useToast } from '@/stores/toast.ts'
+import { useAuthStore } from '@/stores/auth'
+import { useToast } from '@/stores/toast'
 
 import { Grid, Island } from '@/components/structures'
 import { ModalDeleteConfirmation, ModalMakeProposal } from '@/components/sections'
 import { Button, User as UserCard } from '@/components/blocks'
 import { PageTitle, Text } from '@/components/elements'
 import { Http } from '@/plugins'
-import type { IProject, IProjectProposal } from '@/types/project.ts'
-import { emptyProject } from '@/types/project.ts'
+import type { IProject, IProjectProposal } from '@/types/project'
+import { emptyProject } from '@/types/project'
 
 const router = useRouter()
 

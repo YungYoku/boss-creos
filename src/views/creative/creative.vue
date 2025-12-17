@@ -72,9 +72,9 @@ import { useRoute } from 'vue-router'
 
 import { Grid } from '@/components/structures'
 import { Http } from '@/plugins'
-import { emptyCreative, type ICreative } from '@/types/creative.ts'
+import { emptyCreative, type ICreative } from '@/types/creative'
 import CreativeCard from '@/components/blocks/creativeCard/creativeCard.vue'
-import { useAuthStore } from '@/stores/auth.ts'
+import { useAuthStore } from '@/stores/auth'
 
 const auth = useAuthStore()
 

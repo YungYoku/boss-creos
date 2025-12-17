@@ -1,9 +1,9 @@
-import { datetimePlugin, datetime as Datetime } from './datetime.ts'
-import Form from './form.ts'
-import { formatPlugin, format as Format } from './format.ts'
-import Http from './http.ts'
-import Storage from './storage.ts'
-import Screen from './screen.ts'
+import { datetime as Datetime, datetimePlugin } from './datetime'
+import Form from './form'
+import { format as Format, formatPlugin } from './format'
+import Http from './http'
+import Storage from './storage'
+import Screen from './screen'
 
 export {
 	datetimePlugin,

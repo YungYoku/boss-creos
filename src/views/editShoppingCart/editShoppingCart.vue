@@ -77,13 +77,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { useAuthStore } from '@/stores/auth.ts'
+import { useAuthStore } from '@/stores/auth'
 import { Button, SelectRich, SwitcherRich, TextareaRich } from '@/components/blocks'
 import { Image } from '@/components/elements'
-import type { IBasket } from '@/types/basket.ts'
-import { ratioItems } from '@/types/creative.ts'
+import type { IBasket } from '@/types/basket'
+import { ratioItems } from '@/types/creative'
 import { Http } from '@/plugins'
-import { useToast } from '@/stores/toast.ts'
+import { useToast } from '@/stores/toast'
 
 const route = useRoute()
 const { id } = route.params

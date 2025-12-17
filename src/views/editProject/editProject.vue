@@ -97,13 +97,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useToast } from '@/stores/toast.ts'
+import { useToast } from '@/stores/toast'
 
 import { Grid, Island } from '@/components/structures'
 import { Button, Checkbox, DatePicker, Input, InputFile, Textarea } from '@/components/blocks'
 import { Text } from '@/components/elements'
-import { emptyProject, type IProject } from '@/types/project.ts'
-import type { IUser } from '@/types/user.ts'
+import { emptyProject, type IProject } from '@/types/project'
+import type { IUser } from '@/types/user'
 import { Form, Http } from '@/plugins'
 
 const form = Form<IProject>({ ...emptyProject })

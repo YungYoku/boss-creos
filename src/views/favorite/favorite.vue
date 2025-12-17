@@ -41,12 +41,12 @@
 
 <script setup lang="ts">
 import { computed, type Ref, ref, watch } from 'vue'
-import { useAuthStore } from '@/stores/auth.ts'
+import { useAuthStore } from '@/stores/auth'
 
 import { Grid } from '@/components/structures'
 import { CreativeCard, EmptyCreativeCard } from '@/components/blocks'
 import { Http } from '@/plugins'
-import type { ICreative, ICreatives } from '@/types/creative.ts'
+import type { ICreative, ICreatives } from '@/types/creative'
 
 const auth = useAuthStore()
 

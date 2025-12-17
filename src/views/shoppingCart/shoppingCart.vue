@@ -84,13 +84,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth.ts'
+import { useAuthStore } from '@/stores/auth'
 import { CardLong } from '@/components/structures'
 import { Button } from '@/components/blocks'
 import { BadgeBalance, Image } from '@/components/elements'
 import { Http } from '@/plugins'
-import type { IUser } from '@/types/user.ts'
-import { useToast } from '@/stores/toast.ts'
+import type { IUser } from '@/types/user'
+import { useToast } from '@/stores/toast'
 
 const auth = useAuthStore()
 
