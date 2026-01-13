@@ -35,5 +35,5 @@
 		"noImplicitReturns": true,
 		"noUncheckedIndexedAccess": true
 	},
-	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "vite-env.d.ts"]
+	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "vite.config.ts", "vite-env.d.ts"]
 }

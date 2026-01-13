@@ -1,17 +1,18 @@
-import {defineConfig, type ESBuildOptions} from 'vite'
+import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 import eslint from 'vite-plugin-eslint'
-import stylelint from "vite-plugin-stylelint";
+import stylelint from 'vite-plugin-stylelint'
 
 export default defineConfig(({ mode }) => {
-	const esbuild: ESBuildOptions = { drop: [] }
-	if (mode === 'production') {
-		esbuild.drop = ['console', 'debugger']
-	}
+	const isProduction = mode === 'production'
 
 	return {
-		esbuild,
+		esbuild: {
+			drop: isProduction ? ['console', 'debugger'] : []
+		},
 
 		plugins: [
 			vue(),
@@ -21,7 +22,7 @@ export default defineConfig(({ mode }) => {
 
 		resolve: {
 			alias: {
-				'@': path.resolve(__dirname, './src'),
+				'@': path.resolve(__dirname, './src')
 			}
 		}
 	}
