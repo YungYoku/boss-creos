@@ -1,7 +1,8 @@
-import { defineConfig, type ESBuildOptions } from 'vite'
+import {defineConfig, type ESBuildOptions} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import eslint from 'vite-plugin-eslint'
+import stylelint from "vite-plugin-stylelint";
 
 export default defineConfig(({ mode }) => {
 	const esbuild: ESBuildOptions = { drop: [] }
@@ -14,7 +15,8 @@ export default defineConfig(({ mode }) => {
 
 		plugins: [
 			vue(),
-			eslint()
+			eslint(),
+			stylelint()
 		],
 
 		resolve: {
