@@ -83,7 +83,6 @@ const loadCreatives = async () => {
 	loadingCreatives.value = true
 
 	const filter = `status='approved'&&creator='${id}'`
-	console.log(filter)
 	const encodedFilter = encodeURIComponent(filter)
 
 	await Http

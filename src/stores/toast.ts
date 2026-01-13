@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 
 export interface State {
-    text: string
-    removingTimeout: ReturnType<typeof setTimeout> | null
+	text: string
+	removingTimeout: ReturnType<typeof setTimeout> | null
 }
 
 export const useToast = defineStore('toast', {
