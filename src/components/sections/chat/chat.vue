@@ -145,7 +145,7 @@ import { Badge } from '@/components/elements'
 import { Http } from '@/plugins'
 import type { IMessage } from '@/types/message'
 import type { IChat } from '@/types/chat'
-import { emptyProject, type IProject, type IProjectStatus } from '@/types/project'
+import { type IProject, type IProjectStatus } from '@/types/project'
 import type { IRating } from '@/types/rating'
 
 import { Message } from './components'
@@ -157,11 +157,7 @@ interface Props {
 	userType: 'designer' | 'buyer'
 	ratingType: 'ratingDesigner' | 'ratingBuyer'
 }
-const props = withDefaults(defineProps<Props>(), {
-	project: () => emptyProject,
-	userType: 'designer',
-	ratingType: 'ratingDesigner',
-})
+const props = withDefaults(defineProps<Props>(), {})
 
 const messagesRef = useTemplateRef('messages-ref')
 const chat: Ref<IChat> = ref({

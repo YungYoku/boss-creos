@@ -4,8 +4,11 @@ import { CellActions } from '@/components/elements'
 import { Http } from '@/plugins'
 import { datetime } from '@/plugins/datetime'
 import locale from '@/locale'
+import { useToast } from '@/stores/toast.ts'
 
 export const useAdapter = () => {
+	const toast = useToast()
+
 	const unnecessaryFieldsForRequest: Array<Partial<keyof ICreative>> = [
 		'collectionId',
 		'collectionName'
@@ -30,7 +33,7 @@ export const useAdapter = () => {
 							status: 'approved'
 						})
 						.then(res => {
-							console.log(res)
+							toast.set(`Успех, ${res.id}`)
 						})
 				}
 			},

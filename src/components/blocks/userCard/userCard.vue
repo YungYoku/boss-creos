@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { Card } from '@/components/structures'
 import { Image } from '@/components/elements'
-import { emptyUser, type IUser } from '@/types/user'
+import { type IUser } from '@/types/user'
 
 interface Props {
 	user: IUser,
@@ -32,7 +32,6 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-	user: () => ({ ...emptyUser }),
 	loading: false,
 	link: false
 })

@@ -33,7 +33,7 @@
 
 
 <script setup lang="ts">
-import { emptyUser, type IUser } from '@/types/user'
+import { type IUser } from '@/types/user'
 import { Skeleton } from '@/components/elements'
 import Avatar from '../avatar/avatar.vue'
 
@@ -45,7 +45,6 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-	user: () => ({ ...emptyUser }),
 	loading: false,
 	link: false,
 	boughtAmount: 0

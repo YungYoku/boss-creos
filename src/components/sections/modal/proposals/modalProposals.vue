@@ -64,15 +64,13 @@ import { Grid, Modal } from '@/components/structures'
 import { Button, UserCard } from '@/components/blocks'
 import { Separator, Text } from '@/components/elements'
 import { type IUser } from '@/types/user'
-import { emptyProject, type IProject } from '@/types/project'
+import { type IProject } from '@/types/project'
 
 interface Props {
 	project: IProject
 }
 
-const props = withDefaults(defineProps<Props>(), {
-	project: () => ({ ...emptyProject })
-})
+const props = withDefaults(defineProps<Props>(), {})
 
 const proposals = computed(() => props.project.expand?.proposals ?? [])
 

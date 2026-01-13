@@ -30,7 +30,7 @@ import { Icon } from '@/components/elements'
 
 type Props = {
 	label?: string
-	error: string | null
+	error?: string | null
 }
 
 withDefaults(defineProps<Props>(), {

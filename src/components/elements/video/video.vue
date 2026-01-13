@@ -19,10 +19,7 @@ interface Props {
 	preview: string | IImage,
 }
 
-const props = withDefaults(defineProps<Props>(), {
-	src: '',
-	preview: '',
-})
+const props = withDefaults(defineProps<Props>(), {})
 
 const getFileSrc = (file: IVideo | IImage, src: string) => {
 	return `${import.meta.env.VITE_API}/files/${file.collectionId}/${file.id}/${src}`

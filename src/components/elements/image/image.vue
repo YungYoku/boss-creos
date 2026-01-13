@@ -16,7 +16,6 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-	src: '',
 	alt: ''
 })
 
