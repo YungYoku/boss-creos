@@ -44,8 +44,8 @@ export const useAdapter = () => {
 			},
 			'avatar': {
 				link: {
-					new: `${import.meta.env.VITE_API}/files/${avatar?.collectionId}/${avatar?.id}/${avatar?.watermarked_image}`,
-					current: `${import.meta.env.VITE_API}/files/${avatar?.collectionId}/${avatar?.id}/${avatar?.watermarked_image}`,
+					new: avatar ? `${import.meta.env.VITE_API}/files/${avatar.collectionId}/${avatar.id}/${avatar.watermarked_image}` : '',
+					current: avatar ? `${import.meta.env.VITE_API}/files/${avatar.collectionId}/${avatar.id}/${avatar.watermarked_image}` : ''
 				}
 			},
 		}

@@ -7,36 +7,36 @@ type RawSchema = {
 	[key: string]: RawFieldValue | RawSchema
 }
 
-type IFormField<T> = {
+type FormField<T> = {
 	type: 'field'
 	value: T
 	error: string | null
 	isTouched: boolean
 }
 
-type IError = {
+type Error = {
 	code: string
 	message: string
 }
-type Errors<T> = {
+export type FormErrors<T> = {
 	[K in keyof T]?: T[K] extends RawFieldValue
-		? IError
-		: Errors<T[K]>
+		? Error
+		: FormErrors<T[K]>
 }
 
 type TransformedFormFields<Schema extends RawSchema> = {
 	[Key in keyof Schema]: Schema[Key] extends RawFieldValueComplicated
-		? Reactive<IFormField<Schema[Key]>>
+		? Reactive<FormField<Schema[Key]>>
 		: Schema[Key] extends RawSchema
 			? IForm<Schema[Key]>
-			: Reactive<IFormField<Schema[Key]>>
+			: Reactive<FormField<Schema[Key]>>
 }
 
 type IForm<Schema extends RawSchema> = TransformedFormFields<Schema> & {
 	type: 'form'
 	set(data: Partial<Schema>): void
 	get(): Schema
-	setErrors(_: Errors<Schema>): void
+	setErrors(_: FormErrors<Schema>): void
 	clearErrors(): void
 	reset(): void
 	validate(): boolean
@@ -50,7 +50,6 @@ const Form = <Schema extends RawSchema>(base: Schema): IForm<Schema> => {
 	const isObject = (value: unknown): value is Partial<Schema>[string & keyof Schema] => {
 		return (
 			typeof value === 'object' &&
-			value !== undefined &&
 			value !== null &&
 			!isArray(value) &&
 			!isDate(value) &&
@@ -77,7 +76,7 @@ const Form = <Schema extends RawSchema>(base: Schema): IForm<Schema> => {
 		if (isObject(value) && value != undefined) {
 			Reflect.set(acc, key, Form(value))
 		} else {
-			const field: IFormField<typeof value> = {
+			const field: FormField<typeof value> = {
 				type: 'field',
 				value,
 				error: null,
@@ -96,7 +95,7 @@ const Form = <Schema extends RawSchema>(base: Schema): IForm<Schema> => {
 			if (isNestedForm(field) && value != undefined) {
 				field.set(value)
 			} else {
-				const newField: IFormField<typeof value> = {
+				const newField: FormField<typeof value> = {
 					type: 'field',
 					value,
 					error: null,
@@ -123,8 +122,8 @@ const Form = <Schema extends RawSchema>(base: Schema): IForm<Schema> => {
 		return JSON.parse(JSON.stringify(result))
 	}
 
-	const setErrors = (errors: Errors<Schema>) => {
-		const errorKeys = Object.keys(errors) as Array<keyof Errors<Schema>>
+	const setErrors = (errors: FormErrors<Schema>) => {
+		const errorKeys = Object.keys(errors) as Array<keyof FormErrors<Schema>>
 
 		for (const key of errorKeys) {
 			const error = errors[key]
@@ -159,7 +158,7 @@ const Form = <Schema extends RawSchema>(base: Schema): IForm<Schema> => {
 				field.reset()
 			} else {
 				const value = base[key]
-				const newField: IFormField<typeof value> = {
+				const newField: FormField<typeof value> = {
 					type: 'field',
 					value,
 					error: null,

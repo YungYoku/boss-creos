@@ -79,10 +79,12 @@ const value: Ref<IRating> = ref({
 	review: ''
 })
 watch(() => props.modelValue, () => {
-	if (props.modelValue) value.value = props.modelValue
+	value.value = props.modelValue
 }, { immediate: true })
 
-const back = () => emit('back')
+const back = () => {
+	emit('back')
+}
 const send = () => {
 	emit('update:modelValue', value.value)
 	back()

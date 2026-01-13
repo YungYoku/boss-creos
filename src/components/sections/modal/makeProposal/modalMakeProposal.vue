@@ -61,6 +61,10 @@ watch(() => props.defaultPrice, () => {
 
 const emit = defineEmits(['make-proposal', 'close'])
 
-const makeProposal = () => emit('make-proposal', form.get())
-const close = () => emit('close')
+const makeProposal = () => {
+	emit('make-proposal', form.get())
+}
+const close = () => {
+	emit('close')
+}
 </script>

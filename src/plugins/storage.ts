@@ -1,9 +1,6 @@
 type data = number | string | boolean | object | Array<number | string | boolean | object>
 
 class Storage {
-	constructor() {
-	}
-
 	write(key: string, data: data) {
 		localStorage[key] = JSON.stringify(data)
 	}

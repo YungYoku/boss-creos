@@ -96,7 +96,7 @@ const loadImage = async (avatar: File | string) => {
 
 const onImageLoad = async (event: Event) => {
 	const target = event.target as HTMLInputElement
-	const file = target?.files?.[0]
+	const file = target.files?.[0]
 
 	if (file) {
 		await loadImage(file)

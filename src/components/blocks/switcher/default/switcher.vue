@@ -34,7 +34,7 @@ import { defaultProps } from './props'
 
 const props = withDefaults(defineProps<Props>(), defaultProps)
 
-const value = defineModel<boolean>({
+const value = defineModel<boolean | null>({
 	type: Boolean,
 	default: null
 })
@@ -43,7 +43,9 @@ const toggle = () => {
 	value.value = !value.value
 }
 
-const isActive = computed(() => value.value ?? props.checked)
+const isActive = computed(() => {
+	return value.value ?? props.checked
+})
 </script>
 
 <style scoped lang="scss">

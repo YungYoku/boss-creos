@@ -26,7 +26,9 @@ withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits(['action'])
-const reload = () => emit('action', 'reload')
+const reload = () => {
+	emit('action', 'reload')
+}
 
 const onClick = async (cell: ICell) => {
 	if (cell.options?.handler) {

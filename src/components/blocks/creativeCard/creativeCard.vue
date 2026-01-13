@@ -73,7 +73,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, type PropType, ref, type Ref, watch } from 'vue'
+import { computed, ref, type Ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { Card } from '@/components/structures'
@@ -84,25 +84,21 @@ import type { IBasket } from '@/types/basket'
 import type { ICreative } from '@/types/creative'
 import { Http } from '@/plugins'
 
-const props = defineProps({
-	creative: {
-		type: Object as PropType<ICreative>,
-		required: true
-	},
-	forSale: {
-		type: Boolean,
-		default: false
-	},
-	badge: {
-		type: Boolean,
-		default: true
-	}
+interface Props {
+	creative: ICreative
+	forSale?: boolean,
+	badge?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+	forSale: false,
+	badge: false
 })
 
-const excludeGeo = computed(() => props.creative?.unavailableGeo ?? [])
+const excludeGeo = computed(() => props.creative.unavailableGeo)
 
 const auth = useAuthStore()
-const isItMine = computed(() => props.creative?.creator === auth.user.id)
+const isItMine = computed(() => props.creative.creator === auth.user.id)
 
 const route = useRoute()
 const isDetailPage = computed(() => route.name === 'Creative')
@@ -110,7 +106,7 @@ const isDetailPage = computed(() => route.name === 'Creative')
 const geo: Ref<Array<string>> = ref([])
 const basketWithCreative = computed(() => {
 	const baskets = auth.user.expand?.baskets ?? []
-	const basket = baskets.find((basket) => basket.expand?.creative?.id === props.creative?.id)
+	const basket = baskets.find((basket) => basket.expand?.creative?.id === props.creative.id)
 	if (basket && basket.status === 'created') {
 		return basket
 	}
@@ -154,7 +150,7 @@ const addToBasket = async () => {
 	}
 
 	await Http.post<IUser>('/baskets/add', {
-		creative: props.creative?.id,
+		creative: props.creative.id,
 		geo: [...geo.value]
 	}).then(async data => {
 		auth.setUser(data)
@@ -163,7 +159,7 @@ const addToBasket = async () => {
 }
 
 const toggleFavorite = async () => {
-	const id = props.creative?.id
+	const id = props.creative.id
 	if (!id) return
 
 	let newFavorite = [...auth.user.favorite]
@@ -181,7 +177,7 @@ const toggleFavorite = async () => {
 }
 
 const isFavorite = computed(() => {
-	return auth.user.favorite.includes(props.creative?.id)
+	return auth.user.favorite.includes(props.creative.id)
 })
 </script>
 

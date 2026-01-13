@@ -102,7 +102,7 @@ const baskets = computed(() => {
 const totalPrice = computed(() => {
 	return baskets.value.reduce((acc, cur) => {
 		const creative = cur.expand?.creative
-		const geo = cur.geo?.length ?? 0
+		const geo = cur.geo.length
 		return acc + (creative?.price ?? 0) * geo
 	}, 0)
 })

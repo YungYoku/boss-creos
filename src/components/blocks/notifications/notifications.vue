@@ -55,7 +55,7 @@ import { Http } from '@/plugins'
 
 const auth = useAuthStore()
 
-const notifications = computed<Array<INotification>>(() => auth.user?.expand?.notifications ?? [])
+const notifications = computed<Array<INotification>>(() => auth.user.expand?.notifications ?? [])
 const items = computed(() => notifications.value.map(item => [item]))
 
 const onOpen = async () => {
@@ -65,7 +65,7 @@ const onOpen = async () => {
 		auth.setUser({
 			...auth.user,
 			expand: {
-				...auth.user?.expand,
+				...auth.user.expand,
 				notifications: notifications.value.map(item => {
 					item.checked = true
 					return item

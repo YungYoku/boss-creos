@@ -12,7 +12,7 @@ class Format {
 			}
 		}
 
-		return types[type](value, ...props).toString()
+		return types[type](value, ...props)
 	}
 }
 

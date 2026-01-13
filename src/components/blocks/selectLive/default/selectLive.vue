@@ -69,7 +69,9 @@ const getPayload = (entity: string | Array<string>, isIncluded: boolean = false)
 		if (isIncluded) payload.filter += `id='${entity}'`
 		else {
 			props.filterFields.forEach(field => {
-				payload.filter += `${field}${sign}'${entity.toLowerCase()}' || `
+				if (payload.filter) {
+					payload.filter += `${field}${sign}'${entity.toLowerCase()}' || `
+				}
 			})
 			payload.filter = payload.filter.slice(0, payload.filter.length - 3).trim()
 		}
@@ -82,11 +84,17 @@ const getPayload = (entity: string | Array<string>, isIncluded: boolean = false)
 		entity
 			.filter(item => !(props.exclude ?? []).includes(item))
 			.forEach(item => {
-				if (isIncluded) payload.filter += `id='${item}' || `
-				else {
+				if (isIncluded) {
+					if (payload.filter) {
+						payload.filter += `id='${item}' || `
+					}
+				} else {
 					props.filterFields.forEach((field: string) => {
-						const value = item ?? null
-						if (value) payload.filter += `${field}${sign}'${value.toLowerCase()}' || `
+						if (item) {
+							if (payload.filter) {
+								payload.filter += `${field}${sign}'${item.toLowerCase()}' || `
+							}
+						}
 					})
 				}
 			})

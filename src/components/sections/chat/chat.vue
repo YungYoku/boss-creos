@@ -192,7 +192,7 @@ const loadChat = () => {
 			await nextTick(() => {
 				if (messagesRef.value) {
 					const messagesRefScrollHeight = messagesRef.value.scrollHeight ?? 0
-					messagesRef.value?.scrollTo(0, messagesRefScrollHeight) // Не всегда срабатывает с первого раза
+					messagesRef.value.scrollTo(0, messagesRefScrollHeight) // Не всегда срабатывает с первого раза
 				}
 
 				loading.value = false

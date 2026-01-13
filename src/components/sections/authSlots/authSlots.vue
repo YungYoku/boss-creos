@@ -33,7 +33,8 @@ const columns = reactive([
 
 const slotHeight = computed(() => {
 	if (slotsRefs.value && slotsRefs.value[0]) {
-		return `-${slotsRefs.value[0].height + 30}px`
+		const height: number = slotsRefs.value[0].height
+		return `-${(height + 30).toString()}px`
 	}
 	return '0'
 })

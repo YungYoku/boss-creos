@@ -52,7 +52,9 @@ defineProps({
 })
 
 const emit = defineEmits(['reload'])
-const reload = () => emit('reload')
+const reload = () => {
+	emit('reload')
+}
 
 const actions = {
 	'reload': reload

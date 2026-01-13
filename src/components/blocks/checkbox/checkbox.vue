@@ -36,7 +36,7 @@ interface Props {
 	error?: string | null,
 	checked?: boolean,
 	disabled?: boolean
-	label: string
+	label?: string
 }
 
 withDefaults(defineProps<Props>(), {
@@ -46,7 +46,7 @@ withDefaults(defineProps<Props>(), {
 	label: ''
 })
 
-const value = defineModel<boolean>({
+const value = defineModel<boolean | null>({
 	type: Boolean,
 	default: null
 })

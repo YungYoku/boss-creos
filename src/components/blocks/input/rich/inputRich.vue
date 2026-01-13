@@ -36,7 +36,9 @@ const value = defineModel<string | number>({
 })
 
 const emit = defineEmits(['action'])
-const action = () => emit('action')
+const action = () => {
+	emit('action')
+}
 </script>
 
 <style lang="scss">

@@ -35,7 +35,7 @@ const props = defineProps({
 	}
 })
 
-const created = computed(() => new Date(props.message?.created))
+const created = computed(() => new Date(props.message.created))
 </script>
 
 <style lang="scss" scoped>

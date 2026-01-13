@@ -22,7 +22,7 @@ class Datetime {
 			}
 		}
 
-		const year = date.getFullYear()
+		const year = date.getFullYear().toString()
 		const getValue = (value: number) => String(value).padStart(2, '0')
 		const month = getValue(date.getMonth() + 1)
 		const day = getValue(date.getDate())
@@ -39,7 +39,7 @@ class Datetime {
 			monthAndDay: () => `${month}-${day}`
 		}
 
-		return methods[type] ? methods[type]() : ''
+		return methods[type]()
 	}
 }
 
@@ -47,7 +47,7 @@ const datetime = new Datetime()
 
 const datetimePlugin: Plugin = {
 	install (app: App) {
-		app.config.globalProperties.$date = (date: Date | string | null, type: Method = 'default') => {
+		app.config.globalProperties.$date = (date: Date | string | null, type?: Method) => {
 			return datetime.get(date, type)
 		}
 	},

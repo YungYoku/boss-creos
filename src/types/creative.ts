@@ -1,11 +1,12 @@
-import type { IUser } from '@/types/user'
-import type { IProjectProposal } from '@/types/project'
-import type { IImage, IVideo } from '@/types/file'
-import type { IGeo } from '@/types/geo'
-import type { ISlot } from '@/types/slot'
-import type { IApproach } from '@/types/approach'
-import type { DBRecord, DBRecordItems } from '@/types/dbBase'
+import type {IUser} from '@/types/user'
+import type {IProjectProposal} from '@/types/project'
+import type {IImage, IVideo} from '@/types/file'
+import type {IGeo} from '@/types/geo'
+import type {ISlot} from '@/types/slot'
+import type {IApproach} from '@/types/approach'
+import type {DBRecord, DBRecordItems} from '@/types/dbBase'
 
+export type ICreativeStatus = 'moderation' | 'approved'
 export type ICreativeType = 'video' | 'static' | 'pwa'
 const _creativeTypeItems: Array<ICreativeType> = ['video', 'static', 'pwa']
 export const creativeTypeItems = _creativeTypeItems.map(item => ({
@@ -44,7 +45,7 @@ export type ICreative = DBRecord & {
 	resize: boolean
 	resizePrices: ResizePrices
 	changes: Partial<Omit<ICreative, 'changes' | 'expand'>> | null
-	status: 'moderation' | 'approved'
+	status: ICreativeStatus
 	reskin: boolean
 	reskinPrice: number
 	expand?: {

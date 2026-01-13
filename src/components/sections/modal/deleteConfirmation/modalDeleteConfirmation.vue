@@ -27,6 +27,10 @@ import { Button } from '@/components/blocks'
 
 const emit = defineEmits(['remove', 'close'])
 
-const remove = () => emit('remove')
-const close = () => emit('close')
+const remove = () => {
+	emit('remove')
+}
+const close = () => {
+	emit('close')
+}
 </script>

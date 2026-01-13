@@ -77,8 +77,12 @@ const props = withDefaults(defineProps<Props>(), {
 const proposals = computed(() => props.project.expand?.proposals ?? [])
 
 const emit = defineEmits(['close', 'chose-proposal'])
-const close = () => emit('close')
-const choseProposal = (user: IUser) => emit('chose-proposal', user)
+const close = () => {
+	emit('close')
+}
+const choseProposal = (user: IUser) => {
+	emit('chose-proposal', user)
+}
 </script>
 
 <style scoped lang="scss">

@@ -31,12 +31,14 @@ const props = defineProps({
 })
 
 const style = computed(() => ({
-	width: `${props.width}px`
+	width: `${props.width.toString()}px`
 }))
 
 const emit = defineEmits(['close'])
 
-const close = () => emit('close')
+const close = () => {
+	emit('close')
+}
 </script>
 
 <style scoped lang="scss">

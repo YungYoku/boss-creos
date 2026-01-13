@@ -83,14 +83,14 @@
 </template>
 
 <script lang="ts" setup>
-import { type Ref, ref } from 'vue'
-import { useSearchStore } from '@/stores/search'
+import {type Ref, ref} from 'vue'
+import {useSearchStore} from '@/stores/search'
 
-import { Grid, Island } from '@/components/structures'
-import { Button, CreativeCard, EmptyCreativeCard, SelectLiveRich, SelectRich } from '@/components/blocks'
-import type { ICreative, ICreatives, ICreativeType, IRatio } from '@/types/creative'
-import { creativeTypeItems, ratioItems } from '@/types/creative'
-import { Form, Http } from '@/plugins'
+import {Grid, Island} from '@/components/structures'
+import {Button, CreativeCard, EmptyCreativeCard, SelectLiveRich, SelectRich} from '@/components/blocks'
+import type {ICreative, ICreatives, ICreativeStatus, ICreativeType, IRatio} from '@/types/creative'
+import {creativeTypeItems, ratioItems} from '@/types/creative'
+import {Form, Http} from '@/plugins'
 
 type SearchForm = {
 	geo: string
@@ -98,7 +98,7 @@ type SearchForm = {
 	approach: string
 	type: ICreativeType | ''
 	ratio: IRatio | ''
-	status: 'approved'
+	status: Exclude<ICreativeStatus, 'moderation'>
 }
 
 const creatives: Ref<Array<ICreative>> = ref([])
@@ -125,7 +125,7 @@ const loadCreatives = async () => {
 	if (form.approach.value) filters.push(`approach='${form.approach.value}'`)
 	if (form.ratio.value) filters.push(`ratio='${form.ratio.value}'`)
 	if (form.type.value) filters.push(`type='${form.type.value}'`)
-	if (form.status.value) filters.push(`status='${form.status.value}'`)
+	filters.push(`status='${form.status.value}'`)
 	if (filters.length) {
 		filter = filters.reduce((acc, filter) => filter ? `${acc} && ${filter}` : acc, '')
 		filter = filter.slice(4)

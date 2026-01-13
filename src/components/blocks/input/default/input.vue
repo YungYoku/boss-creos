@@ -99,7 +99,9 @@ const onInput = (event: Event) => {
 		if (file) emit('update-file', file)
 	} else emit('input', target.value)
 }
-const action = () => emit('action')
+const action = () => {
+	emit('action')
+}
 
 const isEmpty = computed(() => {
 	if (typeof value.value === 'number') {

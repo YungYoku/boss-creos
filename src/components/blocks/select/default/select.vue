@@ -90,8 +90,8 @@ import { Popover } from '@/components/structures'
 import { Checkbox, Input } from '@/components/blocks'
 import { Icon, Label, Separator, Text } from '@/components/elements'
 
+import type { Item, Props } from './props'
 import { defaultProps } from './props'
-import type { Props, Item } from './props'
 
 const value = defineModel<string | Array<string>>({
 	type: [String, Array],
@@ -111,7 +111,7 @@ const isEmpty = computed(() => {
 	const _value = value.value
 
 	if (props.multiple) {
-		if (Array.isArray(_value) === false) throw validationError
+		if (!Array.isArray(_value)) throw validationError
 		return _value.length === 0
 	}
 	return _value === ''
@@ -121,7 +121,7 @@ const showedValue = computed(() => {
 	const _value = value.value
 
 	if (props.multiple) {
-		if (Array.isArray(_value) === false) throw validationError
+		if (!Array.isArray(_value)) throw validationError
 		const items = _value.length > 7 ? _value.slice(0, 7) : _value
 
 		if (items.length === 0) return null
@@ -131,7 +131,7 @@ const showedValue = computed(() => {
 		}
 
 		const result = items.reduce((acc, item) => `${acc}, ${getItemName(item).trim()}`, '').slice(2)
-		const extra = _value.length > 7 ? `, ... (${_value.length})` : ` (${_value.length})`
+		const extra = _value.length > 7 ? `, ... (${_value.length.toString()})` : ` (${_value.length.toString()})`
 		return `${result}${extra}`
 	}
 	return props.items.find(item => item.id === _value)?.name ?? null
@@ -139,7 +139,7 @@ const showedValue = computed(() => {
 
 const chooseValue = (item: Item) => {
 	if (props.multiple) {
-		if (Array.isArray(value.value) === false) throw validationError
+		if (!Array.isArray(value.value)) throw validationError
 
 		if (value.value.includes(item.id)) {
 			value.value = value.value.filter(val => val !== item.id)

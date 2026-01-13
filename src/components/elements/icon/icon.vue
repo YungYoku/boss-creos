@@ -38,10 +38,8 @@ const props = defineProps({
 	}
 })
 
-const currentTheme = 'dark'
-
 const currentColor = computed(() => {
-	const colorIndex = currentTheme === 'dark' ? 0 : 1
+	const colorIndex = 0
 
 	return props.colors[colorIndex]
 })

@@ -77,8 +77,12 @@ const handleClick = (e: MouseEvent) => {
 		contentShowed.value = false
 	}
 }
-onMounted(() => document.addEventListener('click', handleClick))
-onUnmounted(() => document.addEventListener('click', handleClick))
+onMounted(() => {
+	document.addEventListener('click', handleClick)
+})
+onUnmounted(() => {
+	document.addEventListener('click', handleClick)
+})
 </script>
 
 <style scoped lang="scss">

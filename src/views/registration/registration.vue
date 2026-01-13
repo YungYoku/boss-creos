@@ -107,6 +107,7 @@ import { Text } from '@/components/elements'
 import { Form, Http } from '@/plugins'
 import type { IUser } from '@/types/user'
 import Grid from '@/components/structures/grid/grid.vue'
+import { isHttpError } from '@/plugins/http.ts'
 
 type Role = 'buyer' | 'designer'
 
@@ -152,8 +153,10 @@ const register = async (role: Role) => {
 			.then(async () => {
 				await router.push('/login')
 			})
-			.catch(({ data }) => {
-				form.setErrors(data)
+			.catch((error: unknown) => {
+				if (isHttpError(error)) {
+					form.setErrors(error.data)
+				}
 
 				toast.set('Ошибка авторизации')
 

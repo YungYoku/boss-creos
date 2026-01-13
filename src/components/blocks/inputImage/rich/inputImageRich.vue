@@ -26,7 +26,9 @@ withDefaults(defineProps<Props>(), defaultProps)
 
 
 const emit = defineEmits(['update:name'])
-const updateName = (value: string) => emit('update:name', value)
+const updateName = (value: string) => {
+	emit('update:name', value)
+}
 
 const value = defineModel<string | null>({
 	type: Object as PropType<string | null>,

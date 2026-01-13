@@ -202,6 +202,7 @@ import {
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
 import { creativeTypeItems, emptyCreative, type ICreative, ratioItems } from '@/types/creative'
+import { isHttpError } from '@/plugins/http.ts'
 
 const creativeBase = Form<ICreative>({ ...emptyCreative })
 const creative = Form<ICreative>({ ...emptyCreative })
@@ -252,7 +253,7 @@ const getChanges = () => {
 	for (const key of filteredKeys) {
 		const currentValue = currentCreative[key]
 		const newValue = updatedCreative[key]
-		if (currentValue !== newValue && newValue != undefined) {
+		if (currentValue !== newValue) {
 			changes[key] = newValue
 		}
 	}
@@ -299,8 +300,10 @@ const update = async () => {
 		.then(async response => {
 			await router.push(`/creative/${response.id}`)
 		})
-		.catch(({ data }) => {
-			creative.setErrors(data)
+		.catch((error: unknown) => {
+			if (isHttpError(error)) {
+				creative.setErrors(error.data)
+			}
 
 			toast.set('Ошибка при обновлении креатива')
 

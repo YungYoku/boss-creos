@@ -22,6 +22,22 @@ interface ConnectOptions<T> {
 	cb: (response: T) => Promise<void>
 }
 
+interface HTTPError {
+	status: number
+	message: string
+	data: object
+}
+
+export const isHttpError = (error: unknown): error is HTTPError => {
+	return (
+		typeof error === 'object' &&
+		error !== null &&
+		'data' in error &&
+		'message' in error &&
+		'status' in error
+	)
+}
+
 class Http {
 	api: string = import.meta.env.VITE_API
 

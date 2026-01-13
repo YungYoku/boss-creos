@@ -12,7 +12,7 @@ export {}
 
 declare module 'vue' {
 	interface ComponentCustomProperties {
-		$date: (date: Date | string | null, key: Method = 'default') => string,
+		$date: (date: Date | string | null, key?: Method) => string,
 		$format: (type: FormatType, value: number, ...props: Array<number>) => string
 		$t: (key: string) => string | undefined
 	}

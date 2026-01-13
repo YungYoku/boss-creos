@@ -53,6 +53,7 @@ import { Form, Http } from '@/plugins'
 import { Grid, Island } from '@/components/structures'
 import { Button, InputImageRich, InputRich, TextareaRich } from '@/components/blocks'
 import { emptyUser, type IUser } from '@/types/user'
+import { isHttpError } from '@/plugins/http.ts'
 
 const auth = useAuthStore()
 const toast = useToast()
@@ -80,7 +81,7 @@ const getChanges = () => {
 	for (const key of filteredKeys) {
 		const currentValue = currentCreative[key]
 		const newValue = updatedCreative[key]
-		if (currentValue !== newValue && newValue != undefined) {
+		if (currentValue !== newValue) {
 			changes[key] = newValue
 		}
 	}
@@ -102,8 +103,10 @@ const save = async () => {
 			auth.setUser(res)
 			toast.set('Сохранено успешно!')
 		})
-		.catch(({ data }) => {
-			user.setErrors(data)
+		.catch((error: unknown) => {
+			if (isHttpError(error)) {
+				user.setErrors(error.data)
+			}
 			
 			toast.set('Ошибка сохранения')
 		})

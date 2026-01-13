@@ -36,14 +36,14 @@ export const useAdapter = () => {
 			},
 			'preview': {
 				link: {
-					new: `${import.meta.env.VITE_API}/files/${preview?.collectionId}/${preview?.id}/${preview?.watermarked_image}`,
-					current: `${import.meta.env.VITE_API}/files/${preview?.collectionId}/${preview?.id}/${preview?.watermarked_image}`,
+					new: preview ? `${import.meta.env.VITE_API}/files/${preview.collectionId}/${preview.id}/${preview.watermarked_image}` : '',
+					current: preview ? `${import.meta.env.VITE_API}/files/${preview.collectionId}/${preview.id}/${preview.watermarked_image}` : ''
 				}
 			},
 			'video': {
 				link: {
-					new: `${import.meta.env.VITE_API}/files/${video?.collectionId}/${video?.id}/${video?.watermarked_video}`,
-					current: `${import.meta.env.VITE_API}/files/${video?.collectionId}/${video?.id}/${video?.watermarked_video}`,
+					new: video ? `${import.meta.env.VITE_API}/files/${video.collectionId}/${video.id}/${video.watermarked_video}` : '',
+					current: video ? `${import.meta.env.VITE_API}/files/${video.collectionId}/${video.id}/${video.watermarked_video}` : ''
 				}
 			}
 		}

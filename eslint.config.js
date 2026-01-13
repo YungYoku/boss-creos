@@ -7,7 +7,7 @@ import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescri
 export default defineConfigWithVueTs(
 	js.configs.recommended,
 	pluginVue.configs['flat/recommended'],
-	vueTsConfigs.recommendedTypeChecked,
+	vueTsConfigs.strictTypeChecked,
 	{
 		plugins: {
 			'@stylistic': stylisticJs,

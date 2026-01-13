@@ -151,7 +151,7 @@ const showDescription = (basket: IBasket) => {
 }
 
 const downloadVideo = (basket: IBasket) => {
-	const file = basket?.expand?.video
+	const file = basket.expand?.video
 	if (!file) return
 
 	window.open(`${import.meta.env.VITE_API}/files/${file.collectionId}/${file.id}/${file.original_video}`, '_blank')

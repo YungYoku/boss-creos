@@ -197,6 +197,7 @@ import {
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
 import { creativeTypeItems, emptyCreative, type ICreative, ratioItems } from '@/types/creative'
+import { isHttpError } from '@/plugins/http.ts'
 
 const auth = useAuthStore()
 
@@ -239,8 +240,10 @@ const create = async () => {
 		.then(async response => {
 			await router.push(`/creative/${response.id}`)
 		})
-		.catch(({ data }) => {
-			creative.setErrors(data)
+		.catch((error: unknown) => {
+			if (isHttpError(error)) {
+				creative.setErrors(error.data)
+			}
 
 			toast.set('Ошибка при создании креатива')
 

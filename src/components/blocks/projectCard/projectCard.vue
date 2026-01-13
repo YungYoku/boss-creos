@@ -135,7 +135,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, type PropType } from 'vue'
+import { computed } from 'vue'
 
 import { Island } from '@/components/structures'
 import { Badge, Icon, Skeleton, Text } from '@/components/elements'
@@ -144,39 +144,33 @@ import { Http } from '@/plugins'
 import { useAuthStore } from '@/stores/auth'
 import type { IProject } from '@/types/project'
 
-const props = defineProps({
-	project: {
-		type: Object as PropType<IProject>,
-		required: true
-	},
-	showingProposals: {
-		type: Boolean,
-		default: false
-	},
-	showingChat: {
-		type: Boolean,
-		default: false
-	},
-	showingRemove: {
-		type: Boolean,
-		default: false
-	},
-	showingStatus: {
-		type: Boolean,
-		default: false
-	},
-	loading: {
-		type: Boolean,
-		default: false
-	}
+interface Props {
+	project: IProject
+	showingProposals?: boolean
+	showingChat?: boolean
+	showingRemove?: boolean
+	showingStatus?: boolean
+	loading?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+	showingProposals: false,
+	showingChat: false,
+	showingRemove: false,
+	showingStatus: false,
+	loading: false
 })
 
 const authStore = useAuthStore()
 
 const emit = defineEmits(['show-proposals', 'show-chat', 'add-to-favorite', 'remove'])
 
-const showProposals = () => emit('show-proposals', props.project)
-const openChat = () => emit('show-chat', props.project)
+const showProposals = () => {
+	emit('show-proposals', props.project)
+}
+const openChat = () => {
+	emit('show-chat', props.project)
+}
 const addToFavorite = async () => {
 	const newFavorite = authStore.user.favorite.includes(props.project.id)
 		? authStore.user.favorite.filter(id => id !== props.project.id)
@@ -186,12 +180,16 @@ const addToFavorite = async () => {
 		.patch(`/collections/users/records/${authStore.user.id}`, {
 			favorite: newFavorite
 		})
-		.then(() => authStore.setUser({ ...authStore.user, favorite: newFavorite }))
+		.then(() => {
+			authStore.setUser({ ...authStore.user, favorite: newFavorite })
+		})
 }
-const remove = () => emit('remove', props.project)
+const remove = () => {
+	emit('remove', props.project)
+}
 
 const status = computed(() => {
-	switch (props.project?.status) {
+	switch (props.project.status) {
 		case 'created':
 			return 'Создано'
 		case 'in_progress':
@@ -205,7 +203,7 @@ const status = computed(() => {
 	}
 })
 
-const deadline = computed(() => new Date(props.project?.deadline))
+const deadline = computed(() => new Date(props.project.deadline))
 </script>
 
 <style scoped lang="scss">

@@ -52,7 +52,7 @@ export const useAdapter = <T extends AdditionalAdapterFields<T>, Keys extends ke
 	
 	const getValue = (item: AdapterItem<T>, key: keyof AdapterItem<T>) => {
 		if (item.expand?.[key]) {
-			return item.expand?.[key] as ExpandedOrDirectProperty<T, Keys>
+			return item.expand[key] as ExpandedOrDirectProperty<T, Keys>
 		}
 		return item[key] as ExpandedOrDirectProperty<T, Keys>
 	}
@@ -69,7 +69,7 @@ export const useAdapter = <T extends AdditionalAdapterFields<T>, Keys extends ke
 			}] as IRow
 			filteredKeys.forEach((key) => {
 				const value = getValue(item, key)
-				const format = cellFormats?.[key] ? cellFormats[key] : <V>(value: V) => value
+				const format = cellFormats[key] ? cellFormats[key] : <V>(value: V) => value
 
 				result.push({
 					key: String(key),

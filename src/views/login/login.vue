@@ -72,6 +72,7 @@ import { Button, Input } from '@/components/blocks'
 import { Text } from '@/components/elements'
 import { Form, Http } from '@/plugins'
 import type { IUserLogin } from '@/types/user'
+import { isHttpError } from '@/plugins/http.ts'
 
 type LoginForm = {
 	identity: string
@@ -100,8 +101,10 @@ const login = async () => {
 				auth.setUser(res.record)
 				await router.push('/')
 			})
-			.catch(({ data }) => {
-				form.setErrors(data)
+			.catch((error: unknown) => {
+				if (isHttpError(error)) {
+					form.setErrors(error.data)
+				}
 
 				toast.set('Ошибка авторизации')
 

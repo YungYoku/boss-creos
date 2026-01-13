@@ -44,7 +44,7 @@ const months = [
 	'октября',
 	'ноября',
 	'декабря'
-]
+] as const
 
 const value = defineModel({
 	type: Object as PropType<Date>,
@@ -53,9 +53,9 @@ const value = defineModel({
 const printedValue = computed(() => {
 	const date = new Date(value.value)
 
-	const day = date.getDate()
-	const month = months[date.getMonth()]
-	const year = date.getFullYear()
+	const day = date.getDate().toString()
+	const month = months[date.getMonth()] ?? ''
+	const year = date.getFullYear().toString()
 
 	return `${day} ${month} ${year} г.`
 })

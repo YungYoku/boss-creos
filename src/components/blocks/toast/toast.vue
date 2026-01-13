@@ -24,7 +24,9 @@ import { Icon, Text } from '@/components/elements'
 
 const toast = useToast()
 
-const close = () => toast.close()
+const close = () => {
+	toast.close()
+}
 </script>
 
 <style lang="scss" scoped>
