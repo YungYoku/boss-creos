@@ -1,29 +1,39 @@
 {
 	"compilerOptions": {
-		"target": "ES2023",
+		"lib": ["ESNext", "DOM"],
+		"outDir": "dist",
+		"target": "ES2024",
 		"module": "esnext",
-		"lib": ["ES2023", "DOM", "DOM.Iterable"],
 		"skipLibCheck": true,
+
+		"baseUrl": "./",
+		"paths": {
+			"@/*": ["./src/*"],
+		},
 
 		/* Bundler mode */
 		"moduleResolution": "bundler",
+		"esModuleInterop": true,
 		"allowImportingTsExtensions": true,
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"noEmit": true,
 		"jsx": "preserve",
 
-		/* Linting */
+		// Strict Checks
 		"strict": true,
+		"alwaysStrict": true,
+		"allowUnreachableCode": false,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+
+		/* Linting */
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
 		"verbatimModuleSyntax": true,
-
-		"baseUrl": ".",
-		"paths": {
-			"@/*": ["./src/*"],
-		}
+		"noImplicitReturns": true,
+		"noUncheckedIndexedAccess": true
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

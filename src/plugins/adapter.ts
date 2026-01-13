@@ -85,7 +85,7 @@ export const useAdapter = <T extends AdditionalAdapterFields<T>, Keys extends ke
 	const header: Ref<IHeader> = ref([])
 	const body: Ref<IRows> = ref([])
 	const handleLoadedData = (data: Array<AdapterItem<T>>) => {
-		if (data.length > 0) {
+		if (data.length > 0 && data[0]) {
 			header.value = getHeader(data[0])
 			body.value = getBody(data)
 		} else {

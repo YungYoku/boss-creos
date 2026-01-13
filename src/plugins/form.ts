@@ -1,127 +1,188 @@
-import { reactive, type UnwrapNestedRefs } from 'vue'
+import { reactive, type Reactive } from 'vue'
 
-interface IFormField<T> {
-	value: T extends object ? (T extends unknown[] | Date ? T : IForm<T>) : T;
-	error: string | null;
-}
-type TransformedFormFields<T> = {
-	[key in keyof T]: UnwrapNestedRefs<IFormField<T[key]>>
-}
-type IForm<I> = TransformedFormFields<I> & {
-	set(_: I): void
-	get(): I
-	setErrors(_: Partial<Errors<I>>): void
-	clearErrors(): void
-	reset(): void
+type RawFieldValueComplicated = Array<unknown> | Date | File
+type RawFieldValue = number | string | boolean | null | RawFieldValueComplicated
+
+type RawSchema = {
+	[key: string]: RawFieldValue | RawSchema
 }
 
-interface IError {
+type IFormField<T> = {
+	type: 'field'
+	value: T
+	error: string | null
+	isTouched: boolean
+}
+
+type IError = {
 	code: string
 	message: string
 }
 type Errors<T> = {
-	[key in keyof T]: T[key] extends object ? Errors<T[key]> : IError
+	[K in keyof T]?: T[K] extends RawFieldValue
+		? IError
+		: Errors<T[K]>
 }
 
-const isObject = (value: unknown): value is object => {
-	return typeof value === 'object' && value !== null && !Array.isArray(value)
+type TransformedFormFields<Schema extends RawSchema> = {
+	[Key in keyof Schema]: Schema[Key] extends RawFieldValueComplicated
+		? Reactive<IFormField<Schema[Key]>>
+		: Schema[Key] extends RawSchema
+			? IForm<Schema[Key]>
+			: Reactive<IFormField<Schema[Key]>>
 }
 
-const Form = <I extends object>(base: I): IForm<I> => {
-	const form = (Object.keys(base as object) as Array<keyof I>)
-		.reduce((acc, key) => {
-			const value = base[key]
-			if (isObject(value)) {
-				acc[key] = reactive({
-					value: Form(value),
-					error: null
-				}) as UnwrapNestedRefs<IFormField<typeof value>>
-			} else {
-				acc[key] = reactive({
-					value: value,
-					error: null
-				}) as UnwrapNestedRefs<IFormField<typeof value>>
+type IForm<Schema extends RawSchema> = TransformedFormFields<Schema> & {
+	type: 'form'
+	set(data: Partial<Schema>): void
+	get(): Schema
+	setErrors(_: Errors<Schema>): void
+	clearErrors(): void
+	reset(): void
+	validate(): boolean
+}
+
+const isFile = (value: unknown): value is File => value instanceof File
+const isDate = (value: unknown): value is Date => value instanceof Date
+const isArray = (value: unknown): value is Array<unknown> => Array.isArray(value)
+
+const Form = <Schema extends RawSchema>(base: Schema): IForm<Schema> => {
+	const isObject = (value: unknown): value is Partial<Schema>[string & keyof Schema] => {
+		return (
+			typeof value === 'object' &&
+			value !== undefined &&
+			value !== null &&
+			!isArray(value) &&
+			!isDate(value) &&
+			!isFile(value)
+		)
+	}
+
+	const isNestedForm = (value: unknown): value is IForm<RawSchema> => {
+		return (
+			value !== undefined &&
+			value !== null &&
+			isObject(value) &&
+			'set' in value &&
+			'get' in value &&
+			'setErrors' in value &&
+			'clearErrors' in value &&
+			'reset' in value
+		)
+	}
+
+	const keys = Object.keys(base) as Array<string & keyof Schema>
+	const form = keys.reduce((acc, key) => {
+		const value = base[key]
+		if (isObject(value) && value != undefined) {
+			Reflect.set(acc, key, Form(value))
+		} else {
+			const field: IFormField<typeof value> = {
+				type: 'field',
+				value,
+				error: null,
+				isTouched: false
 			}
-			return acc
-		}, {} as TransformedFormFields<I>)
-	const keys = Object.keys(form) as Array<keyof typeof form>
+			Reflect.set(acc, key, reactive(field))
+		}
+		return acc
+	}, {} as TransformedFormFields<Schema>)
 
-	const set = (data: I) => {
+	const set = (data: Partial<Schema>) => {
 		for (const key of keys) {
-			const formValue = form[key] as I[keyof I] | IForm<I[keyof I]>
-			if (isObject(formValue) && 'set' in formValue) {
-				formValue.set(data[key])
+			const field = form[key]
+			const value = data[key]
+
+			if (isNestedForm(field) && value != undefined) {
+				field.set(value)
 			} else {
-				Object.assign(form[key], {
-					value: data[key],
-					error: null
-				})
+				const newField: IFormField<typeof value> = {
+					type: 'field',
+					value,
+					error: null,
+					isTouched: false
+				}
+				Object.assign(field, newField)
 			}
 		}
 	}
 
-	const get = () => {
-		const result: I = {} as I
+	const get = (): Schema => {
+		const result: Schema = {} as Schema
 
 		for (const key of keys) {
-			const value = form[key].value as I[keyof I] | IForm<I[keyof I]>
-			if (isObject(value) && 'get' in value) {
-				result[key] = value.get()
+			const field = form[key]
+
+			if (isNestedForm(field)) {
+				Reflect.set(result, key, field.get())
 			} else {
-				result[key] = value
+				Reflect.set(result, key, field.value)
 			}
 		}
 
-		return result
+		return JSON.parse(JSON.stringify(result))
 	}
 
-	const setErrors = (errors: Errors<I>) => {
-		const errorKeys: Array<keyof I> = Object.keys(errors) as Array<keyof I>
+	const setErrors = (errors: Errors<Schema>) => {
+		const errorKeys = Object.keys(errors) as Array<keyof Errors<Schema>>
 
 		for (const key of errorKeys) {
-			const formValue = form[key] as I[keyof I] | IForm<I[keyof I]>
-			if (isObject(formValue) && 'setErrors' in formValue) {
-				const _errors = errors[key] as Errors<I[keyof I]>
-				formValue.setErrors(_errors)
-			} else {
-				const error = errors[key] as IError
-				form[key].error = error.message
+			const error = errors[key]
+			if (!error) continue
+
+			const field = form[key]
+			if (isNestedForm(field)) {
+				field.setErrors(error)
+			} else if ('message' in error) {
+				field.error = error.message
+				field.isTouched = false
 			}
 		}
 	}
 
 	const clearErrors = () => {
 		for (const key of keys) {
-			const formValue = form[key] as I[keyof I] | IForm<I[keyof I]>
-			if (isObject(formValue) && 'clearErrors' in formValue) {
-				formValue.clearErrors()
+			const field = form[key]
+			if (isNestedForm(field)) {
+				field.clearErrors()
 			} else {
-				form[key].error = null
+				field.error = null
+				field.isTouched = false
 			}
 		}
 	}
 
 	const reset = () => {
 		for (const key of keys) {
-			const formValue = form[key] as I[keyof I] | IForm<I[keyof I]>
-			if (isObject(formValue) && 'reset' in formValue) {
-				formValue.reset()
+			const field = form[key]
+			if (isNestedForm(field)) {
+				field.reset()
 			} else {
-				Object.assign(form[key], {
-					value: base[key],
-					error: null
-				})
+				const value = base[key]
+				const newField: IFormField<typeof value> = {
+					type: 'field',
+					value,
+					error: null,
+					isTouched: false
+				}
+				Object.assign(field, newField)
 			}
 		}
 	}
 
+	const validate = () => {
+		return true
+	}
+
 	return {
 		...form,
+		type: 'form',
 		set,
 		get,
 		setErrors,
 		clearErrors,
-		reset
+		reset,
+		validate
 	}
 }
 

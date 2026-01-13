@@ -42,7 +42,7 @@ export type ICreative = DBRecord & {
 	approach: string
 	ratio: IRatio
 	resize: boolean
-	resizePrices: ResizePrices | null
+	resizePrices: ResizePrices
 	changes: Partial<Omit<ICreative, 'changes' | 'expand'>> | null
 	status: 'moderation' | 'approved'
 	reskin: boolean

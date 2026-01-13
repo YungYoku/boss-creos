@@ -170,10 +170,10 @@
 				:key="item.id"
 			>
 				<InputRich
-					v-if="creative.resizePrices.value?.[item.name]"
-					v-model="creative.resizePrices.value[item.name].value"
+					v-if="creative.resizePrices?.[item.id]"
+					v-model="creative.resizePrices[item.id].value"
 					:disabled="loading"
-					:error="creative.resizePrices.value[item.name]?.error"
+					:error="creative.resizePrices[item.id]?.error"
 					:label="`Цена ресайза ${item.name}`"
 					type="number"
 				/>

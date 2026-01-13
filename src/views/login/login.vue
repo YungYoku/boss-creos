@@ -73,7 +73,7 @@ import { Text } from '@/components/elements'
 import { Form, Http } from '@/plugins'
 import type { IUserLogin } from '@/types/user'
 
-interface LoginForm {
+type LoginForm = {
 	identity: string
 	password: string
 }

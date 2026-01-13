@@ -272,6 +272,8 @@ router.beforeEach((to, from) => {
 
 		return true
 	}
+
+	return false
 })
 
 export default router

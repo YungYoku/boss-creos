@@ -92,7 +92,7 @@ import type { ICreative, ICreatives, ICreativeType, IRatio } from '@/types/creat
 import { creativeTypeItems, ratioItems } from '@/types/creative'
 import { Form, Http } from '@/plugins'
 
-interface SearchForm {
+type SearchForm = {
 	geo: string
 	slot: string
 	approach: string

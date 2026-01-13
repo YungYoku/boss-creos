@@ -110,7 +110,7 @@ import Grid from '@/components/structures/grid/grid.vue'
 
 type Role = 'buyer' | 'designer'
 
-interface RegistrationForm {
+type RegistrationForm = {
 	username: string
 	telegram: string
 	email: string

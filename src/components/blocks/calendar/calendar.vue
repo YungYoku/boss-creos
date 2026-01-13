@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, type PropType, ref } from 'vue'
+import { computed, type PropType, type Ref, ref } from 'vue'
 
 const value = defineModel({
 	type: Object as PropType<Date>,
@@ -108,8 +108,9 @@ const monthInfo = [
 		days: 31,
 		title: 'Декабрь'
 	}
-]
-const month = ref(new Date().getMonth())
+] as const
+type Month = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
+const month: Ref<Month> = ref(new Date().getMonth() as Month)
 const next = () => {
 	month.value++
 	if (month.value === 12) {

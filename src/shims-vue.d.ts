@@ -14,6 +14,6 @@ declare module 'vue' {
 	interface ComponentCustomProperties {
 		$date: (date: Date | string | null, key: Method = 'default') => string,
 		$format: (type: FormatType, value: number, ...props: Array<number>) => string
-		$t: (key: string, values?: object) => string
+		$t: (key: string) => string | undefined
 	}
 }
