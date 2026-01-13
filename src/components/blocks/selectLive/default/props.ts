@@ -16,10 +16,10 @@ export type Props = {
 	modelValue: Array<string> | string
 	error?: string | null
 	typeKey?: string
-	label?: string,
-	api: string,
-	filterFields?: Array<string>,
-	exclude?: Array<string>,
+	label?: string
+	api: string
+	filterFields?: Array<string>
+	exclude?: Array<string> | undefined
 	multiple?: boolean
 }
 

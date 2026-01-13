@@ -73,7 +73,7 @@ export const useAdapter = <T extends AdditionalAdapterFields<T>, Keys extends ke
 
 				result.push({
 					key: String(key),
-					options: options(item)[key],
+					options: options(item)[key] ?? {},
 					newValue: item.changes?.[key] ?? null,
 					currentValue: format(value)
 				})

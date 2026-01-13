@@ -122,9 +122,9 @@
 
 		<template #step_2="{back}">
 			<Rating
-				v-if="project.status === 'ended'"
+				v-if="project.status === 'ended' && chatMember?.username"
 				v-model="newRating"
-				:user="chatMember?.username"
+				:user="chatMember.username"
 				:loading="loading"
 				@update:model-value="sendRating"
 				@back="back"

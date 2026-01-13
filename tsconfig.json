@@ -1,4 +1,5 @@
 {
+	// Visit https://aka.ms/tsconfig to read more about this file
 	"compilerOptions": {
 		"lib": ["ESNext", "DOM"],
 		"outDir": "dist",
@@ -26,6 +27,7 @@
 		"allowUnreachableCode": false,
 		"noImplicitAny": true,
 		"strictNullChecks": true,
+		"exactOptionalPropertyTypes": true,
 
 		/* Linting */
 		"noUnusedLocals": true,
@@ -33,7 +35,9 @@
 		"noFallthroughCasesInSwitch": true,
 		"verbatimModuleSyntax": true,
 		"noImplicitReturns": true,
-		"noUncheckedIndexedAccess": true
-	},
-	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "vite.config.ts", "vite-env.d.ts"]
+		"noUncheckedIndexedAccess": true,
+		"noUncheckedSideEffectImports": true,
+		"moduleDetection": "force",
+		"noImplicitOverride": true
+	}
 }
