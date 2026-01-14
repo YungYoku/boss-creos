@@ -15,9 +15,7 @@ export default defineConfig(({ mode }) => {
 
 		plugins: [
 			vue(),
-			eslint({
-				failOnError: false
-			})
+			eslint()
 		],
 
 		resolve: {
