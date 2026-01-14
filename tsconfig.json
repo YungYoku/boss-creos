@@ -39,5 +39,6 @@
 		"noUncheckedSideEffectImports": true,
 		"moduleDetection": "force",
 		"noImplicitOverride": true
-	}
+	},
+	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "vite.config.ts", "vite-env.d.ts"]
 }
