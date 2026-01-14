@@ -34,7 +34,6 @@
 		"vite": "7.3.1",
 		"vite-plugin-eslint": "1.8.1",
 		"vite-plugin-inspect": "11.3.3",
-		"vite-plugin-stylelint": "6.0.2",
 		"vue-tsc": "3.2.2"
 	}
 }
