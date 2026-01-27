@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { computed, ref, useTemplateRef } from 'vue'
-import type { IImage, IVideo } from '@/types/file.ts'
+import type { IImage, IVideo } from '@/types/file'
 
 interface Props {
 	src: string | IVideo,

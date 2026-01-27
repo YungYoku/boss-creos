@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { emptyUser, type IUser } from '@/types/user'
-import { Storage } from '@/plugins'
+import Storage from '@/plugins/storage'
 import type { IBasket } from '@/types/basket'
 
 export interface State {
