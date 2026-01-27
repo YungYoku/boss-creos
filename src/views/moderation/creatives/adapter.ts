@@ -9,12 +9,12 @@ import { useToast } from '@/stores/toast.ts'
 export const useAdapter = () => {
 	const toast = useToast()
 
-	const unnecessaryFieldsForRequest: Array<Partial<keyof ICreative>> = [
+	const unnecessaryFieldsForRequest: Partial<keyof ICreative>[] = [
 		'collectionId',
 		'collectionName'
 	]
 
-	const unnecessaryFieldsForTable: Array<Partial<keyof ICreative>> = [
+	const unnecessaryFieldsForTable: Partial<keyof ICreative>[] = [
 		'changes',
 		'expand'
 	]

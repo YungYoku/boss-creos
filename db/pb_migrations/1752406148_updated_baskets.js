@@ -1,31 +1,31 @@
 /// <reference path="../pb_data/types.d.ts" />
 migrate((app) => {
-  const collection = app.findCollectionByNameOrId("pbc_1302879749")
+	const collection = app.findCollectionByNameOrId('pbc_1302879749')
 
-  // add field
-  collection.fields.addAt(6, new Field({
-    "hidden": false,
-    "id": "select2063623452",
-    "maxSelect": 1,
-    "name": "status",
-    "presentable": false,
-    "required": false,
-    "system": false,
-    "type": "select",
-    "values": [
-      "created",
-      "pending",
-      "in-progress",
-      "done"
-    ]
-  }))
+	// add field
+	collection.fields.addAt(6, new Field({
+		'hidden': false,
+		'id': 'select2063623452',
+		'maxSelect': 1,
+		'name': 'status',
+		'presentable': false,
+		'required': false,
+		'system': false,
+		'type': 'select',
+		'values': [
+			'created',
+			'pending',
+			'in-progress',
+			'done'
+		]
+	}))
 
-  return app.save(collection)
+	return app.save(collection)
 }, (app) => {
-  const collection = app.findCollectionByNameOrId("pbc_1302879749")
+	const collection = app.findCollectionByNameOrId('pbc_1302879749')
 
-  // remove field
-  collection.fields.removeById("select2063623452")
+	// remove field
+	collection.fields.removeById('select2063623452')
 
-  return app.save(collection)
+	return app.save(collection)
 })

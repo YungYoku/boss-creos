@@ -1,9 +1,9 @@
-export type DBRecord = {
+export interface DBRecord {
 	collectionId: string
 	collectionName: string
 }
 
-export type DBRecordItems = {
+export interface DBRecordItems {
 	page: number
 	perPage: number
 	totalItems: number

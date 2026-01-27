@@ -17,7 +17,7 @@
 import { type ICell } from '@/types/table'
 import { Button } from '@/components/blocks'
 
-type Props = {
+interface Props {
 	cell: ICell
 }
 

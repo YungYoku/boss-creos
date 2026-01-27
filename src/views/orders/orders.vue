@@ -95,7 +95,7 @@ import type { ICreative, ICreatives } from '@/types/creative'
 import { Button, InputVideo } from '@/components/blocks'
 
 const auth = useAuthStore()
-const creatives: Ref<Array<ICreative>> = ref([])
+const creatives: Ref<ICreative[]> = ref([])
 const creativesIDs = computed(() => creatives.value.map(({ id }) => id))
 const loadCreatives = async () => {
 	if (!auth.user.id) return
@@ -108,7 +108,7 @@ const loadCreatives = async () => {
 		})
 }
 
-const baskets: Ref<Array<IBasket>> = ref([])
+const baskets: Ref<IBasket[]> = ref([])
 const loadBaskets = async () => {
 	if (creativesIDs.value.length === 0) return
 

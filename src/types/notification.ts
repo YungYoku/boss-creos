@@ -10,5 +10,5 @@ export type INotification = DBRecord & {
 }
 
 export type INotifications = DBRecordItems & {
-	items: Array<INotification>
+	items: INotification[]
 }

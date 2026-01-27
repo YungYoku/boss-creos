@@ -8,16 +8,17 @@ export default defineConfigWithVueTs(
 	js.configs.recommended,
 	pluginVue.configs['flat/recommended'],
 	vueTsConfigs.strictTypeChecked,
+	vueTsConfigs.stylisticTypeChecked,
 	{
-		plugins: {
-			'@stylistic': stylisticJs,
-		},
-
 		languageOptions: {
 			globals: {
 				...globals.browser,
 				...globals.node
 			}
+		},
+
+		plugins: {
+			'@stylistic': stylisticJs,
 		},
 
 		rules: {

@@ -111,7 +111,7 @@ import { isHttpError } from '@/plugins/http.ts'
 
 type Role = 'buyer' | 'designer'
 
-type RegistrationForm = {
+interface RegistrationForm {
 	username: string
 	telegram: string
 	email: string

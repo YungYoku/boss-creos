@@ -81,7 +81,7 @@ const headerColumns = computed(() => {
 	}
 	return 1
 })
-const chats: Ref<Array<IProject>> = ref([])
+const chats: Ref<IProject[]> = ref([])
 const loading = ref(true)
 
 const chatRatingType = computed(() => auth.isBuyer ? 'ratingDesigner' : 'ratingBuyer')
@@ -117,13 +117,13 @@ const getChats = async () => {
 }
 watch(() => auth.user.id, getChats, { immediate: true })
 
-const updateStatus = async (status: IProjectStatus) => {
+const updateStatus = (status: IProjectStatus) => {
 	if (openedChat.value) {
 		openedChat.value.status = status
 	}
 }
 
-const updateRating = async (rating: IRating) => {
+const updateRating = (rating: IRating) => {
 	if (openedChat.value && openedChat.value.expand) {
 		if (auth.isBuyer) {
 			openedChat.value.ratingDesigner = rating.id

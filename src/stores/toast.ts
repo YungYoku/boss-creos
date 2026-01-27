@@ -6,10 +6,10 @@ export interface State {
 }
 
 export const useToast = defineStore('toast', {
-	state: (): State => <State>({
+	state: (): State => ({
 		text: '',
 		removingTimeout: null
-	}),
+	} as State),
 
 	getters: {
 		showed: ({ text }) => text.length > 0,

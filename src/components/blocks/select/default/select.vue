@@ -93,7 +93,7 @@ import { Icon, Label, Separator, Text } from '@/components/elements'
 import type { Item, Props } from './props'
 import { defaultProps } from './props'
 
-const value = defineModel<string | Array<string>>({
+const value = defineModel<string | string[]>({
 	type: [String, Array],
 	default: ''
 })

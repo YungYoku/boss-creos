@@ -74,7 +74,7 @@ const loading = ref(true)
 const user: Ref<IUser | null> = ref(null)
 
 const loadingCreatives = ref(true)
-const creatives: Ref<Array<ICreative>> = ref([])
+const creatives: Ref<ICreative[]> = ref([])
 
 const loadCreatives = async () => {
 	const id = route.params.id

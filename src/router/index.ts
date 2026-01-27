@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { DefaultLayout } from '@/components/layouts'
 import { useAuthStore } from '@/stores/auth'
 
-const routes: Array<RouteRecordRaw> = [
+const routes: RouteRecordRaw[] = [
 	{
 		path: '/',
 		name: 'DefaultLayout',
@@ -240,7 +240,7 @@ const body = document.querySelector('body')
 
 router.beforeEach((to, from) => {
 	const authStore = useAuthStore()
-	const toRules = (to.meta.rules ?? []) as Array<string>
+	const toRules = (to.meta.rules ?? []) as string[]
 
 	const previousBgClass = (from.meta.bgClass ?? 'default') as string
 	const currentBgClass = (to.meta.bgClass ?? 'default') as string

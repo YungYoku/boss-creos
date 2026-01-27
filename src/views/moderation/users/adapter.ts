@@ -9,7 +9,7 @@ import { useToast } from '@/stores/toast.ts'
 export const useAdapter = () => {
 	const toast = useToast()
 
-	const unnecessaryFieldsForRequest: Array<Partial<keyof IUser>> = [
+	const unnecessaryFieldsForRequest: Partial<keyof IUser>[] = [
 		'collectionId',
 		'collectionName',
 		'emailVisibility',
@@ -23,7 +23,7 @@ export const useAdapter = () => {
 		'transactions'
 	]
 
-	const unnecessaryFieldsForTable: Array<Partial<keyof IUser>> = [
+	const unnecessaryFieldsForTable: Partial<keyof IUser>[] = [
 		'changes',
 		'expand'
 	]

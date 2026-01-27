@@ -50,7 +50,7 @@ import type { ICreative, ICreatives } from '@/types/creative'
 
 const auth = useAuthStore()
 
-const creatives: Ref<Array<ICreative>> = ref([])
+const creatives: Ref<ICreative[]> = ref([])
 const favorite = computed(() => auth.user.favorite)
 
 const loading = ref(true)

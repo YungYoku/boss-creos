@@ -74,7 +74,7 @@ import { Form, Http } from '@/plugins'
 import type { IUserLogin } from '@/types/user'
 import { isHttpError } from '@/plugins/http.ts'
 
-type LoginForm = {
+interface LoginForm {
 	identity: string
 	password: string
 }

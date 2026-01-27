@@ -55,11 +55,11 @@ import { Http } from '@/plugins'
 
 const auth = useAuthStore()
 
-const notifications = computed<Array<INotification>>(() => auth.user.expand?.notifications ?? [])
+const notifications = computed<INotification[]>(() => auth.user.expand?.notifications ?? [])
 const items = computed(() => notifications.value.map(item => [item]))
 
 const onOpen = async () => {
-	await Http.post<Array<INotification>>('/check-notifications')
+	await Http.post<INotification[]>('/check-notifications')
 
 	setTimeout(() => {
 		auth.setUser({

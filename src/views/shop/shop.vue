@@ -92,7 +92,7 @@ import type { ICreative, ICreatives, ICreativeStatus, ICreativeType, IRatio } fr
 import { creativeTypeItems, ratioItems } from '@/types/creative'
 import { Form, Http } from '@/plugins'
 
-type SearchForm = {
+interface SearchForm {
 	geo: string
 	slot: string
 	approach: string
@@ -101,7 +101,7 @@ type SearchForm = {
 	status: Exclude<ICreativeStatus, 'moderation'>
 }
 
-const creatives: Ref<Array<ICreative>> = ref([])
+const creatives: Ref<ICreative[]> = ref([])
 
 const searchStore = useSearchStore()
 

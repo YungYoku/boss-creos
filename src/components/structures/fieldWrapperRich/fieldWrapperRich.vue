@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import { Icon } from '@/components/elements'
 
-type Props = {
+interface Props {
 	label?: string
 	error?: string | null
 }

@@ -5,6 +5,6 @@ export type IReferralCode = DBRecord & {
 	created: Date,
 	id: string,
 	updated: Date
-	used: Array<IUser>
-	new: Array<IUser>
+	used: IUser[]
+	new: IUser[]
 }

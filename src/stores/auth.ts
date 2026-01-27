@@ -9,14 +9,14 @@ export interface State {
 }
 
 export const useAuthStore = defineStore('auth', {
-	state: (): State => <State>({
+	state: (): State => ({
 		user: {
 			...emptyUser,
 			...(Storage.load('user') ?? {}),
 		},
 
 		token: Storage.load('token') ?? '',
-	}),
+	} as State),
 
 	getters: {
 		isGuest: state => state.token.length === 0,
@@ -54,7 +54,7 @@ export const useAuthStore = defineStore('auth', {
 			})
 		},
 
-		setBaskets(baskets: Array<IBasket>) {
+		setBaskets(baskets: IBasket[]) {
 			this.user.baskets = baskets.map(item => item.id)
 			if (this.user.expand) {
 				this.user.expand.baskets = baskets

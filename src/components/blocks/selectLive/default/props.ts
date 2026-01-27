@@ -1,25 +1,25 @@
-export type Item = {
+export interface Item {
 	id: string
 	name: string
 	[key: string]: unknown
 }
 
-export type Items = {
+export interface Items {
 	page: number,
 	perPage: number,
 	totalPages: number,
 	totalItems: number,
-	items: Array<Item>
+	items: Item[]
 }
 
-export type Props = {
-	modelValue: Array<string> | string
+export interface Props {
+	modelValue: string[] | string
 	error?: string | null
 	typeKey?: string
 	label?: string
 	api: string
-	filterFields?: Array<string>
-	exclude?: Array<string> | undefined
+	filterFields?: string[]
+	exclude?: string[] | undefined
 	multiple?: boolean
 }
 

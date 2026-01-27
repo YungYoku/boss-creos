@@ -2,9 +2,9 @@ export interface IHeaderItem {
 	name: string
 }
 
-export type IHeader = Array<IHeaderItem>
+export type IHeader = IHeaderItem[]
 
-export type ICellOptions = {
+export interface ICellOptions {
 	handler?: () => Promise<void>
 	link?: {
 		new: string
@@ -26,6 +26,6 @@ export const emptyCell: ICell = {
 	options: {},
 }
 
-export type IRow = Array<ICell>
+export type IRow = ICell[]
 
-export type IRows = Array<IRow>
+export type IRows = IRow[]

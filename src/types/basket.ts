@@ -10,19 +10,19 @@ export type IBasket = DBRecord & {
 	created: string
 	updated: string
 	creative: string
-	geo: Array<string>
-	resize: Array<IRatio>
+	geo: string[]
+	resize: IRatio[]
 	reskin: boolean
 	comment: string
 	status: BasketStatus
 	video: string
 	expand?: {
 		creative?: ICreative
-		geo?: Array<IGeo>
+		geo?: IGeo[]
 		video?: IVideo,
 	}
 }
 
 export type IBaskets = DBRecordItems & {
-	items: Array<IBasket>
+	items: IBasket[]
 }

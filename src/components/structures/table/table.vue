@@ -46,7 +46,7 @@ defineProps({
 		default: () => ([])
 	},
 	cells: {
-		type: Object as PropType<{ [key: string]: unknown }>,
+		type: Object as PropType<Record<string, unknown>>,
 		default: () => ({})
 	}
 })

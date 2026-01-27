@@ -25,7 +25,7 @@ import type { Props } from '../default/props'
 
 withDefaults(defineProps<Props>(), defaultProps)
 
-const value = defineModel<string | Array<string>>({
+const value = defineModel<string | string[]>({
 	type: [String, Array],
 	default: ''
 })

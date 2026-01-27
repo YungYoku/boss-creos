@@ -1,22 +1,22 @@
 /// <reference path="../pb_data/types.d.ts" />
 migrate((app) => {
-  const collection = app.findCollectionByNameOrId("pbc_2021195245")
+	const collection = app.findCollectionByNameOrId('pbc_2021195245')
 
-  // update collection data
-  unmarshal({
-    "createRule": null,
-    "updateRule": null
-  }, collection)
+	// update collection data
+	unmarshal({
+		'createRule': null,
+		'updateRule': null
+	}, collection)
 
-  return app.save(collection)
+	return app.save(collection)
 }, (app) => {
-  const collection = app.findCollectionByNameOrId("pbc_2021195245")
+	const collection = app.findCollectionByNameOrId('pbc_2021195245')
 
-  // update collection data
-  unmarshal({
-    "createRule": "",
-    "updateRule": ""
-  }, collection)
+	// update collection data
+	unmarshal({
+		'createRule': '',
+		'updateRule': ''
+	}, collection)
 
-  return app.save(collection)
+	return app.save(collection)
 })

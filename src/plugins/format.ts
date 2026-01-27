@@ -3,11 +3,11 @@ import type { App, Plugin } from 'vue'
 export type FormatType = 'percent' | 'number'
 
 class Format {
-	get(type: FormatType, value: number, ...props: Array<number>) {
+	get(type: FormatType, value: number, ...props: number[]) {
 		const types = {
 			percent: (value: number) => `${value.toFixed(2)}%`,
 
-			number(value: number, length: number = 1) {
+			number(value: number, length = 1) {
 				return value.toFixed(length)
 			}
 		}
@@ -20,7 +20,7 @@ const format = new Format()
 
 const formatPlugin: Plugin = {
 	install (app: App) {
-		app.config.globalProperties.$format = (type: FormatType, value: number, ...props: Array<number>) => {
+		app.config.globalProperties.$format = (type: FormatType, value: number, ...props: number[]) => {
 			return format.get(type, value, ...props)
 		}
 	},

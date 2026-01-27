@@ -80,7 +80,7 @@ import { CreativeCard, EmptyCreativeCard } from '@/components/blocks'
 import { Http } from '@/plugins'
 
 const loadingCreatives = ref(true)
-const creatives: Ref<Array<ICreative>> = ref([])
+const creatives: Ref<ICreative[]> = ref([])
 const loadCreatives = async () => {
 	loadingCreatives.value = true
 

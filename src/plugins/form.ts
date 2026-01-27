@@ -1,20 +1,20 @@
 import { reactive, type Reactive } from 'vue'
 
-type RawFieldValueComplicated = Array<unknown> | Date | File
+type RawFieldValueComplicated = unknown[] | Date | File
 type RawFieldValue = number | string | boolean | null | RawFieldValueComplicated
 
-type RawSchema = {
-	[key: string]: RawFieldValue | RawSchema
+type RawSchema<Schema extends object = object> = {
+	[key in keyof Schema]?: RawFieldValue | RawSchema
 }
 
-type FormField<T> = {
+interface FormField<T> {
 	type: 'field'
 	value: T
 	error: string | null
 	isTouched: boolean
 }
 
-type Error = {
+interface Error {
 	code: string
 	message: string
 }
@@ -44,9 +44,9 @@ type IForm<Schema extends RawSchema> = TransformedFormFields<Schema> & {
 
 const isFile = (value: unknown): value is File => value instanceof File
 const isDate = (value: unknown): value is Date => value instanceof Date
-const isArray = (value: unknown): value is Array<unknown> => Array.isArray(value)
+const isArray = (value: unknown): value is unknown[] => Array.isArray(value)
 
-const Form = <Schema extends RawSchema>(base: Schema): IForm<Schema> => {
+const Form = <Schema extends RawSchema<Schema>>(base: Schema): IForm<Schema> => {
 	const isObject = (value: unknown): value is Partial<Schema>[string & keyof Schema] => {
 		return (
 			typeof value === 'object' &&
@@ -70,7 +70,7 @@ const Form = <Schema extends RawSchema>(base: Schema): IForm<Schema> => {
 		)
 	}
 
-	const keys = Object.keys(base) as Array<string & keyof Schema>
+	const keys = Object.keys(base) as (string & keyof Schema)[]
 	const form = keys.reduce((acc, key) => {
 		const value = base[key]
 		if (isObject(value) && value != undefined) {
@@ -123,7 +123,7 @@ const Form = <Schema extends RawSchema>(base: Schema): IForm<Schema> => {
 	}
 
 	const setErrors = (errors: FormErrors<Schema>) => {
-		const errorKeys = Object.keys(errors) as Array<keyof FormErrors<Schema>>
+		const errorKeys = Object.keys(errors) as (keyof FormErrors<Schema>)[]
 
 		for (const key of errorKeys) {
 			const error = errors[key]

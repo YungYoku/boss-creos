@@ -16,7 +16,7 @@ import { computed, onBeforeUnmount, onMounted, ref, type Ref, watch } from 'vue'
 import { Screen } from '@/plugins'
 
 type Align = 'start' | 'center' | 'end' | 'stretch' | 'initial'
-type Columns = number | Array<number | string> | null
+type Columns = number | (number | string)[] | null
 
 interface Props {
 	vertical?: boolean
@@ -42,7 +42,7 @@ const props = withDefaults(defineProps<Props>(), {
 	columnsS: null
 })
 
-const activeColumns: Ref<Array<number | string> | number | null> = ref(1)
+const activeColumns: Ref<(number | string)[] | number | null> = ref(1)
 const updateActiveColumns = () => {
 	if (props.columns) {
 		activeColumns.value = props.columns

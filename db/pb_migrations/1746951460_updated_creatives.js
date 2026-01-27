@@ -1,38 +1,38 @@
 /// <reference path="../pb_data/types.d.ts" />
 migrate((app) => {
-  const collection = app.findCollectionByNameOrId("pbc_3625530119")
+	const collection = app.findCollectionByNameOrId('pbc_3625530119')
 
-  // update field
-  collection.fields.addAt(1, new Field({
-    "hidden": false,
-    "id": "number3402113753",
-    "max": null,
-    "min": 0,
-    "name": "price",
-    "onlyInt": false,
-    "presentable": false,
-    "required": true,
-    "system": false,
-    "type": "number"
-  }))
+	// update field
+	collection.fields.addAt(1, new Field({
+		'hidden': false,
+		'id': 'number3402113753',
+		'max': null,
+		'min': 0,
+		'name': 'price',
+		'onlyInt': false,
+		'presentable': false,
+		'required': true,
+		'system': false,
+		'type': 'number'
+	}))
 
-  return app.save(collection)
+	return app.save(collection)
 }, (app) => {
-  const collection = app.findCollectionByNameOrId("pbc_3625530119")
+	const collection = app.findCollectionByNameOrId('pbc_3625530119')
 
-  // update field
-  collection.fields.addAt(1, new Field({
-    "hidden": false,
-    "id": "number3402113753",
-    "max": null,
-    "min": 0,
-    "name": "price",
-    "onlyInt": false,
-    "presentable": false,
-    "required": false,
-    "system": false,
-    "type": "number"
-  }))
+	// update field
+	collection.fields.addAt(1, new Field({
+		'hidden': false,
+		'id': 'number3402113753',
+		'max': null,
+		'min': 0,
+		'name': 'price',
+		'onlyInt': false,
+		'presentable': false,
+		'required': false,
+		'system': false,
+		'type': 'number'
+	}))
 
-  return app.save(collection)
+	return app.save(collection)
 })

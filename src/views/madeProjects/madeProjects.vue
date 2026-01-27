@@ -85,7 +85,7 @@ import type { IProject, IProjects, IProjectStatus } from '@/types/project.ts'
 
 const auth = useAuthStore()
 
-const projects: Ref<Array<IProject>> = ref([])
+const projects: Ref<IProject[]> = ref([])
 
 const loading = ref(true)
 const getUserProjects = async () => {
@@ -109,7 +109,7 @@ watch(() => auth.user.id, getUserProjects, { immediate: true })
 
 const openedProject: Ref<IProject | null> = ref(null)
 
-const showProposals = async (project: IProject) => {
+const showProposals = (project: IProject) => {
 	openedProject.value = project
 }
 
@@ -131,7 +131,7 @@ const pickDesigner = async (user: IUser) => {
 		})
 		.then(() => {
 			closeResponses()
-			getUserProjects()
+			void getUserProjects()
 		})
 }
 
@@ -153,13 +153,13 @@ const openChat = (project: IProject) => openedChat.value = project
 
 const closeChat = () => openedChat.value = null
 
-const updateStatus = async (status: IProjectStatus) => {
+const updateStatus = (status: IProjectStatus) => {
 	if (openedChat.value) {
 		openedChat.value.status = status
 	}
 }
 
-const updateRating = async (rating: IRating) => {
+const updateRating = (rating: IRating) => {
 	if (openedChat.value && openedChat.value.expand) {
 		openedChat.value.ratingDesigner = rating.id
 		openedChat.value.expand.ratingDesigner = rating

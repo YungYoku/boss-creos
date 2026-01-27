@@ -20,27 +20,27 @@ export type IUser = DBRecord & {
 	role: 'admin' | 'buyer' | 'designer' | 'guest'
 	energy: number
 	referral_code: string
-	favorite: Array<string>
-	rating: Array<string>
-	notifications: Array<string>
-	baskets: Array<string>
+	favorite: string[]
+	rating: string[]
+	notifications: string[]
+	baskets: string[]
 	telegram: string
 	balance: number
-	transactions: Array<string>
+	transactions: string[]
 	status: 'approved' | 'moderation'
 	changes: Partial<Omit<IUser, 'changes' | 'expand'>> | null
 	expand?: {
 		avatar?: IImage
 		referral_code?: IReferralCode
-		favorite?: Array<ICreative>
-		rating?: Array<IRating>
-		notifications?: Array<INotification>
-		baskets?: Array<IBasket>
-		transactions?: Array<Transaction>
+		favorite?: ICreative[]
+		rating?: IRating[]
+		notifications?: INotification[]
+		baskets?: IBasket[]
+		transactions?: Transaction[]
 	}
 }
 
-export type IUserRefresh = {
+export interface IUserRefresh {
 	token: string
 	record: IUser
 }
@@ -72,10 +72,10 @@ export const emptyUser: IUser = {
 }
 
 export type IUsers = DBRecordItems & {
-	items: Array<IUser>
+	items: IUser[]
 }
 
-export type IUserLogin = {
+export interface IUserLogin {
 	record: IUser
 	token: string
 }

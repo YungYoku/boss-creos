@@ -1,12 +1,12 @@
-export type Item = {
+export interface Item {
 	id: string
 	name: string
 }
 
-export type Props = {
+export interface Props {
 	error?: string | null
 	label?: string
-	items: Array<Item>
+	items: Item[]
 	multiple?: boolean
 	clearable?: boolean
 	searchable?: boolean

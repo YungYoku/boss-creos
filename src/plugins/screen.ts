@@ -3,11 +3,6 @@ import { type Ref, ref } from 'vue'
 type Size = 's' | 'm' | 'l' | 'xl'
 
 class Screen {
-	static inst: Screen | null = null
-	static getInst() {
-		return Screen.inst || (Screen.inst = new Screen())
-	}
-
 	constructor() {
 		this.#update()
 		window.addEventListener('resize', this.#update.bind(this))
@@ -49,4 +44,4 @@ class Screen {
 	}
 }
 
-export default Screen.getInst()
+export default new Screen()

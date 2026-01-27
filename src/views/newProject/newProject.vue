@@ -123,7 +123,7 @@ const create = async () => {
 	await Http
 		.post<IProject>('/collections/projects/records', project.get())
 		.then(response => {
-			router.push(`/project/${response.id}`)
+			void router.push(`/project/${response.id}`)
 		})
 		.catch(({ data }) => {
 			project.setErrors(data)

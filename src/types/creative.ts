@@ -8,22 +8,20 @@ import type { DBRecord, DBRecordItems } from '@/types/dbBase'
 
 export type ICreativeStatus = 'moderation' | 'approved'
 export type ICreativeType = 'video' | 'static' | 'pwa'
-const _creativeTypeItems: Array<ICreativeType> = ['video', 'static', 'pwa']
+const _creativeTypeItems: ICreativeType[] = ['video', 'static', 'pwa']
 export const creativeTypeItems = _creativeTypeItems.map(item => ({
 	id: item,
 	name: item
 }))
 
 export type IRatio = '1:1' | '2:3' | '3:2' | '3:4' | '4:3' | '4:5' | '9:16' | '16:9'
-const _ratioItems: Array<IRatio> = ['1:1', '2:3', '3:2', '3:4', '4:3', '4:5', '9:16', '16:9']
+const _ratioItems: IRatio[] = ['1:1', '2:3', '3:2', '3:4', '4:3', '4:5', '9:16', '16:9']
 export const ratioItems = _ratioItems.map(item => ({
 	id: item,
 	name: item
 }))
 
-export type ResizePrices = {
-	[_ in IRatio]: number
-}
+export type ResizePrices = Record<IRatio, number>
 
 export type ICreative = DBRecord & {
 	id: string
@@ -31,10 +29,10 @@ export type ICreative = DBRecord & {
 	updated: string
 	creator: string
 	price: number
-	proposals: Array<string>
+	proposals: string[]
 	type: ICreativeType
 	geo: string
-	unavailableGeo: Array<string>
+	unavailableGeo: string[]
 	slot: string
 	preview: string
 	watermark: boolean
@@ -50,9 +48,9 @@ export type ICreative = DBRecord & {
 	reskinPrice: number
 	expand?: {
 		creator?: IUser
-		proposals?: Array<IProjectProposal>
+		proposals?: IProjectProposal[]
 		geo?: IGeo
-		unavailableGeo?: Array<IGeo>
+		unavailableGeo?: IGeo[]
 		slot?: ISlot
 		preview?: IImage
 		video?: IVideo,
@@ -98,5 +96,5 @@ export const emptyCreative: ICreative = {
 }
 
 export type ICreatives = DBRecordItems & {
-	items: Array<ICreative>
+	items: ICreative[]
 }

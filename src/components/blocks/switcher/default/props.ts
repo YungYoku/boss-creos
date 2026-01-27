@@ -1,4 +1,4 @@
-export type Props = {
+export interface Props {
 	error?: string | null,
 	checked?: boolean,
 	disabled?: boolean

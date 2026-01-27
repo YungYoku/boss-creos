@@ -20,7 +20,7 @@ export const locales = {
 
 type DefaultLang = 'en' | 'ru'
 
-type Locales<Lang extends string = DefaultLang> = Record<Lang, { [key: string]: string }>
+type Locales<Lang extends string = DefaultLang> = Record<Lang, Record<string, string>>
 
 class Localize<Lang extends string = DefaultLang> {
 	readonly baseLocale: DefaultLang = 'en'

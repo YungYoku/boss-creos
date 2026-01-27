@@ -61,7 +61,7 @@ import Separator from '@/components/elements/separator/separator.vue'
 
 defineProps({
 	items: {
-		type: Array as PropType<Array<Array<IDropdownMenuItem>>>,
+		type: Array as PropType<IDropdownMenuItem[][]>,
 		default: () => ([])
 	}
 })

@@ -65,7 +65,7 @@ import type { IRating } from '@/types/rating'
 
 const auth = useAuthStore()
 
-const projects: Ref<Array<IProject>> = ref([])
+const projects: Ref<IProject[]> = ref([])
 
 const loading = ref(true)
 const getUserProjects = async () => {

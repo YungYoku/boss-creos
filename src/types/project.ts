@@ -46,7 +46,7 @@ export type IProject = DBRecord & {
 	ratingDesigner: string
 	deadline: Date
 	designer: string
-	proposals: Array<string>
+	proposals: string[]
 	chat: string
 	file: string | null
 	tutoring: false
@@ -54,7 +54,7 @@ export type IProject = DBRecord & {
 		buyer?: IUser
 		designer?: IUser
 		chat?: IChat
-		proposals?: Array<IProjectProposal>
+		proposals?: IProjectProposal[]
 		file?: {
 			value: File
 		},
@@ -90,5 +90,5 @@ export const emptyProject: IProject = {
 }
 
 export type IProjects = DBRecordItems & {
-	items: Array<IProject>
+	items: IProject[]
 }

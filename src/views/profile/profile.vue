@@ -73,9 +73,9 @@ const getChanges = () => {
 	const currentCreative = userBase.get()
 	const updatedCreative = user.get()
 
-	const readonlyFields: Array<keyof IUser> = ['id', 'collectionId', 'collectionName', 'created', 'changes', 'expand'] as const
-	const currentCreativeKeys = Object.keys(currentCreative) as Array<keyof IUser>
-	const filteredKeys = currentCreativeKeys.filter(key => !readonlyFields.includes(key)) as Array<keyof Omit<IUser, ReadOnlyUserFields>>
+	const readonlyFields: (keyof IUser)[] = ['id', 'collectionId', 'collectionName', 'created', 'changes', 'expand'] as const
+	const currentCreativeKeys = Object.keys(currentCreative) as (keyof IUser)[]
+	const filteredKeys = currentCreativeKeys.filter(key => !readonlyFields.includes(key)) as (keyof Omit<IUser, ReadOnlyUserFields>)[]
 
 	const changes: Record<string, unknown> = {}
 	for (const key of filteredKeys) {

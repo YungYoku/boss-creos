@@ -11,7 +11,7 @@ type ExpandedOrDirectProperty<T, K extends keyof T> = K extends keyof ItemExpand
 		? T[K]
 		: never
 
-type AdditionalAdapterFields<T> = {
+interface AdditionalAdapterFields<T> {
 	expand?: {
 		[key in keyof T]?: ExpandedProperty<T, key>
 	}
@@ -23,7 +23,7 @@ export type CellFormats<T> = {
 	[K in keyof T]?: (param: ExpandedOrDirectProperty<T, K>) => unknown
 }
 
-type BaseOptions = {
+interface BaseOptions {
 	actions?: ICellOptions
 }
 type Options<T> = BaseOptions & {
@@ -32,18 +32,18 @@ type Options<T> = BaseOptions & {
 
 export const useAdapter = <T extends AdditionalAdapterFields<T>, Keys extends keyof T = keyof T>(
 	elementSchema: T,
-	unnecessaryFieldsForRequest: Array<Keys>,
-	unnecessaryFieldsForTable: Array<Keys>,
+	unnecessaryFieldsForRequest: Keys[],
+	unnecessaryFieldsForTable: Keys[],
 	options: (item: T) => Options<T>,
 	cellFormats: CellFormats<T>,
 ) => {
-	const keys = Object.keys(elementSchema) as Array<Keys>
+	const keys = Object.keys(elementSchema) as Keys[]
 
-	const fieldsForRequest = keys.filter(field => !unnecessaryFieldsForRequest.includes(field)) as Array<string>
+	const fieldsForRequest = keys.filter(field => !unnecessaryFieldsForRequest.includes(field)) as string[]
 	const fieldsForTable = keys.filter(field => !unnecessaryFieldsForTable.includes(field))
 
 	const getHeader = (item: T) => {
-		const keys = Object.keys(item) as Array<Keys>
+		const keys = Object.keys(item) as Keys[]
 		const filteredKeys = keys.filter(name => fieldsForTable.includes(name))
 		const result = filteredKeys.map(name => ({ name: String(name) }))
 
@@ -57,9 +57,9 @@ export const useAdapter = <T extends AdditionalAdapterFields<T>, Keys extends ke
 		return item[key] as ExpandedOrDirectProperty<T, Keys>
 	}
 
-	const getBody = (items: Array<AdapterItem<T>>) => {
+	const getBody = (items: AdapterItem<T>[]) => {
 		return items.map(item => {
-			const keys = Object.keys(item) as Array<Keys>
+			const keys = Object.keys(item) as Keys[]
 			const filteredKeys = keys.filter(name => fieldsForTable.includes(name))
 
 			const result = [{
@@ -84,7 +84,7 @@ export const useAdapter = <T extends AdditionalAdapterFields<T>, Keys extends ke
 
 	const header: Ref<IHeader> = ref([])
 	const body: Ref<IRows> = ref([])
-	const handleLoadedData = (data: Array<AdapterItem<T>>) => {
+	const handleLoadedData = (data: AdapterItem<T>[]) => {
 		if (data.length > 0 && data[0]) {
 			header.value = getHeader(data[0])
 			body.value = getBody(data)

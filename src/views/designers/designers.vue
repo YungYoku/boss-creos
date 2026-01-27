@@ -24,7 +24,7 @@ import { UserCard } from '@/components/blocks'
 import type { IUser, IUsers } from '@/types/user'
 import { Http } from '@/plugins'
 
-const users: Ref<Array<IUser>> = ref([])
+const users: Ref<IUser[]> = ref([])
 
 const loading = ref(true)
 const loadDesigners = async () => {

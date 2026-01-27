@@ -22,10 +22,10 @@ import { defaultProps } from './props'
 
 const props = withDefaults(defineProps<Props>(), defaultProps)
 
-const items: Ref<Array<Item>> = ref([])
+const items: Ref<Item[]> = ref([])
 
 const emit = defineEmits(['update:model-value'])
-const value = computed<Array<string> | string>({
+const value = computed<string[] | string>({
 	get: () => props.modelValue,
 	set(value) {
 		if (props.multiple && Array.isArray(props.modelValue) && Array.isArray(value)) {
@@ -55,7 +55,7 @@ const getExcludedItems = () => {
 	return ''
 }
 
-const getPayload = (entity: string | Array<string>, isIncluded: boolean = false) => {
+const getPayload = (entity: string | string[], isIncluded = false) => {
 	const payload: {
 		sort?: string,
 		filter?: string
@@ -110,10 +110,10 @@ const getPayload = (entity: string | Array<string>, isIncluded: boolean = false)
 	return null
 }
 
-const loadItems = async (include?: string | Array<string>) => {
-	let _defaultItems: Array<Item> = []
-	let _searchItems: Array<Item> = []
-	let _extraItems: Array<Item> = []
+const loadItems = async (include?: string | string[]) => {
+	let _defaultItems: Item[] = []
+	let _searchItems: Item[] = []
+	let _extraItems: Item[] = []
 
 	const loadDefaultItems = async () => {
 		if (search.value.length === 0) {
@@ -134,7 +134,7 @@ const loadItems = async (include?: string | Array<string>) => {
 		}
 	}
 	const loadExtraItems = async () => {
-		if (include && include.length) {
+		if (include?.length) {
 			await Http.get<Items>(`/collections/${props.api}/records`, getPayload(include, true))
 				.then(response => {
 					_extraItems = response.items

@@ -1,44 +1,44 @@
 /// <reference path="../pb_data/types.d.ts" />
 migrate((app) => {
-  const collection = app.findCollectionByNameOrId("_pb_users_auth_")
+	const collection = app.findCollectionByNameOrId('_pb_users_auth_')
 
-  // update field
-  collection.fields.addAt(9, new Field({
-    "hidden": false,
-    "id": "xeqzmlti",
-    "maxSelect": 1,
-    "name": "role",
-    "presentable": false,
-    "required": true,
-    "system": false,
-    "type": "select",
-    "values": [
-      "designer",
-      "buyer",
-      "admin"
-    ]
-  }))
+	// update field
+	collection.fields.addAt(9, new Field({
+		'hidden': false,
+		'id': 'xeqzmlti',
+		'maxSelect': 1,
+		'name': 'role',
+		'presentable': false,
+		'required': true,
+		'system': false,
+		'type': 'select',
+		'values': [
+			'designer',
+			'buyer',
+			'admin'
+		]
+	}))
 
-  return app.save(collection)
+	return app.save(collection)
 }, (app) => {
-  const collection = app.findCollectionByNameOrId("_pb_users_auth_")
+	const collection = app.findCollectionByNameOrId('_pb_users_auth_')
 
-  // update field
-  collection.fields.addAt(9, new Field({
-    "hidden": false,
-    "id": "xeqzmlti",
-    "maxSelect": 1,
-    "name": "role",
-    "presentable": false,
-    "required": true,
-    "system": false,
-    "type": "select",
-    "values": [
-      "customer",
-      "executor",
-      "admin"
-    ]
-  }))
+	// update field
+	collection.fields.addAt(9, new Field({
+		'hidden': false,
+		'id': 'xeqzmlti',
+		'maxSelect': 1,
+		'name': 'role',
+		'presentable': false,
+		'required': true,
+		'system': false,
+		'type': 'select',
+		'values': [
+			'customer',
+			'executor',
+			'admin'
+		]
+	}))
 
-  return app.save(collection)
+	return app.save(collection)
 })

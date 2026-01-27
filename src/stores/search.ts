@@ -6,10 +6,10 @@ export interface State {
 }
 
 export const useSearchStore = defineStore('search', {
-	state: (): State => <State>({
+	state: (): State => ({
 		search: '',
 		loading: false,
-	}),
+	} as State),
 
 	getters: {
 	},

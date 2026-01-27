@@ -195,6 +195,10 @@ const { id } = route.params
 const loading = ref(true)
 const loadProject = async () => {
 	if (!id) return
+	if (Array.isArray(id)) {
+		console.warn('ID is array for some reason.')
+		return
+	}
 
 	await Http
 		.get<IProject>(`/collections/projects/records/${id}`, {
@@ -206,7 +210,7 @@ const loadProject = async () => {
 
 	loading.value = false
 }
-loadProject()
+void loadProject()
 
 const remove = async () => {
 	if (loading.value) return
@@ -214,7 +218,7 @@ const remove = async () => {
 	await Http
 		.delete(`/collections/projects/records/${project.value.id}`)
 		.then(() => {
-			router.push('/')
+			void router.push('/')
 		})
 }
 

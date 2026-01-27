@@ -1,4 +1,4 @@
-type data = number | string | boolean | object | Array<number | string | boolean | object>
+type data = number | string | boolean | object | (number | string | boolean | object)[]
 
 class Storage {
 	write(key: string, data: data) {

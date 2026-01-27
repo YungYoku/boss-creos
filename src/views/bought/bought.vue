@@ -105,11 +105,11 @@ import { Badge, BadgeBalance, Image } from '@/components/elements'
 import { Button } from '@/components/blocks'
 import type { BasketStatus, IBasket } from '@/types/basket'
 
-type Filter = {
+interface Filter {
 	value: BasketStatus
 	name: string
 }
-type Filters = Array<Filter>
+type Filters = Filter[]
 const filters: Filters = [
 	{
 		value: 'done',

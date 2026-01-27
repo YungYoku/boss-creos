@@ -95,7 +95,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, warn } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useToast } from '@/stores/toast'
 
@@ -115,6 +115,11 @@ const { id } = route.params
 const loading = ref(true)
 const loadProject = async () => {
 	if (!id) return
+	if (Array.isArray(id)) {
+		warn('ID is array for some reason.')
+		return
+	}
+
 	loading.value = true
 
 	await Http
@@ -127,10 +132,16 @@ const loadProject = async () => {
 
 	loading.value = false
 }
-loadProject()
+void loadProject()
 
 const toast = useToast()
 const save = async () => {
+	if (!id) return
+	if (Array.isArray(id)) {
+		warn('ID is array for some reason.')
+		return
+	}
+
 	loading.value = true
 	form.clearErrors()
 
@@ -140,7 +151,7 @@ const save = async () => {
 	await Http
 		.patch<IUser>(`/collections/projects/records/${form.id.value}`, form.get())
 		.then(() => {
-			router.push(`/project/${id}`)
+			void router.push(`/project/${id}`)
 
 			toast.set('Сохранено успешно!')
 		})

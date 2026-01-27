@@ -245,9 +245,9 @@ const getChanges = () => {
 	const currentCreative = creativeBase.get()
 	const updatedCreative = creative.get()
 
-	const readonlyFields: Array<keyof ICreative> = ['id', 'collectionId', 'collectionName', 'created', 'proposals', 'changes', 'expand'] as const
-	const currentCreativeKeys = Object.keys(currentCreative) as Array<keyof ICreative>
-	const filteredKeys = currentCreativeKeys.filter(key => !readonlyFields.includes(key)) as Array<keyof Omit<ICreative, ReadOnlyCreativeFields>>
+	const readonlyFields: (keyof ICreative)[] = ['id', 'collectionId', 'collectionName', 'created', 'proposals', 'changes', 'expand'] as const
+	const currentCreativeKeys = Object.keys(currentCreative) as (keyof ICreative)[]
+	const filteredKeys = currentCreativeKeys.filter(key => !readonlyFields.includes(key)) as (keyof Omit<ICreative, ReadOnlyCreativeFields>)[]
 
 	const changes: Record<string, unknown> = {}
 	for (const key of filteredKeys) {

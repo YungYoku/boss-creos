@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { type ICell } from '@/types/table'
 
-type Props = {
+interface Props {
 	cell: ICell
 }
 

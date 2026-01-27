@@ -103,11 +103,11 @@ const isItMine = computed(() => props.creative.creator === auth.user.id)
 const route = useRoute()
 const isDetailPage = computed(() => route.name === 'Creative')
 
-const geo: Ref<Array<string>> = ref([])
+const geo: Ref<string[]> = ref([])
 const basketWithCreative = computed(() => {
 	const baskets = auth.user.expand?.baskets ?? []
 	const basket = baskets.find((basket) => basket.expand?.creative?.id === props.creative.id)
-	if (basket && basket.status === 'created') {
+	if (basket?.status === 'created') {
 		return basket
 	}
 

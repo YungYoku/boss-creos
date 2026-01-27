@@ -27,10 +27,8 @@ import { ref, reactive, computed } from 'vue'
 
 const emit = defineEmits(['apply'])
 
-const slots = defineSlots<{
-	[key: string]: string
-}>()
-const steps = reactive<Array<string>>(Object.keys(slots).filter((slot) => slot !== 'footer'))
+const slots = defineSlots<Record<string, string>>()
+const steps = reactive<string[]>(Object.keys(slots).filter((slot) => slot !== 'footer'))
 const currentStep = ref(1)
 
 defineProps({

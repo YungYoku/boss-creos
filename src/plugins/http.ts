@@ -1,9 +1,9 @@
 import { useAuthStore } from '@/stores/auth.ts'
 
 interface Query {
-	fields?: Array<string>
+	fields?: string[]
 	filter?: string
-	expand?: Array<string>
+	expand?: string[]
 	perPage?: number
 	page?: number
 	sort?: string
@@ -17,7 +17,7 @@ interface HeadersOptions {
 interface ConnectOptions<T> {
 	collection: string
 	id: string
-	expand: Array<string>,
+	expand: string[],
 
 	cb: (response: T) => Promise<void>
 }
@@ -45,7 +45,7 @@ class Http {
 		isFormData: false,
 		isSSE: false
 	}) {
-		const headers: { [key: string]: string } = {
+		const headers: Record<string, string> = {
 			Accept: 'application/json',
 			Authorization: token
 		}
