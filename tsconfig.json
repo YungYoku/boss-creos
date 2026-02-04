@@ -35,5 +35,5 @@
 		"noImplicitOverride": true,
 		"useUnknownInCatchVariables": true
 	},
-	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "vite.config.ts", "env.d.ts", "vite-env.d.ts"]
+	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "vite.config.ts", "env.d.ts", "vite-env.d.ts", "shims-vue.d.ts", "directives.d.ts"]
 }
