@@ -1,5 +1,5 @@
-import type {Method} from '@/plugins/datetime'
-import type {FormatType} from '@/plugins/format'
+import type { Method } from '@/plugins/datetime'
+import type { FormatType } from '@/plugins/format'
 
 declare module '@vue/runtime-core' {
 	interface ComponentCustomProperties {

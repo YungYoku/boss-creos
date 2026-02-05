@@ -71,6 +71,13 @@ export default defineConfigWithVueTs(
 		},
 	},
 	{
-		ignores: ['.github/', 'deploy/', 'dist/', 'node_modules/', 'public/'],
+		ignores: [
+			'.github/',
+			'deploy/',
+			'dist/',
+			'node_modules/',
+			'public/',
+			'db/'
+		],
 	}
 )
