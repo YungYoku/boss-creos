@@ -1,8 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
-// @ts-expect-error Проблема с импортом библиотеки
-import eslint from 'vite-plugin-eslint'
+import checker from 'vite-plugin-checker'
 
 export default defineConfig(({ mode }) => {
 	const isProduction = mode === 'production'
@@ -14,7 +13,19 @@ export default defineConfig(({ mode }) => {
 
 		plugins: [
 			vue(),
-			eslint()
+			checker({
+				eslint: {
+					lintCommand: 'eslint "./src/**/*.{ts,vue, js}"',
+					watchPath: './src',
+					useFlatConfig: true
+				},
+				vueTsc: true,
+				typescript: true,
+				// stylelint: {
+				// 	lintCommand: 'stylelint ./src/**/*.{css,scss,vue}',
+				// 	watchPath: './src',
+				// }
+			})
 		],
 
 		resolve: {

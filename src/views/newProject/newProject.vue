@@ -97,6 +97,7 @@ import { Button, Checkbox, DatePicker, Input, InputFile, Textarea } from '@/comp
 import { emptyProject, type IProject } from '@/types/project'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
+import { isHttpError } from '@/plugins/http'
 
 const auth = useAuthStore()
 
@@ -125,8 +126,10 @@ const create = async () => {
 		.then(response => {
 			void router.push(`/project/${response.id}`)
 		})
-		.catch(({ data }) => {
-			project.setErrors(data)
+		.catch((error: unknown) => {
+			if (isHttpError(error)) {
+				project.setErrors(error.data)
+			}
 
 			toast.set('Ошибка при создании объявления')
 

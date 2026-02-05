@@ -105,6 +105,7 @@ import { Text } from '@/components/elements'
 import { emptyProject, type IProject } from '@/types/project'
 import type { IUser } from '@/types/user'
 import { Form, Http } from '@/plugins'
+import { isHttpError } from '@/plugins/http'
 
 const form = Form<IProject>({ ...emptyProject })
 
@@ -155,8 +156,10 @@ const save = async () => {
 
 			toast.set('Сохранено успешно!')
 		})
-		.catch(({ data }) => {
-			form.setErrors(data)
+		.catch((error: unknown) => {
+			if (isHttpError(error)) {
+				form.setErrors(error.data)
+			}
 
 			toast.set('Ошибка сохранения')
 		})
