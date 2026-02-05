@@ -26,7 +26,6 @@ defineProps({
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-
 	margin-right: auto;
 	margin-left: auto;
 	gap: 8px;

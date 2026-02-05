@@ -53,7 +53,6 @@ const isActive = computed(() => {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-
 	cursor: pointer;
 
 	&__label {
@@ -65,7 +64,6 @@ const isActive = computed(() => {
 		width: 80px;
 		height: 25px;
 		padding: 4px 8px;
-
 		background: hsl(var(--background));
 		border: 1px solid hsl(var(--input));
 		border-radius: 8px;
@@ -79,8 +77,7 @@ const isActive = computed(() => {
 		width: 15px;
 		height: 15px;
 		margin: 0 calc(100% - 24px) 0 0;
-
-		background: #ffffff;
+		background: #fff;
 		border-radius: 6px;
 
 		&._active {

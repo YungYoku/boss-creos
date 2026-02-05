@@ -51,8 +51,7 @@ defineProps({
 	max-width: 100%;
 
 	&__title {
-		padding: 16px 20px 4px 20px;
-
+		padding: 16px 20px 4px;
 		font-size: 32px;
 		font-weight: 700;
 	}
@@ -62,7 +61,7 @@ defineProps({
 	}
 
 	&__footer {
-		padding: 0 20px 20px 20px;
+		padding: 0 20px 20px;
 	}
 }
 </style>

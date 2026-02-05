@@ -167,25 +167,20 @@ const clear = () => {
 <style scoped lang="scss">
 .select {
 	&__trigger {
-
 		position: relative;
-
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
-
 		width: 100%;
 		height: 48px;
 		padding: 8px 12px;
-
 		background: hsl(var(--background));
 		border: 1px solid hsl(var(--input));
 		border-radius: 14px;
-
 		transition: all 0.2s;
 
 		&:focus-visible {
-			border-color: rgb(245 245 244 / 1);
+			border-color: rgb(245 245 244 / 100%);
 		}
 
 		&:hover {
@@ -201,14 +196,12 @@ const clear = () => {
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
-
 		width: 100%;
 		height: 100%;
 		padding-top: 12px;
 
 		&._empty {
 			padding-top: initial;
-
 			color: hsl(var(--muted-foreground));
 		}
 	}
@@ -217,7 +210,6 @@ const clear = () => {
 		position: absolute;
 		top: 14px;
 		right: 34px;
-
 		cursor: pointer;
 	}
 
@@ -225,13 +217,11 @@ const clear = () => {
 		position: absolute;
 		top: 14px;
 		right: 12px;
-
 		cursor: pointer;
 	}
 
 	&__error {
 		padding-left: 12px;
-
 		font-size: 12px;
 		font-weight: 200;
 		color: hsl(var(--destructive));
@@ -241,7 +231,6 @@ const clear = () => {
 		display: flex;
 		flex-direction: column;
 		gap: 4px;
-
 		padding: 4px;
 		overflow: auto;
 	}
@@ -250,18 +239,14 @@ const clear = () => {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-
 		width: 100%;
 		height: 32px;
 		min-height: 32px;
 		padding: 8px;
 		overflow: hidden;
-
 		white-space: nowrap;
-
 		background-color: hsl(var(--background));
 		border-radius: 4px;
-
 		cursor: pointer;
 
 		&:hover {

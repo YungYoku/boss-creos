@@ -71,9 +71,9 @@ watch(() => auth.user.id, getUserCreatives, { immediate: true })
 	&__title {
 		font-size: 32px;
 		font-weight: 700;
-		color: #ffffff;
+		color: #fff;
 		text-align: center;
-		margin: 0 0 20px 0;
+		margin: 0 0 20px;
 	}
 
 	&__creatives {
@@ -81,12 +81,10 @@ watch(() => auth.user.id, getUserCreatives, { immediate: true })
 		flex-wrap: wrap;
 		justify-content: flex-start;
 		align-items: center;
-
 		width: 100%;
 		max-width: 100%;
 		gap: 20px;
-
-		margin: 40px auto 40px auto;
+		margin: 40px auto;
 
 		@media (max-width: 1024px) {
 			gap: 15px;

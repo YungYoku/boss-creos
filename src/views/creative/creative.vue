@@ -119,7 +119,7 @@ void loadProject()
 
 <style scoped lang="scss">
 .creative {
-	padding: 60px 0 0 0;
+	padding: 60px 0 0;
 
 	&__name {
 		font-size: 40px;
@@ -130,7 +130,6 @@ void loadProject()
 	&__info {
 		display: flex;
 		flex-direction: column;
-
 		width: 100%;
 		gap: 10px;
 	}
@@ -145,8 +144,7 @@ void loadProject()
 		width: 60%;
 		height: 1px;
 		margin: 20px 0;
-
-		background: linear-gradient(to right, #ffffff 20%, rgba(255, 255, 255, 0));
+		background: linear-gradient(to right, #fff 20%, rgb(255 255 255 / 0%));
 	}
 
 	&__description-title {

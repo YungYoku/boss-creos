@@ -12,7 +12,6 @@
 	height: 1px;
 	min-height: 1px;
 	max-height: 1px;
-
 	background-color: hsl(var(--muted));
 }
 </style>

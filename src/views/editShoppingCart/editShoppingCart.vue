@@ -109,7 +109,6 @@ const updateBasket = async (basket: IBasket) => {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-
 	width: 800px;
 	max-width: 100%;
 
@@ -117,23 +116,19 @@ const updateBasket = async (basket: IBasket) => {
 		display: flex;
 		flex-direction: column;
 		gap: 5px;
-
 		padding: 5px;
-
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.08) 100%),
-		radial-gradient(50% 100% at 50% 0%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+		background: linear-gradient(180deg, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 8%) 100%),
+		radial-gradient(50% 100% at 50% 0%, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 0%) 100%);
 		border: 1px solid;
 		border-radius: 10px;
-		border-image-source: linear-gradient(135.28deg, rgba(255, 255, 255, 0.3) -128.53%, rgba(255, 255, 255, 0) 75.12%);
+		border-image-source: linear-gradient(135.28deg, rgb(255 255 255 / 30%) -128.53%, rgb(255 255 255 / 0%) 75.12%);
 	}
 
 	&__creative-head {
 		display: flex;
 		align-items: center;
-
 		width: 100%;
 		padding: 0 15px 0 0;
-
 		gap: 12px;
 	}
 
@@ -141,7 +136,6 @@ const updateBasket = async (basket: IBasket) => {
 		max-width: 57px;
 		max-height: 57px;
 		aspect-ratio: 1/1;
-
 		border-radius: 10px;
 	}
 

@@ -144,9 +144,7 @@ const loadChat = (project: IProject) => {
 .chats {
 	&__item {
 		padding: 8px 16px;
-
 		border-radius: 8px;
-
 		cursor: pointer;
 
 		&:hover {

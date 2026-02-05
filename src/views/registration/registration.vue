@@ -180,7 +180,6 @@ const isRegistrationPossible = computed(() => {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-
 		width: 100%;
 		gap: 5%;
 	}

@@ -31,7 +31,7 @@ const columns = reactive([
 	[slotBase, slotBase, slotBase, slotBase, slotBase, slotBase, slotBase],
 ])
 
-const slotHeight = computed(() => {
+const height = computed(() => {
 	if (slotsRefs.value?.[0]) {
 		const height: number = slotsRefs.value[0].height
 		return `-${(height + 30).toString()}px`
@@ -43,13 +43,11 @@ const slotHeight = computed(() => {
 <style scoped lang="scss">
 .auth-slots {
 	display: flex;
-
 	height: 100vh;
 	max-height: 100vh;
 	overflow: hidden;
 	gap: 30px;
-
-	margin: -94px 0 0 0;
+	margin: -94px 0 0;
 
 	&__column {
 		height: calc(100% / 6 * 7);
@@ -66,8 +64,9 @@ const slotHeight = computed(() => {
 
 		@keyframes down {
 			from {
-				transform: translateY(v-bind(slotHeight));
+				transform: translateY(v-bind(height));
 			}
+
 			to {
 				transform: translateY(0);
 			}

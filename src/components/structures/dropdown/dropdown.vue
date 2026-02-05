@@ -96,18 +96,14 @@ onUnmounted(() => {
 	&__content {
 		width: 200px;
 		max-height: 500px;
-
 		position: absolute;
 		top: 56px;
 		right: 0;
 		z-index: 10;
-
 		display: flex;
 		flex-direction: column;
 		gap: 4px;
-
 		padding: 4px;
-
 		background-color: hsl(var(--background));
 		border: 1px solid hsl(var(--input));
 		border-radius: 12px;
@@ -116,9 +112,11 @@ onUnmounted(() => {
 		&.dropdown-enter-from {
 			opacity: 0;
 		}
+
 		&.dropdown-enter-active {
 			transition: opacity 0.1s;
 		}
+
 		&.dropdown-enter-to {
 			opacity: 1;
 		}
@@ -126,9 +124,11 @@ onUnmounted(() => {
 		&.dropdown-leave-from {
 			opacity: 1;
 		}
+
 		&.dropdown-leave-active {
 			transition: opacity 0.1s;
 		}
+
 		&.dropdown-leave-to {
 			opacity: 0;
 		}
@@ -137,11 +137,8 @@ onUnmounted(() => {
 	&__empty,
 	&__item {
 		width: 100%;
-
 		display: block;
-
 		padding: 8px;
-
 		font-size: 14px;
 		border-radius: 8px;
 	}

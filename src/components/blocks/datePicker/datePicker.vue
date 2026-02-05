@@ -65,7 +65,6 @@ const printedValue = computed(() => {
 .date-picker {
 	&__button {
 		justify-content: flex-start;
-
 		width: 100%;
 		padding-top: 20px;
 		padding-left: 12px;

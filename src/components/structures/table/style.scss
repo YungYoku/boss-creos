@@ -1,25 +1,19 @@
 .table {
 	position: relative;
-
-	display: flex;
-
 	box-sizing: border-box;
-
+	display: flex;
 	width: 100%;
 	overflow: auto;
-
-	background: #ffffff;
+	background: #fff;
 	border-radius: 10px;
 
 	&__body {
 		display: table;
-
 		min-width: 100%;
 	}
 
 	&__inner {
 		flex-grow: 1;
-
 		border-top-right-radius: 10px;
 	}
 
@@ -27,9 +21,8 @@
 	&__link span {
 		max-width: 100%;
 		overflow: hidden;
-
-		white-space: nowrap;
 		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	.table__inner {
@@ -40,35 +33,27 @@
 		}
 	}
 
-	// Row
 	&__row {
 		position: relative;
-
 		display: table-row;
 	}
 
-	// Column
 	&__col {
 		position: relative;
-
-		display: table-cell;
-
 		box-sizing: border-box;
-
+		display: table-cell;
 		min-width: 40px;
 		height: 50px;
 		padding: 0;
-
 		font-size: 14px;
-		line-height: 14px;
 		font-weight: 400;
-		text-align: right;
-		vertical-align: middle;
-		color: #000000;
-		white-space: nowrap;
-
-		border-right: 1px dashed #000000;
 		font-variant-numeric: tabular-nums;
+		line-height: 14px;
+		vertical-align: middle;
+		color: #000;
+		text-align: right;
+		white-space: nowrap;
+		border-right: 1px dashed #000;
 
 		&._content {
 			padding: 0 5px;
@@ -81,23 +66,19 @@
 
 			.table__value-wrap {
 				display: flex;
-				justify-content: flex-end;
 				align-items: center;
+				justify-content: flex-end;
 			}
 		}
 
 		&._header {
 			position: relative;
-
-			padding: 18px 10px 18px 10px;
-
+			padding: 18px 10px;
 			font-size: 14px;
 			font-weight: 500;
-			color: #000000;
-
-			background: linear-gradient(180deg, #FCFDFF 0%, #EDEDED 100%);
-
+			color: #000;
 			user-select: none;
+			background: linear-gradient(180deg, #FCFDFF 0%, #EDEDED 100%);
 
 			.table__content {
 				justify-content: flex-start;
@@ -107,30 +88,29 @@
 
 	&__col_value-wrap {
 		display: flex;
-		justify-content: flex-end;
 		align-items: center;
+		justify-content: flex-end;
 	}
 
 	&__col_value:not(.table__col_header) {
 		font-size: 14px;
-		line-height: 1.25;
 		font-weight: 400;
-		color: #000000;
 		font-variant-numeric: lining-nums tabular-nums;
+		line-height: 1.25;
+		color: #000;
 	}
 
 	&__content {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
 		align-items: center;
-
+		justify-content: center;
 		height: 14px;
 
 		a {
 			display: flex;
-			align-items: center;
 			gap: 10px;
+			align-items: center;
 		}
 
 		.table__cell-value {
@@ -149,18 +129,15 @@
 	}
 
 	&__col_color {
-		color: #ffffff;
-
 		background: #ed806f;
+		color: #fff;
 	}
 
 	&__empty {
 		display: flex;
-		justify-content: center;
 		align-items: center;
-
+		justify-content: center;
 		width: 100%;
-
-		color: #000000;
+		color: #000;
 	}
 }

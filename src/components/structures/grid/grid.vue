@@ -122,7 +122,6 @@ const style = computed(() => {
 <style lang="scss" scoped>
 .grid {
 	width: 100%;
-
 	display: grid;
 
 	&._vertical {
@@ -133,15 +132,19 @@ const style = computed(() => {
 	&._gap-xs {
 		gap: 4px;
 	}
+
 	&._gap-s {
 		gap: 8px;
 	}
+
 	&._gap-m {
 		gap: 12px;
 	}
+
 	&._gap-l {
 		gap: 16px;
 	}
+
 	&._gap-xl {
 		gap: 20px;
 	}

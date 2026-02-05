@@ -66,10 +66,8 @@ const toggle = () => {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-
 		width: 16px;
 		height: 16px;
-
 		background: hsl(var(--accent));
 		border: 1px solid hsl(var(--primary));
 		border-radius: 5px;

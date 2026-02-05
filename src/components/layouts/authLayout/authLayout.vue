@@ -32,11 +32,9 @@ import { Header } from '@/components/sections'
     display: flex;
     flex-direction: column;
     align-items: center;
-
 	width: 100%;
 	min-height: 100vh;
     gap: 10px;
-
 	position: relative;
 
 	&__content {
@@ -46,13 +44,11 @@ import { Header } from '@/components/sections'
 
 	&__text {
 		position: absolute;
-
 		font-size: 15px;
 		font-weight: 500;
 		color: #F5FF00;
-
 		cursor: default;
-		filter: drop-shadow(0 0 15px rgba(245, 255, 0, 0.6));
+		filter: drop-shadow(0 0 15px rgb(245 255 0 / 60%));
 
 		&._work {
 			top: 20%;

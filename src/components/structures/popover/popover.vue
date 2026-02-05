@@ -89,20 +89,16 @@ const contentLeft = computed(() => {
 
 	&__trigger {
 		position: relative;
-
 		cursor: pointer;
 	}
 
 	&__content {
 		max-height: 360px;
-
 		position: absolute;
 		top: 56px;
 		z-index: 10;
-
 		display: flex;
 		flex-direction: column;
-
 		background-color: hsl(var(--background));
 		border: 1px solid hsl(var(--input));
 		border-radius: 12px;

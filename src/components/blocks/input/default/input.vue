@@ -127,16 +127,14 @@ const filled = computed(() => {
 	&__field-wrap {
 		width: 100%;
 		height: 48px;
-
 		background: hsl(var(--background));
 		border: 1px solid hsl(var(--input));
 		border-radius: 14px;
 		outline: none;
-
 		transition: all 0.2s;
 
 		&:focus-visible {
-			border-color: rgb(245 245 244 / 1);
+			border-color: rgb(245 245 244 / 100%);
 		}
 
 		&.plain {
@@ -162,10 +160,8 @@ const filled = computed(() => {
 		width: 100%;
 		height: 100%;
 		padding: 20px 40px 8px 12px;
-
 		font-size: 14px;
 		font-weight: 400;
-
 		background: transparent;
 		border: none;
 		border-radius: 14px;
@@ -178,7 +174,6 @@ const filled = computed(() => {
 
 	&__error {
 		padding-left: 12px;
-
 		font-size: 12px;
 		font-weight: 200;
 		color: hsl(var(--destructive));
@@ -189,7 +184,6 @@ const filled = computed(() => {
 		position: absolute;
 		top: 14px;
 		right: 12px;
-
 		cursor: pointer;
 	}
 }

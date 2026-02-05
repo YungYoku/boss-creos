@@ -150,16 +150,15 @@ const loadVideo = async (basket: IBasket) => {
 	display: flex;
 	flex-direction: column;
 	gap: 7px;
-
 	width: 860px;
 	max-width: 100%;
 
 	&__title {
 		font-size: 32px;
 		font-weight: 700;
-		color: #ffffff;
+		color: #fff;
 		text-align: center;
-		margin: 100px 0 20px 0;
+		margin: 100px 0 20px;
 	}
 
 	&__creative-image {
@@ -167,7 +166,6 @@ const loadVideo = async (basket: IBasket) => {
 		max-width: 57px;
 		max-height: 57px;
 		aspect-ratio: 1/1;
-
 		border-radius: 10px;
 	}
 
@@ -183,7 +181,6 @@ const loadVideo = async (basket: IBasket) => {
 		align-items: center;
 		justify-content: flex-start;
 		gap: 8px;
-
 		font-size: 14px;
 	}
 

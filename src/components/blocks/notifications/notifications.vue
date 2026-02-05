@@ -83,15 +83,12 @@ const onOpen = async () => {
 	}
 
 	&__signal {
-
 		position: absolute;
 		top: 0;
 		right: 0;
-
 		width: 8px;
 		height: 8px;
-
-		background-color: rgb(239 68 68 / 1);
+		background-color: rgb(239 68 68 / 100%);
 		border-radius: 50%;
 	}
 

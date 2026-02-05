@@ -56,7 +56,6 @@ const skeletonHeights = {
 	&.l,
 	&.m {
 		overflow: hidden;
-
 		line-height: 1;
 		white-space: nowrap;
 		text-overflow: ellipsis;

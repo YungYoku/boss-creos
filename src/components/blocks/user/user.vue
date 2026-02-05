@@ -61,7 +61,6 @@ withDefaults(defineProps<Props>(), {
 	&__info {
 		display: flex;
 		flex-direction: column;
-
 		line-height: 1.5;
 	}
 

@@ -71,18 +71,14 @@ const filled = computed(() => value.value.length > 0)
 
 	&__field {
 		width: 100%;
-		padding: 16px 12px 8px 12px;
-
+		padding: 16px 12px 8px;
 		font-size: 14px;
 		font-weight: 300;
-
 		background: hsl(var(--background));
 		border: 1px solid hsl(var(--input));
 		border-radius: 14px;
 		outline: none;
-
 		transition: all 0.2s, padding 0s;
-
 		resize: none;
 
 		&._empty {
@@ -90,7 +86,7 @@ const filled = computed(() => value.value.length > 0)
 		}
 
 		&:focus-visible {
-			border-color: rgb(245 245 244 / 1);
+			border-color: rgb(245 245 244 / 100%);
 		}
 
 		&:hover {
@@ -104,7 +100,6 @@ const filled = computed(() => value.value.length > 0)
 
 	&__error {
 		padding-left: 12px;
-
 		font-size: 12px;
 		font-weight: 200;
 		color: hsl(var(--destructive));
@@ -114,7 +109,6 @@ const filled = computed(() => value.value.length > 0)
 		position: absolute;
 		top: 14px;
 		right: 12px;
-
 		cursor: pointer;
 	}
 }

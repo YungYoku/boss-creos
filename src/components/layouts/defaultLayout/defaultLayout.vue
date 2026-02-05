@@ -19,7 +19,6 @@ import { Header } from '@/components/sections'
     flex-direction: column;
     align-items: center;
     gap: 10px;
-
 	min-height: 100vh;
 }
 </style>

@@ -12,9 +12,7 @@
 	display: flex;
 	align-items: center;
 	gap: 5px;
-
 	padding: 4px 10px;
-
 	font-weight: 600;
 	font-size: 13px;
 	border-radius: 16px;

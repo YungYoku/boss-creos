@@ -44,7 +44,6 @@ const search = defineModel<string>('search', {
 
 	.select__trigger {
 		height: 25px;
-
 		border-radius: 8px;
 		border: 1px solid #FFFFFF1A;
 		background: transparent;

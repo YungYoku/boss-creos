@@ -74,18 +74,18 @@ const getCurrentClass = (step: number) => {
 
 	&__steps {
 		width: 100%;
-
 		display: flex;
 		gap: 5px;
 
 		& span {
 			width: 100%;
-
 			background: transparent;
 			border-radius: 3px;
+
 			&.current_step {
 				background: transparent;
 			}
+
 			&.accept_step {
 				background: transparent;
 			}

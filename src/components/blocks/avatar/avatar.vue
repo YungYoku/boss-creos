@@ -109,13 +109,10 @@ const removeAvatar = () => loadImage('')
 <style lang="scss" scoped>
 .avatar {
 	position: relative;
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
 	overflow: hidden;
-
 	background-color: #27272B;
 	background-position: center;
 	background-size: cover;
@@ -192,18 +189,14 @@ const removeAvatar = () => loadImage('')
 			top: 0;
 			left: 0;
 			z-index: 1;
-
 			width: 100%;
 			height: 100%;
-
 			background: transparent;
-
 			transition: all 0.2s;
 		}
 
 		&:hover::before {
-			background: rgba(68, 68, 68, 0.8);
-
+			background: rgb(68 68 68 / 80%);
 			transition: all 0.2s;
 		}
 	}
@@ -211,10 +204,8 @@ const removeAvatar = () => loadImage('')
 	&__input {
 		position: absolute;
 		left: 0;
-
 		width: 100%;
 		height: 100%;
-
 		cursor: pointer;
 		opacity: 0;
 	}

@@ -103,14 +103,13 @@ void loadCreatives()
 .main {
 	display: flex;
 	flex-direction: column;
-	padding: 0 0 40px 0;
+	padding: 0 0 40px;
 	width: 100%;
 
 	&__prologue {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-
 		width: 100%;
 		min-height: 600px;
 		margin: 0 auto;
@@ -119,7 +118,6 @@ void loadCreatives()
 
 	&__prologue-info {
 		position: relative;
-
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -129,27 +127,24 @@ void loadCreatives()
 		position: absolute;
 		top: -60px;
 		right: -60px;
-
 		font-size: 15px;
 		font-weight: 700;
 		color: #F5FF00;
-
 		transform: rotate(20deg);
 		cursor: default;
-		filter: drop-shadow(0 0 15px rgba(245, 255, 0, 0.6));
+		filter: drop-shadow(0 0 15px rgb(245 255 0 / 60%));
 	}
 
 	&__prologue-text {
 		display: flex;
 		flex-direction: column;
-
 		margin-bottom: 30px;
-
 		font-weight: 700;
 
 		span:nth-child(1) {
 			font-size: 32px;
 		}
+
 		span:nth-child(2) {
 			font-size: 20px;
 		}
@@ -162,26 +157,21 @@ void loadCreatives()
 	}
 
 	&__prologue-made-creatives-wrap {
-		filter: drop-shadow(0 0 20px rgba(245, 255, 0, 0.6));
+		filter: drop-shadow(0 0 20px rgb(245 255 0 / 60%));
 	}
 
 	&__prologue-made-creatives {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-
 		width: 240px;
 		height: 44px;
-
 		font-size: 12px;
 		font-weight: 700;
-		color:#000000;
+		color:#000;
 		text-transform: uppercase;
-
 		background-color: #F5FF00;
-
 		cursor: default;
-
 		clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
 	}
 
@@ -189,40 +179,33 @@ void loadCreatives()
 		display: flex;
 		justify-content: center;
 		align-items: center;
-
 		width: 180px;
 		height: 100px;
-
 		font-size: 12px;
 		font-weight: 700;
-
 		background-image: url("@/assets/img/main__order-from-scratch.svg");
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: contain;
-
 		cursor: default;
-		filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
+		filter: drop-shadow(0 0 20px rgb(255 255 255 / 60%));
 	}
 
 	&__prologue-fb-approve {
 		position: absolute;
 		right: 25%;
 		bottom: -70px;
-
 		font-size: 12px;
 		font-weight: 700;
 		color: #F5FF00;
 		text-transform: uppercase;
-
 		transform: rotate(-4deg);
 		cursor: default;
-		filter: drop-shadow(0 0 15px rgba(245, 255, 0, 0.6));
+		filter: drop-shadow(0 0 15px rgb(245 255 0 / 60%));
 	}
 
 	&__prologue-creatives {
 		position: relative;
-
 		width: 50%;
 	}
 
@@ -230,6 +213,7 @@ void loadCreatives()
 		&:nth-child(1) {
 			margin: 0 0 90px auto;
 		}
+
 		&:nth-child(2) {
 			position: absolute;
 			top: 90px;
@@ -243,12 +227,10 @@ void loadCreatives()
 		flex-wrap: wrap;
 		justify-content: flex-start;
 		align-items: center;
-
 		width: 100%;
 		max-width: 100%;
 		gap: 20px;
-
-		margin: 120px auto 40px auto;
+		margin: 120px auto 40px;
 
 		@media (max-width: 1024px) {
 			gap: 15px;

@@ -259,7 +259,7 @@ const modalShowing = ref(false)
 	max-width: 630px;
 
 	&__title {
-		margin: 0 auto 20px auto;
+		margin: 0 auto 20px;
 	}
 
 	&__submit {

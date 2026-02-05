@@ -59,34 +59,29 @@ const props = defineProps({
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
 	height: 39px;
 	padding: 12px;
-
 	font-size: 14px;
 	font-weight: 500;
-
 	border: none;
 	border-radius: 9px;
 	outline: none;
-
 	transition: all 0.2s;
 
 	&.default {
 		color: hsl(var(--primary-foreground));
-
 		background-color: hsl(var(--primary));
 
 		&:hover {
-			background-color: hsl(var(--primary) / 0.9);
+			background-color: hsl(var(--primary) / 90%);
 		}
 	}
 
 	&.positive {
-		background-color: rgb(22 163 74 / 1);
+		background-color: rgb(22 163 74 / 100%);
 
 		&:hover {
-			background-color: rgb(22 163 74 / 0.9);
+			background-color: rgb(22 163 74 / 90%);
 		}
 	}
 
@@ -94,13 +89,13 @@ const props = defineProps({
 		background-color: hsl(var(--destructive));
 
 		&:hover {
-			background-color: hsl(var(--destructive) / 0.9);
+			background-color: hsl(var(--destructive) / 90%);
 		}
 	}
 
 	&.outline {
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.08) 100%),
-		radial-gradient(50% 100% at 50% 0%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+		background: linear-gradient(180deg, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 8%) 100%),
+		radial-gradient(50% 100% at 50% 0%, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 0%) 100%);
 
 
 		&:hover {

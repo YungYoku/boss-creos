@@ -47,35 +47,29 @@ const close = () => {
 	top: 0;
 	left: 0;
 	z-index: 2;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 	width: 100%;
 	height: 100vh;
-
-	background-color: rgba(26, 26, 26, 0.7);
+	background-color: rgb(26 26 26 / 70%);
 
     &__form {
 		max-width: 100%;
 		min-height: 70px;
 		max-height: 70vh;
-
 		position: relative;
-
         display: flex;
         justify-content: center;
         align-items: center;
-
-		padding: 40px 10px 10px 10px;
-
+		padding: 40px 10px 10px;
 		border: 1px solid hsl(var(--border));
 		background-color: hsl(var(--card));
 		border-radius: 14px;
 
-		--tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+		--tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px -1px rgb(0 0 0 / 10%);
+
 		box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
     }
 

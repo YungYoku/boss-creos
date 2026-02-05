@@ -27,9 +27,7 @@ defineProps({
 <style scoped lang="scss">
 .card {
 	position: relative;
-
 	padding: 16px 8px;
-
 	background: #0F0F10;
 	border: 1px solid #1D1D20;
 	border-radius: 16px;
@@ -42,7 +40,6 @@ defineProps({
 		position: absolute;
 		top: -35px;
 		left: calc(50% - 47px);
-
 		width: 95px;
 		height: 70px;
 	}
@@ -50,12 +47,10 @@ defineProps({
 	&__fade {
 		position: relative;
 		z-index: 1;
-
 		width: 100%;
 		height: 80px;
-		margin: -80px 0 0 0;
-
-		background: linear-gradient(to top, rgba(15, 15, 16, 1) 5px, transparent);
+		margin: -80px 0 0;
+		background: linear-gradient(to top, rgb(15 15 16 / 100%) 5px, transparent);
 		pointer-events: none;
 	}
 }

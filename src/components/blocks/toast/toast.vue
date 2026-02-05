@@ -34,15 +34,12 @@ const close = () => {
 	position: fixed;
 	right: 12px;
 	bottom: 12px;
-
 	display: flex;
 	align-items: center;
-
 	max-width: 340px;
 	padding: 12px 12px 12px 16px;
-
 	background-color: hsl(var(--background));
-	border: 1px solid rgb(113 113 122 / 1);
+	border: 1px solid rgb(113 113 122 / 100%);
 	border-radius: 12px;
 	gap: 8px;
 

@@ -101,7 +101,6 @@ const isAuthPage = computed(() => route.name === 'Login' || route.name === 'Regi
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
-
 		gap: 10px;
 	}
 	
@@ -141,9 +140,7 @@ const isAuthPage = computed(() => route.name === 'Login' || route.name === 'Regi
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
-
 		gap: 10px;
-
 		margin: 0 0 0 auto;
 	}
 

@@ -188,7 +188,6 @@ const isFavorite = computed(() => {
 	&__video {
 		width: 100%;
 		max-width: 100%;
-
 		border-radius: 10px;
 		object-fit: cover;
 		aspect-ratio: 1 / 1;
@@ -197,12 +196,10 @@ const isFavorite = computed(() => {
 	&__user {
 		position: relative;
 		z-index: 2;
-
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-
-		margin: -40px 10px 15px 10px;
+		margin: -40px 10px 15px;
 	}
 
 	&__select-geo {
@@ -213,12 +210,9 @@ const isFavorite = computed(() => {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-
 		max-width: 220px;
 		margin: 0 auto;
-
 		color: #fff;
-
 		background: #303036;
 		border: 1px solid #27272B;
 	}
@@ -235,10 +229,8 @@ const isFavorite = computed(() => {
 
 	&__action {
 		width: 100%;
-
 		font-size: 16px;
 		text-align: center;
-
 		background: #525252;
 	}
 }

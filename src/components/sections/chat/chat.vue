@@ -279,7 +279,6 @@ const sendRating = async (value: { stars: number, review: string } = { stars: 1,
 	&__messages {
 		display: flex;
 		flex-direction: column;
-
 		height: 40vh;
 		min-height: 300px;
 		max-height: 800px;

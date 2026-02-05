@@ -42,7 +42,6 @@ withDefaults(defineProps<Props>(), {
 	&__image {
 		width: 100%;
 		max-width: 100%;
-
 		border-radius: 10px;
 		object-fit: cover;
 		aspect-ratio: 1 / 1;

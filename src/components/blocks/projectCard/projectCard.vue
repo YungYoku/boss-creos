@@ -209,15 +209,12 @@ const deadline = computed(() => new Date(props.project.deadline))
 <style scoped lang="scss">
 .project {
 	position: relative;
-
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-
 	max-width: 100%;
 	height: 240px;
 	overflow: hidden;
-
 	background-color: hsl(var(--primary-foreground));
 	gap: 10px;
 
@@ -225,7 +222,6 @@ const deadline = computed(() => new Date(props.project.deadline))
 		position: absolute;
 		top: 10px;
 		right: 10px;
-
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
@@ -236,7 +232,6 @@ const deadline = computed(() => new Date(props.project.deadline))
 		justify-content: center;
 		align-items: center;
 		gap: 5px;
-
 		cursor: pointer;
 	}
 
@@ -256,7 +251,6 @@ const deadline = computed(() => new Date(props.project.deadline))
 	&__description {
 		max-height: 64px;
 		overflow: hidden;
-
 		text-overflow: ellipsis;
 	}
 
@@ -264,7 +258,6 @@ const deadline = computed(() => new Date(props.project.deadline))
 		display: flex;
 		flex-wrap: wrap;
 		gap: 8px;
-
 		padding-right: 48px;
 	}
 
@@ -272,9 +265,8 @@ const deadline = computed(() => new Date(props.project.deadline))
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-
 		width: 100%;
-		margin: auto 0 0 0;
+		margin: auto 0 0;
 	}
 }
 </style>

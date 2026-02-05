@@ -96,11 +96,9 @@ const updateFile = async (file: File) => {
 <style lang="scss" scoped>
 .input-file {
 	position: relative;
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
 	cursor: pointer;
 
 	&__button {
@@ -113,13 +111,10 @@ const updateFile = async (file: File) => {
 		width: 100%;
 
 		&._compact {
-
 			position: absolute;
 			top: 0;
 			left: 0;
-
 			height: 100%;
-
 			opacity: 0;
 		}
 	}

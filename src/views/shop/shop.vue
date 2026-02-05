@@ -168,11 +168,9 @@ void loadData()
 		flex-wrap: wrap;
 		justify-content: flex-start;
 		align-items: center;
-
 		width: 100%;
 		max-width: 100%;
 		gap: 20px;
-
 		margin: 0 auto;
 
 		@media (max-width: 1024px) {

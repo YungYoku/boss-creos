@@ -138,12 +138,10 @@ watch(() => route.params.id, loadUser, { immediate: true })
 		flex-wrap: wrap;
 		justify-content: flex-start;
 		align-items: center;
-
 		width: 100%;
 		max-width: 100%;
 		gap: 20px;
-
-		margin: 120px auto 40px auto;
+		margin: 120px auto 40px;
 
 		@media (max-width: 1024px) {
 			gap: 15px;

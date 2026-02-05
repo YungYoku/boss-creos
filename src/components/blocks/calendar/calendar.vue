@@ -140,7 +140,6 @@ const isDayActive = (day: number) => {
 .calendar {
 	display: flex;
 	flex-direction: column;
-
 	max-width: 244px;
 	padding: 10px;
 	gap: 10px;
@@ -150,13 +149,10 @@ const isDayActive = (day: number) => {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-
 		width: 32px;
 		height: 32px;
-
 		background: #333;
 		border-radius: 5px;
-
 		cursor: pointer;
 	}
 
@@ -164,9 +160,7 @@ const isDayActive = (day: number) => {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-
 		width: 100%;
-
 		font-size: 14px;
 		gap: 10px;
 	}
@@ -179,10 +173,8 @@ const isDayActive = (day: number) => {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-
 		width: 32px;
 		height: 32px;
-
 		font-size: 14px;
 	}
 
@@ -195,14 +187,10 @@ const isDayActive = (day: number) => {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-
 		width: 32px;
 		height: 32px;
-
 		font-size: 14px;
-
 		border-radius: 5px;
-
 		cursor: pointer;
 
 		&:hover {

@@ -59,17 +59,14 @@ const tabs = [
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
-
 		padding: 10px;
-
-		background: #FFFFFF;
+		background: #FFF;
 		border-radius: 8px;
 		overflow: hidden;
 	}
 
 	&__tab {
 		padding: 6px 12px;
-
 		background: #2264E5;
 		border-radius: 6px;
 		cursor: pointer;
