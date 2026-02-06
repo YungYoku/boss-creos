@@ -19,12 +19,8 @@ export default defineConfig(({ mode }) => {
 					watchPath: './src',
 					useFlatConfig: true
 				},
-				vueTsc: {
-					buildMode: isProduction
-				},
-				typescript: {
-					buildMode: isProduction
-				},
+				vueTsc: true,
+				typescript: true,
 				// stylelint: {
 				// 	lintCommand: 'stylelint ./src/**/*.{css,scss,vue}',
 				// 	watchPath: './src',
