@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
+import { fileURLToPath, URL } from 'url'
 import vue from '@vitejs/plugin-vue'
-import path from 'path'
 import checker from 'vite-plugin-checker'
 
 export default defineConfig(({ mode }) => {
@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => {
 			vue(),
 			checker({
 				eslint: {
-					lintCommand: 'eslint "./src/**/*.{ts,vue, js}"',
+					lintCommand: 'eslint "./src/**/*.{ts,vue,js}"',
 					watchPath: './src',
 					useFlatConfig: true
 				},
@@ -30,7 +30,7 @@ export default defineConfig(({ mode }) => {
 
 		resolve: {
 			alias: {
-				'@': path.resolve(__dirname, './src')
+				'@': fileURLToPath(new URL('./src', import.meta.url))
 			}
 		}
 	}

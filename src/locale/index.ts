@@ -1,13 +1,13 @@
 import type { App, Ref } from 'vue'
 import { ref } from 'vue'
 
-import en from './en/en.json'
-import enTable from './en/table.json'
+import * as en from './en/en.json'
+import * as enTable from './en/table.json'
 
-import ru from './ru/ru.json'
-import ruTable from './ru/table.json'
+import * as ru from './ru/ru.json'
+import * as ruTable from './ru/table.json'
 
-export const locales = {
+const locales = {
 	ru: {
 		...ru,
 		...ruTable
@@ -16,7 +16,7 @@ export const locales = {
 		...en,
 		...enTable
 	},
-}
+} as const
 
 type DefaultLang = 'en' | 'ru'
 
@@ -31,12 +31,14 @@ class Localize<Lang extends string = DefaultLang> {
 		ru: {}
 	} as Locales<Lang | DefaultLang>
 
-	install(app: App, { locales }: { locales: Locales<Lang> }) {
+	constructor(locales: Locales<Lang>) {
 		const keys = Object.keys(locales) as Lang[]
 		keys.forEach(key => {
 			this.locales[key] = { ...this.locales[key], ...locales[key] }
 		})
+	}
 
+	install(app: App) {
 		app.config.globalProperties.$t = (key: string) => this.t(key)
 		app.config.globalProperties.$locale = (locale: Lang) => {
 			if (locale) {
@@ -81,4 +83,4 @@ class Localize<Lang extends string = DefaultLang> {
 	}
 }
 
-export default new Localize()
+export default new Localize(locales)
