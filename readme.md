@@ -10,7 +10,7 @@ git clone git@github.com:YungYoku/college-freelance.git
 ## 2. Install dependencies
 
 ``` powershell
-bun install
+bun i
 ```
 
 ## 3. Start Develop
