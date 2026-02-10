@@ -61,9 +61,9 @@ const printedValue = computed(() => {
 })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .date-picker {
-	&__button {
+	.date-picker__button {
 		justify-content: flex-start;
 		width: 100%;
 		padding-top: 20px;

@@ -136,7 +136,7 @@ const isDayActive = (day: number) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .calendar {
 	display: flex;
 	flex-direction: column;
@@ -144,8 +144,8 @@ const isDayActive = (day: number) => {
 	padding: 10px;
 	gap: 10px;
 
-	&__next,
-	&__back {
+	.calendar__next,
+	.calendar__back {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -156,7 +156,7 @@ const isDayActive = (day: number) => {
 		cursor: pointer;
 	}
 
-	&__header {
+	.calendar__header {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -165,11 +165,11 @@ const isDayActive = (day: number) => {
 		gap: 10px;
 	}
 
-	&__week-days {
+	.calendar__week-days {
 		display: flex;
 	}
 
-	&__week-day {
+	.calendar__week-day {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -178,12 +178,12 @@ const isDayActive = (day: number) => {
 		font-size: 14px;
 	}
 
-	&__content {
+	.calendar__content {
 		display: flex;
 		flex-wrap: wrap;
 	}
 
-	&__month-day {
+	.calendar__month-day {
 		display: flex;
 		justify-content: center;
 		align-items: center;

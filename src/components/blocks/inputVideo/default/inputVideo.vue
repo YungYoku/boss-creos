@@ -90,7 +90,7 @@ const updateFile = async (file: File) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .input-video {
 	position: relative;
 	display: flex;
@@ -98,11 +98,11 @@ const updateFile = async (file: File) => {
 	align-items: center;
 	cursor: pointer;
 
-	&__button {
+	.input-video__button {
 		gap: 10px;
 	}
 
-	&__field-wrap {
+	.input-video__field-wrap {
 		width: 100%;
 		position: relative;
 
@@ -115,7 +115,7 @@ const updateFile = async (file: File) => {
 		}
 	}
 
-	&__icon {
+	.input-video__icon {
 		position: absolute;
 		right: 15px;
 		top: 15px;

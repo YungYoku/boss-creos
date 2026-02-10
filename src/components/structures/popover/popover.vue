@@ -83,16 +83,16 @@ const contentLeft = computed(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .popover {
 	position: relative;
 
-	&__trigger {
+	.popover__trigger {
 		position: relative;
 		cursor: pointer;
 	}
 
-	&__content {
+	.popover__content {
 		max-height: 360px;
 		position: absolute;
 		top: 56px;

@@ -48,19 +48,19 @@ const isActive = computed(() => {
 })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .switcher {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	cursor: pointer;
 
-	&__label {
+	.switcher__label {
 		font-weight: 300;
 		text-align: left;
 	}
 
-	&__content {
+	.switcher__content {
 		width: 80px;
 		height: 25px;
 		padding: 4px 8px;
@@ -73,7 +73,7 @@ const isActive = computed(() => {
 		}
 	}
 
-	&__content-icon {
+	.switcher__content-icon {
 		width: 15px;
 		height: 15px;
 		margin: 0 calc(100% - 24px) 0 0;

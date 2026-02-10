@@ -24,7 +24,7 @@ defineProps({
 })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .card {
 	position: relative;
 	padding: 16px 8px;
@@ -36,7 +36,7 @@ defineProps({
 		max-width: 300px;
 	}
 
-	&__badge {
+	.card__badge {
 		position: absolute;
 		top: -35px;
 		left: calc(50% - 47px);
@@ -44,7 +44,7 @@ defineProps({
 		height: 70px;
 	}
 
-	&__fade {
+	.card__fade {
 		position: relative;
 		z-index: 1;
 		width: 100%;

@@ -41,7 +41,7 @@ const close = () => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .modal {
 	position: fixed;
 	top: 0;
@@ -55,7 +55,7 @@ const close = () => {
 	height: 100vh;
 	background-color: rgb(26 26 26 / 70%);
 
-    &__form {
+    .modal__form {
 		max-width: 100%;
 		min-height: 70px;
 		max-height: 70vh;
@@ -73,7 +73,7 @@ const close = () => {
 		box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
     }
 
-	&__close {
+	.modal__close {
 		position: absolute;
 		top: 10px;
 		right: 10px;

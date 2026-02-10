@@ -49,14 +49,14 @@ const loadData = async () => {
 void loadData()
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .designers {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: 56px;
 
-	&__content {
+	.designers__content {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-start;
@@ -75,7 +75,7 @@ void loadData()
 		}
 	}
 
-	&__item {
+	.designers__item {
 		max-width: calc((100% - 40px) / 3);
 		width: 100%;
 

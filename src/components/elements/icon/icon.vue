@@ -1,7 +1,7 @@
 <template>
 	<Image
 		class="icon"
-		:class="[`icon_${size}`, currentColor]"
+		:class="[`_${size}`, currentColor]"
 		:style="{
 			cursor: pointer ? 'pointer' : 'initial',
 		}"
@@ -49,37 +49,37 @@ const src = computed(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .icon {
 	&.light {
 		filter: invert(1);
 	}
 
-    &_xs {
+    &._xs {
 		width: 15px;
         max-width: 15px;
         max-height: 15px;
     }
 
-    &_s {
+    &._s {
 		width: 20px;
         max-width: 20px;
         max-height: 20px;
     }
 
-    &_m {
+    &._m {
 		width: 30px;
         max-width: 30px;
         max-height: 30px;
     }
 
-	&_l {
+	&._l {
 		width: 40px;
 		max-width: 40px;
 		max-height: 40px;
 	}
 
-	&_xl {
+	&._xl {
 		width: 50px;
 		max-width: 50px;
 		max-height: 50px;

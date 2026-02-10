@@ -85,15 +85,15 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .dropdown {
 	position: relative;
 
-	&__trigger {
+	.dropdown__trigger {
 		cursor: pointer;
 	}
 
-	&__content {
+	.dropdown__content {
 		width: 200px;
 		max-height: 500px;
 		position: absolute;
@@ -134,8 +134,8 @@ onUnmounted(() => {
 		}
 	}
 
-	&__empty,
-	&__item {
+	.dropdown__empty,
+	.dropdown__item {
 		width: 100%;
 		display: block;
 		padding: 8px;
@@ -143,7 +143,7 @@ onUnmounted(() => {
 		border-radius: 8px;
 	}
 
-	&__item {
+	.dropdown__item {
 		cursor: pointer;
 
 		&:hover {
@@ -151,7 +151,7 @@ onUnmounted(() => {
 		}
 	}
 
-	&__empty {
+	.dropdown__empty {
 		cursor: default;
 	}
 }

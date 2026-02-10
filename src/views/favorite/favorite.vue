@@ -78,9 +78,9 @@ const loadFavorite = async () => {
 watch(() => auth.user.id, loadFavorite, { immediate: true })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .favorite {
-	&__title {
+	.favorite__title {
 		font-size: 32px;
 		font-weight: 700;
 		color: #fff;
@@ -88,7 +88,7 @@ watch(() => auth.user.id, loadFavorite, { immediate: true })
 		margin: 0 0 20px;
 	}
 
-	&__creatives {
+	.favorite__creatives {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-start;

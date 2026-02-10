@@ -13,7 +13,7 @@ import { Page } from '@/components/structures'
 import { Header } from '@/components/sections'
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .default-layout {
     display: flex;
     flex-direction: column;

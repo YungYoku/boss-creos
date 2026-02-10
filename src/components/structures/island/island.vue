@@ -4,7 +4,7 @@
 	</div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .island {
 	padding: 12px;
 	background: linear-gradient(180deg, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 8%) 100%),

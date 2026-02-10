@@ -5,12 +5,12 @@
 	>
 		<div class="logo__text">
 			<span class="logo__name">Boss Creos</span>
-			<span class="logo__descriprion">Работаем 24/7</span>
+			<span class="logo__description">Работаем 24/7</span>
 		</div>
 	</router-link>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .logo {
 	display: flex;
 	flex-direction: column;
@@ -18,20 +18,20 @@
 	max-width: 182px;
 	line-height: 1;
 
-	&__text {
+	.logo__text {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-end;
 	}
 
-	&__name {
+	.logo__name {
 		font-size: 32px;
 		font-weight: 700;
 		color: #fff;
 		filter: drop-shadow(0 0 15px rgb(255 255 255 / 30%));
 	}
 
-	&__descriprion {
+	.logo__description {
 		margin: -7px 0 0;
 		font-size: 15px;
 		font-weight: 700;

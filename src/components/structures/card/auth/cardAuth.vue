@@ -46,21 +46,21 @@ defineProps({
 })
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .card-auth {
 	max-width: 100%;
 
-	&__title {
+	.card-auth__title {
 		padding: 16px 20px 4px;
 		font-size: 32px;
 		font-weight: 700;
 	}
 
-	&__content {
+	.card-auth__content {
 		padding: 20px;
 	}
 
-	&__footer {
+	.card-auth__footer {
 		padding: 0 20px 20px;
 	}
 }

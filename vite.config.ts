@@ -21,10 +21,10 @@ export default defineConfig(({ mode }) => {
 				},
 				vueTsc: true,
 				typescript: true,
-				// stylelint: {
-				// 	lintCommand: 'stylelint ./src/**/*.{css,scss,vue}',
-				// 	watchPath: './src',
-				// }
+				stylelint: {
+					lintCommand: 'stylelint ./src/**/*.{css,vue}',
+					watchPath: './src',
+				}
 			})
 		],
 

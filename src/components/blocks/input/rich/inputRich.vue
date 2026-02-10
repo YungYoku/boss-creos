@@ -41,7 +41,7 @@ const action = () => {
 }
 </script>
 
-<style lang="scss">
+<style>
 .input-rich {
 	.input {
 		width: 120px;

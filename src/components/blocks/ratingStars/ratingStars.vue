@@ -21,7 +21,7 @@ defineProps({
 })
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .rating-stars {
 	display: flex;
 	flex-wrap: wrap;

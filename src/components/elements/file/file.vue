@@ -34,7 +34,7 @@ const props = defineProps({
 const file = computed(() => `${import.meta.env.VITE_API}/files/${props.src}`)
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .file {
 	display: flex;
 	align-items: center;

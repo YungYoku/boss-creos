@@ -117,43 +117,43 @@ const loadProject = async () => {
 void loadProject()
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .creative {
 	padding: 60px 0 0;
 
-	&__name {
+	.creative__name {
 		font-size: 40px;
 		line-height: 1.5;
 		font-weight: 600;
 	}
 
-	&__info {
+	.creative__info {
 		display: flex;
 		flex-direction: column;
 		width: 100%;
 		gap: 10px;
 	}
 
-	&__info-item {
+	.creative__info-item {
 		font-size: 16px;
 		line-height: 1;
 		font-weight: 400;
 	}
 
-	&__separator {
+	.creative__separator {
 		width: 60%;
 		height: 1px;
 		margin: 20px 0;
 		background: linear-gradient(to right, #fff 20%, rgb(255 255 255 / 0%));
 	}
 
-	&__description-title {
+	.creative__description-title {
 		font-size: 20px;
 		line-height: 1;
 		font-weight: 700;
 	}
 
-	&__description {
+	.creative__description {
 		font-size: 20px;
 		line-height: 1;
 		font-weight: 600;

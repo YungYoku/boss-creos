@@ -39,22 +39,19 @@ withDefaults(defineProps<Props>(), {
 })
 </script>
 
-<style lang="scss">
+<style>
 .field-wrapper-rich {
-	&__content {
+	.field-wrapper-rich__content {
 		padding: 7px 20px 7px 10px;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		gap: 10px;
-		background: linear-gradient(180deg, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 8%) 100%),
-		radial-gradient(50% 100% at 50% 0%, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 0%) 100%);
-		border-image-source: linear-gradient(135.28deg, rgb(255 255 255 / 30%) -128.53%, rgb(255 255 255 / 0%) 75.12%),
-		linear-gradient(174.85deg, rgb(255 255 255 / 10%) 0.61%, rgb(255 255 255 / 0%) 18.03%);
+		background: linear-gradient(180deg, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 8%) 100%), radial-gradient(50% 100% at 50% 0%, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 0%) 100%);
 		border-radius: 9px;
 	}
 
-	&__label {
+	.field-wrapper-rich__label {
 		flex-shrink: 0;
 		display: flex;
 		align-items: center;
@@ -68,7 +65,7 @@ withDefaults(defineProps<Props>(), {
 		white-space: nowrap;
 	}
 
-	&__error {
+	.field-wrapper-rich__error {
 		padding-left: 12px;
 		font-size: 12px;
 		font-weight: 200;

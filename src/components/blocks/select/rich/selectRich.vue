@@ -35,7 +35,7 @@ const search = defineModel<string>('search', {
 })
 </script>
 
-<style lang="scss">
+<style>
 .select-rich {
 	.select {
 		width: 120px;

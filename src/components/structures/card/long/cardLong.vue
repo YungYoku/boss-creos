@@ -23,10 +23,7 @@
 	</div>
 </template>
 
-<script setup lang="ts">
-</script>
-
-<style lang="scss" scoped>
+<style scoped>
 .card-long {
 	width: 100%;
 	display: flex;
@@ -38,17 +35,17 @@
 	border-image-source: linear-gradient(135.28deg, rgb(255 255 255 / 30%) -128.53%, rgb(255 255 255 / 0%) 75.12%);
 	gap: 7px;
 
-	&__icon {
+	.card-long__icon {
 		display: flex;
 	}
 
-	&__content {
+	.card-long__content {
 		display: flex;
 		flex-direction: column;
 		padding: 5px;
 	}
 
-	&__action {
+	.card-long__action {
 		display: flex;
 		align-items: center;
 		justify-content: center;

@@ -54,7 +54,7 @@ const props = defineProps({
 })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .button {
 	display: flex;
 	justify-content: center;

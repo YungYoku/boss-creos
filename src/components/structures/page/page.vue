@@ -4,7 +4,7 @@
 	</div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .page {
 	position: relative;
     display: flex;

@@ -40,7 +40,17 @@ const height = computed(() => {
 })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
+@keyframes down {
+	from {
+		transform: translateY(v-bind(height));
+	}
+
+	to {
+		transform: translateY(0);
+	}
+}
+
 .auth-slots {
 	display: flex;
 	height: 100vh;
@@ -49,7 +59,7 @@ const height = computed(() => {
 	gap: 30px;
 	margin: -94px 0 0;
 
-	&__column {
+	.auth-slots__column {
 		height: calc(100% / 6 * 7);
 		display: flex;
 		flex-direction: column;
@@ -61,19 +71,9 @@ const height = computed(() => {
 		}
 
 		animation: down 3s linear infinite;
-
-		@keyframes down {
-			from {
-				transform: translateY(v-bind(height));
-			}
-
-			to {
-				transform: translateY(0);
-			}
-		}
 	}
 
-	&__slot {
+	.auth-slots__slot {
 		max-width: 100%;
 		min-height: calc((100% - 150px) / 7);
 		max-height: calc((100% - 150px) / 7);

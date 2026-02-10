@@ -53,9 +53,9 @@ const tabs = [
 }))
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .moderation {
-	&__tabs {
+	.moderation__tabs {
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
@@ -65,7 +65,7 @@ const tabs = [
 		overflow: hidden;
 	}
 
-	&__tab {
+	.moderation__tab {
 		padding: 6px 12px;
 		background: #2264E5;
 		border-radius: 6px;
@@ -80,7 +80,7 @@ const tabs = [
 		}
 	}
 
-	&__empty {
+	.moderation__empty {
 		text-align: center;
 	}
 }

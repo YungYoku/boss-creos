@@ -36,7 +36,7 @@ const onClick = async (cell: ICell) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .cell {
 	&.cell__actions {
 		display: flex;

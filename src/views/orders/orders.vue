@@ -145,7 +145,7 @@ const loadVideo = async (basket: IBasket) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .orders {
 	display: flex;
 	flex-direction: column;
@@ -153,7 +153,7 @@ const loadVideo = async (basket: IBasket) => {
 	width: 860px;
 	max-width: 100%;
 
-	&__title {
+	.orders__title {
 		font-size: 32px;
 		font-weight: 700;
 		color: #fff;
@@ -161,7 +161,7 @@ const loadVideo = async (basket: IBasket) => {
 		margin: 100px 0 20px;
 	}
 
-	&__creative-image {
+	.orders__creative-image {
 		min-width: 57px;
 		max-width: 57px;
 		max-height: 57px;
@@ -169,14 +169,14 @@ const loadVideo = async (basket: IBasket) => {
 		border-radius: 10px;
 	}
 
-	&__creative-content {
+	.orders__creative-content {
 		height: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
 	}
 
-	&__creative-name {
+	.orders__creative-name {
 		display: flex;
 		align-items: center;
 		justify-content: flex-start;
@@ -184,7 +184,7 @@ const loadVideo = async (basket: IBasket) => {
 		font-size: 14px;
 	}
 
-	&__status {
+	.orders__status {
 		width: 5px;
 		height: 5px;
 		border-radius: 50%;
@@ -198,12 +198,12 @@ const loadVideo = async (basket: IBasket) => {
 		}
 	}
 
-	&__creative-geo {
+	.orders__creative-geo {
 		font-size: 10px;
 		color: #AFAFB7;
 	}
 
-	&__creative-geo-item {
+	.orders__creative-geo-item {
 		text-transform: uppercase;
 	}
 }

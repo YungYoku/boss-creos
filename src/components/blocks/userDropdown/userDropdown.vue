@@ -125,9 +125,19 @@ const items = computed(() => [
 ])
 </script>
 
-<style scoped lang="scss">
+<style scoped>
+@keyframes rotate-glow {
+	0% {
+		transform: rotate(-90deg);
+	}
+
+	100% {
+		transform: rotate(270deg);
+	}
+}
+
 .user-dropdown {
-	&__account {
+	.user-dropdown__account {
 		position: relative;
 		z-index: 1;
 		display: flex;
@@ -162,28 +172,6 @@ const items = computed(() => [
 			opacity: 0.8;
 			animation: rotate-glow 2s linear infinite;
 			pointer-events: none;
-		}
-
-		@keyframes rotate-glow {
-			0% {
-				transform: rotate(-90deg);
-			}
-
-			25% {
-				transform: rotate(0deg);
-			}
-
-			50% {
-				transform: rotate(90deg);
-			}
-
-			75% {
-				transform: rotate(180deg);
-			}
-
-			100% {
-				transform: rotate(270deg);
-			}
 		}
 
 		&::after {

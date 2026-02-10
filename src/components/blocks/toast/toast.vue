@@ -29,7 +29,7 @@ const close = () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .toast {
 	position: fixed;
 	right: 12px;

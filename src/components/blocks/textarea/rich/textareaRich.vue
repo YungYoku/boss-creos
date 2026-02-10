@@ -27,7 +27,7 @@ const value = defineModel<string>({
 })
 </script>
 
-<style lang="scss">
+<style>
 .textarea-rich {
 	.field-wrapper-rich__content {
 		align-items: flex-start;

@@ -314,15 +314,15 @@ const update = async () => {
 const modalShowing = ref(false)
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .edit-creative {
 	max-width: 585px;
 
-	&__title {
+	.edit-creative__title {
 		margin: 0 auto 20px;
 	}
 
-	&__submit {
+	.edit-creative__submit {
 		margin: 0 auto;
 	}
 }

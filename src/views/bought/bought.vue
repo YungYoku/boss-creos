@@ -158,7 +158,7 @@ const downloadVideo = (basket: IBasket) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .bought {
 	display: flex;
 	flex-direction: column;
@@ -166,7 +166,7 @@ const downloadVideo = (basket: IBasket) => {
 	width: 860px;
 	max-width: 100%;
 
-	&__title {
+	.bought__title {
 		font-size: 32px;
 		font-weight: 700;
 		color: #fff;
@@ -174,7 +174,7 @@ const downloadVideo = (basket: IBasket) => {
 		margin: 100px 0 20px;
 	}
 
-	&__action-panel {
+	.bought__action-panel {
 		width: 100%;
 		display: flex;
 		align-items: center;
@@ -183,13 +183,13 @@ const downloadVideo = (basket: IBasket) => {
 		margin-bottom: 20px;
 	}
 
-	&__filters {
+	.bought__filters {
 		display: flex;
 		align-items: center;
 		gap: 15px;
 	}
 
-	&__filter {
+	.bought__filter {
 		transition: all 0.2s;
 
 		&._passive {
@@ -198,7 +198,7 @@ const downloadVideo = (basket: IBasket) => {
 		}
 	}
 
-	&__filter-status {
+	.bought__filter-status {
 		width: 5px;
 		height: 5px;
 		border-radius: 50%;
@@ -212,7 +212,7 @@ const downloadVideo = (basket: IBasket) => {
 		}
 	}
 
-	&__creative-image {
+	.bought__creative-image {
 		min-width: 57px;
 		max-width: 57px;
 		max-height: 57px;
@@ -220,14 +220,14 @@ const downloadVideo = (basket: IBasket) => {
 		border-radius: 10px;
 	}
 
-	&__creative-content {
+	.bought__creative-content {
 		height: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
 	}
 
-	&__creative-name {
+	.bought__creative-name {
 		display: flex;
 		align-items: center;
 		justify-content: flex-start;
@@ -235,7 +235,7 @@ const downloadVideo = (basket: IBasket) => {
 		font-size: 14px;
 	}
 
-	&__status {
+	.bought__status {
 		width: 5px;
 		height: 5px;
 		border-radius: 50%;
@@ -249,12 +249,12 @@ const downloadVideo = (basket: IBasket) => {
 		}
 	}
 
-	&__creative-geo {
+	.bought__creative-geo {
 		font-size: 10px;
 		color: #AFAFB7;
 	}
 
-	&__creative-geo-item {
+	.bought__creative-geo-item {
 		text-transform: uppercase;
 	}
 }

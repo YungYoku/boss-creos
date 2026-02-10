@@ -120,11 +120,11 @@ const filled = computed(() => {
 })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .input {
 	position: relative;
 
-	&__field-wrap {
+	.input__field-wrap {
 		width: 100%;
 		height: 48px;
 		background: hsl(var(--background));
@@ -155,8 +155,8 @@ const filled = computed(() => {
 		}
 	}
 
-	&__file-name,
-	&__field {
+	.input__file-name,
+	.input__field {
 		width: 100%;
 		height: 100%;
 		padding: 20px 40px 8px 12px;
@@ -172,15 +172,15 @@ const filled = computed(() => {
 		}
 	}
 
-	&__error {
+	.input__error {
 		padding-left: 12px;
 		font-size: 12px;
 		font-weight: 200;
 		color: hsl(var(--destructive));
 	}
 
-	&__action,
-	&__clear {
+	.input__action,
+	.input__clear {
 		position: absolute;
 		top: 14px;
 		right: 12px;

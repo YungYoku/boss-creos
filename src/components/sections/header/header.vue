@@ -88,7 +88,7 @@ const route = useRoute()
 const isAuthPage = computed(() => route.name === 'Login' || route.name === 'Registration')
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .header {
     width: 100%;
     min-height: 48px;
@@ -97,14 +97,14 @@ const isAuthPage = computed(() => route.name === 'Login' || route.name === 'Regi
 	position: relative;
 	z-index: 2;
 
-	&__nav {
+	.header__nav {
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
 		gap: 10px;
 	}
 	
-	&__nav-item {
+	.header__nav-item {
 		position: relative;
 		
 		&::after {
@@ -136,7 +136,7 @@ const isAuthPage = computed(() => route.name === 'Login' || route.name === 'Regi
 		}
 	}
 
-	&__account {
+	.header__account {
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
@@ -144,7 +144,7 @@ const isAuthPage = computed(() => route.name === 'Login' || route.name === 'Regi
 		margin: 0 0 0 auto;
 	}
 
-	&__shopping-cart {
+	.header__shopping-cart {
 		display: flex;
 		align-items: center;
 	}

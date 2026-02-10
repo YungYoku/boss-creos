@@ -27,7 +27,7 @@ import { Page } from '@/components/structures'
 import { Header } from '@/components/sections'
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .auth-layout {
     display: flex;
     flex-direction: column;
@@ -37,12 +37,12 @@ import { Header } from '@/components/sections'
     gap: 10px;
 	position: relative;
 
-	&__content {
+	.auth-layout__content {
 		width: 100%;
 		margin: auto;
 	}
 
-	&__text {
+	.auth-layout__text {
 		position: absolute;
 		font-size: 15px;
 		font-weight: 500;

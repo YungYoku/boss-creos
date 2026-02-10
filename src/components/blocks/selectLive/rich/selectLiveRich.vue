@@ -31,7 +31,7 @@ const value = defineModel<string | string[]>({
 })
 </script>
 
-<style lang="scss">
+<style>
 .select-live-rich {
 	.select {
 		width: 120px;

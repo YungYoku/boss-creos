@@ -254,15 +254,15 @@ const create = async () => {
 const modalShowing = ref(false)
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .new-creative {
 	max-width: 630px;
 
-	&__title {
+	.new-creative__title {
 		margin: 0 auto 20px;
 	}
 
-	&__submit {
+	.new-creative__submit {
 		margin: 0 auto;
 	}
 }

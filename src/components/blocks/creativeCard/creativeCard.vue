@@ -181,11 +181,11 @@ const isFavorite = computed(() => {
 })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .creative-card {
 	max-width: 378px;
 
-	&__video {
+	.creative-card__video {
 		width: 100%;
 		max-width: 100%;
 		border-radius: 10px;
@@ -193,7 +193,7 @@ const isFavorite = computed(() => {
 		aspect-ratio: 1 / 1;
 	}
 
-	&__user {
+	.creative-card__user {
 		position: relative;
 		z-index: 2;
 		display: flex;
@@ -202,11 +202,11 @@ const isFavorite = computed(() => {
 		margin: -40px 10px 15px;
 	}
 
-	&__select-geo {
+	.creative-card__select-geo {
 		margin-bottom: 5px;
 	}
 
-	&__info {
+	.creative-card__info {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -217,17 +217,17 @@ const isFavorite = computed(() => {
 		border: 1px solid #27272B;
 	}
 
-	&__info,
-	&__action {
+	.creative-card__info,
+	.creative-card__action {
 		border-radius: 14px;
 	}
 
-	&__price,
-	&__action {
+	.creative-card__price,
+	.creative-card__action {
 		padding: 12px;
 	}
 
-	&__action {
+	.creative-card__action {
 		width: 100%;
 		font-size: 16px;
 		text-align: center;

@@ -38,7 +38,7 @@ const props = defineProps({
 const created = computed(() => new Date(props.message.created))
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .message {
 	display: flex;
 	flex-direction: column;
@@ -58,7 +58,7 @@ const created = computed(() => new Date(props.message.created))
 		border-radius: 8px 8px 0;
 	}
 
-	&__date {
+	.message__date {
 		font-size: 12px;
 	}
 }

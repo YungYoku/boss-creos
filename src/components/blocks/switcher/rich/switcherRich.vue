@@ -27,7 +27,7 @@ const value = defineModel<boolean>({
 })
 </script>
 
-<style lang="scss">
+<style>
 .switcher-rich {
 	.switcher__content {
 		border-radius: 8px;

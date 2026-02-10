@@ -156,14 +156,14 @@ const loadData = async () => {
 void loadData()
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .shop {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: 56px;
 
-	&__creatives {
+	.shop__creatives {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-start;
@@ -182,7 +182,7 @@ void loadData()
 		}
 	}
 
-	&__creatives-item.creative-card {
+	.shop__creatives-item.creative-card {
 		max-width: calc((100% - 40px) / 3);
 		width: 100%;
 

@@ -106,7 +106,7 @@ const onImageLoad = async (event: Event) => {
 const removeAvatar = () => loadImage('')
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .avatar {
 	position: relative;
 	display: flex;
@@ -118,24 +118,24 @@ const removeAvatar = () => loadImage('')
 	background-size: cover;
 	border-radius: 20%;
 
-	&__image {
+	.avatar__image {
 		max-width: 100%;
 		max-height: 100%;
 	}
 
-	&__icon-remove,
-	&__icon-upload {
+	.avatar__icon-remove,
+	.avatar__icon-upload {
 		position: absolute;
 		top: calc(50% - 15px);
 		right: calc(50% - 15px);
 		z-index: 2;
 	}
 
-	&__icon-upload {
+	.avatar__icon-upload {
 		pointer-events: none;
 	}
 
-	&__icon-remove {
+	.avatar__icon-remove {
 		opacity: 0;
 		transition: all 0.2s;
 	}
@@ -201,7 +201,7 @@ const removeAvatar = () => loadImage('')
 		}
 	}
 
-	&__input {
+	.avatar__input {
 		position: absolute;
 		left: 0;
 		width: 100%;

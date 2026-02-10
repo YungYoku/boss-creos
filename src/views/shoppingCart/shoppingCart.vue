@@ -136,7 +136,7 @@ const removeShoppingCart = async (id: string) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .shopping-cart {
 	display: flex;
 	flex-direction: column;
@@ -144,14 +144,14 @@ const removeShoppingCart = async (id: string) => {
 	width: 800px;
 	max-width: 100%;
 
-	&__title {
+	.shopping-cart__title {
 		font-size: 32px;
 		font-weight: 700;
 		color: #fff;
 		text-align: center;
 	}
 
-	&__action-panel {
+	.shopping-cart__action-panel {
 		width: 100%;
 		display: flex;
 		align-items: center;
@@ -159,7 +159,7 @@ const removeShoppingCart = async (id: string) => {
 		gap: 20px;
 	}
 
-	&__content {
+	.shopping-cart__content {
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
@@ -172,14 +172,14 @@ const removeShoppingCart = async (id: string) => {
 		border-image-source: linear-gradient(135.28deg, rgb(255 255 255 / 30%) -128.53%, rgb(255 255 255 / 0%) 75.12%);
 	}
 
-	&__creative {
+	.shopping-cart__creative {
 		display: flex;
 		align-items: center;
 		width: 100%;
 		padding: 0 15px 0 0;
 	}
 
-	&__creative-image {
+	.shopping-cart__creative-image {
 		min-width: 57px;
 		max-width: 57px;
 		max-height: 57px;
@@ -187,30 +187,30 @@ const removeShoppingCart = async (id: string) => {
 		border-radius: 10px;
 	}
 
-	&__creative-info {
+	.shopping-cart__creative-info {
 		display: flex;
 		flex-direction: column;
 	}
 
-	&__creative-name {
+	.shopping-cart__creative-name {
 		font-size: 14px;
 		line-height: 1;
 		margin-bottom: 5px;
 	}
 
-	&__creative-price,
-	&__creative-geo {
+	.shopping-cart__creative-price,
+	.shopping-cart__creative-geo {
 		font-size: 10px;
 		color: #AFAFB7;
 		line-height: 1;
 	}
 
-	&__creative-geo-item {
+	.shopping-cart__creative-geo-item {
 		text-transform: uppercase;
 	}
 
-	&__creative-remove,
-	&__creative-edit {
+	.shopping-cart__creative-remove,
+	.shopping-cart__creative-edit {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -225,7 +225,7 @@ const removeShoppingCart = async (id: string) => {
 		cursor: pointer;
 	}
 
-	&__pay {
+	.shopping-cart__pay {
 		margin: 0 auto;
 	}
 }

@@ -115,17 +115,17 @@ const save = async () => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .profile {
 	width: 585px;
 
-	&__title {
+	.profile__title {
 		text-align: center;
 		font-weight: 600;
 		font-size: 20px;
 	}
 
-	&__save {
+	.profile__save {
 		width: 240px;
 		margin: 0 auto;
 	}

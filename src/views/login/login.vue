@@ -121,9 +121,9 @@ const isLoginPossible = computed(() => {
 })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .login {
-	&__content {
+	.login__content {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -131,11 +131,11 @@ const isLoginPossible = computed(() => {
 		gap: 5%;
 	}
 
-	&__no-account {
+	.login__no-account {
 		text-align: center;
 	}
 
-	&__link {
+	.login__link {
 		text-align: center;
 		text-decoration: underline;
 	}

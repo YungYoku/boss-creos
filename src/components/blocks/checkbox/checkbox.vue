@@ -58,11 +58,11 @@ const toggle = () => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .checkbox {
 	cursor: pointer;
 
-	&__content {
+	.checkbox__content {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -77,7 +77,7 @@ const toggle = () => {
 		}
 	}
 
-	&__label {
+	.checkbox__label {
 		font-weight: 300;
 		text-align: left;
 	}

@@ -55,7 +55,7 @@ const showVideo = () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .video {
 	cursor: pointer;
 }

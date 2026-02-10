@@ -44,7 +44,7 @@ const hoverIndex: Ref<number | null> = ref(null)
 const hover = (index: number | null) => hoverIndex.value = index
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .rating-start-editable {
 	display: flex;
 	flex-wrap: wrap;

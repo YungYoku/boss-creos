@@ -48,7 +48,7 @@ const skeletonHeights = {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .text {
 	max-width: 100%;
 

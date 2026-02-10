@@ -99,14 +99,14 @@ const loadCreatives = async () => {
 void loadCreatives()
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .main {
 	display: flex;
 	flex-direction: column;
 	padding: 0 0 40px;
 	width: 100%;
 
-	&__prologue {
+	.main__prologue {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -116,14 +116,14 @@ void loadCreatives()
 		gap: 20px;
 	}
 
-	&__prologue-info {
+	.main__prologue-info {
 		position: relative;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 	}
 
-	&__prologue-fee {
+	.main__prologue-fee {
 		position: absolute;
 		top: -60px;
 		right: -60px;
@@ -135,7 +135,7 @@ void loadCreatives()
 		filter: drop-shadow(0 0 15px rgb(245 255 0 / 60%));
 	}
 
-	&__prologue-text {
+	.main__prologue-text {
 		display: flex;
 		flex-direction: column;
 		margin-bottom: 30px;
@@ -150,17 +150,17 @@ void loadCreatives()
 		}
 	}
 
-	&__prologue-buttons {
+	.main__prologue-buttons {
 		display: flex;
 		align-items: center;
 		gap: 20px;
 	}
 
-	&__prologue-made-creatives-wrap {
+	.main__prologue-made-creatives-wrap {
 		filter: drop-shadow(0 0 20px rgb(245 255 0 / 60%));
 	}
 
-	&__prologue-made-creatives {
+	.main__prologue-made-creatives {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -175,7 +175,7 @@ void loadCreatives()
 		clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
 	}
 
-	&__prologue-order-from-scratch {
+	.main__prologue-order-from-scratch {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -191,7 +191,7 @@ void loadCreatives()
 		filter: drop-shadow(0 0 20px rgb(255 255 255 / 60%));
 	}
 
-	&__prologue-fb-approve {
+	.main__prologue-fb-approve {
 		position: absolute;
 		right: 25%;
 		bottom: -70px;
@@ -204,12 +204,12 @@ void loadCreatives()
 		filter: drop-shadow(0 0 15px rgb(245 255 0 / 60%));
 	}
 
-	&__prologue-creatives {
+	.main__prologue-creatives {
 		position: relative;
 		width: 50%;
 	}
 
-	&__prologue-creative {
+	.main__prologue-creative {
 		&:nth-child(1) {
 			margin: 0 0 90px auto;
 		}
@@ -222,7 +222,7 @@ void loadCreatives()
 		}
 	}
 
-	&__creatives {
+	.main__creatives {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-start;
@@ -241,7 +241,7 @@ void loadCreatives()
 		}
 	}
 
-	&__creatives-item.creative-card {
+	.main__creatives-item.creative-card {
 		max-width: calc((100% - 40px) / 3);
 
 		@media (max-width: 1024px) {
@@ -253,7 +253,7 @@ void loadCreatives()
 		}
 	}
 
-	&__show-more {
+	.main__show-more {
 		margin: 0 auto;
 	}
 }

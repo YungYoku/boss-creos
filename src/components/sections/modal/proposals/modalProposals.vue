@@ -83,9 +83,9 @@ const choseProposal = (user: IUser) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .modal-proposals {
-	&__item {
+	.modal-proposals__item {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;

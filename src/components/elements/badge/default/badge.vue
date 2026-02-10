@@ -4,10 +4,7 @@
 	</div>
 </template>
 
-<script setup lang="ts">
-</script>
-
-<style scoped lang="scss">
+<style scoped>
 .badge {
 	display: flex;
 	align-items: center;

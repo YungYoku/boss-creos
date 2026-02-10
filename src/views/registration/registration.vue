@@ -174,9 +174,9 @@ const isRegistrationPossible = computed(() => {
 })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .registration {
-	&__content {
+	.registration__content {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -184,20 +184,20 @@ const isRegistrationPossible = computed(() => {
 		gap: 5%;
 	}
 
-	&__have-account {
+	.registration__have-account {
 		text-align: center;
 	}
 
-	&__link {
+	.registration__link {
 		text-decoration: underline;
 	}
 
-	&__btn {
+	.registration__btn {
 		display: flex;
 		flex-direction: column;
 	}
 
-	&__btn-text-head {
+	.registration__btn-text-head {
 		font-size: 10px;
 		color: #9E9E9E;
 	}

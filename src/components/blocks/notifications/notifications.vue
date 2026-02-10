@@ -76,13 +76,13 @@ const onOpen = async () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .notifications {
-	&__button {
+	.notifications__button {
 		position: relative;
 	}
 
-	&__signal {
+	.notifications__signal {
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -92,7 +92,7 @@ const onOpen = async () => {
 		border-radius: 50%;
 	}
 
-	&__item {
+	.notifications__item {
 		position: relative;
 	}
 }

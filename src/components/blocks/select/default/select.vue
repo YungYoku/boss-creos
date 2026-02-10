@@ -164,9 +164,9 @@ const clear = () => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .select {
-	&__trigger {
+	.select__trigger {
 		position: relative;
 		display: flex;
 		justify-content: flex-start;
@@ -192,7 +192,7 @@ const clear = () => {
 		}
 	}
 
-	&__showed-value {
+	.select__showed-value {
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
@@ -206,28 +206,28 @@ const clear = () => {
 		}
 	}
 
-	&__clear {
+	.select__clear {
 		position: absolute;
 		top: 14px;
 		right: 34px;
 		cursor: pointer;
 	}
 
-	&__state {
+	.select__state {
 		position: absolute;
 		top: 14px;
 		right: 12px;
 		cursor: pointer;
 	}
 
-	&__error {
+	.select__error {
 		padding-left: 12px;
 		font-size: 12px;
 		font-weight: 200;
 		color: hsl(var(--destructive));
 	}
 
-	&__content {
+	.select__content {
 		display: flex;
 		flex-direction: column;
 		gap: 4px;
@@ -235,7 +235,7 @@ const clear = () => {
 		overflow: auto;
 	}
 
-	&__item {
+	.select__item {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;

@@ -16,7 +16,7 @@ defineProps({
 })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .label {
 	position: absolute;
 	top: 13px;

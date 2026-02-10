@@ -68,11 +68,11 @@ const getCurrentClass = (step: number) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .step-by-step {
 	width: 100%;
 
-	&__steps {
+	.step-by-step__steps {
 		width: 100%;
 		display: flex;
 		gap: 5px;

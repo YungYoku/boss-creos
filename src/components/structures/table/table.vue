@@ -64,4 +64,4 @@ const handleAction = (key: keyof typeof actions) => {
 }
 </script>
 
-<style lang="scss" src="./style.scss"></style>
+<style src="./style.css"></style>

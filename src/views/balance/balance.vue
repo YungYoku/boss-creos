@@ -171,7 +171,7 @@ const showWithdrawModal = () => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .balance {
 	width: 860px;
 	max-width: 100%;
@@ -180,19 +180,19 @@ const showWithdrawModal = () => {
 	align-items: center;
 	gap: 20px;
 
-	&__title {
+	.balance__title {
 		font-weight: 700;
 		font-size: 32px;
 	}
 
-	&__description {
+	.balance__description {
 		max-width: 600px;
 		font-weight: 500;
 		font-size: 12px;
 		text-align: center;
 	}
 
-	&__action-panel {
+	.balance__action-panel {
 		width: 100%;
 		display: flex;
 		align-items: center;
@@ -200,19 +200,19 @@ const showWithdrawModal = () => {
 		gap: 20px;
 	}
 
-	&__actions {
+	.balance__actions {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		gap: 10px;
 	}
 
-	&__withdraw,
-	&__deposit {
+	.balance__withdraw,
+	.balance__deposit {
 		cursor: pointer;
 	}
 
-	&__transaction-value {
+	.balance__transaction-value {
 		display: flex;
 		align-items: center;
 		gap: 10px;
@@ -220,13 +220,13 @@ const showWithdrawModal = () => {
 		font-size: 14px;
 	}
 
-	&__transaction-date {
+	.balance__transaction-date {
 		font-weight: 500;
 		font-size: 11px;
 		color: #AFAFB7;
 	}
 
-	&__transaction-status {
+	.balance__transaction-status {
 		width: 5px;
 		height: 5px;
 		border-radius: 50%;

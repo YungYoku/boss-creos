@@ -104,7 +104,7 @@ const updateBasket = async (basket: IBasket) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .edit-shopping-cart {
 	display: flex;
 	flex-direction: column;
@@ -112,7 +112,7 @@ const updateBasket = async (basket: IBasket) => {
 	width: 800px;
 	max-width: 100%;
 
-	&__creative {
+	.edit-shopping-cart__creative {
 		display: flex;
 		flex-direction: column;
 		gap: 5px;
@@ -124,7 +124,7 @@ const updateBasket = async (basket: IBasket) => {
 		border-image-source: linear-gradient(135.28deg, rgb(255 255 255 / 30%) -128.53%, rgb(255 255 255 / 0%) 75.12%);
 	}
 
-	&__creative-head {
+	.edit-shopping-cart__creative-head {
 		display: flex;
 		align-items: center;
 		width: 100%;
@@ -132,36 +132,36 @@ const updateBasket = async (basket: IBasket) => {
 		gap: 12px;
 	}
 
-	&__creative-image {
+	.edit-shopping-cart__creative-image {
 		max-width: 57px;
 		max-height: 57px;
 		aspect-ratio: 1/1;
 		border-radius: 10px;
 	}
 
-	&__creative-info {
+	.edit-shopping-cart__creative-info {
 		display: flex;
 		flex-direction: column;
 	}
 
-	&__creative-name {
+	.edit-shopping-cart__creative-name {
 		font-size: 14px;
 	}
 
-	&__creative-geo {
+	.edit-shopping-cart__creative-geo {
 		font-size: 10px;
 		color: #AFAFB7;
 	}
 
-	&__creative-geo-item {
+	.edit-shopping-cart__creative-geo-item {
 		text-transform: uppercase;
 	}
 
-	&__creative-description {
+	.edit-shopping-cart__creative-description {
 		width: 100%;
 	}
 
-	&__creative-save {
+	.edit-shopping-cart__creative-save {
 		margin: 0 auto;
 	}
 }

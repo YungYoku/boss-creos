@@ -66,9 +66,9 @@ const getUserCreatives = async () => {
 watch(() => auth.user.id, getUserCreatives, { immediate: true })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .made-creatives {
-	&__title {
+	.made-creatives__title {
 		font-size: 32px;
 		font-weight: 700;
 		color: #fff;
@@ -76,7 +76,7 @@ watch(() => auth.user.id, getUserCreatives, { immediate: true })
 		margin: 0 0 20px;
 	}
 
-	&__creatives {
+	.made-creatives__creatives {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-start;
@@ -87,10 +87,6 @@ watch(() => auth.user.id, getUserCreatives, { immediate: true })
 		margin: 40px auto;
 
 		@media (max-width: 1024px) {
-			gap: 15px;
-		}
-
-		@media (max-width: 600px) {
 			gap: 15px;
 		}
 	}

@@ -118,22 +118,22 @@ const loadUser = async () => {
 watch(() => route.params.id, loadUser, { immediate: true })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .user {
 	width: 1240px;
 	max-width: 100%;
 
-	&__name {
+	.user__name {
 		font-weight: 600;
 		font-size: 40px;
 	}
 
-	&__description {
+	.user__description {
 		font-weight: 300;
 		font-size: 16px;
 	}
 
-	&__creatives {
+	.user__creatives {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-start;
@@ -152,7 +152,7 @@ watch(() => route.params.id, loadUser, { immediate: true })
 		}
 	}
 
-	&__creatives-item.creative-card {
+	.user__creatives-item.creative-card {
 		max-width: calc((100% - 40px) / 3);
 
 		@media (max-width: 1024px) {

@@ -140,9 +140,9 @@ const loadChat = (project: IProject) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .chats {
-	&__item {
+	.chats__item {
 		padding: 8px 16px;
 		border-radius: 8px;
 		cursor: pointer;

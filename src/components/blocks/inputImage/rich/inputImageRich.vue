@@ -36,7 +36,7 @@ const value = defineModel<string | null>({
 })
 </script>
 
-<style lang="scss">
+<style>
 .input-image-rich {
 	.input {
 		width: 120px;

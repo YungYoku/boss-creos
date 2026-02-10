@@ -51,25 +51,25 @@ withDefaults(defineProps<Props>(), {
 })
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .user {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
 	gap: 10px;
 
-	&__info {
+	.user__info {
 		display: flex;
 		flex-direction: column;
 		line-height: 1.5;
 	}
 
-	&__name {
+	.user__name {
 		font-size: 14px;
 		color: #E5E5E7;
 	}
 
-	&__bought-amount {
+	.user__bought-amount {
 		font-size: 11px;
 		color: #AFAFB7;
 	}

@@ -65,11 +65,11 @@ const isEmpty = computed(() => {
 const filled = computed(() => value.value.length > 0)
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .textarea {
 	position: relative;
 
-	&__field {
+	.textarea__field {
 		width: 100%;
 		padding: 16px 12px 8px;
 		font-size: 14px;
@@ -98,14 +98,14 @@ const filled = computed(() => value.value.length > 0)
 		}
 	}
 
-	&__error {
+	.textarea__error {
 		padding-left: 12px;
 		font-size: 12px;
 		font-weight: 200;
 		color: hsl(var(--destructive));
 	}
 
-	&__clear {
+	.textarea__clear {
 		position: absolute;
 		top: 14px;
 		right: 12px;

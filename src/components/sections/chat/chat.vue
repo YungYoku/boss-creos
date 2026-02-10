@@ -274,9 +274,9 @@ const sendRating = async (value: { stars: number, review: string } = { stars: 1,
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .chat {
-	&__messages {
+	.chat__messages {
 		display: flex;
 		flex-direction: column;
 		height: 40vh;

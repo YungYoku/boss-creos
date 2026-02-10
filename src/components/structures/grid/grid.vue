@@ -119,7 +119,7 @@ const style = computed(() => {
 })
 </script>]
 
-<style lang="scss" scoped>
+<style scoped>
 .grid {
 	width: 100%;
 	display: grid;

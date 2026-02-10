@@ -37,9 +37,9 @@ withDefaults(defineProps<Props>(), {
 })
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .user-card {
-	&__image {
+	.user-card__image {
 		width: 100%;
 		max-width: 100%;
 		border-radius: 10px;

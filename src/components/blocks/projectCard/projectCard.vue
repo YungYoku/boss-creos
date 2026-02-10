@@ -206,7 +206,7 @@ const status = computed(() => {
 const deadline = computed(() => new Date(props.project.deadline))
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .project {
 	position: relative;
 	display: flex;
@@ -218,7 +218,7 @@ const deadline = computed(() => new Date(props.project.deadline))
 	background-color: hsl(var(--primary-foreground));
 	gap: 10px;
 
-	&__actions {
+	.project__actions {
 		position: absolute;
 		top: 10px;
 		right: 10px;
@@ -227,7 +227,7 @@ const deadline = computed(() => new Date(props.project.deadline))
 		gap: 10px;
 	}
 
-	&__proposals {
+	.project__proposals {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -235,33 +235,33 @@ const deadline = computed(() => new Date(props.project.deadline))
 		cursor: pointer;
 	}
 
-	&__title {
+	.project__title {
 		max-width: 100%;
 		max-height: 32px;
 		padding-right: 48px;
 	}
 
-	&__title,
-	&__description {
+	.project__title,
+	.project__description {
 		display: flex;
 		justify-content: flex-start;
 		align-items: flex-start;
 	}
 
-	&__description {
+	.project__description {
 		max-height: 64px;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
 
-	&__info {
+	.project__info {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 8px;
 		padding-right: 48px;
 	}
 
-	&__footer {
+	.project__footer {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
