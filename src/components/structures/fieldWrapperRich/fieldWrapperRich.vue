@@ -72,4 +72,4 @@ withDefaults(defineProps<Props>(), {
 		color: hsl(var(--destructive));
 	}
 }
-</style>>
+</style>
