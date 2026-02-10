@@ -4,11 +4,11 @@ import vue from '@vitejs/plugin-vue'
 import checker from 'vite-plugin-checker'
 
 export default defineConfig(({ mode }) => {
-	const isProduction = mode === 'production'
+	const isProd = mode === 'production'
 
 	return {
 		esbuild: {
-			drop: isProduction ? ['console', 'debugger'] : []
+			drop: isProd ? ['console', 'debugger'] : []
 		},
 
 		plugins: [
@@ -21,10 +21,10 @@ export default defineConfig(({ mode }) => {
 				},
 				vueTsc: true,
 				typescript: true,
-				// stylelint: {
-				// 	lintCommand: 'stylelint ./src/**/*.{css,vue}',
-				// 	watchPath: './src',
-				// }
+				stylelint: {
+					lintCommand: 'stylelint ./src/**/*.{css,vue}',
+					watchPath: './src',
+				}
 			})
 		],
 
