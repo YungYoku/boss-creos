@@ -19,7 +19,6 @@
 		"noEmit": true,
 		"jsx": "preserve",
 		"esModuleInterop": false,
-		"allowSyntheticDefaultImports": false,
 
 		// Strict Checks
 		"strict": true,

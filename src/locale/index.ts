@@ -1,11 +1,11 @@
 import type { App, Ref } from 'vue'
 import { ref } from 'vue'
 
-import * as en from './en/en.json'
-import * as enTable from './en/table.json'
+import en from './en/en.json'
+import enTable from './en/table.json'
 
-import * as ru from './ru/ru.json'
-import * as ruTable from './ru/table.json'
+import ru from './ru/ru.json'
+import ruTable from './ru/table.json'
 
 const locales = {
 	ru: {
