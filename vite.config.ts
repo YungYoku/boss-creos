@@ -12,7 +12,11 @@ export default defineConfig(({ mode }) => {
 		},
 
 		plugins: [
-			vue(),
+			vue({
+				features: {
+					optionsAPI: false
+				}
+			}),
 			checker({
 				eslint: {
 					lintCommand: 'eslint "./src/**/*.{ts,vue,js}"',
