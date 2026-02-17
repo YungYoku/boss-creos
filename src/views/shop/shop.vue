@@ -117,7 +117,6 @@ const form = Form<SearchForm>({
 const loading = ref(true)
 const loadCreatives = async () => {
 	const filters = []
-	let filter = ''
 	let encodedFilter = ''
 
 	if (form.geo.value) filters.push(`unavailableGeo!~'${form.geo.value}'`)
@@ -127,7 +126,7 @@ const loadCreatives = async () => {
 	if (form.type.value) filters.push(`type='${form.type.value}'`)
 	filters.push(`status='${form.status.value}'`)
 	if (filters.length) {
-		filter = filters.reduce((acc, filter) => filter ? `${acc} && ${filter}` : acc, '')
+		let filter = filters.reduce((acc, filter) => filter ? `${acc} && ${filter}` : acc, '')
 		filter = filter.slice(4)
 
 		encodedFilter = encodeURIComponent(filter)
