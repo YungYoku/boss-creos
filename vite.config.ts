@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'url'
 import vue from '@vitejs/plugin-vue'
+import vueRouter from 'vue-router/vite'
 import checker from 'vite-plugin-checker'
 
 export default defineConfig(({ mode }) => {
@@ -12,6 +13,7 @@ export default defineConfig(({ mode }) => {
 		},
 
 		plugins: [
+			vueRouter(),
 			vue({
 				features: {
 					optionsAPI: false

@@ -1,7 +1,2 @@
-interface ImportMetaEnv {
-	readonly VITE_API: string;
-}
-
-interface ImportMeta {
-	readonly env: ImportMetaEnv;
-}
+/// <reference types="vite/client" />
+/// <reference types="vue-router/auto" />

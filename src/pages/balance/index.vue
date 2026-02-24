@@ -29,7 +29,7 @@
 		>
 			<template #icon>
 				<img
-					src="./icons/tether.svg"
+					src="@/assets/img/tether.svg"
 					alt=""
 				>
 			</template>
