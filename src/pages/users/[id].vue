@@ -19,17 +19,11 @@
 				:columns="1"
 				vertical
 			>
-				<div
-					class="user__name"
-					size="m"
-				>
+				<div class="user__name">
 					{{ user?.username }}
 				</div>
 
-				<div
-					class="user__description"
-					size="m"
-				>
+				<div class="user__description">
 					{{ user?.description }}
 				</div>
 			</Grid>

@@ -93,10 +93,14 @@ definePage({
 })
 
 const route = useRoute()
-const { id } = route.params
+const getID = () => {
+	// @ts-expect-error TODO: видимо косяк в vue-router/experimental
+	return route.params.id as string
+}
 
 const auth = useAuthStore()
 const baskets = computed(() => {
+	const id = getID()
 	const baskets = auth.user.expand?.baskets ?? []
 	return baskets.filter(basket => basket.status === 'created' && basket.id === id)
 })

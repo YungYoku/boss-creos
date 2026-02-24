@@ -44,7 +44,7 @@ definePage({
 
 const route = useRoute()
 const currentTab = computed(() => route.path)
-const isTabNotSelected = computed(() => route.name === 'Moderation')
+const isTabNotSelected = computed(() => route.name === '/moderation/')
 
 const tabs = [
 	{
