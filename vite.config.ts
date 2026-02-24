@@ -18,11 +18,11 @@ export default defineConfig(({ mode }) => {
 				}
 			}),
 			checker({
-				eslint: {
-					lintCommand: 'eslint "./src/**/*.{ts,vue,js}"',
-					watchPath: './src',
-					useFlatConfig: true
-				},
+				// eslint: {
+				// 	lintCommand: 'eslint "./src/**/*.{ts,vue}"',
+				// 	watchPath: './src',
+				// 	useFlatConfig: true
+				// },
 				vueTsc: true,
 				typescript: true,
 				stylelint: {

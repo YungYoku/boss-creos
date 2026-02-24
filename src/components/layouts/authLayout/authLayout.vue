@@ -17,7 +17,7 @@
 		</div>
 
 		<div class="auth-layout__content">
-			<slot/>
+			<router-view/>
 		</div>
 	</div>
 </template>

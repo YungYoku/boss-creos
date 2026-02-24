@@ -1,62 +1,60 @@
 <template>
-	<AuthLayout class="login">
-		<div class="login__content">
-			<CardAuth
-				width="400px"
-				title="Вход"
-				@keyup.enter="login"
+	<div class="login">
+		<CardAuth
+			width="400px"
+			title="Вход"
+			@keyup.enter="login"
+		>
+			<Input
+				v-model.trim="form.identity.value"
+				:error="form.identity.error"
+				label="Логин или почта"
+				type="text"
+			/>
+
+			<Input
+				v-model.trim="form.password.value"
+				:error="form.password.error"
+				label="Пароль"
+				type="password"
+			/>
+
+			<Button
+				:disabled="loading"
+				type="submit"
+				variant="outline"
+				@click="login"
 			>
-				<Input
-					v-model.trim="form.identity.value"
-					:error="form.identity.error"
-					label="Логин или почта"
-					type="text"
-				/>
+				Войти
+			</Button>
 
-				<Input
-					v-model.trim="form.password.value"
-					:error="form.password.error"
-					label="Пароль"
-					type="password"
-				/>
-
-				<Button
-					:disabled="loading"
-					type="submit"
-					variant="outline"
-					@click="login"
+			<template #footer>
+				<Text
+					size="xs"
+					class="login__no-account"
 				>
-					Войти
-				</Button>
-
-				<template #footer>
-					<Text
-						size="xs"
-						class="login__no-account"
-					>
-						Нет аккаунта?
-						<router-link
-							to="/registration"
-							class="login__link"
-						>
-							Зарегистрироваться
-						</router-link>
-					</Text>
-
+					Нет аккаунта?
 					<router-link
+						to="/registration"
 						class="login__link"
-						to="/login"
 					>
-						<Text size="xs">
-							Забыли пароль?
-						</Text>
+						Зарегистрироваться
 					</router-link>
-				</template>
-			</CardAuth>
+				</Text>
 
-			<AuthSlots/>
-		</div>
-	</AuthLayout>
+				<router-link
+					class="login__link"
+					to="/login"
+				>
+					<Text size="xs">
+						Забыли пароль?
+					</Text>
+				</router-link>
+			</template>
+		</CardAuth>
+
+		<AuthSlots/>
+	</div>
 </template>
 
 <script lang="ts" setup>
@@ -65,7 +63,6 @@ import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useToast } from '@/stores/toast'
 
-import { AuthLayout } from '@/components/layouts'
 import { CardAuth } from '@/components/structures'
 import { AuthSlots } from '@/components/sections'
 import { Button, Input } from '@/components/blocks'
@@ -123,21 +120,19 @@ const isLoginPossible = computed(() => {
 
 <style scoped>
 .login {
-	.login__content {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 100%;
-		gap: 5%;
-	}
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	gap: 5%;
+}
 
-	.login__no-account {
-		text-align: center;
-	}
+.login__no-account {
+	text-align: center;
+}
 
-	.login__link {
-		text-align: center;
-		text-decoration: underline;
-	}
+.login__link {
+	text-align: center;
+	text-decoration: underline;
 }
 </style>
