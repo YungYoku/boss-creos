@@ -104,6 +104,14 @@ import { CardLong, Modal } from '@/components/structures'
 import { Badge, BadgeBalance, Image } from '@/components/elements'
 import { Button } from '@/components/blocks'
 import type { BasketStatus, IBasket } from '@/types/basket'
+import { AUTH } from '@/data/permissions'
+
+definePage({
+	meta: {
+		permissions: [AUTH],
+		bgClass: 'shop'
+	}
+})
 
 interface Filter {
 	value: BasketStatus

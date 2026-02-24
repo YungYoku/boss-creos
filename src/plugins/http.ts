@@ -1,4 +1,4 @@
-import { useAuthStore } from '@/stores/auth.ts'
+import { useAuthStore } from '@/stores/auth'
 
 interface Query {
 	fields?: string[]

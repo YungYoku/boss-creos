@@ -1,0 +1,5 @@
+export const AUTH = 'auth'
+export const NO_AUTH = 'no-auth'
+export const BUYER = 'buyer'
+export const DESIGNER = 'designer'
+export const ADMIN = 'admin'

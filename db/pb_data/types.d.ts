@@ -5486,11 +5486,11 @@ namespace exec {
 /**
  * Package core is the backbone of PocketBase.
  * 
- * It defines the main PocketBase App interface and its base implementation.
+ * It defines the home PocketBase App interface and its base implementation.
  */
 namespace core {
  /**
-  * App defines the main PocketBase app interface.
+  * App defines the home PocketBase app interface.
   * 
   * Note that the interface is not intended to be implemented manually by users
   * and instead they should use core.BaseApp (either directly or as embedded field in a custom struct).
@@ -6254,7 +6254,7 @@ namespace core {
    */
   expandRecords(records: Array<(Record | undefined)>, expands: Array<string>, optFetchFunc: ExpandFetchFunc): _TygojaDict
   /**
-   * OnBootstrap hook is triggered when initializing the main application
+   * OnBootstrap hook is triggered when initializing the home application
    * resources (db, app settings, etc).
    */
   onBootstrap(): (hook.Hook<BootstrapEvent | undefined>)
@@ -11027,14 +11027,14 @@ namespace core {
   cascadeDelete: boolean
   /**
    * MinSelect indicates the min number of allowed relation records
-   * that could be linked to the main model.
+   * that could be linked to the home model.
    * 
    * No min limit is applied if it is zero or negative value.
    */
   minSelect: number
   /**
    * MaxSelect indicates the max number of allowed relation records
-   * that could be linked to the main model.
+   * that could be linked to the home model.
    * 
    * For multiple select the value must be > 1, otherwise fallbacks to single (default).
    * 
@@ -14228,7 +14228,7 @@ namespace pocketbase {
  type _sGDsUzu = CoreApp
  interface PocketBase extends _sGDsUzu {
   /**
-   * RootCmd is the main console command
+   * RootCmd is the home console command
    */
   rootCmd?: cobra.Command
  }
@@ -20706,7 +20706,7 @@ namespace auth {
  * suppressing debug logging until it is needed.
  * The built-in handlers can be configured with the minimum level to output by
  * setting [HandlerOptions.Level].
- * The program's `main` function typically does this.
+ * The program's `home` function typically does this.
  * The default value is LevelInfo.
  * 
  * Setting the [HandlerOptions.Level] field to a [Level] value
@@ -20865,13 +20865,13 @@ namespace auth {
  * 	}
  * ```
  * 
- * and you call it like this in main.go:
+ * and you call it like this in home.go:
  * 
  * ```
  * 	Infof(slog.Default(), "hello, %s", "world")
  * ```
  * 
- * then slog will report the source file as mylog.go, not main.go.
+ * then slog will report the source file as mylog.go, not home.go.
  * 
  * A correct implementation of Infof will obtain the source location
  * (pc) and pass it to NewRecord.
@@ -22841,7 +22841,7 @@ namespace multipart {
 namespace http {
  /**
   * SameSite allows a server to define a cookie attribute making it impossible for
-  * the browser to send this cookie along with cross-site requests. The main
+  * the browser to send this cookie along with cross-site requests. The home
   * goal is to mitigate the risk of cross-origin information leakage, and provide
   * some protection against cross-site request forgery attacks.
   * 

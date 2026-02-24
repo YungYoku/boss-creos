@@ -58,11 +58,11 @@
 	</Grid>
 
 	<div v-else-if="isOnModeration">
-		Креатив с ID {{ id }} на модерации
+		Креатив с ID {{ getID() }} на модерации
 	</div>
 
 	<div v-else-if="!isExists">
-		Креатив с ID {{ id }} не существует
+		Креатив с ID {{ getID() }} не существует
 	</div>
 </template>
 
@@ -80,13 +80,18 @@ const auth = useAuthStore()
 
 const creative: Ref<ICreative> = ref({ ...emptyCreative })
 const route = useRoute()
-const { id } = route.params
+
+const getID = () => {
+	// @ts-expect-error TODO: видимо косяк в vue-router/experimental
+	return route.params.id as string
+}
 
 const isOnModeration = ref(false)
 const isExists = ref(true)
 
 const loading = ref(true)
 const loadProject = async () => {
+	const id = getID()
 	if (!id || Array.isArray(id)) return
 
 	loading.value = true

@@ -65,12 +65,19 @@ import { Chat } from '@/components/sections'
 import { User as UserCard } from '@/components/blocks'
 import { Icon, PageTitle } from '@/components/elements'
 import { Grid, Island } from '@/components/structures'
-import type { IProject, IProjects, IProjectStatus } from '@/types/project.ts'
+import type { IProject, IProjects, IProjectStatus } from '@/types/project'
 import { Http, Screen } from '@/plugins'
-import { useAuthStore } from '@/stores/auth.ts'
+import { useAuthStore } from '@/stores/auth'
 import Text from '@/components/elements/text/text.vue'
-import type { IRating } from '@/types/rating.ts'
-import { emptyUser } from '@/types/user.ts'
+import type { IRating } from '@/types/rating'
+import { emptyUser } from '@/types/user'
+import { AUTH } from '@/data/permissions'
+
+definePage({
+	meta: {
+		permissions: [AUTH]
+	}
+})
 
 const auth = useAuthStore()
 const openedChat: Ref<IProject | null> = ref(null)

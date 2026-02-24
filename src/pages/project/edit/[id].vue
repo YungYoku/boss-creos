@@ -106,15 +106,27 @@ import { emptyProject, type IProject } from '@/types/project'
 import type { IUser } from '@/types/user'
 import { Form, Http } from '@/plugins'
 import { isHttpError } from '@/plugins/http'
+import { AUTH, BUYER } from '@/data/permissions'
+
+definePage({
+	meta: {
+		permissions: [AUTH, BUYER]
+	}
+})
 
 const form = Form<IProject>({ ...emptyProject })
 
 const router = useRouter()
 const route = useRoute()
-const { id } = route.params
+
+const getID = () => {
+	// @ts-expect-error TODO: видимо косяк в vue-router/experimental
+	return route.params.id as string
+}
 
 const loading = ref(true)
 const loadProject = async () => {
+	const id = getID()
 	if (!id) return
 	if (Array.isArray(id)) {
 		warn('ID is array for some reason.')
@@ -137,6 +149,7 @@ void loadProject()
 
 const toast = useToast()
 const save = async () => {
+	const id = getID()
 	if (!id) return
 	if (Array.isArray(id)) {
 		warn('ID is array for some reason.')

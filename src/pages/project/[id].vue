@@ -190,10 +190,15 @@ const router = useRouter()
 
 const project: Ref<IProject> = ref({ ...emptyProject })
 const route = useRoute()
-const { id } = route.params
+
+const getID = () => {
+	// @ts-expect-error TODO: видимо косяк в vue-router/experimental
+	return route.params.id as string
+}
 
 const loading = ref(true)
 const loadProject = async () => {
+	const id = getID()
 	if (!id) return
 	if (Array.isArray(id)) {
 		console.warn('ID is array for some reason.')

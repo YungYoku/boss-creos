@@ -93,6 +93,14 @@ import { Http } from '@/plugins'
 import type { IBasket, IBaskets } from '@/types/basket'
 import type { ICreative, ICreatives } from '@/types/creative'
 import { Button, InputVideo } from '@/components/blocks'
+import { AUTH } from '@/data/permissions'
+
+definePage({
+	meta: {
+		permissions: [AUTH],
+		bgClass: 'shop'
+	}
+})
 
 const auth = useAuthStore()
 const creatives: Ref<ICreative[]> = ref([])

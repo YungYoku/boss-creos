@@ -104,7 +104,16 @@ import { Text } from '@/components/elements'
 import { Form, Http } from '@/plugins'
 import type { IUser } from '@/types/user'
 import Grid from '@/components/structures/grid/grid.vue'
-import { isHttpError } from '@/plugins/http.ts'
+import { isHttpError } from '@/plugins/http'
+import { NO_AUTH } from '@/data/permissions'
+
+definePage({
+	meta: {
+		permissions: [NO_AUTH],
+		bgClass: 'auth',
+		layout: 'auth'
+	}
+})
 
 type Role = 'buyer' | 'designer'
 

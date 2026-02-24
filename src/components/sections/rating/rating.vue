@@ -49,7 +49,7 @@ import { type PropType, ref, type Ref, watch } from 'vue'
 import { Grid } from '@/components/structures'
 import { Button, RatingStarsEditable, Textarea } from '@/components/blocks'
 import { Text } from '@/components/elements'
-import type { IRating } from '@/types/rating.ts'
+import type { IRating } from '@/types/rating'
 
 const props = defineProps({
 	modelValue: {

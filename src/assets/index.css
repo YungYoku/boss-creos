@@ -44,7 +44,7 @@ body {
 	background-position-y: top;
 	background-size: 100% auto;
 
-	&.main-bg {
+	&.home-bg {
 		background-image: url("@/assets/img/bg__main.webp");
 	}
 

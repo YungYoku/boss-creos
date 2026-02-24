@@ -4,7 +4,7 @@ import { CellActions } from '@/components/elements'
 import { Http } from '@/plugins'
 import { datetime } from '@/plugins/datetime'
 import locale from '@/locale'
-import { useToast } from '@/stores/toast.ts'
+import { useToast } from '@/stores/toast'
 
 export const useAdapter = () => {
 	const toast = useToast()

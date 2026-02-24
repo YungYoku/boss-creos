@@ -69,7 +69,16 @@ import { Button, Input } from '@/components/blocks'
 import { Text } from '@/components/elements'
 import { Form, Http } from '@/plugins'
 import type { IUserLogin } from '@/types/user'
-import { isHttpError } from '@/plugins/http.ts'
+import { isHttpError } from '@/plugins/http'
+import { NO_AUTH } from '@/data/permissions'
+
+definePage({
+	meta: {
+		permissions: [NO_AUTH],
+		bgClass: 'auth',
+		layout: 'auth'
+	}
+})
 
 interface LoginForm {
 	identity: string

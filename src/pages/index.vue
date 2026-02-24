@@ -79,6 +79,12 @@ import type { ICreative, ICreatives } from '@/types/creative'
 import { CreativeCard, EmptyCreativeCard } from '@/components/blocks'
 import { Http } from '@/plugins'
 
+definePage({
+	meta: {
+		bgClass: 'home'
+	}
+})
+
 const loadingCreatives = ref(true)
 const creatives: Ref<ICreative[]> = ref([])
 const loadCreatives = async () => {

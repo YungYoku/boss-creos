@@ -98,6 +98,13 @@ import { emptyProject, type IProject } from '@/types/project'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
 import { isHttpError } from '@/plugins/http'
+import { AUTH, BUYER } from '@/data/permissions'
+
+definePage({
+	meta: {
+		permissions: [AUTH, BUYER]
+	}
+})
 
 const auth = useAuthStore()
 

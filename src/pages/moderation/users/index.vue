@@ -13,8 +13,15 @@ import { ref } from 'vue'
 import { Table } from '@/components/structures'
 import type { IUsers } from '@/types/user'
 import { Http } from '@/plugins'
+import { ADMIN, AUTH } from '@/data/permissions'
 
 import { useAdapter } from './adapter'
+
+definePage({
+	meta: {
+		permissions: [AUTH, ADMIN]
+	}
+})
 
 const {
 	handleLoadedData,

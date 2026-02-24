@@ -156,7 +156,7 @@
 	</Grid>
 
 	<div v-else>
-		Креатив с ID {{ id }} не существует или был создан не вами
+		Креатив с ID {{ getID() }} не существует или был создан не вами
 	</div>
 
 	<Modal
@@ -202,7 +202,14 @@ import {
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
 import { creativeTypeItems, emptyCreative, type ICreative, ratioItems } from '@/types/creative'
-import { isHttpError } from '@/plugins/http.ts'
+import { isHttpError } from '@/plugins/http'
+import { AUTH, DESIGNER } from '@/data/permissions'
+
+definePage({
+	meta: {
+		permissions: [AUTH, DESIGNER]
+	}
+})
 
 const creativeBase = Form<ICreative>({ ...emptyCreative })
 const creative = Form<ICreative>({ ...emptyCreative })
@@ -211,12 +218,17 @@ const auth = useAuthStore()
 const toast = useToast()
 const router = useRouter()
 const route = useRoute()
-const { id } = route.params
+
+const getID = () => {
+	// @ts-expect-error TODO: видимо косяк в vue-router/experimental
+	return route.params.id as string
+}
 
 const isAvailable = ref(true)
 
 const loading = ref(true)
 const loadCreative = async () => {
+	const id = getID()
 	if (!id || Array.isArray(id)) return
 
 	loading.value = true

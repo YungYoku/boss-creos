@@ -53,7 +53,14 @@ import { Form, Http } from '@/plugins'
 import { Grid, Island } from '@/components/structures'
 import { Button, InputImageRich, InputRich, TextareaRich } from '@/components/blocks'
 import { emptyUser, type IUser } from '@/types/user'
-import { isHttpError } from '@/plugins/http.ts'
+import { isHttpError } from '@/plugins/http'
+import { AUTH } from '@/data/permissions'
+
+definePage({
+	meta: {
+		permissions: [AUTH]
+	}
+})
 
 const auth = useAuthStore()
 const toast = useToast()

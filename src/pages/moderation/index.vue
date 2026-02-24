@@ -33,6 +33,14 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { Grid } from '@/components/structures'
+import { ADMIN, AUTH } from '@/data/permissions'
+
+definePage({
+	meta: {
+		permissions: [AUTH, ADMIN],
+		bgClass: 'shop'
+	}
+})
 
 const route = useRoute()
 const currentTab = computed(() => route.path)

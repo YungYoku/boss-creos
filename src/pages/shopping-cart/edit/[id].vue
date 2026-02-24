@@ -84,6 +84,13 @@ import type { IBasket } from '@/types/basket'
 import { ratioItems } from '@/types/creative'
 import { Http } from '@/plugins'
 import { useToast } from '@/stores/toast'
+import { AUTH } from '@/data/permissions'
+
+definePage({
+	meta: {
+		permissions: [AUTH]
+	}
+})
 
 const route = useRoute()
 const { id } = route.params

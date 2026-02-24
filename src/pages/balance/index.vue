@@ -114,6 +114,14 @@ import { Badge, BadgeBalance } from '@/components/elements'
 import { Http } from '@/plugins'
 import type { IUser } from '@/types/user'
 import type { Transaction, TransactionStatus, TransactionType } from '@/types/transaction'
+import { AUTH } from '@/data/permissions'
+
+definePage({
+	meta: {
+		permissions: [AUTH],
+		bgClass: 'shop'
+	}
+})
 
 const auth = useAuthStore()
 const transactions = computed(() => auth.user.expand?.transactions)

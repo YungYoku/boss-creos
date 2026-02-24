@@ -76,8 +76,13 @@ const user: Ref<IUser | null> = ref(null)
 const loadingCreatives = ref(true)
 const creatives: Ref<ICreative[]> = ref([])
 
+const getID = () => {
+	// @ts-expect-error TODO: видимо косяк в vue-router/experimental
+	return route.params.id as string
+}
+
 const loadCreatives = async () => {
-	const id = route.params.id
+	const id = getID()
 	if (!id || Array.isArray(id)) return
 
 	loadingCreatives.value = true
@@ -100,7 +105,7 @@ const loadCreatives = async () => {
 void loadCreatives()
 
 const loadUser = async () => {
-	const id = route.params.id
+	const id = getID()
 	if (!id || Array.isArray(id)) return
 
 	loading.value = true
@@ -115,7 +120,7 @@ const loadUser = async () => {
 
 	loading.value = false
 }
-watch(() => route.params.id, loadUser, { immediate: true })
+watch(() => getID(), loadUser, { immediate: true })
 </script>
 
 <style scoped>

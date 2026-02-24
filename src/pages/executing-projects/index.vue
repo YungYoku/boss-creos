@@ -62,6 +62,13 @@ import { Chat } from '@/components/sections'
 import { EmptyProjectCard, ProjectCard } from '@/components/blocks'
 import { PageTitle } from '@/components/elements'
 import type { IRating } from '@/types/rating'
+import { AUTH, DESIGNER } from '@/data/permissions'
+
+definePage({
+	meta: {
+		permissions: [AUTH, DESIGNER]
+	}
+})
 
 const auth = useAuthStore()
 

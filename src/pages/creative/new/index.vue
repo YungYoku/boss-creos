@@ -197,7 +197,15 @@ import {
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
 import { creativeTypeItems, emptyCreative, type ICreative, ratioItems } from '@/types/creative'
-import { isHttpError } from '@/plugins/http.ts'
+import { isHttpError } from '@/plugins/http'
+import { AUTH, DESIGNER } from '@/data/permissions'
+
+definePage({
+	meta: {
+		permissions: [AUTH, DESIGNER],
+		bgClass: 'new-creative'
+	}
+})
 
 const auth = useAuthStore()
 

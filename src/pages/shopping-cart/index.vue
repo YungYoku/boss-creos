@@ -91,6 +91,13 @@ import { BadgeBalance, Image } from '@/components/elements'
 import { Http } from '@/plugins'
 import type { IUser } from '@/types/user'
 import { useToast } from '@/stores/toast'
+import { AUTH } from '@/data/permissions'
+
+definePage({
+	meta: {
+		permissions: [AUTH]
+	}
+})
 
 const auth = useAuthStore()
 

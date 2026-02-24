@@ -24,6 +24,12 @@ import { UserCard } from '@/components/blocks'
 import type { IUser, IUsers } from '@/types/user'
 import { Http } from '@/plugins'
 
+definePage({
+	meta: {
+		bgClass: 'shop'
+	}
+})
+
 const users: Ref<IUser[]> = ref([])
 
 const loading = ref(true)

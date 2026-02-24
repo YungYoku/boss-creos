@@ -47,6 +47,13 @@ import { Grid } from '@/components/structures'
 import { CreativeCard, EmptyCreativeCard } from '@/components/blocks'
 import { Http } from '@/plugins'
 import type { ICreative, ICreatives } from '@/types/creative'
+import { AUTH, BUYER } from '@/data/permissions'
+
+definePage({
+	meta: {
+		permissions: [AUTH, BUYER]
+	}
+})
 
 const auth = useAuthStore()
 

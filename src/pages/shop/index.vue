@@ -92,6 +92,12 @@ import type { ICreative, ICreatives, ICreativeStatus, ICreativeType, IRatio } fr
 import { creativeTypeItems, ratioItems } from '@/types/creative'
 import { Form, Http } from '@/plugins'
 
+definePage({
+	meta: {
+		bgClass: 'shop'
+	}
+})
+
 interface SearchForm {
 	geo: string
 	slot: string
