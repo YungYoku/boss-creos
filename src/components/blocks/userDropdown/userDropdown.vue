@@ -95,7 +95,7 @@ const items = computed(() => [
 		},
 		{
 			text: 'Создать креатив',
-			to: '/new-creative',
+			to: '/creative/new',
 			can: auth.isDesigner
 		},
 

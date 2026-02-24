@@ -47,9 +47,23 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/creative/': RouteRecordInfo<
-      '/creative/',
-      '/creative',
+    '/creative/edit/': RouteRecordInfo<
+      '/creative/edit/',
+      '/creative/edit',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/creative/id/': RouteRecordInfo<
+      '/creative/id/',
+      '/creative/id',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/creative/new/': RouteRecordInfo<
+      '/creative/new/',
+      '/creative/new',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -57,20 +71,6 @@ declare module 'vue-router/auto-routes' {
     '/designers/': RouteRecordInfo<
       '/designers/',
       '/designers',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/editCreative/': RouteRecordInfo<
-      '/editCreative/',
-      '/editCreative',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/editProject/': RouteRecordInfo<
-      '/editProject/',
-      '/editProject',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -145,20 +145,6 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/newCreative/': RouteRecordInfo<
-      '/newCreative/',
-      '/newCreative',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
-    '/newProject/': RouteRecordInfo<
-      '/newProject/',
-      '/newProject',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/orders/': RouteRecordInfo<
       '/orders/',
       '/orders',
@@ -173,9 +159,23 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/project/': RouteRecordInfo<
-      '/project/',
-      '/project',
+    '/project/edit/': RouteRecordInfo<
+      '/project/edit/',
+      '/project/edit',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/project/id/': RouteRecordInfo<
+      '/project/id/',
+      '/project/id',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/project/new/': RouteRecordInfo<
+      '/project/new/',
+      '/project/new',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -239,27 +239,27 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/creative/index.vue': {
+    'src/pages/creative/edit/index.vue': {
       routes:
-        | '/creative/'
+        | '/creative/edit/'
+      views:
+        | never
+    }
+    'src/pages/creative/id/index.vue': {
+      routes:
+        | '/creative/id/'
+      views:
+        | never
+    }
+    'src/pages/creative/new/index.vue': {
+      routes:
+        | '/creative/new/'
       views:
         | never
     }
     'src/pages/designers/index.vue': {
       routes:
         | '/designers/'
-      views:
-        | never
-    }
-    'src/pages/editCreative/index.vue': {
-      routes:
-        | '/editCreative/'
-      views:
-        | never
-    }
-    'src/pages/editProject/index.vue': {
-      routes:
-        | '/editProject/'
       views:
         | never
     }
@@ -323,18 +323,6 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/newCreative/index.vue': {
-      routes:
-        | '/newCreative/'
-      views:
-        | never
-    }
-    'src/pages/newProject/index.vue': {
-      routes:
-        | '/newProject/'
-      views:
-        | never
-    }
     'src/pages/orders/index.vue': {
       routes:
         | '/orders/'
@@ -347,9 +335,21 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/project/index.vue': {
+    'src/pages/project/edit/index.vue': {
       routes:
-        | '/project/'
+        | '/project/edit/'
+      views:
+        | never
+    }
+    'src/pages/project/id/index.vue': {
+      routes:
+        | '/project/id/'
+      views:
+        | never
+    }
+    'src/pages/project/new/index.vue': {
+      routes:
+        | '/project/new/'
       views:
         | never
     }

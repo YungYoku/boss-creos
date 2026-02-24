@@ -23,50 +23,50 @@ const routes: RouteRecordRaw[] = [
 				},
 			},
 			// {
-			// 	path: '/new-project',
+			// 	path: '/project/:id',
+			// 	name: 'Project',
+			// 	component: () => import('@/pages/project/id/index.vue'),
+			// 	meta: {
+			// 		rules: []
+			// 	}
+			// },
+			// {
+			// 	path: '/project/new',
 			// 	name: 'NewProject',
-			// 	component: () => import('@/views/newProject/index.vue'),
+			// 	component: () => import('@/pages/project/new/index.vue'),
 			// 	meta: {
 			// 		rules: ['auth', 'buyer']
 			// 	}
 			// },
 			// {
-			// 	path: '/project/:id',
-			// 	name: 'Project',
-			// 	component: () => import('@/views/project/index.vue'),
-			// 	meta: {
-			// 		rules: []
-			// 	}
-			// },
-			// {
 			// 	path: '/project/:id/edit',
 			// 	name: 'ProjectEditing',
-			// 	component: () => import('@/views/editProject/index.vue'),
+			// 	component: () => import('@/pages/project/edit/index.vue'),
 			// 	meta: {
 			// 		rules: []
 			// 	}
 			// },
 			{
-				path: '/new-creative',
+				path: '/creative/:id',
+				name: 'Creative',
+				component: () => import('@/pages/creative/id/index.vue'),
+				meta: {
+					rules: []
+				}
+			},
+			{
+				path: '/creative/new',
 				name: 'NewCreative',
-				component: () => import('@/pages/newCreative/index.vue'),
+				component: () => import('@/pages/creative/new/index.vue'),
 				meta: {
 					rules: ['auth', 'designer'],
 					bgClass: 'new-creative'
 				}
 			},
 			{
-				path: '/creative/:id',
-				name: 'Creative',
-				component: () => import('@/pages/creative/index.vue'),
-				meta: {
-					rules: []
-				}
-			},
-			{
 				path: '/creative/:id/edit',
 				name: 'EditCreative',
-				component: () => import('@/pages/editCreative/index.vue'),
+				component: () => import('@/pages/creative/edit/index.vue'),
 				meta: {
 					rules: []
 				}
@@ -74,7 +74,7 @@ const routes: RouteRecordRaw[] = [
 			// {
 			// 	path: '/made-projects',
 			// 	name: 'MadeProjects',
-			// 	component: () => import('@/views/madeProjects/index.vue'),
+			// 	component: () => import('@/pages/madeProjects/index.vue'),
 			// 	meta: {
 			// 		rules: ['auth', 'buyer']
 			// 	}
@@ -204,7 +204,7 @@ const routes: RouteRecordRaw[] = [
 			// {
 			// 	path: '/chats',
 			// 	name: 'Chats',
-			// 	component: () => import('@/views/chats/index.vue'),
+			// 	component: () => import('@/pages/chats/index.vue'),
 			// 	meta: {
 			// 		rules: ['auth']
 			// 	}
