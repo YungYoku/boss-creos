@@ -114,7 +114,7 @@ const routes: RouteRecordRaw[] = [
 			{
 				path: '/shopping-cart/edit/:id',
 				name: 'EditShoppingCart',
-				component: () => import('@/pages/editShoppingCart/index.vue'),
+				component: () => import('@/pages/shoppingCart/edit/index.vue'),
 				meta: {
 					rules: ['auth']
 				}
@@ -140,7 +140,7 @@ const routes: RouteRecordRaw[] = [
 			{
 				path: '/users/:id',
 				name: 'User',
-				component: () => import('@/pages/user/index.vue'),
+				component: () => import('@/pages/users/id/index.vue'),
 				meta: {
 					rules: []
 				}

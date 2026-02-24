@@ -75,13 +75,6 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/editShoppingCart/': RouteRecordInfo<
-      '/editShoppingCart/',
-      '/editShoppingCart',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/executingProjects/': RouteRecordInfo<
       '/executingProjects/',
       '/executingProjects',
@@ -201,9 +194,16 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/user/': RouteRecordInfo<
-      '/user/',
-      '/user',
+    '/shoppingCart/edit/': RouteRecordInfo<
+      '/shoppingCart/edit/',
+      '/shoppingCart/edit',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/users/id/': RouteRecordInfo<
+      '/users/id/',
+      '/users/id',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -260,12 +260,6 @@ declare module 'vue-router/auto-routes' {
     'src/pages/designers/index.vue': {
       routes:
         | '/designers/'
-      views:
-        | never
-    }
-    'src/pages/editShoppingCart/index.vue': {
-      routes:
-        | '/editShoppingCart/'
       views:
         | never
     }
@@ -371,9 +365,15 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/user/index.vue': {
+    'src/pages/shoppingCart/edit/index.vue': {
       routes:
-        | '/user/'
+        | '/shoppingCart/edit/'
+      views:
+        | never
+    }
+    'src/pages/users/id/index.vue': {
+      routes:
+        | '/users/id/'
       views:
         | never
     }
