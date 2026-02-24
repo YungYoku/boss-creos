@@ -74,7 +74,7 @@ const routes: RouteRecordRaw[] = [
 			// {
 			// 	path: '/made-projects',
 			// 	name: 'MadeProjects',
-			// 	component: () => import('@/pages/madeProjects/index.vue'),
+			// 	component: () => import('@/pages/made-projects/index.vue'),
 			// 	meta: {
 			// 		rules: ['auth', 'buyer']
 			// 	}
@@ -82,7 +82,7 @@ const routes: RouteRecordRaw[] = [
 			{
 				path: '/made-creatives',
 				name: 'MadeCreatives',
-				component: () => import('@/pages/madeCreatives/index.vue'),
+				component: () => import('@/pages/made-creatives/index.vue'),
 				meta: {
 					rules: ['auth', 'designer']
 				}
@@ -90,7 +90,7 @@ const routes: RouteRecordRaw[] = [
 			{
 				path: '/executing-projects',
 				name: 'ExecutingProjects',
-				component: () => import('@/pages/executingProjects/index.vue'),
+				component: () => import('@/pages/executing-projects/index.vue'),
 				meta: {
 					rules: ['auth', 'designer']
 				}
@@ -106,7 +106,7 @@ const routes: RouteRecordRaw[] = [
 			{
 				path: '/shopping-cart',
 				name: 'ShoppingCart',
-				component: () => import('@/pages/shoppingCart/index.vue'),
+				component: () => import('@/pages/shopping-cart/index.vue'),
 				meta: {
 					rules: ['auth']
 				}
@@ -114,7 +114,7 @@ const routes: RouteRecordRaw[] = [
 			{
 				path: '/shopping-cart/edit/:id',
 				name: 'EditShoppingCart',
-				component: () => import('@/pages/shoppingCart/edit/index.vue'),
+				component: () => import('@/pages/shopping-cart/edit/index.vue'),
 				meta: {
 					rules: ['auth']
 				}
