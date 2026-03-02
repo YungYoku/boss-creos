@@ -101,7 +101,7 @@ const auth = useAuthStore()
 const isItMine = computed(() => props.creative.creator === auth.user.id)
 
 const route = useRoute()
-const isDetailPage = computed(() => route.name === 'Creative')
+const isDetailPage = computed(() => route.name === '/creative/[id]')
 
 const geo: Ref<string[]> = ref([])
 const basketWithCreative = computed(() => {

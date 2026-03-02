@@ -85,7 +85,7 @@ const nav = [
 ]
 
 const route = useRoute()
-const isAuthPage = computed(() => route.name === 'Login' || route.name === 'Registration')
+const isAuthPage = computed(() => route.name === '/login/' || route.name === '/registration/')
 </script>
 
 <style scoped>
