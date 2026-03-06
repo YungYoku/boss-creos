@@ -15,8 +15,8 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "10.0.1",
-		"@stylistic/eslint-plugin": "5.9.0",
-		"@types/node": "25.3.3",
+		"@stylistic/eslint-plugin": "5.10.0",
+		"@types/node": "25.3.5",
 		"typescript-eslint": "8.56.1",
 		"@vitejs/plugin-vue": "6.0.4",
 		"@vue/eslint-config-typescript": "14.7.0",
