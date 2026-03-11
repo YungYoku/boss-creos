@@ -1,17 +1,12 @@
 <template>
 	<div class="card">
-		<img
-			v-if="badge"
-			src="@/assets/img/creative__badge.webp"
-			class="card__badge"
-			alt=""
-		>
+		<img v-if="badge" src="@/assets/img/creative__badge.webp" class="card__badge" alt="" />
 
-		<slot name="image"/>
+		<slot name="image" />
 
-		<div class="card__fade"/>
+		<div class="card__fade" />
 
-		<slot name="footer"/>
+		<slot name="footer" />
 	</div>
 </template>
 
@@ -19,8 +14,8 @@
 defineProps({
 	badge: {
 		type: Boolean,
-		default: true
-	}
+		default: true,
+	},
 })
 </script>
 
@@ -28,8 +23,8 @@ defineProps({
 .card {
 	position: relative;
 	padding: 16px 8px;
-	background: #0F0F10;
-	border: 1px solid #1D1D20;
+	background: #0f0f10;
+	border: 1px solid #1d1d20;
 	border-radius: 16px;
 
 	@media (max-width: 1024px) {

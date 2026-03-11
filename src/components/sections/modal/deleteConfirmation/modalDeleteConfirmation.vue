@@ -1,21 +1,11 @@
 <template>
-	<Modal
-		:width="600"
-		@close="close"
-	>
-		<Grid
-			:columns="1"
-			vertical
-		>
-			<slot/>
+	<Modal :width="600" @close="close">
+		<Grid :columns="1" vertical>
+			<slot />
 
 			<Grid :columns="2">
-				<Button @click="close">
-					Нет
-				</Button>
-				<Button @click="remove">
-					Да
-				</Button>
+				<Button @click="close"> Нет </Button>
+				<Button @click="remove"> Да </Button>
 			</Grid>
 		</Grid>
 	</Modal>

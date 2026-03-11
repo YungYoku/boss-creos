@@ -1,7 +1,5 @@
 <template>
-	<Badge>
-		Ваш баланс: ${{ auth.user.balance }}
-	</Badge>
+	<Badge> Ваш баланс: ${{ auth.user.balance }} </Badge>
 </template>
 
 <script setup lang="ts">

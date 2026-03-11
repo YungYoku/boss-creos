@@ -1,31 +1,12 @@
 <template>
-	<Grid
-		vertical
-		:columns="1"
-		gap="l"
-		class="favorite"
-	>
-		<div class="favorite__title">
-			Избранное
-		</div>
+	<Grid vertical :columns="1" gap="l" class="favorite">
+		<div class="favorite__title">Избранное</div>
 
-		<div
-			v-if="favorite.length === 0"
-			class="favorite__empty"
-		>
-			Пусто
-		</div>
+		<div v-if="favorite.length === 0" class="favorite__empty">Пусто</div>
 
-		<div
-			v-else-if="creatives.length || loading"
-			class="favorite__creatives"
-		>
+		<div v-else-if="creatives.length || loading" class="favorite__creatives">
 			<template v-if="loading">
-				<EmptyCreativeCard
-					v-for="i in 8"
-					:key="i"
-					class="favorite__creatives-item"
-				/>
+				<EmptyCreativeCard v-for="i in 8" :key="i" class="favorite__creatives-item" />
 			</template>
 			<template v-else>
 				<CreativeCard
@@ -51,8 +32,8 @@ import { AUTH, BUYER } from '@/data/permissions'
 
 definePage({
 	meta: {
-		permissions: [AUTH, BUYER]
-	}
+		permissions: [AUTH, BUYER],
+	},
 })
 
 const auth = useAuthStore()
@@ -66,18 +47,16 @@ const loadFavorite = async () => {
 
 	if (favorite.value.length === 0) return
 
-	const favoriteIds = favorite.value.map(id => `id = '${id}'`).join(' || ')
+	const favoriteIds = favorite.value.map((id) => `id = '${id}'`).join(' || ')
 
 	loading.value = true
 
-	await Http
-		.get<ICreatives>('/collections/creatives/records', {
-			filter: favoriteIds,
-			expand: ['preview', 'video', 'creator', 'creator.avatar', 'slot']
-		})
-		.then(response => {
-			creatives.value = response.items
-		})
+	await Http.get<ICreatives>('/collections/creatives/records', {
+		filter: favoriteIds,
+		expand: ['preview', 'video', 'creator', 'creator.avatar', 'slot'],
+	}).then((response) => {
+		creatives.value = response.items
+	})
 
 	loading.value = false
 }

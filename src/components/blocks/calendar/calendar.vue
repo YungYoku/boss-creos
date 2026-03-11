@@ -1,31 +1,19 @@
 <template>
 	<div class="calendar">
 		<div class="calendar__header">
-			<div
-				class="calendar__back"
-				@click="back"
-			>
+			<div class="calendar__back" @click="back">
 				{{ '<' }}
 			</div>
 
-			<div class="calendar__title">
-				{{ monthTitle }} {{ year }}
-			</div>
+			<div class="calendar__title">{{ monthTitle }} {{ year }}</div>
 
-			<div
-				class="calendar__next"
-				@click="next"
-			>
+			<div class="calendar__next" @click="next">
 				{{ '>' }}
 			</div>
 		</div>
 
 		<div class="calendar__week-days">
-			<div
-				v-for="weekDay in weekInfo"
-				:key="weekDay"
-				class="calendar__week-day"
-			>
+			<div v-for="weekDay in weekInfo" :key="weekDay" class="calendar__week-day">
 				{{ weekDay }}
 			</div>
 		</div>
@@ -36,7 +24,7 @@
 				:key="day"
 				class="calendar__month-day"
 				:class="{
-					'_active': isDayActive(day)
+					_active: isDayActive(day),
 				}"
 				@click="updateDate(day)"
 			>
@@ -62,52 +50,52 @@ const year = ref(new Date().getFullYear())
 const monthInfo = [
 	{
 		days: 31,
-		title: 'Январь'
+		title: 'Январь',
 	},
 	{
 		days: 28,
-		title: 'Февраль'
+		title: 'Февраль',
 	},
 	{
 		days: 31,
-		title: 'Март'
+		title: 'Март',
 	},
 	{
 		days: 30,
-		title: 'Апрель'
+		title: 'Апрель',
 	},
 	{
 		days: 31,
-		title: 'Май'
+		title: 'Май',
 	},
 	{
 		days: 30,
-		title: 'Июнь'
+		title: 'Июнь',
 	},
 	{
 		days: 31,
-		title: 'Июль'
+		title: 'Июль',
 	},
 	{
 		days: 31,
-		title: 'Август'
+		title: 'Август',
 	},
 	{
 		days: 30,
-		title: 'Сентябрь'
+		title: 'Сентябрь',
 	},
 	{
 		days: 31,
-		title: 'Октябрь'
+		title: 'Октябрь',
 	},
 	{
 		days: 30,
-		title: 'Ноябрь'
+		title: 'Ноябрь',
 	},
 	{
 		days: 31,
-		title: 'Декабрь'
-	}
+		title: 'Декабрь',
+	},
 ] as const
 type Month = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
 const month: Ref<Month> = ref(new Date().getMonth() as Month)
@@ -132,7 +120,11 @@ const weekInfo = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС']
 
 const isDayActive = (day: number) => {
 	const date = new Date(value.value)
-	return date.getFullYear() === year.value && date.getMonth() === month.value && date.getDate() === day
+	return (
+		date.getFullYear() === year.value &&
+		date.getMonth() === month.value &&
+		date.getDate() === day
+	)
 }
 </script>
 

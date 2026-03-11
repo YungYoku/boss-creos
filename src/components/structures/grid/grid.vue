@@ -1,12 +1,15 @@
 <template>
 	<div
 		class="grid"
-		:class="[`_gap-${gap}`, {
-			'_vertical': vertical
-		}]"
+		:class="[
+			`_gap-${gap}`,
+			{
+				_vertical: vertical,
+			},
+		]"
 		:style="style"
 	>
-		<slot/>
+		<slot />
 	</div>
 </template>
 
@@ -39,7 +42,7 @@ const props = withDefaults(defineProps<Props>(), {
 	columnsXl: null,
 	columnsL: null,
 	columnsM: null,
-	columnsS: null
+	columnsS: null,
 })
 
 const activeColumns: Ref<(number | string)[] | number | null> = ref(1)
@@ -71,7 +74,10 @@ onMounted(() => {
 onBeforeUnmount(() => {
 	window.removeEventListener('resize', updateActiveColumns)
 })
-watch(() => [props.columns, props.columnsXl, props.columnsL, props.columnsM, props.columnsS], updateActiveColumns)
+watch(
+	() => [props.columns, props.columnsXl, props.columnsL, props.columnsM, props.columnsS],
+	updateActiveColumns,
+)
 
 const getAlign = (align: Align) => {
 	switch (align) {
@@ -94,7 +100,7 @@ const style = computed(() => {
 
 	if (props.vertical) {
 		return {
-			'align-items': getAlign(props.horAlign)
+			'align-items': getAlign(props.horAlign),
 		}
 	}
 
@@ -102,22 +108,25 @@ const style = computed(() => {
 		return {
 			gridTemplateColumns: `repeat(${activeColumns.value.toString()}, 1fr)`,
 			'align-items': getAlign(props.verAlign),
-			'justify-items': getAlign(props.horAlign)
+			'justify-items': getAlign(props.horAlign),
 		}
 	}
 
 	const _columns = [...activeColumns.value]
 	return {
-		gridTemplateColumns: _columns.reduce((result: string, column: string | number) => {
-			if (typeof column === 'string') return `${result} ${column} `
-			if (typeof column === 'number') return `${result} ${column.toString()}fr `
-			return result
-		}, '').trim(),
+		gridTemplateColumns: _columns
+			.reduce((result: string, column: string | number) => {
+				if (typeof column === 'string') return `${result} ${column} `
+				if (typeof column === 'number') return `${result} ${column.toString()}fr `
+				return result
+			}, '')
+			.trim(),
 		'align-items': getAlign(props.verAlign),
-		'justify-items': getAlign(props.horAlign)
+		'justify-items': getAlign(props.horAlign),
 	}
 })
-</script>]
+</script>
+]
 
 <style scoped>
 .grid {

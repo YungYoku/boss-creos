@@ -1,10 +1,5 @@
 <template>
-	<Table
-		:header
-		:body
-		:cells
-		@reload="loadCreatives"
-	/>
+	<Table :header :body :cells @reload="loadCreatives" />
 </template>
 
 <script lang="ts" setup>
@@ -19,31 +14,23 @@ import { useAdapter } from './adapter'
 
 definePage({
 	meta: {
-		permissions: [AUTH, ADMIN]
-	}
+		permissions: [AUTH, ADMIN],
+	},
 })
 
-const {
-	handleLoadedData,
-	header,
-	body,
-	fields,
-	cells
-} = useAdapter()
+const { handleLoadedData, header, body, fields, cells } = useAdapter()
 
 const loading = ref(true)
 const loadCreatives = async () => {
-	await Http
-		.get<IUsers>('/collections/users/records', {
-			fields,
-			filter: 'status=\'moderation\'',
-			expand: ['avatar'],
-			perPage: 12,
-			page: 1
-		})
-		.then(res => {
-			handleLoadedData(res.items)
-		})
+	await Http.get<IUsers>('/collections/users/records', {
+		fields,
+		filter: "status='moderation'",
+		expand: ['avatar'],
+		perPage: 12,
+		page: 1,
+	}).then((res) => {
+		handleLoadedData(res.items)
+	})
 }
 
 const loadData = async () => {

@@ -1,15 +1,10 @@
 <template>
 	<div class="orders">
-		<div class="orders__title">
-			Мои заказы
-		</div>
+		<div class="orders__title">Мои заказы</div>
 
 		<span v-if="baskets.length === 0">Пусто</span>
 
-		<CardLong
-			v-for="basket in baskets"
-			:key="basket.id"
-		>
+		<CardLong v-for="basket in baskets" :key="basket.id">
 			<template #icon>
 				<Image
 					v-if="basket.expand?.creative?.expand?.preview"
@@ -21,7 +16,9 @@
 			<div class="orders__creative-content">
 				<div class="orders__creative-name">
 					<router-link :to="`/creative/${basket.expand?.creative?.id}`">
-						{{ basket.expand?.creative?.expand?.slot?.name }} - ${{ basket.expand?.creative?.price }}
+						{{ basket.expand?.creative?.expand?.slot?.name }} - ${{
+							basket.expand?.creative?.price
+						}}
 					</router-link>
 
 					<div
@@ -57,28 +54,16 @@
 				>
 					Загрузить
 				</InputVideo>
-				<Button
-					variant="outline"
-					@click="showDescription(basket)"
-				>
-					Подробнее
-				</Button>
+				<Button variant="outline" @click="showDescription(basket)"> Подробнее </Button>
 			</template>
 		</CardLong>
 	</div>
 
-	<Modal
-		v-if="modalShowing"
-		:width="585"
-		@close="modalShowing = false"
-	>
+	<Modal v-if="modalShowing" :width="585" @close="modalShowing = false">
 		<div class="orders__item-description">
 			Описание: {{ modalShowingBasket?.comment || 'пусто' }}
 		</div>
-		<div
-			v-if="modalShowingBasket?.resize?.length"
-			class="orders__item-resize"
-		>
+		<div v-if="modalShowingBasket?.resize?.length" class="orders__item-resize">
 			Ресайз: {{ modalShowingBasket.resize.join(', ') }}
 		</div>
 	</Modal>
@@ -98,8 +83,8 @@ import { AUTH } from '@/data/permissions'
 definePage({
 	meta: {
 		permissions: [AUTH],
-		bgClass: 'shop'
-	}
+		bgClass: 'shop',
+	},
 })
 
 const auth = useAuthStore()
@@ -110,31 +95,33 @@ const loadCreatives = async () => {
 
 	await Http.get<ICreatives>('/collections/creatives/records', {
 		filter: `creator='${auth.user.id}'`,
+	}).then(({ items }) => {
+		creatives.value = items
 	})
-		.then(({ items }) => {
-			creatives.value = items
-		})
 }
 
 const baskets: Ref<IBasket[]> = ref([])
 const loadBaskets = async () => {
 	if (creativesIDs.value.length === 0) return
 
-	const filter = creativesIDs.value.map(id => `creative = '${id}'`).join(' || ')
+	const filter = creativesIDs.value.map((id) => `creative = '${id}'`).join(' || ')
 	await Http.get<IBaskets>('/collections/baskets/records', {
 		filter,
-		expand: ['creative', 'creative.preview', 'creative.slot', 'geo']
+		expand: ['creative', 'creative.preview', 'creative.slot', 'geo'],
+	}).then(({ items }) => {
+		baskets.value = items
 	})
-		.then(({ items }) => {
-			baskets.value = items
-		})
 }
 
-watch(() => auth.user, () => {
-	void loadCreatives().then(() => {
-		void loadBaskets()
-	})
-}, { immediate: true })
+watch(
+	() => auth.user,
+	() => {
+		void loadCreatives().then(() => {
+			void loadBaskets()
+		})
+	},
+	{ immediate: true },
+)
 
 const modalShowing = ref(false)
 const modalShowingBasket: Ref<IBasket | null> = ref(null)
@@ -208,7 +195,7 @@ const loadVideo = async (basket: IBasket) => {
 
 	.orders__creative-geo {
 		font-size: 10px;
-		color: #AFAFB7;
+		color: #afafb7;
 	}
 
 	.orders__creative-geo-item {

@@ -1,15 +1,6 @@
 <template>
-	<FieldWrapperRich
-		class="input-video-rich"
-		:label
-		:error
-	>
-		<InputVideo
-			v-model="value"
-			:loading
-			:accept
-			@update:name="updateName"
-		/>
+	<FieldWrapperRich class="input-video-rich" :label :error>
+		<InputVideo v-model="value" :loading :accept @update:name="updateName" />
 	</FieldWrapperRich>
 </template>
 
@@ -55,7 +46,7 @@ const value = defineModel<string | null>({
 	.input__field-wrap {
 		height: 25px;
 		border-radius: 8px;
-		border: 1px solid #FFFFFF1A;
+		border: 1px solid #ffffff1a;
 		background: transparent;
 	}
 

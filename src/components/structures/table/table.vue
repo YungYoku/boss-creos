@@ -1,11 +1,8 @@
 <template>
 	<div class="table table_default">
-		<div
-			v-if="body.length > 0"
-			class="table__inner"
-		>
+		<div v-if="body.length > 0" class="table__inner">
 			<div class="table__body">
-				<Header :data="header"/>
+				<Header :data="header" />
 
 				<Row :data="body">
 					<template #cell="{ cell }">
@@ -21,12 +18,7 @@
 			</div>
 		</div>
 
-		<div
-			v-else
-			class="table__empty"
-		>
-			Пусто
-		</div>
+		<div v-else class="table__empty">Пусто</div>
 	</div>
 </template>
 
@@ -39,16 +31,16 @@ import Row from './components/row.vue'
 defineProps({
 	header: {
 		type: Array as PropType<IHeader>,
-		default: () => ([])
+		default: () => [],
 	},
 	body: {
 		type: Array as PropType<IRows>,
-		default: () => ([])
+		default: () => [],
 	},
 	cells: {
 		type: Object as PropType<Record<string, unknown>>,
-		default: () => ({})
-	}
+		default: () => ({}),
+	},
 })
 
 const emit = defineEmits(['reload'])
@@ -57,7 +49,7 @@ const reload = () => {
 }
 
 const actions = {
-	'reload': reload
+	reload: reload,
 }
 const handleAction = (key: keyof typeof actions) => {
 	actions[key]()
@@ -171,7 +163,7 @@ const handleAction = (key: keyof typeof actions) => {
 			font-weight: 500;
 			color: #000;
 			user-select: none;
-			background: linear-gradient(180deg, #FCFDFF 0%, #EDEDED 100%);
+			background: linear-gradient(180deg, #fcfdff 0%, #ededed 100%);
 
 			.table__content {
 				justify-content: flex-start;

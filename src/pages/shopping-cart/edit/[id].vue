@@ -3,11 +3,7 @@
 	<div class="edit-shopping-cart">
 		<span v-if="baskets.length === 0">Пусто</span>
 
-		<div
-			v-for="basket in baskets"
-			:key="basket.id"
-			class="edit-shopping-cart__creative"
-		>
+		<div v-for="basket in baskets" :key="basket.id" class="edit-shopping-cart__creative">
 			<div class="edit-shopping-cart__creative-head">
 				<Image
 					v-if="basket.expand?.creative?.expand?.preview"
@@ -65,12 +61,7 @@
 			</Button>
 		</div>
 
-		<Button
-			to="/shopping-cart"
-			variant="outline"
-		>
-			Вернуться
-		</Button>
+		<Button to="/shopping-cart" variant="outline"> Вернуться </Button>
 	</div>
 </template>
 
@@ -88,8 +79,8 @@ import { AUTH } from '@/data/permissions'
 
 definePage({
 	meta: {
-		permissions: [AUTH]
-	}
+		permissions: [AUTH],
+	},
 })
 
 const route = useRoute()
@@ -102,16 +93,14 @@ const auth = useAuthStore()
 const baskets = computed(() => {
 	const id = getID()
 	const baskets = auth.user.expand?.baskets ?? []
-	return baskets.filter(basket => basket.status === 'created' && basket.id === id)
+	return baskets.filter((basket) => basket.status === 'created' && basket.id === id)
 })
 
 const toast = useToast()
 const updateBasket = async (basket: IBasket) => {
-	await Http
-		.patch<IBasket>(`/collections/baskets/records/${basket.id}`, basket)
-		.then(() => {
-			toast.set('Успешно сохранено!')
-		})
+	await Http.patch<IBasket>(`/collections/baskets/records/${basket.id}`, basket).then(() => {
+		toast.set('Успешно сохранено!')
+	})
 }
 </script>
 
@@ -128,11 +117,20 @@ const updateBasket = async (basket: IBasket) => {
 		flex-direction: column;
 		gap: 5px;
 		padding: 5px;
-		background: linear-gradient(180deg, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 8%) 100%),
-		radial-gradient(50% 100% at 50% 0%, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 0%) 100%);
+		background:
+			linear-gradient(180deg, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 8%) 100%),
+			radial-gradient(
+				50% 100% at 50% 0%,
+				rgb(255 255 255 / 10%) 0%,
+				rgb(255 255 255 / 0%) 100%
+			);
 		border: 1px solid;
 		border-radius: 10px;
-		border-image-source: linear-gradient(135.28deg, rgb(255 255 255 / 30%) -128.53%, rgb(255 255 255 / 0%) 75.12%);
+		border-image-source: linear-gradient(
+			135.28deg,
+			rgb(255 255 255 / 30%) -128.53%,
+			rgb(255 255 255 / 0%) 75.12%
+		);
 	}
 
 	.edit-shopping-cart__creative-head {
@@ -161,7 +159,7 @@ const updateBasket = async (basket: IBasket) => {
 
 	.edit-shopping-cart__creative-geo {
 		font-size: 10px;
-		color: #AFAFB7;
+		color: #afafb7;
 	}
 
 	.edit-shopping-cart__creative-geo-item {

@@ -1,18 +1,6 @@
 <template>
-	<FieldWrapperRich
-		class="select-live-rich"
-		:label
-		:error
-	>
-		<SelectLive
-			v-model="value"
-			label=""
-			:type-key
-			:api
-			:filter-fields
-			:exclude
-			:multiple
-		/>
+	<FieldWrapperRich class="select-live-rich" :label :error>
+		<SelectLive v-model="value" label="" :type-key :api :filter-fields :exclude :multiple />
 	</FieldWrapperRich>
 </template>
 
@@ -27,7 +15,7 @@ withDefaults(defineProps<Props>(), defaultProps)
 
 const value = defineModel<string | string[]>({
 	type: [String, Array],
-	default: ''
+	default: '',
 })
 </script>
 
@@ -48,7 +36,7 @@ const value = defineModel<string | string[]>({
 		.select__trigger {
 			height: 25px;
 			border-radius: 8px;
-			border: 1px solid #FFFFFF1A;
+			border: 1px solid #ffffff1a;
 			background: transparent;
 			padding: 8px 0;
 		}

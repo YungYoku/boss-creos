@@ -2,19 +2,18 @@
 
 ## 1. Clone project and submodules
 
-``` powershell
+```powershell
 git clone git@github.com:YungYoku/college-freelance.git
 ```
 
-
 ## 2. Install dependencies
 
-``` powershell
+```powershell
 bun i
 ```
 
 ## 3. Start Develop
 
-``` powershell
+```powershell
 bun run dev
 ```

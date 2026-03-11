@@ -1,8 +1,5 @@
 <template>
-	<ProjectCard
-		:project="emptyProject"
-		loading
-	/>
+	<ProjectCard :project="emptyProject" loading />
 </template>
 
 <script setup lang="ts">

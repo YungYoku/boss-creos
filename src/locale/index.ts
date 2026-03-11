@@ -10,11 +10,11 @@ import ruTable from './ru/table.json'
 const locales = {
 	ru: {
 		...ru,
-		...ruTable
+		...ruTable,
 	},
 	en: {
 		...en,
-		...enTable
+		...enTable,
 	},
 } as const
 
@@ -28,12 +28,12 @@ class Localize<Lang extends string = DefaultLang> {
 	locale: Ref<Lang | DefaultLang> = ref(this.baseLocale)
 	locales: Locales<Lang | DefaultLang> = {
 		en: {},
-		ru: {}
+		ru: {},
 	} as Locales<Lang | DefaultLang>
 
 	constructor(locales: Locales<Lang>) {
 		const keys = Object.keys(locales) as Lang[]
-		keys.forEach(key => {
+		keys.forEach((key) => {
 			this.locales[key] = { ...this.locales[key], ...locales[key] }
 		})
 	}
@@ -42,7 +42,8 @@ class Localize<Lang extends string = DefaultLang> {
 		app.config.globalProperties.$t = (key: string) => this.t(key)
 		app.config.globalProperties.$locale = (locale: Lang) => {
 			if (locale) {
-				this.setLocale(locale); return
+				this.setLocale(locale)
+				return
 			} else {
 				return this.getLocale()
 			}

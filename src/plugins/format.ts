@@ -9,7 +9,7 @@ class Format {
 
 			number(value: number, length = 1) {
 				return value.toFixed(length)
-			}
+			},
 		}
 
 		return types[type](value, ...props)
@@ -19,14 +19,15 @@ class Format {
 const format = new Format()
 
 const formatPlugin: Plugin = {
-	install (app: App) {
-		app.config.globalProperties.$format = (type: FormatType, value: number, ...props: number[]) => {
+	install(app: App) {
+		app.config.globalProperties.$format = (
+			type: FormatType,
+			value: number,
+			...props: number[]
+		) => {
 			return format.get(type, value, ...props)
 		}
 	},
 }
 
-export {
-	format,
-	formatPlugin
-}
+export { format, formatPlugin }

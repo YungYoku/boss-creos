@@ -36,7 +36,7 @@ class Datetime {
 			time: () => `${hour}:${min}`,
 			fullTime: () => `${hour}:${min}:${second}`,
 			fullDatetime: () => `${year}-${month}-${day}, ${hour}:${min}:${second}`,
-			monthAndDay: () => `${month}-${day}`
+			monthAndDay: () => `${month}-${day}`,
 		}
 
 		return methods[type]()
@@ -46,14 +46,11 @@ class Datetime {
 const datetime = new Datetime()
 
 const datetimePlugin: Plugin = {
-	install (app: App) {
+	install(app: App) {
 		app.config.globalProperties.$date = (date: Date | string | null, type?: Method) => {
 			return datetime.get(date, type)
 		}
 	},
 }
 
-export {
-	datetime,
-	datetimePlugin
-}
+export { datetime, datetimePlugin }

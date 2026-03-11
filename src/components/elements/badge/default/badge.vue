@@ -1,6 +1,6 @@
 <template>
 	<div class="badge">
-		<slot/>
+		<slot />
 	</div>
 </template>
 
@@ -13,8 +13,8 @@
 	font-weight: 600;
 	font-size: 13px;
 	border-radius: 16px;
-	border: 1px solid #1D1D20;
-	background: #0F0F10;
+	border: 1px solid #1d1d20;
+	background: #0f0f10;
 	cursor: pointer;
 	user-select: none;
 }

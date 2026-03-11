@@ -1,9 +1,12 @@
 <template>
 	<div
 		class="avatar"
-		:class="[`_${size}`, {
-			'_editable': editable && avatar
-		}]"
+		:class="[
+			`_${size}`,
+			{
+				_editable: editable && avatar,
+			},
+		]"
 		:style="style"
 	>
 		<template v-if="avatar">
@@ -25,22 +28,12 @@
 					type="file"
 					accept="image/png, image/gif, image/jpeg, image/jpg, image/svg, image/webp, image/avif"
 					@input="onImageLoad"
-				>
-
-				<Icon
-					v-if="editable"
-					class="avatar__icon-upload"
-					name="upload"
-					size="m"
 				/>
+
+				<Icon v-if="editable" class="avatar__icon-upload" name="upload" size="m" />
 			</template>
 
-			<Icon
-				v-else
-				name="user"
-				:colors="['light', 'light']"
-				:size="size"
-			/>
+			<Icon v-else name="user" :colors="['light', 'light']" :size="size" />
 		</template>
 	</div>
 </template>
@@ -64,7 +57,7 @@ const props = withDefaults(defineProps<Props>(), {
 	user: () => ({ ...emptyUser }),
 	self: false,
 	size: 'm',
-	editable: false
+	editable: false,
 })
 
 const auth = useAuthStore()
@@ -113,7 +106,7 @@ const removeAvatar = () => loadImage('')
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
-	background-color: #27272B;
+	background-color: #27272b;
 	background-position: center;
 	background-size: cover;
 	border-radius: 20%;

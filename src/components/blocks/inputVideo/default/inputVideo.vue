@@ -1,18 +1,13 @@
 <template>
 	<div class="input-video">
-		<Button
-			v-if="compact"
-			:disabled="loading"
-			variant="outline"
-			class="input-video__button"
-		>
-			<Icon name="video"/>
-			<slot/>
+		<Button v-if="compact" :disabled="loading" variant="outline" class="input-video__button">
+			<Icon name="video" />
+			<slot />
 
 			<div
 				class="input-video__field-wrap"
 				:class="{
-					'_compact': compact
+					_compact: compact,
 				}"
 			>
 				<Input
@@ -31,7 +26,7 @@
 			v-else
 			class="input-video__field-wrap"
 			:class="{
-				'_compact': compact
+				_compact: compact,
 			}"
 		>
 			<Input
@@ -45,12 +40,7 @@
 				@update-file="updateFile"
 			/>
 
-			<Icon
-				class="input-video__icon"
-				name="download"
-				size="xs"
-				:colors="['dark', 'light']"
-			/>
+			<Icon class="input-video__icon" name="download" size="xs" :colors="['dark', 'light']" />
 		</div>
 	</div>
 </template>
@@ -66,7 +56,6 @@ import type { Props } from './props'
 import { defaultProps } from './props'
 
 withDefaults(defineProps<Props>(), defaultProps)
-
 
 const emit = defineEmits(['update:name'])
 const updateName = (value: string) => {
@@ -84,9 +73,7 @@ const updateFile = async (file: File) => {
 
 	formData.append('video', file)
 
-	value.value = await Http
-		.post<{ id: string }>('/upload/video', formData)
-		.then(({ id }) => id)
+	value.value = await Http.post<{ id: string }>('/upload/video', formData).then(({ id }) => id)
 }
 </script>
 

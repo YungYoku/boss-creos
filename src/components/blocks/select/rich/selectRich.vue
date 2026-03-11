@@ -1,17 +1,6 @@
 <template>
-	<FieldWrapperRich
-		class="select-rich"
-		:label
-		:error
-	>
-		<Select
-			v-model="value"
-			v-model:search="search"
-			:items
-			:multiple
-			:clearable
-			:searchable
-		/>
+	<FieldWrapperRich class="select-rich" :label :error>
+		<Select v-model="value" v-model:search="search" :items :multiple :clearable :searchable />
 	</FieldWrapperRich>
 </template>
 
@@ -26,12 +15,12 @@ withDefaults(defineProps<Props>(), defaultProps)
 
 const value = defineModel<string | string[]>({
 	type: [String, Array],
-	default: ''
+	default: '',
 })
 
 const search = defineModel<string>('search', {
 	type: String,
-	default: ''
+	default: '',
 })
 </script>
 
@@ -45,7 +34,7 @@ const search = defineModel<string>('search', {
 	.select__trigger {
 		height: 25px;
 		border-radius: 8px;
-		border: 1px solid #FFFFFF1A;
+		border: 1px solid #ffffff1a;
 		background: transparent;
 		padding: 8px 0;
 	}

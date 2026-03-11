@@ -5,15 +5,12 @@
 				{{ label }}
 			</Label>
 
-			<Button
-				class="date-picker__button"
-				variant="outline"
-			>
+			<Button class="date-picker__button" variant="outline">
 				{{ printedValue }}
 			</Button>
 		</template>
 
-		<Calendar v-model="value"/>
+		<Calendar v-model="value" />
 	</Popover>
 </template>
 
@@ -27,8 +24,8 @@ import { Label } from '@/components/elements'
 defineProps({
 	label: {
 		type: String,
-		default: 'Дата'
-	}
+		default: 'Дата',
+	},
 })
 
 const months = [
@@ -43,12 +40,12 @@ const months = [
 	'сентября',
 	'октября',
 	'ноября',
-	'декабря'
+	'декабря',
 ] as const
 
 const value = defineModel({
 	type: Object as PropType<Date>,
-	default: () => new Date()
+	default: () => new Date(),
 })
 const printedValue = computed(() => {
 	const date = new Date(value.value)

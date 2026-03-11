@@ -1,9 +1,5 @@
 <template>
-	<img
-		:src="image"
-		:alt="alt"
-		:loading="typeof props.src === 'string' ? 'eager' : 'lazy'"
-	>
+	<img :src="image" :alt="alt" :loading="typeof props.src === 'string' ? 'eager' : 'lazy'" />
 </template>
 
 <script setup lang="ts">
@@ -11,12 +7,12 @@ import { computed } from 'vue'
 import type { IImage } from '@/types/file'
 
 interface Props {
-	src: string | IImage,
+	src: string | IImage
 	alt?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-	alt: ''
+	alt: '',
 })
 
 const image = computed(() => {

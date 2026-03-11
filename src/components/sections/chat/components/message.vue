@@ -2,7 +2,7 @@
 	<div
 		class="message"
 		:class="{
-			'_self': self,
+			_self: self,
 		}"
 	>
 		<Text size="xs">
@@ -27,12 +27,12 @@ import { File, Text } from '@/components/elements'
 const props = defineProps({
 	message: {
 		type: Object,
-		default: () => ({})
+		default: () => ({}),
 	},
 	self: {
 		type: Boolean,
-		default: false
-	}
+		default: false,
+	},
 })
 
 const created = computed(() => new Date(props.message.created))

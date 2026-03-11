@@ -1,14 +1,6 @@
 <template>
-	<FieldWrapperRich
-		class="textarea-rich"
-		:label
-		:error
-	>
-		<Textarea
-			v-model="value"
-			:height
-			:disabled
-		/>
+	<FieldWrapperRich class="textarea-rich" :label :error>
+		<Textarea v-model="value" :height :disabled />
 	</FieldWrapperRich>
 </template>
 
@@ -23,7 +15,7 @@ withDefaults(defineProps<Props>(), defaultProps)
 
 const value = defineModel<string>({
 	type: String,
-	default: ''
+	default: '',
 })
 </script>
 
@@ -40,7 +32,7 @@ const value = defineModel<string>({
 	.textarea__field {
 		padding: 4px 24px 4px 8px;
 		border-radius: 8px;
-		border: 1px solid #FFFFFF1A;
+		border: 1px solid #ffffff1a;
 		background: transparent;
 	}
 

@@ -1,5 +1,5 @@
 <template>
-	<div class="separator"/>
+	<div class="separator" />
 </template>
 
 <style scoped>

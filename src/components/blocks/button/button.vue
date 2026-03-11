@@ -1,9 +1,5 @@
 <template>
-	<Skeleton
-		v-if="loading"
-		:class="props.class"
-		height="48px"
-	/>
+	<Skeleton v-if="loading" :class="props.class" height="48px" />
 
 	<component
 		:is="to ? 'router-link' : 'button'"
@@ -14,7 +10,7 @@
 		:type
 		:disabled
 	>
-		<slot/>
+		<slot />
 	</component>
 </template>
 
@@ -29,28 +25,28 @@ type Variant = 'default' | 'positive' | 'destructive' | 'outline'
 const props = defineProps({
 	class: {
 		type: [String, Array, Object],
-		default: ''
+		default: '',
 	},
 	loading: {
 		type: Boolean,
-		default: false
+		default: false,
 	},
 	type: {
 		type: String as PropType<Type>,
-		default: 'button'
+		default: 'button',
 	},
 	disabled: {
 		type: Boolean,
-		default: false
+		default: false,
 	},
 	variant: {
 		type: String as PropType<Variant>,
-		default: 'default'
+		default: 'default',
 	},
 	to: {
 		type: String,
-		default: null
-	}
+		default: null,
+	},
 })
 </script>
 
@@ -94,9 +90,13 @@ const props = defineProps({
 	}
 
 	&.outline {
-		background: linear-gradient(180deg, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 8%) 100%),
-		radial-gradient(50% 100% at 50% 0%, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 0%) 100%);
-
+		background:
+			linear-gradient(180deg, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 8%) 100%),
+			radial-gradient(
+				50% 100% at 50% 0%,
+				rgb(255 255 255 / 10%) 0%,
+				rgb(255 255 255 / 0%) 100%
+			);
 
 		&:hover {
 			background-color: hsl(var(--accent));

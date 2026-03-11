@@ -19,23 +19,23 @@ import Image from '../image/image.vue'
 const props = defineProps({
 	name: {
 		type: String,
-		default: 'file'
+		default: 'file',
 	},
 	size: {
 		type: String,
 		default: 's',
 		validator: (size: string) => {
 			return ['xs', 's', 'm', 'l', 'xl'].includes(size)
-		}
+		},
 	},
 	colors: {
 		type: Array,
-		default: () => ['light', 'dark']
+		default: () => ['light', 'dark'],
 	},
 	pointer: {
 		type: Boolean,
-		default: true
-	}
+		default: true,
+	},
 })
 
 const currentColor = computed(() => {
@@ -55,23 +55,23 @@ const src = computed(() => {
 		filter: invert(1);
 	}
 
-    &._xs {
+	&._xs {
 		width: 15px;
-        max-width: 15px;
-        max-height: 15px;
-    }
+		max-width: 15px;
+		max-height: 15px;
+	}
 
-    &._s {
+	&._s {
 		width: 20px;
-        max-width: 20px;
-        max-height: 20px;
-    }
+		max-width: 20px;
+		max-height: 20px;
+	}
 
-    &._m {
+	&._m {
 		width: 30px;
-        max-width: 30px;
-        max-height: 30px;
-    }
+		max-width: 30px;
+		max-height: 30px;
+	}
 
 	&._l {
 		width: 40px;

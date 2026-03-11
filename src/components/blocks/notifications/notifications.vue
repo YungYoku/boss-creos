@@ -1,43 +1,25 @@
 <template>
-	<Dropdown
-		class="notifications"
-		:items
-	>
-		<Button
-			variant="outline"
-			class="notifications__button"
-			@click="onOpen"
-		>
-			<Icon name="notifications"/>
+	<Dropdown class="notifications" :items>
+		<Button variant="outline" class="notifications__button" @click="onOpen">
+			<Icon name="notifications" />
 
 			<span
-				v-if="notifications.findIndex(item => !item.checked) !== -1"
+				v-if="notifications.findIndex((item) => !item.checked) !== -1"
 				class="notifications__signal"
 			/>
 		</Button>
 
-		<template #item="{item}">
-			<Grid
-				:columns="1"
-				vertical
-				gap="xs"
-				class="notifications__item"
-			>
+		<template #item="{ item }">
+			<Grid :columns="1" vertical gap="xs" class="notifications__item">
 				<Text size="xs">
 					{{ item.text }}
 				</Text>
 
-				<Text
-					v-if="item?.created"
-					size="xs"
-				>
+				<Text v-if="item?.created" size="xs">
 					{{ $date(new Date(item.created), 'datetime') }}
 				</Text>
 
-				<span
-					v-if="!item.checked"
-					class="notifications__signal"
-				/>
+				<span v-if="!item.checked" class="notifications__signal" />
 			</Grid>
 		</template>
 	</Dropdown>
@@ -56,7 +38,7 @@ import { Http } from '@/plugins'
 const auth = useAuthStore()
 
 const notifications = computed<INotification[]>(() => auth.user.expand?.notifications ?? [])
-const items = computed(() => notifications.value.map(item => [item]))
+const items = computed(() => notifications.value.map((item) => [item]))
 
 const onOpen = async () => {
 	await Http.post<INotification[]>('/check-notifications')
@@ -66,11 +48,11 @@ const onOpen = async () => {
 			...auth.user,
 			expand: {
 				...auth.user.expand,
-				notifications: notifications.value.map(item => {
+				notifications: notifications.value.map((item) => {
 					item.checked = true
 					return item
-				})
-			}
+				}),
+			},
 		})
 	}, 3000)
 }

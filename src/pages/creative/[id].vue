@@ -1,37 +1,20 @@
 <template>
-	<div v-if="loading">
-		Загрузка
-	</div>
+	<div v-if="loading">Загрузка</div>
 
-	<Grid
-		v-else-if="isExists && !isOnModeration"
-		class="creative"
-		vertical
-		:columns="1"
-		gap="l"
-	>
+	<Grid v-else-if="isExists && !isOnModeration" class="creative" vertical :columns="1" gap="l">
 		<Grid :columns="['430px', 1]">
-			<CreativeCard
-				:creative="creative"
-				for-sale
-			/>
+			<CreativeCard :creative="creative" for-sale />
 
 			<div class="creative__info">
 				<div class="creative__name">
 					{{ creative.expand?.slot?.name }}
 				</div>
 
-				<div class="creative__info-item">
-					Creo ID: {{ creative.id }}
-				</div>
+				<div class="creative__info-item">Creo ID: {{ creative.id }}</div>
 
-				<div class="creative__info-item">
-					Geo: {{ creative.expand?.geo?.name }}
-				</div>
+				<div class="creative__info-item">Geo: {{ creative.expand?.geo?.name }}</div>
 
-				<div class="creative__info-item">
-					Size: {{ creative.ratio }}
-				</div>
+				<div class="creative__info-item">Size: {{ creative.ratio }}</div>
 
 				<div class="creative__info-item">
 					Resize: {{ creative.resize ? 'Делаю' : 'Не делаю' }}
@@ -41,29 +24,21 @@
 					Reskin: {{ creative.reskin ? 'Делаю' : 'Не делаю' }}
 				</div>
 
-				<div class="creative__info-item">
-					Подход: {{ creative.expand?.approach?.name }}
-				</div>
+				<div class="creative__info-item">Подход: {{ creative.expand?.approach?.name }}</div>
 
-				<div class="creative__separator"/>
+				<div class="creative__separator" />
 
 				<div class="creative__description">
-					<span class="creative__description-title">
-						Описание:
-					</span>
+					<span class="creative__description-title"> Описание: </span>
 					{{ creative.description }}
 				</div>
 			</div>
 		</Grid>
 	</Grid>
 
-	<div v-else-if="isOnModeration">
-		Креатив с ID {{ getID() }} на модерации
-	</div>
+	<div v-else-if="isOnModeration">Креатив с ID {{ getID() }} на модерации</div>
 
-	<div v-else-if="!isExists">
-		Креатив с ID {{ getID() }} не существует
-	</div>
+	<div v-else-if="!isExists">Креатив с ID {{ getID() }} не существует</div>
 </template>
 
 <script setup lang="ts">
@@ -98,18 +73,17 @@ const loadProject = async () => {
 	isOnModeration.value = false
 	isExists.value = true
 
-	await Http
-		.get<ICreative>(`/collections/creatives/records/${id}`, {
-			expand: ['creator', 'creator.avatar', 'preview', 'video', 'slot', 'geo', 'approach']
-		})
-		.then(response => {
+	await Http.get<ICreative>(`/collections/creatives/records/${id}`, {
+		expand: ['creator', 'creator.avatar', 'preview', 'video', 'slot', 'geo', 'approach'],
+	})
+		.then((response) => {
 			if (response.status === 'moderation') {
 				if (response.creator === auth.user.id) {
 					isOnModeration.value = true
 				}
 				isExists.value = true
 			}
-			
+
 			creative.value = response
 		})
 		.catch(() => {

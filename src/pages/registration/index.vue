@@ -1,10 +1,6 @@
 <template>
 	<div class="registration">
-		<CardAuth
-			width="400px"
-			title="Регистрация"
-			@keyup.enter="register"
-		>
+		<CardAuth width="400px" title="Регистрация" @keyup.enter="register">
 			<Input
 				v-model.trim="form.username.value"
 				:error="form.username.error"
@@ -50,9 +46,7 @@
 					class="registration__btn"
 					@click="register('buyer')"
 				>
-					<span class="registration__btn-text-head">
-						Зарегистрироваться
-					</span>
+					<span class="registration__btn-text-head"> Зарегистрироваться </span>
 
 					Как баер
 				</Button>
@@ -63,9 +57,7 @@
 					class="registration__btn"
 					@click="register('designer')"
 				>
-					<span class="registration__btn-text-head">
-						Зарегистрироваться
-					</span>
+					<span class="registration__btn-text-head"> Зарегистрироваться </span>
 
 					Как дизайнер
 				</Button>
@@ -73,22 +65,15 @@
 
 			<template #footer>
 				<div class="registration__have-account">
-					<Text size="xs">
-						Есть аккаунт?
-					</Text>
-					<router-link
-						to="/login"
-						class="registration__link"
-					>
-						<Text size="xs">
-							Войти
-						</Text>
+					<Text size="xs"> Есть аккаунт? </Text>
+					<router-link to="/login" class="registration__link">
+						<Text size="xs"> Войти </Text>
 					</router-link>
 				</div>
 			</template>
 		</CardAuth>
 
-		<AuthSlots/>
+		<AuthSlots />
 	</div>
 </template>
 
@@ -111,8 +96,8 @@ definePage({
 	meta: {
 		permissions: [NO_AUTH],
 		bgClass: 'auth',
-		layout: 'auth'
-	}
+		layout: 'auth',
+	},
 })
 
 type Role = 'buyer' | 'designer'
@@ -136,7 +121,7 @@ const form = Form<RegistrationForm>({
 	passwordConfirm: '',
 	role: 'buyer',
 	energy: 100,
-	checked_at: new Date()
+	checked_at: new Date(),
 })
 
 const router = useRouter()
@@ -150,12 +135,11 @@ refCode.value = router.currentRoute.value.query.ref as string
 const register = async (role: Role) => {
 	if (isRegistrationPossible.value) {
 		form.role.value = role
-		
+
 		loading.value = true
 		form.clearErrors()
 
-		await Http
-			.post<IUser>('/collections/users/records', form.get())
+		await Http.post<IUser>('/collections/users/records', form.get())
 			.then(async () => {
 				await router.push('/login')
 			})
@@ -204,6 +188,6 @@ const isRegistrationPossible = computed(() => {
 
 .registration__btn-text-head {
 	font-size: 10px;
-	color: #9E9E9E;
+	color: #9e9e9e;
 }
 </style>

@@ -6,10 +6,11 @@ export interface State {
 }
 
 export const useToast = defineStore('toast', {
-	state: (): State => ({
-		text: '',
-		removingTimeout: null
-	} as State),
+	state: (): State =>
+		({
+			text: '',
+			removingTimeout: null,
+		}) as State,
 
 	getters: {
 		showed: ({ text }) => text.length > 0,
@@ -30,6 +31,6 @@ export const useToast = defineStore('toast', {
 			if (this.removingTimeout) {
 				clearTimeout(this.removingTimeout)
 			}
-		}
+		},
 	},
 })

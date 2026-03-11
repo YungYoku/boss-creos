@@ -1,10 +1,6 @@
 <template>
 	<div class="login">
-		<CardAuth
-			width="400px"
-			title="Вход"
-			@keyup.enter="login"
-		>
+		<CardAuth width="400px" title="Вход" @keyup.enter="login">
 			<Input
 				v-model.trim="form.identity.value"
 				:error="form.identity.error"
@@ -19,41 +15,25 @@
 				type="password"
 			/>
 
-			<Button
-				:disabled="loading"
-				type="submit"
-				variant="outline"
-				@click="login"
-			>
+			<Button :disabled="loading" type="submit" variant="outline" @click="login">
 				Войти
 			</Button>
 
 			<template #footer>
-				<Text
-					size="xs"
-					class="login__no-account"
-				>
+				<Text size="xs" class="login__no-account">
 					Нет аккаунта?
-					<router-link
-						to="/registration"
-						class="login__link"
-					>
+					<router-link to="/registration" class="login__link">
 						Зарегистрироваться
 					</router-link>
 				</Text>
 
-				<router-link
-					class="login__link"
-					to="/login"
-				>
-					<Text size="xs">
-						Забыли пароль?
-					</Text>
+				<router-link class="login__link" to="/login">
+					<Text size="xs"> Забыли пароль? </Text>
 				</router-link>
 			</template>
 		</CardAuth>
 
-		<AuthSlots/>
+		<AuthSlots />
 	</div>
 </template>
 
@@ -76,8 +56,8 @@ definePage({
 	meta: {
 		permissions: [NO_AUTH],
 		bgClass: 'auth',
-		layout: 'auth'
-	}
+		layout: 'auth',
+	},
 })
 
 interface LoginForm {
@@ -87,7 +67,7 @@ interface LoginForm {
 
 const form = Form<LoginForm>({
 	identity: '',
-	password: ''
+	password: '',
 })
 
 const auth = useAuthStore()
@@ -100,9 +80,8 @@ const login = async () => {
 		loading.value = true
 		form.clearErrors()
 
-		await Http
-			.post<IUserLogin>('/collections/users/auth-with-password', form.get())
-			.then(async res => {
+		await Http.post<IUserLogin>('/collections/users/auth-with-password', form.get())
+			.then(async (res) => {
 				auth.setToken(res.token)
 				auth.setUser(res.record)
 				await router.push('/')

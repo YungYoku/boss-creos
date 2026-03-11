@@ -1,15 +1,8 @@
 <template>
 	<Card class="user-card">
 		<template #image>
-			<Image
-				v-if="user.expand?.avatar"
-				class="user-card__image"
-				:src="user.expand.avatar"
-			/>
-			<div
-				v-else
-				class="user-card__image"
-			/>
+			<Image v-if="user.expand?.avatar" class="user-card__image" :src="user.expand.avatar" />
+			<div v-else class="user-card__image" />
 		</template>
 
 		<template #footer>
@@ -26,14 +19,14 @@ import { Image } from '@/components/elements'
 import { type IUser } from '@/types/user'
 
 interface Props {
-	user: IUser,
+	user: IUser
 	loading?: boolean
 	link?: boolean
 }
 
 withDefaults(defineProps<Props>(), {
 	loading: false,
-	link: false
+	link: false,
 })
 </script>
 

@@ -2,15 +2,8 @@
 	<div class="shop">
 		<Island>
 			<Grid :columns="[6, 1]">
-				<Grid
-					:columns="4"
-					@keyup.enter="loadData"
-				>
-					<SelectLiveRich
-						v-model="form.geo.value"
-						label="Свободные гео"
-						api="geo"
-					/>
+				<Grid :columns="4" @keyup.enter="loadData">
+					<SelectLiveRich v-model="form.geo.value" label="Свободные гео" api="geo" />
 
 					<SelectRich
 						v-model="form.type.value"
@@ -18,55 +11,28 @@
 						:items="creativeTypeItems"
 					/>
 
-					<SelectLiveRich
-						v-model="form.slot.value"
-						label="Слот"
-						api="slots"
-					/>
+					<SelectLiveRich v-model="form.slot.value" label="Слот" api="slots" />
 
-					<SelectLiveRich
-						v-model="form.approach.value"
-						label="Подход"
-						api="approaches"
-					/>
+					<SelectLiveRich v-model="form.approach.value" label="Подход" api="approaches" />
 
-					<SelectRich
-						v-model="form.ratio.value"
-						label="Размер"
-						:items="ratioItems"
-					/>
+					<SelectRich v-model="form.ratio.value" label="Размер" :items="ratioItems" />
 				</Grid>
 
 				<Grid vertical>
-					<Button
-						:disabled="loading"
-						variant="outline"
-						@click="loadData"
-					>
+					<Button :disabled="loading" variant="outline" @click="loadData">
 						Применить
 					</Button>
 
-					<Button
-						:disabled="loading"
-						variant="outline"
-						@click="form.reset"
-					>
+					<Button :disabled="loading" variant="outline" @click="form.reset">
 						Очистить
 					</Button>
 				</Grid>
 			</Grid>
 		</Island>
 
-		<div
-			v-if="creatives.length || loading"
-			class="shop__creatives"
-		>
+		<div v-if="creatives.length || loading" class="shop__creatives">
 			<template v-if="loading">
-				<EmptyCreativeCard
-					v-for="i in 8"
-					:key="i"
-					class="shop__creatives-item"
-				/>
+				<EmptyCreativeCard v-for="i in 8" :key="i" class="shop__creatives-item" />
 			</template>
 			<template v-else>
 				<CreativeCard
@@ -87,15 +53,27 @@ import { type Ref, ref } from 'vue'
 import { useSearchStore } from '@/stores/search'
 
 import { Grid, Island } from '@/components/structures'
-import { Button, CreativeCard, EmptyCreativeCard, SelectLiveRich, SelectRich } from '@/components/blocks'
-import type { ICreative, ICreatives, ICreativeStatus, ICreativeType, IRatio } from '@/types/creative'
+import {
+	Button,
+	CreativeCard,
+	EmptyCreativeCard,
+	SelectLiveRich,
+	SelectRich,
+} from '@/components/blocks'
+import type {
+	ICreative,
+	ICreatives,
+	ICreativeStatus,
+	ICreativeType,
+	IRatio,
+} from '@/types/creative'
 import { creativeTypeItems, ratioItems } from '@/types/creative'
 import { Form, Http } from '@/plugins'
 
 definePage({
 	meta: {
-		bgClass: 'shop'
-	}
+		bgClass: 'shop',
+	},
 })
 
 interface SearchForm {
@@ -117,7 +95,7 @@ const form = Form<SearchForm>({
 	approach: '',
 	type: '',
 	ratio: '',
-	status: 'approved'
+	status: 'approved',
 })
 
 const loading = ref(true)
@@ -132,21 +110,19 @@ const loadCreatives = async () => {
 	if (form.type.value) filters.push(`type='${form.type.value}'`)
 	filters.push(`status='${form.status.value}'`)
 	if (filters.length) {
-		let filter = filters.reduce((acc, filter) => filter ? `${acc} && ${filter}` : acc, '')
+		let filter = filters.reduce((acc, filter) => (filter ? `${acc} && ${filter}` : acc), '')
 		filter = filter.slice(4)
 
 		encodedFilter = encodeURIComponent(filter)
 	}
 
-	await Http
-		.get<ICreatives>('/collections/creatives/records', {
-			filter: encodedFilter,
-			expand: ['preview', 'video', 'creator', 'creator.avatar'],
-			perPage: 12
-		})
-		.then(res => {
-			creatives.value = res.items
-		})
+	await Http.get<ICreatives>('/collections/creatives/records', {
+		filter: encodedFilter,
+		expand: ['preview', 'video', 'creator', 'creator.avatar'],
+		perPage: 12,
+	}).then((res) => {
+		creatives.value = res.items
+	})
 }
 
 const loadData = async () => {

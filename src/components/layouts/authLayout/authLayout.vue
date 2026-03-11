@@ -1,23 +1,17 @@
 <template>
 	<div class="auth-layout">
 		<Page>
-			<Header/>
+			<Header />
 		</Page>
 
-		<div class="auth-layout__text _work">
-			Работаем 24/7
-		</div>
+		<div class="auth-layout__text _work">Работаем 24/7</div>
 
-		<div class="auth-layout__text _fees">
-			Комиссии 0%
-		</div>
+		<div class="auth-layout__text _fees">Комиссии 0%</div>
 
-		<div class="auth-layout__text _approve">
-			100% аппрув на FB
-		</div>
+		<div class="auth-layout__text _approve">100% аппрув на FB</div>
 
 		<div class="auth-layout__content">
-			<router-view/>
+			<router-view />
 		</div>
 	</div>
 </template>
@@ -29,12 +23,12 @@ import { Header } from '@/components/sections'
 
 <style scoped>
 .auth-layout {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	width: 100%;
 	min-height: 100vh;
-    gap: 10px;
+	gap: 10px;
 	position: relative;
 
 	.auth-layout__content {
@@ -46,7 +40,7 @@ import { Header } from '@/components/sections'
 		position: absolute;
 		font-size: 15px;
 		font-weight: 500;
-		color: #F5FF00;
+		color: #f5ff00;
 		cursor: default;
 		filter: drop-shadow(0 0 15px rgb(245 255 0 / 60%));
 

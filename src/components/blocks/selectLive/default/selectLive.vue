@@ -33,16 +33,15 @@ const value = computed<string[] | string>({
 		} else if (typeof value === 'string') {
 			emit('update:model-value', value)
 		}
-	}
+	},
 })
 
 const getExcludedItems = () => {
 	if (props.exclude) {
 		let result = '('
-		props.exclude
-			.forEach(item => {
-				result += `id!='${item}' && `
-			})
+		props.exclude.forEach((item) => {
+			result += `id!='${item}' && `
+		})
 		result = result.slice(0, result.length - 3).trim()
 		if (result) {
 			result += ')'
@@ -57,7 +56,7 @@ const getExcludedItems = () => {
 
 const getPayload = (entity: string | string[], isIncluded = false) => {
 	const payload: {
-		sort?: string,
+		sort?: string
 		filter?: string
 	} = {}
 
@@ -68,7 +67,7 @@ const getPayload = (entity: string | string[], isIncluded = false) => {
 
 		if (isIncluded) payload.filter += `id='${entity}'`
 		else {
-			props.filterFields.forEach(field => {
+			props.filterFields.forEach((field) => {
 				if (payload.filter) {
 					payload.filter += `${field}${sign}'${entity.toLowerCase()}' || `
 				}
@@ -82,8 +81,8 @@ const getPayload = (entity: string | string[], isIncluded = false) => {
 		payload.filter = '('
 
 		entity
-			.filter(item => !(props.exclude ?? []).includes(item))
-			.forEach(item => {
+			.filter((item) => !(props.exclude ?? []).includes(item))
+			.forEach((item) => {
 				if (isIncluded) {
 					if (payload.filter) {
 						payload.filter += `id='${item}' || `
@@ -98,7 +97,6 @@ const getPayload = (entity: string | string[], isIncluded = false) => {
 					})
 				}
 			})
-
 
 		payload.filter = payload.filter.slice(0, payload.filter.length - 3).trim()
 		if (payload.filter.length > 0) {
@@ -118,34 +116,41 @@ const loadItems = async (include?: string | string[]) => {
 	const loadDefaultItems = async () => {
 		if (search.value.length === 0) {
 			await Http.get<Items>(`/collections/${props.api}/records`, {
-				filter: getExcludedItems()
+				filter: getExcludedItems(),
+			}).then((response) => {
+				_defaultItems = response.items
 			})
-				.then(response => {
-					_defaultItems = response.items
-				})
 		}
 	}
 	const loadSearchItems = async () => {
 		if (search.value.length > 0) {
-			await Http.get<Items>(`/collections/${props.api}/records`, getPayload(search.value))
-				.then(response => {
-					_searchItems = response.items
-				})
+			await Http.get<Items>(
+				`/collections/${props.api}/records`,
+				getPayload(search.value),
+			).then((response) => {
+				_searchItems = response.items
+			})
 		}
 	}
 	const loadExtraItems = async () => {
 		if (include?.length) {
-			await Http.get<Items>(`/collections/${props.api}/records`, getPayload(include, true))
-				.then(response => {
-					_extraItems = response.items
-				})
+			await Http.get<Items>(
+				`/collections/${props.api}/records`,
+				getPayload(include, true),
+			).then((response) => {
+				_extraItems = response.items
+			})
 		}
 	}
 
 	await Promise.all([loadDefaultItems(), loadSearchItems(), loadExtraItems()])
 
-	_defaultItems = _defaultItems.filter(defaultItem => !_extraItems.some(extraItem => extraItem.id === defaultItem.id))
-	_searchItems = _searchItems.filter(searchItem => !_extraItems.some(extraItem => extraItem.id === searchItem.id))
+	_defaultItems = _defaultItems.filter(
+		(defaultItem) => !_extraItems.some((extraItem) => extraItem.id === defaultItem.id),
+	)
+	_searchItems = _searchItems.filter(
+		(searchItem) => !_extraItems.some((extraItem) => extraItem.id === searchItem.id),
+	)
 	items.value = [..._extraItems, ..._searchItems, ..._defaultItems]
 }
 

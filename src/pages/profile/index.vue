@@ -1,12 +1,7 @@
 <template>
 	<Island class="profile">
-		<Grid
-			:columns="1"
-			vertical
-		>
-			<div class="profile__title">
-				Редактировать
-			</div>
+		<Grid :columns="1" vertical>
+			<div class="profile__title">Редактировать</div>
 
 			<Grid :columns="2">
 				<InputRich
@@ -32,12 +27,7 @@
 				height="240px"
 			/>
 
-			<Button
-				class="profile__save"
-				:disabled="loading"
-				variant="outline"
-				@click="save"
-			>
+			<Button class="profile__save" :disabled="loading" variant="outline" @click="save">
 				Отправить на модерацию
 			</Button>
 		</Grid>
@@ -58,8 +48,8 @@ import { AUTH } from '@/data/permissions'
 
 definePage({
 	meta: {
-		permissions: [AUTH]
-	}
+		permissions: [AUTH],
+	},
 })
 
 const auth = useAuthStore()
@@ -68,21 +58,40 @@ const toast = useToast()
 const userBase = Form<IUser>({ ...emptyUser })
 const user = Form<IUser>({ ...emptyUser })
 
-watch(() => auth.user, () => {
-	user.set(auth.user)
-	userBase.set(auth.user)
-}, { immediate: true })
+watch(
+	() => auth.user,
+	() => {
+		user.set(auth.user)
+		userBase.set(auth.user)
+	},
+	{ immediate: true },
+)
 
 const loading = ref(false)
 
-type ReadOnlyUserFields = 'id' | 'collectionId' | 'collectionName' | 'created' | 'changes' | 'expand'
+type ReadOnlyUserFields =
+	| 'id'
+	| 'collectionId'
+	| 'collectionName'
+	| 'created'
+	| 'changes'
+	| 'expand'
 const getChanges = () => {
 	const currentCreative = userBase.get()
 	const updatedCreative = user.get()
 
-	const readonlyFields: (keyof IUser)[] = ['id', 'collectionId', 'collectionName', 'created', 'changes', 'expand'] as const
+	const readonlyFields: (keyof IUser)[] = [
+		'id',
+		'collectionId',
+		'collectionName',
+		'created',
+		'changes',
+		'expand',
+	] as const
 	const currentCreativeKeys = Object.keys(currentCreative) as (keyof IUser)[]
-	const filteredKeys = currentCreativeKeys.filter(key => !readonlyFields.includes(key)) as (keyof Omit<IUser, ReadOnlyUserFields>)[]
+	const filteredKeys = currentCreativeKeys.filter(
+		(key) => !readonlyFields.includes(key),
+	) as (keyof Omit<IUser, ReadOnlyUserFields>)[]
 
 	const changes: Record<string, unknown> = {}
 	for (const key of filteredKeys) {
@@ -100,12 +109,11 @@ const save = async () => {
 	loading.value = true
 	user.clearErrors()
 
-	await Http
-		.patch<IUser>(`/collections/users/records/${auth.user.id}`, {
-			...userBase.get(),
-			status: 'moderation',
-			changes: getChanges()
-		})
+	await Http.patch<IUser>(`/collections/users/records/${auth.user.id}`, {
+		...userBase.get(),
+		status: 'moderation',
+		changes: getChanges(),
+	})
 		.then((res) => {
 			auth.setUser(res)
 			toast.set('Сохранено успешно!')
@@ -114,7 +122,7 @@ const save = async () => {
 			if (isHttpError(error)) {
 				user.setErrors(error.data)
 			}
-			
+
 			toast.set('Ошибка сохранения')
 		})
 

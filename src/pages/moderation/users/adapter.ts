@@ -20,64 +20,64 @@ export const useAdapter = () => {
 		'referral_code',
 		'notifications',
 		'baskets',
-		'transactions'
+		'transactions',
 	]
 
-	const unnecessaryFieldsForTable: Partial<keyof IUser>[] = [
-		'changes',
-		'expand'
-	]
+	const unnecessaryFieldsForTable: Partial<keyof IUser>[] = ['changes', 'expand']
 
 	const options = (item: IUser) => {
 		const avatar = item.expand?.avatar
 		return {
-			'actions': {
+			actions: {
 				handler: async () => {
-					await Http
-						.patch<IUser>(`/collections/users/records/${item.id}`, {
-							...item,
-							...item.changes,
-							changes: null,
-							status: 'approved'
-						})
-						.then(res => {
-							toast.set(`Успех, ${res.id}`)
-						})
-				}
+					await Http.patch<IUser>(`/collections/users/records/${item.id}`, {
+						...item,
+						...item.changes,
+						changes: null,
+						status: 'approved',
+					}).then((res) => {
+						toast.set(`Успех, ${res.id}`)
+					})
+				},
 			},
-			'avatar': {
+			avatar: {
 				link: {
-					new: avatar ? `${import.meta.env.VITE_API}/files/${avatar.collectionId}/${avatar.id}/${avatar.watermarked_image}` : '',
-					current: avatar ? `${import.meta.env.VITE_API}/files/${avatar.collectionId}/${avatar.id}/${avatar.watermarked_image}` : ''
-				}
+					new: avatar
+						? `${import.meta.env.VITE_API}/files/${avatar.collectionId}/${avatar.id}/${avatar.watermarked_image}`
+						: '',
+					current: avatar
+						? `${import.meta.env.VITE_API}/files/${avatar.collectionId}/${avatar.id}/${avatar.watermarked_image}`
+						: '',
+				},
 			},
 		}
 	}
 
 	const cellFormats: CellFormats<IUser> = {
-		'avatar': () => 'Ссылка',
-		'created': (created) => datetime.get(created, 'datetime'),
-		'updated': (updated) => datetime.get(updated, 'datetime'),
-		'role': (role) => locale.t(role),
-		'status': (status) => locale.t(status),
+		avatar: () => 'Ссылка',
+		created: (created) => datetime.get(created, 'datetime'),
+		updated: (updated) => datetime.get(updated, 'datetime'),
+		role: (role) => locale.t(role),
+		status: (status) => locale.t(status),
 	}
 
 	const cells = {
-		'actions': CellActions,
+		actions: CellActions,
 	}
 
-	const {
-		handleLoadedData,
-		header,
-		body,
-		fields,
-	} = useAdapterRoot(emptyUser, unnecessaryFieldsForRequest, unnecessaryFieldsForTable, options, cellFormats)
+	const { handleLoadedData, header, body, fields } = useAdapterRoot(
+		emptyUser,
+		unnecessaryFieldsForRequest,
+		unnecessaryFieldsForTable,
+		options,
+		cellFormats,
+	)
 
 	return {
 		handleLoadedData,
 		header,
 		body,
 		fields,
-		cells
+		cells,
 	}
 }

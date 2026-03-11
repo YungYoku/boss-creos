@@ -1,8 +1,5 @@
 <template>
-	<router-link
-		to="/"
-		class="logo"
-	>
+	<router-link to="/" class="logo">
 		<div class="logo__text">
 			<span class="logo__name">Boss Creos</span>
 			<span class="logo__description">Работаем 24/7</span>
@@ -35,7 +32,7 @@
 		margin: -7px 0 0;
 		font-size: 15px;
 		font-weight: 700;
-		color: #F5FF00;
+		color: #f5ff00;
 		filter: drop-shadow(0 0 10px rgb(245 255 0 / 30%));
 	}
 }

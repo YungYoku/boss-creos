@@ -1,28 +1,15 @@
 <template>
-	<Grid
-		class="checkbox"
-		:columns="['16px', 1]"
-		ver-align="center"
-		@click="toggle"
-	>
+	<Grid class="checkbox" :columns="['16px', 1]" ver-align="center" @click="toggle">
 		<div
 			class="checkbox__content"
 			:class="{
-				'_active': (value ?? checked)
+				_active: value ?? checked,
 			}"
 		>
-			<Icon
-				v-if="value ?? checked"
-				name="check"
-				size="xs"
-				:colors="['dark', 'light']"
-			/>
+			<Icon v-if="value ?? checked" name="check" size="xs" :colors="['dark', 'light']" />
 		</div>
 
-		<div
-			v-if="label"
-			class="checkbox__label"
-		>
+		<div v-if="label" class="checkbox__label">
 			{{ label }}
 		</div>
 	</Grid>
@@ -33,8 +20,8 @@ import { Grid } from '@/components/structures'
 import { Icon } from '@/components/elements'
 
 interface Props {
-	error?: string | null,
-	checked?: boolean,
+	error?: string | null
+	checked?: boolean
 	disabled?: boolean
 	label?: string
 }
@@ -43,12 +30,12 @@ withDefaults(defineProps<Props>(), {
 	error: null,
 	checked: false,
 	disabled: false,
-	label: ''
+	label: '',
 })
 
 const value = defineModel<boolean | null>({
 	type: Boolean,
-	default: null
+	default: null,
 })
 
 const toggle = () => {

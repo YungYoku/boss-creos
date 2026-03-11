@@ -1,22 +1,16 @@
 <template>
 	<div class="shopping-cart">
-		<div class="shopping-cart__title">
-			Корзина
-		</div>
+		<div class="shopping-cart__title">Корзина</div>
 
 		<div class="shopping-cart__action-panel">
-			<BadgeBalance/>
+			<BadgeBalance />
 		</div>
 
 		<div class="shopping-cart__content">
 			<span v-if="baskets.length === 0">Пусто</span>
 			<span v-else>Стоимость ${{ totalPrice }}</span>
 
-			<CardLong
-				v-for="basket in baskets"
-				:key="basket.id"
-				class="shopping-cart__creative"
-			>
+			<CardLong v-for="basket in baskets" :key="basket.id" class="shopping-cart__creative">
 				<template #icon>
 					<Image
 						v-if="basket.expand?.creative?.expand?.preview"
@@ -69,12 +63,7 @@
 				</template>
 			</CardLong>
 
-			<Button
-				v-if="totalPrice > 0"
-				class="shopping-cart__pay"
-				variant="outline"
-				@click="pay"
-			>
+			<Button v-if="totalPrice > 0" class="shopping-cart__pay" variant="outline" @click="pay">
 				Оплатить
 			</Button>
 		</div>
@@ -95,15 +84,15 @@ import { AUTH } from '@/data/permissions'
 
 definePage({
 	meta: {
-		permissions: [AUTH]
-	}
+		permissions: [AUTH],
+	},
 })
 
 const auth = useAuthStore()
 
 const baskets = computed(() => {
 	const baskets = auth.user.expand?.baskets ?? []
-	return baskets.filter(basket => basket.status === 'created')
+	return baskets.filter((basket) => basket.status === 'created')
 })
 
 const totalPrice = computed(() => {
@@ -120,22 +109,32 @@ const pay = async () => {
 	if (auth.user.balance < totalPrice.value) {
 		toast.set('Недостаточно средств!')
 	} else {
-		await Http.post<IUser>('/baskets/pay')
-			.then(async data => {
-				auth.setUser(data)
-				await router.push('/bought')
-			})
+		await Http.post<IUser>('/baskets/pay').then(async (data) => {
+			auth.setUser(data)
+			await router.push('/bought')
+		})
 	}
 }
 
 const removeShoppingCart = async (id: string) => {
-	const newBaskets = auth.user.baskets.filter(basket => basket !== id)
-	await Http.patch<IUser>(`/collections/users/records/${auth.user.id}`, {
-		...auth.user,
-		baskets: newBaskets
-	}, {
-		expand: ['baskets', 'baskets.creative', 'baskets.creative.preview', 'baskets.creative.slot', 'baskets.geo', 'transactions']
-	}).then(data => {
+	const newBaskets = auth.user.baskets.filter((basket) => basket !== id)
+	await Http.patch<IUser>(
+		`/collections/users/records/${auth.user.id}`,
+		{
+			...auth.user,
+			baskets: newBaskets,
+		},
+		{
+			expand: [
+				'baskets',
+				'baskets.creative',
+				'baskets.creative.preview',
+				'baskets.creative.slot',
+				'baskets.geo',
+				'transactions',
+			],
+		},
+	).then((data) => {
 		auth.setUser(data)
 	})
 
@@ -172,11 +171,20 @@ const removeShoppingCart = async (id: string) => {
 		gap: 10px;
 		width: 100%;
 		padding: 24px 15px;
-		background: linear-gradient(180deg, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 8%) 100%),
-		radial-gradient(50% 100% at 50% 0%, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 0%) 100%);
+		background:
+			linear-gradient(180deg, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 8%) 100%),
+			radial-gradient(
+				50% 100% at 50% 0%,
+				rgb(255 255 255 / 10%) 0%,
+				rgb(255 255 255 / 0%) 100%
+			);
 		border: 1px solid;
 		border-radius: 10px;
-		border-image-source: linear-gradient(135.28deg, rgb(255 255 255 / 30%) -128.53%, rgb(255 255 255 / 0%) 75.12%);
+		border-image-source: linear-gradient(
+			135.28deg,
+			rgb(255 255 255 / 30%) -128.53%,
+			rgb(255 255 255 / 0%) 75.12%
+		);
 	}
 
 	.shopping-cart__creative {
@@ -208,7 +216,7 @@ const removeShoppingCart = async (id: string) => {
 	.shopping-cart__creative-price,
 	.shopping-cart__creative-geo {
 		font-size: 10px;
-		color: #AFAFB7;
+		color: #afafb7;
 		line-height: 1;
 	}
 
@@ -225,9 +233,9 @@ const removeShoppingCart = async (id: string) => {
 		height: 30px;
 		margin-left: auto;
 		font-size: 11px;
-		color: #9297A0;
+		color: #9297a0;
 		background: transparent;
-		border: 1px solid #FFFFFF1A;
+		border: 1px solid #ffffff1a;
 		border-radius: 8px;
 		cursor: pointer;
 	}

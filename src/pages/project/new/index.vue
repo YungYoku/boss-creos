@@ -1,9 +1,5 @@
 <template>
-	<Grid
-		vertical
-		:columns="1"
-		gap="l"
-	>
+	<Grid vertical :columns="1" gap="l">
 		<Grid :columns="[1, '100px']">
 			<Input
 				v-model.trim="project.title.value"
@@ -12,29 +8,13 @@
 				label="Название"
 			/>
 
-			<Button
-				:disabled="loading"
-				@click="create"
-			>
-				Создать
-			</Button>
+			<Button :disabled="loading" @click="create"> Создать </Button>
 		</Grid>
 
-		<Grid
-			:columns-xl="2"
-			:columns-l="1"
-		>
+		<Grid :columns-xl="2" :columns-l="1">
 			<Island>
-				<Grid
-					vertical
-					:columns="1"
-				>
-					<Text
-						size="m"
-						:loading="loading"
-					>
-						Информация о заказе
-					</Text>
+				<Grid vertical :columns="1">
+					<Text size="m" :loading="loading"> Информация о заказе </Text>
 
 					<Input
 						v-model="project.price.value"
@@ -53,7 +33,7 @@
 						:error="project.deadline.error"
 						label="Срок сдачи"
 					/>
-				
+
 					<Checkbox
 						v-model="project.tutoring.value"
 						:error="project.tutoring.error"
@@ -63,16 +43,8 @@
 			</Island>
 
 			<Island>
-				<Grid
-					vertical
-					:columns="1"
-				>
-					<Text
-						size="m"
-						:loading="loading"
-					>
-						Описание
-					</Text>
+				<Grid vertical :columns="1">
+					<Text size="m" :loading="loading"> Описание </Text>
 
 					<Textarea
 						v-model.trim="project.description.value"
@@ -102,8 +74,8 @@ import { AUTH, BUYER } from '@/data/permissions'
 
 definePage({
 	meta: {
-		permissions: [AUTH, BUYER]
-	}
+		permissions: [AUTH, BUYER],
+	},
 })
 
 const auth = useAuthStore()
@@ -113,7 +85,11 @@ const project = Form<IProject>({ ...emptyProject })
 const router = useRouter()
 const toast = useToast()
 
-watch(() => auth.user.id, () => project.buyer.value = auth.user.id, { immediate: true })
+watch(
+	() => auth.user.id,
+	() => (project.buyer.value = auth.user.id),
+	{ immediate: true },
+)
 
 const loading = ref(false)
 const create = async () => {
@@ -128,9 +104,8 @@ const create = async () => {
 	project.title_lowercase.value = project.title.value
 	project.description_lowercase.value = project.description.value
 
-	await Http
-		.post<IProject>('/collections/projects/records', project.get())
-		.then(response => {
+	await Http.post<IProject>('/collections/projects/records', project.get())
+		.then((response) => {
 			void router.push(`/project/${response.id}`)
 		})
 		.catch((error: unknown) => {

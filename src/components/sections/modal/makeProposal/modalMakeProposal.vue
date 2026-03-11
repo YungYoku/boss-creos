@@ -1,12 +1,6 @@
 <template>
-	<Modal
-		:width="600"
-		@close="close"
-	>
-		<Grid
-			:columns="1"
-			vertical
-		>
+	<Modal :width="600" @close="close">
+		<Grid :columns="1" vertical>
 			<Textarea
 				v-model="form.text.value"
 				:error="form.text.error"
@@ -23,12 +17,8 @@
 			/>
 
 			<Grid :columns="2">
-				<Button @click="close">
-					Отменить
-				</Button>
-				<Button @click="makeProposal">
-					Откликнуться
-				</Button>
+				<Button @click="close"> Отменить </Button>
+				<Button @click="makeProposal"> Откликнуться </Button>
 			</Grid>
 		</Grid>
 	</Modal>
@@ -45,19 +35,23 @@ import { emptyProposal, type IProjectProposal } from '@/types/project'
 const props = defineProps({
 	loading: {
 		type: Boolean,
-		default: false
+		default: false,
 	},
 	defaultPrice: {
 		type: Number,
-		default: 0
-	}
+		default: 0,
+	},
 })
 
 const form = Form<IProjectProposal>({ ...emptyProposal })
 
-watch(() => props.defaultPrice, () => {
-	form.price.value = props.defaultPrice
-}, { immediate: true })
+watch(
+	() => props.defaultPrice,
+	() => {
+		form.price.value = props.defaultPrice
+	},
+	{ immediate: true },
+)
 
 const emit = defineEmits(['make-proposal', 'close'])
 

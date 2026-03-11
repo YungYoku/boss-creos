@@ -1,18 +1,18 @@
 import { defineStore } from 'pinia'
 
 export interface State {
-	search: string;
-	loading: boolean;
+	search: string
+	loading: boolean
 }
 
 export const useSearchStore = defineStore('search', {
-	state: (): State => ({
-		search: '',
-		loading: false,
-	} as State),
+	state: (): State =>
+		({
+			search: '',
+			loading: false,
+		}) as State,
 
-	getters: {
-	},
+	getters: {},
 
 	actions: {
 		update(value: string) {
@@ -21,6 +21,6 @@ export const useSearchStore = defineStore('search', {
 
 		setLoading(value: boolean) {
 			this.loading = value
-		}
+		},
 	},
 })

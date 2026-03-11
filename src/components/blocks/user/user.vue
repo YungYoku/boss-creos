@@ -1,36 +1,26 @@
 <template>
-	<Skeleton
-		v-if="loading"
-		width="120px"
-		height="28px"
-	/>
+	<Skeleton v-if="loading" width="120px" height="28px" />
 
 	<component
-		:is="(link && user.id) ? 'router-link' : 'div'"
+		:is="link && user.id ? 'router-link' : 'div'"
 		v-else
 		class="user"
 		:class="{
-			'_link': (link && user.id),
+			_link: link && user.id,
 		}"
 		:to="`/users/${user.id}`"
 	>
-		<Avatar
-			size="m"
-			:user="user"
-		/>
+		<Avatar size="m" :user="user" />
 
 		<div class="user__info">
 			<div class="user__name">
 				{{ user.username }}
 			</div>
 
-			<div class="user__bought-amount">
-				Кол-во продаж: {{ boughtAmount }}
-			</div>
+			<div class="user__bought-amount">Кол-во продаж: {{ boughtAmount }}</div>
 		</div>
 	</component>
 </template>
-
 
 <script setup lang="ts">
 import { type IUser } from '@/types/user'
@@ -38,7 +28,7 @@ import { Skeleton } from '@/components/elements'
 import Avatar from '../avatar/avatar.vue'
 
 interface Props {
-	user: IUser,
+	user: IUser
 	loading?: boolean
 	link?: boolean
 	boughtAmount?: number
@@ -47,7 +37,7 @@ interface Props {
 withDefaults(defineProps<Props>(), {
 	loading: false,
 	link: false,
-	boughtAmount: 0
+	boughtAmount: 0,
 })
 </script>
 
@@ -66,12 +56,12 @@ withDefaults(defineProps<Props>(), {
 
 	.user__name {
 		font-size: 14px;
-		color: #E5E5E7;
+		color: #e5e5e7;
 	}
 
 	.user__bought-amount {
 		font-size: 11px;
-		color: #AFAFB7;
+		color: #afafb7;
 	}
 
 	&._link {

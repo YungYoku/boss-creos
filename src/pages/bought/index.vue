@@ -1,8 +1,6 @@
 <template>
 	<div class="bought">
-		<div class="bought__title">
-			Мои заказы
-		</div>
+		<div class="bought__title">Мои заказы</div>
 
 		<div class="bought__action-panel">
 			<div class="bought__filters">
@@ -15,23 +13,17 @@
 					}"
 					@click="toggleFilter(filter.value)"
 				>
-					<div
-						class="bought__filter-status"
-						:class="[`_${filter.value}`]"
-					/>
+					<div class="bought__filter-status" :class="[`_${filter.value}`]" />
 					{{ filter.name }}
 				</Badge>
 			</div>
-			
-			<BadgeBalance/>
+
+			<BadgeBalance />
 		</div>
 
 		<span v-if="baskets.length === 0">Пусто</span>
 
-		<CardLong
-			v-for="basket in baskets"
-			:key="basket.id"
-		>
+		<CardLong v-for="basket in baskets" :key="basket.id">
 			<template #icon>
 				<Image
 					v-if="basket.expand?.creative?.expand?.preview"
@@ -43,14 +35,16 @@
 			<div class="bought__creative-content">
 				<div class="bought__creative-name">
 					<router-link :to="`/creative/${basket.expand?.creative?.id}`">
-						{{ basket.expand?.creative?.expand?.slot?.name }} - ${{ basket.expand?.creative?.price }}
+						{{ basket.expand?.creative?.expand?.slot?.name }} - ${{
+							basket.expand?.creative?.price
+						}}
 					</router-link>
 
 					<div
 						class="bought__status"
 						:class="{
 							_pending: basket.status === 'in-progress',
-							_done: basket.status === 'done'
+							_done: basket.status === 'done',
 						}"
 					/>
 				</div>
@@ -78,21 +72,12 @@
 				>
 					Скачать
 				</Button>
-				<Button
-					variant="outline"
-					@click="showDescription(basket)"
-				>
-					Подробнее
-				</Button>
+				<Button variant="outline" @click="showDescription(basket)"> Подробнее </Button>
 			</template>
 		</CardLong>
 	</div>
 
-	<Modal
-		v-if="modalShowing"
-		:width="585"
-		@close="modalShowing = false"
-	>
+	<Modal v-if="modalShowing" :width="585" @close="modalShowing = false">
 		Описание: {{ modalShowingBasket?.comment || 'пусто' }}
 	</Modal>
 </template>
@@ -109,8 +94,8 @@ import { AUTH } from '@/data/permissions'
 definePage({
 	meta: {
 		permissions: [AUTH],
-		bgClass: 'shop'
-	}
+		bgClass: 'shop',
+	},
 })
 
 interface Filter {
@@ -142,8 +127,8 @@ const auth = useAuthStore()
 const baskets = computed(() => {
 	const baskets = auth.user.expand?.baskets ?? []
 	return baskets
-		.filter(basket => basket.status !== 'created')
-		.filter(basket => {
+		.filter((basket) => basket.status !== 'created')
+		.filter((basket) => {
 			if (activeFilter.value !== null) {
 				return basket.status === activeFilter.value
 			}
@@ -162,7 +147,10 @@ const downloadVideo = (basket: IBasket) => {
 	const file = basket.expand?.video
 	if (!file) return
 
-	window.open(`${import.meta.env.VITE_API}/files/${file.collectionId}/${file.id}/${file.original_video}`, '_blank')
+	window.open(
+		`${import.meta.env.VITE_API}/files/${file.collectionId}/${file.id}/${file.original_video}`,
+		'_blank',
+	)
 }
 </script>
 
@@ -259,7 +247,7 @@ const downloadVideo = (basket: IBasket) => {
 
 	.bought__creative-geo {
 		font-size: 10px;
-		color: #AFAFB7;
+		color: #afafb7;
 	}
 
 	.bought__creative-geo-item {

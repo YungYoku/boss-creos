@@ -4,10 +4,10 @@ import type { DBRecord } from '@/types/dbBase'
 export type IRating = DBRecord & {
 	by: string
 	created: string
-	id:	string
+	id: string
 	review: string
 	stars: number
-	updated: string,
+	updated: string
 	expand?: {
 		by?: IUser
 	}
@@ -21,5 +21,5 @@ export const emptyRating: IRating = {
 	id: '',
 	review: '',
 	stars: 0,
-	updated: ''
+	updated: '',
 }

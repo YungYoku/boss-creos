@@ -1,18 +1,8 @@
 <template>
-	<Grid
-		v-if="isAvailable"
-		vertical
-		:columns="1"
-		gap="l"
-		class="edit-creative"
-	>
+	<Grid v-if="isAvailable" vertical :columns="1" gap="l" class="edit-creative">
 		<Island>
 			<Grid vertical>
-				<Text
-					size="m"
-					:loading="loading"
-					class="edit-creative__title"
-				>
+				<Text size="m" :loading="loading" class="edit-creative__title">
 					Добавить креатив
 				</Text>
 
@@ -155,20 +145,11 @@
 		</Island>
 	</Grid>
 
-	<div v-else>
-		Креатив с ID {{ getID() }} не существует или был создан не вами
-	</div>
+	<div v-else>Креатив с ID {{ getID() }} не существует или был создан не вами</div>
 
-	<Modal
-		v-if="modalShowing"
-		:width="585"
-		@close="modalShowing = false"
-	>
+	<Modal v-if="modalShowing" :width="585" @close="modalShowing = false">
 		<Grid>
-			<template
-				v-for="item in ratioItems"
-				:key="item.id"
-			>
+			<template v-for="item in ratioItems" :key="item.id">
 				<InputRich
 					v-if="creative.resizePrices?.[item.id]"
 					v-model="creative.resizePrices[item.id].value"
@@ -197,7 +178,7 @@ import {
 	SelectLiveRich,
 	SelectRich,
 	SwitcherRich,
-	TextareaRich
+	TextareaRich,
 } from '@/components/blocks'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
@@ -207,8 +188,8 @@ import { AUTH, DESIGNER } from '@/data/permissions'
 
 definePage({
 	meta: {
-		permissions: [AUTH, DESIGNER]
-	}
+		permissions: [AUTH, DESIGNER],
+	},
 })
 
 const creativeBase = Form<ICreative>({ ...emptyCreative })
@@ -234,9 +215,8 @@ const loadCreative = async () => {
 	loading.value = true
 	isAvailable.value = true
 
-	await Http
-		.get<ICreative>(`/collections/creatives/records/${id}`)
-		.then(response => {
+	await Http.get<ICreative>(`/collections/creatives/records/${id}`)
+		.then((response) => {
 			if (response.creator !== auth.user.id) {
 				isAvailable.value = false
 			}
@@ -252,14 +232,31 @@ const loadCreative = async () => {
 }
 void loadCreative()
 
-type ReadOnlyCreativeFields = 'id' | 'collectionId' | 'collectionName' | 'created' | 'proposals' | 'changes' | 'expand'
+type ReadOnlyCreativeFields =
+	| 'id'
+	| 'collectionId'
+	| 'collectionName'
+	| 'created'
+	| 'proposals'
+	| 'changes'
+	| 'expand'
 const getChanges = () => {
 	const currentCreative = creativeBase.get()
 	const updatedCreative = creative.get()
 
-	const readonlyFields: (keyof ICreative)[] = ['id', 'collectionId', 'collectionName', 'created', 'proposals', 'changes', 'expand'] as const
+	const readonlyFields: (keyof ICreative)[] = [
+		'id',
+		'collectionId',
+		'collectionName',
+		'created',
+		'proposals',
+		'changes',
+		'expand',
+	] as const
 	const currentCreativeKeys = Object.keys(currentCreative) as (keyof ICreative)[]
-	const filteredKeys = currentCreativeKeys.filter(key => !readonlyFields.includes(key)) as (keyof Omit<ICreative, ReadOnlyCreativeFields>)[]
+	const filteredKeys = currentCreativeKeys.filter(
+		(key) => !readonlyFields.includes(key),
+	) as (keyof Omit<ICreative, ReadOnlyCreativeFields>)[]
 
 	const changes: Record<string, unknown> = {}
 	for (const key of filteredKeys) {
@@ -284,14 +281,14 @@ const update = async () => {
 		const isNoApproach = !creative.approach.value
 		if (isNoApproach) {
 			creative.setErrors({
-				approach: { code: 'validation_required', message: 'Cannot be blank.' }
+				approach: { code: 'validation_required', message: 'Cannot be blank.' },
 			})
 		}
 
 		const isNoVideo = !creative.video.value
 		if (isNoVideo) {
 			creative.setErrors({
-				video: { code: 'validation_required', message: 'Cannot be blank.' }
+				video: { code: 'validation_required', message: 'Cannot be blank.' },
 			})
 		}
 
@@ -303,13 +300,12 @@ const update = async () => {
 	loading.value = true
 	creative.clearErrors()
 
-	await Http
-		.patch<ICreative>(`/collections/creatives/records/${creativeBase.id.value}`, {
-			...creativeBase.get(),
-			status: 'moderation',
-			changes: getChanges()
-		})
-		.then(async response => {
+	await Http.patch<ICreative>(`/collections/creatives/records/${creativeBase.id.value}`, {
+		...creativeBase.get(),
+		status: 'moderation',
+		changes: getChanges(),
+	})
+		.then(async (response) => {
 			await router.push(`/creative/${response.id}`)
 		})
 		.catch((error: unknown) => {

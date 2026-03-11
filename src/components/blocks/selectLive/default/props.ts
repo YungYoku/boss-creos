@@ -5,10 +5,10 @@ export interface Item {
 }
 
 export interface Items {
-	page: number,
-	perPage: number,
-	totalPages: number,
-	totalItems: number,
+	page: number
+	perPage: number
+	totalPages: number
+	totalItems: number
 	items: Item[]
 }
 
@@ -24,12 +24,12 @@ export interface Props {
 }
 
 export const defaultProps = {
-	modelValue: () => ([]),
+	modelValue: () => [],
 	error: null,
 	typeKey: 'name',
 	label: 'Значение',
 	api: '',
-	filterFields: () => (['id', 'name']),
+	filterFields: () => ['id', 'name'],
 	filter: [],
-	multiple: false
+	multiple: false,
 }

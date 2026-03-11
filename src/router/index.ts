@@ -6,7 +6,7 @@ import { AUTH, BUYER, NO_AUTH, DESIGNER, ADMIN } from '@/data/permissions'
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
-	routes
+	routes,
 })
 
 if (import.meta.hot) {

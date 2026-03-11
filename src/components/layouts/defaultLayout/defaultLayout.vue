@@ -1,9 +1,9 @@
 <template>
 	<div class="default-layout">
 		<Page>
-			<Header/>
+			<Header />
 
-			<router-view/>
+			<router-view />
 		</Page>
 	</div>
 </template>
@@ -15,10 +15,10 @@ import { Header } from '@/components/sections'
 
 <style scoped>
 .default-layout {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
 	min-height: 100vh;
 }
 </style>

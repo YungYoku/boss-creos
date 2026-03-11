@@ -1,26 +1,12 @@
 <template>
-	<Grid
-		vertical
-		:columns="1"
-		gap="l"
-	>
+	<Grid vertical :columns="1" gap="l">
 		<Grid :columns="1">
-			<PageTitle>
-				Выполняемые объявления
-			</PageTitle>
+			<PageTitle> Выполняемые объявления </PageTitle>
 		</Grid>
 
-		<Grid
-			:columns-xl="4"
-			:columns-l="3"
-			:columns-m="2"
-			:columns-s="1"
-		>
+		<Grid :columns-xl="4" :columns-l="3" :columns-m="2" :columns-s="1">
 			<template v-if="loading">
-				<EmptyProjectCard
-					v-for="i in 8"
-					:key="i"
-				/>
+				<EmptyProjectCard v-for="i in 8" :key="i" />
 			</template>
 			<template v-else>
 				<ProjectCard
@@ -36,11 +22,7 @@
 		</Grid>
 	</Grid>
 
-	<Modal
-		v-if="openedChat"
-		:width="600"
-		@close="closeChat"
-	>
+	<Modal v-if="openedChat" :width="600" @close="closeChat">
 		<Chat
 			:project="openedChat"
 			rating-type="ratingBuyer"
@@ -66,8 +48,8 @@ import { AUTH, DESIGNER } from '@/data/permissions'
 
 definePage({
 	meta: {
-		permissions: [AUTH, DESIGNER]
-	}
+		permissions: [AUTH, DESIGNER],
+	},
 })
 
 const auth = useAuthStore()
@@ -80,14 +62,12 @@ const getUserProjects = async () => {
 
 	loading.value = true
 
-	await Http
-		.get<IProjects>('/collections/projects/records', {
-			filter: `(designer='${auth.user.id}')`,
-			expand: ['creator', 'creator.avatar']
-		})
-		.then(response => {
-			projects.value = response.items
-		})
+	await Http.get<IProjects>('/collections/projects/records', {
+		filter: `(designer='${auth.user.id}')`,
+		expand: ['creator', 'creator.avatar'],
+	}).then((response) => {
+		projects.value = response.items
+	})
 
 	loading.value = false
 }
@@ -99,7 +79,7 @@ const openChat = (project: IProject) => {
 	openedChat.value = project
 }
 
-const closeChat = () => openedChat.value = null
+const closeChat = () => (openedChat.value = null)
 
 const updateStatus = (status: IProjectStatus) => {
 	if (openedChat.value) {

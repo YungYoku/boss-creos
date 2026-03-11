@@ -12,7 +12,7 @@ class Screen {
 		s: 768,
 		m: 1024,
 		l: 1280,
-		xl: 1440
+		xl: 1440,
 	}
 	#size: Ref<Size> = ref('xl')
 

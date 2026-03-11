@@ -1,11 +1,6 @@
 <template>
-	<Dropdown
-		class="user-dropdown"
-		:items
-	>
-		<div class="user-dropdown__account">
-			Аккаунт
-		</div>
+	<Dropdown class="user-dropdown" :items>
+		<div class="user-dropdown__account">Аккаунт</div>
 	</Dropdown>
 </template>
 
@@ -59,50 +54,50 @@ const items = computed(() => [
 	[
 		{
 			text: 'Профиль',
-			to: `/users/${auth.user.id}`
+			to: `/users/${auth.user.id}`,
 		},
 		{
 			text: 'Настройки',
-			to: '/profile'
+			to: '/profile',
 		},
 	],
 	[
 		{
 			text: 'Мои заказы',
 			to: '/bought',
-			can: auth.isBuyer
+			can: auth.isBuyer,
 		},
 		{
 			text: 'Избранное',
 			to: '/favorite',
-			can: auth.isBuyer
+			can: auth.isBuyer,
 		},
 		{
 			text: 'Корзина',
 			to: '/shopping-cart',
-			can: auth.isBuyer
+			can: auth.isBuyer,
 		},
 
 		{
 			text: 'Мои креативы',
 			to: '/made-creatives',
-			can: auth.isDesigner
+			can: auth.isDesigner,
 		},
 		{
 			text: 'Мои заказы',
 			to: '/orders',
-			can: auth.isDesigner
+			can: auth.isDesigner,
 		},
 		{
 			text: 'Создать креатив',
 			to: '/creative/new',
-			can: auth.isDesigner
+			can: auth.isDesigner,
 		},
 
 		{
 			text: 'На модерации',
 			to: '/moderation',
-			can: auth.isAdmin
+			can: auth.isAdmin,
 		},
 
 		// {
@@ -119,9 +114,9 @@ const items = computed(() => [
 	[
 		{
 			text: 'Выйти',
-			action: logout
-		}
-	]
+			action: logout,
+		},
+	],
 ])
 </script>
 
@@ -181,8 +176,9 @@ const items = computed(() => [
 			z-index: -1;
 			background-color: #090909;
 			border-radius: 50px;
-			box-shadow: inset 0 0 4px rgb(255 255 255 / 5%),
-			inset 0 0 20px rgb(255 255 255 / 2%);
+			box-shadow:
+				inset 0 0 4px rgb(255 255 255 / 5%),
+				inset 0 0 20px rgb(255 255 255 / 2%);
 			pointer-events: none;
 		}
 	}

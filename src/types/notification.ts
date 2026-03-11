@@ -2,7 +2,7 @@ import type { DBRecord, DBRecordItems } from '@/types/dbBase'
 
 export type INotification = DBRecord & {
 	created: string
-	id:	string
+	id: string
 	text: string
 	link: string
 	updated: string

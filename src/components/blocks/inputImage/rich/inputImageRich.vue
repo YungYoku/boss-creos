@@ -1,15 +1,6 @@
 <template>
-	<FieldWrapperRich
-		class="input-image-rich"
-		:label
-		:error
-	>
-		<InputImage
-			v-model="value"
-			:loading
-			:accept
-			@update:name="updateName"
-		/>
+	<FieldWrapperRich class="input-image-rich" :label :error>
+		<InputImage v-model="value" :loading :accept @update:name="updateName" />
 	</FieldWrapperRich>
 </template>
 
@@ -23,7 +14,6 @@ import { defaultProps } from '../default/props'
 import InputImage from '../default/inputImage.vue'
 
 withDefaults(defineProps<Props>(), defaultProps)
-
 
 const emit = defineEmits(['update:name'])
 const updateName = (value: string) => {
@@ -56,7 +46,7 @@ const value = defineModel<string | null>({
 	.input__field-wrap {
 		height: 25px;
 		border-radius: 8px;
-		border: 1px solid #FFFFFF1A;
+		border: 1px solid #ffffff1a;
 		background: transparent;
 	}
 

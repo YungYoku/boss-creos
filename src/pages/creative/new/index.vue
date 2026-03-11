@@ -1,17 +1,8 @@
 <template>
-	<Grid
-		vertical
-		:columns="1"
-		gap="l"
-		class="new-creative"
-	>
+	<Grid vertical :columns="1" gap="l" class="new-creative">
 		<Island>
 			<Grid vertical>
-				<Text
-					size="m"
-					:loading="loading"
-					class="new-creative__title"
-				>
+				<Text size="m" :loading="loading" class="new-creative__title">
 					Добавить креатив
 				</Text>
 
@@ -154,16 +145,9 @@
 		</Island>
 	</Grid>
 
-	<Modal
-		v-if="modalShowing"
-		:width="585"
-		@close="modalShowing = false"
-	>
+	<Modal v-if="modalShowing" :width="585" @close="modalShowing = false">
 		<Grid>
-			<template
-				v-for="item in ratioItems"
-				:key="item.id"
-			>
+			<template v-for="item in ratioItems" :key="item.id">
 				<InputRich
 					v-if="creative.resizePrices?.[item.id]"
 					v-model="creative.resizePrices[item.id].value"
@@ -192,7 +176,7 @@ import {
 	SelectLiveRich,
 	SelectRich,
 	SwitcherRich,
-	TextareaRich
+	TextareaRich,
 } from '@/components/blocks'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
@@ -203,8 +187,8 @@ import { AUTH, DESIGNER } from '@/data/permissions'
 definePage({
 	meta: {
 		permissions: [AUTH, DESIGNER],
-		bgClass: 'new-creative'
-	}
+		bgClass: 'new-creative',
+	},
 })
 
 const auth = useAuthStore()
@@ -214,7 +198,11 @@ const creative = Form<ICreative>({ ...emptyCreative })
 const router = useRouter()
 const toast = useToast()
 
-watch(() => auth.user.id, () => creative.creator.value = auth.user.id, { immediate: true })
+watch(
+	() => auth.user.id,
+	() => (creative.creator.value = auth.user.id),
+	{ immediate: true },
+)
 
 const loading = ref(false)
 const create = async () => {
@@ -222,14 +210,14 @@ const create = async () => {
 		const isNoApproach = !creative.approach.value
 		if (isNoApproach) {
 			creative.setErrors({
-				approach: { code: 'validation_required', message: 'Cannot be blank.' }
+				approach: { code: 'validation_required', message: 'Cannot be blank.' },
 			})
 		}
 
 		const isNoVideo = !creative.video.value
 		if (isNoVideo) {
 			creative.setErrors({
-				video: { code: 'validation_required', message: 'Cannot be blank.' }
+				video: { code: 'validation_required', message: 'Cannot be blank.' },
 			})
 		}
 
@@ -243,9 +231,8 @@ const create = async () => {
 
 	creative.creator.value = auth.user.id
 
-	await Http
-		.post<ICreative>('/collections/creatives/records', creative.get())
-		.then(async response => {
+	await Http.post<ICreative>('/collections/creatives/records', creative.get())
+		.then(async (response) => {
 			await router.push(`/creative/${response.id}`)
 		})
 		.catch((error: unknown) => {

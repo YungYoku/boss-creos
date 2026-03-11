@@ -1,21 +1,13 @@
 <template>
-	<Grid
-		vertical
-		:columns="1"
-		gap="l"
-	>
-		<Grid
-			:columns-xl="[1, '119px', '126px']"
-			:columns-m="[1, 1]"
-			:columns-s="1"
-		>
+	<Grid vertical :columns="1" gap="l">
+		<Grid :columns-xl="[1, '119px', '126px']" :columns-m="[1, 1]" :columns-s="1">
 			<PageTitle :loading="loading">
 				{{ project.title }}
 			</PageTitle>
 
 			<template v-if="!loading && project.status === 'created'">
 				<Button
-					v-if="(authStore.isAdmin || isItMyProject)"
+					v-if="authStore.isAdmin || isItMyProject"
 					:disabled="loading"
 					variant="destructive"
 					@click="showDeleteConfirmation"
@@ -32,122 +24,52 @@
 				</Button>
 
 				<template v-else-if="authStore.isDesigner">
-					<span/>
-					<span v-if="isAlreadyProposed"/>
-					<Button
-						v-else
-						:disabled="loading"
-						@click="showMakeProposal"
-					>
+					<span />
+					<span v-if="isAlreadyProposed" />
+					<Button v-else :disabled="loading" @click="showMakeProposal">
 						Откликнуться
 					</Button>
 				</template>
 			</template>
 		</Grid>
 
-		<Grid
-			:columns-xl="2"
-			:columns-l="1"
-		>
+		<Grid :columns-xl="2" :columns-l="1">
 			<Island>
-				<Grid
-					vertical
-					:columns="1"
-				>
-					<Text
-						size="m"
-						:loading="loading"
-					>
-						Информация о заказе
-					</Text>
+				<Grid vertical :columns="1">
+					<Text size="m" :loading="loading"> Информация о заказе </Text>
 
-					<Text
-						size="s"
-						:loading="loading"
-					>
-						Цена: {{ project.price }}₽
-					</Text>
+					<Text size="s" :loading="loading"> Цена: {{ project.price }}₽ </Text>
 
-					<span/>
+					<span />
 
-					<Text
-						size="s"
-						:loading="loading"
-					>
-						Создано: {{ $date(created) }}
-					</Text>
-					<Text
-						size="s"
-						:loading="loading"
-					>
-						Срок сдачи: {{ $date(deadline) }}
-					</Text>
+					<Text size="s" :loading="loading"> Создано: {{ $date(created) }} </Text>
+					<Text size="s" :loading="loading"> Срок сдачи: {{ $date(deadline) }} </Text>
 
-					<span/>
+					<span />
 
-					<Text
-						size="s"
-						:loading="loading"
-					>
+					<Text size="s" :loading="loading">
 						Репетиторство: {{ project.tutoring ? 'да' : 'нет' }}
 					</Text>
 
-					<Grid
-						v-if="project.expand?.buyer"
-						:columns="[0, 0]"
-						ver-align="center"
-					>
-						<Text
-							size="s"
-							:loading="loading"
-						>
-							Заказчик:
-						</Text>
+					<Grid v-if="project.expand?.buyer" :columns="[0, 0]" ver-align="center">
+						<Text size="s" :loading="loading"> Заказчик: </Text>
 
-						<UserCard
-							link
-							:user="project.expand.buyer"
-							:loading="loading"
-						/>
+						<UserCard link :user="project.expand.buyer" :loading="loading" />
 					</Grid>
 
-					<Grid
-						v-if="project.expand?.designer"
-						:columns="[0, 0]"
-						ver-align="center"
-					>
-						<Text
-							size="s"
-							:loading="loading"
-						>
-							Исполнитель:
-						</Text>
+					<Grid v-if="project.expand?.designer" :columns="[0, 0]" ver-align="center">
+						<Text size="s" :loading="loading"> Исполнитель: </Text>
 
-						<UserCard
-							link
-							:user="project.expand.designer"
-							:loading="loading"
-						/>
+						<UserCard link :user="project.expand.designer" :loading="loading" />
 					</Grid>
 				</Grid>
 			</Island>
 
 			<Island>
-				<Grid
-					vertical
-					:columns="1"
-				>
-					<Text
-						size="m"
-						:loading="loading"
-					>
-						Описание
-					</Text>
+				<Grid vertical :columns="1">
+					<Text size="m" :loading="loading"> Описание </Text>
 
-					<Text
-						size="s"
-						:loading="loading"
-					>
+					<Text size="s" :loading="loading">
 						{{ project.description }}
 					</Text>
 				</Grid>
@@ -205,13 +127,11 @@ const loadProject = async () => {
 		return
 	}
 
-	await Http
-		.get<IProject>(`/collections/projects/records/${id}`, {
-			expand: ['buyer', 'designer', 'proposals', 'discipline', 'type', 'university']
-		})
-		.then(response => {
-			project.value = response
-		})
+	await Http.get<IProject>(`/collections/projects/records/${id}`, {
+		expand: ['buyer', 'designer', 'proposals', 'discipline', 'type', 'university'],
+	}).then((response) => {
+		project.value = response
+	})
 
 	loading.value = false
 }
@@ -220,16 +140,13 @@ void loadProject()
 const remove = async () => {
 	if (loading.value) return
 
-	await Http
-		.delete(`/collections/projects/records/${project.value.id}`)
-		.then(() => {
-			void router.push('/')
-		})
+	await Http.delete(`/collections/projects/records/${project.value.id}`).then(() => {
+		void router.push('/')
+	})
 }
 
 const authStore = useAuthStore()
 const toast = useToast()
-
 
 const makeProposalModal = reactive<{
 	show: boolean
@@ -249,22 +166,20 @@ const showMakeProposal = () => {
 
 	makeProposalModal.show = true
 }
-const hideMakeProposal = () => makeProposalModal.show = false
+const hideMakeProposal = () => (makeProposalModal.show = false)
 const makeProposal = async (proposal: IProjectProposal) => {
 	loading.value = true
 
-	await Http
-		.post<IProject>(`/make-proposal/${project.value.id}`, {
-			price: proposal.price,
-			text: proposal.text
-		})
-		.then((response) => {
-			project.value = response
+	await Http.post<IProject>(`/make-proposal/${project.value.id}`, {
+		price: proposal.price,
+		text: proposal.text,
+	}).then((response) => {
+		project.value = response
 
-			authStore.setEnergy(authStore.user.energy - 1)
+		authStore.setEnergy(authStore.user.energy - 1)
 
-			toast.set('Вы успешно откликнулись')
-		})
+		toast.set('Вы успешно откликнулись')
+	})
 
 	loading.value = false
 
@@ -274,7 +189,7 @@ const makeProposal = async (proposal: IProjectProposal) => {
 const isItMyProject = computed(() => project.value.buyer === authStore.user.id)
 const isAlreadyProposed = computed(() => {
 	const proposals = project.value.expand?.proposals ?? []
-	const proposal = proposals.find(proposal => proposal.user === authStore.user.id)
+	const proposal = proposals.find((proposal) => proposal.user === authStore.user.id)
 
 	return proposal !== undefined
 })
@@ -287,6 +202,6 @@ const deleteConfirmationModal = reactive<{
 }>({
 	show: false,
 })
-const showDeleteConfirmation = () => deleteConfirmationModal.show = true
-const hideDeleteConfirmation = () => deleteConfirmationModal.show = false
+const showDeleteConfirmation = () => (deleteConfirmationModal.show = true)
+const hideDeleteConfirmation = () => (deleteConfirmationModal.show = false)
 </script>

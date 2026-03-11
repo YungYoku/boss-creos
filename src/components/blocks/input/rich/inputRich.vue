@@ -1,9 +1,5 @@
 <template>
-	<FieldWrapperRich
-		class="input-rich"
-		:label
-		:error
-	>
+	<FieldWrapperRich class="input-rich" :label :error>
 		<Input
 			v-model="value"
 			:loading
@@ -32,7 +28,7 @@ withDefaults(defineProps<Props>(), defaultProps)
 
 const value = defineModel<string | number>({
 	type: [String, Number],
-	default: ''
+	default: '',
 })
 
 const emit = defineEmits(['action'])
@@ -51,7 +47,7 @@ const action = () => {
 	.input__field-wrap {
 		height: 25px;
 		border-radius: 8px;
-		border: 1px solid #FFFFFF1A;
+		border: 1px solid #ffffff1a;
 		background: transparent;
 	}
 

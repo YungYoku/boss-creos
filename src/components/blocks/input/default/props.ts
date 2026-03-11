@@ -5,9 +5,9 @@ export interface Props {
 	disabled?: boolean
 	type?: 'text' | 'password' | 'email' | 'file' | 'number'
 	icon?: string | null
-	autocomplete?: 'off' | 'on' | 'new-password' | 'username',
-	cursor?: 'text' | 'pointer',
-	clearable?: boolean,
+	autocomplete?: 'off' | 'on' | 'new-password' | 'username'
+	cursor?: 'text' | 'pointer'
+	clearable?: boolean
 	variant?: 'default' | 'plain'
 	transparent?: boolean
 	accept?: string
@@ -25,5 +25,5 @@ export const defaultProps = {
 	clearable: true,
 	variant: 'default',
 	transparent: false,
-	accept: ''
+	accept: '',
 } as const

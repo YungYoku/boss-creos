@@ -6,8 +6,12 @@ const Calendar = defineAsyncComponent(() => import('./calendar/calendar.vue'))
 const Checkbox = defineAsyncComponent(() => import('./checkbox/checkbox.vue'))
 const CreativeCard = defineAsyncComponent(() => import('./creativeCard/creativeCard.vue'))
 const DatePicker = defineAsyncComponent(() => import('./datePicker/datePicker.vue'))
-const EmptyProjectCard = defineAsyncComponent(() => import('./projectCard/blank/emptyProjectCard.vue'))
-const EmptyCreativeCard = defineAsyncComponent(() => import('./creativeCard/blank/emptyCreativeCard.vue'))
+const EmptyProjectCard = defineAsyncComponent(
+	() => import('./projectCard/blank/emptyProjectCard.vue'),
+)
+const EmptyCreativeCard = defineAsyncComponent(
+	() => import('./creativeCard/blank/emptyCreativeCard.vue'),
+)
 const Input = defineAsyncComponent(() => import('./input/default/input.vue'))
 const InputRich = defineAsyncComponent(() => import('./input/rich/inputRich.vue'))
 const InputFile = defineAsyncComponent(() => import('./inputFile/inputFile.vue'))
@@ -17,7 +21,9 @@ const InputVideo = defineAsyncComponent(() => import('./inputVideo/default/input
 const InputVideoRich = defineAsyncComponent(() => import('./inputVideo/rich/inputVideoRich.vue'))
 const ProjectCard = defineAsyncComponent(() => import('./projectCard/projectCard.vue'))
 const RatingStars = defineAsyncComponent(() => import('./ratingStars/ratingStars.vue'))
-const RatingStarsEditable = defineAsyncComponent(() => import('./ratingStarsEditable/ratingStartEditable.vue'))
+const RatingStarsEditable = defineAsyncComponent(
+	() => import('./ratingStarsEditable/ratingStartEditable.vue'),
+)
 const Notifications = defineAsyncComponent(() => import('./notifications/notifications.vue'))
 const Select = defineAsyncComponent(() => import('./select/default/select.vue'))
 const SelectRich = defineAsyncComponent(() => import('./select/rich/selectRich.vue'))
@@ -63,5 +69,5 @@ export {
 	Toast,
 	User,
 	UserCard,
-	UserDropdown
+	UserDropdown,
 }

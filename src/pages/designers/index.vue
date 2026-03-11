@@ -1,9 +1,6 @@
 <template>
 	<div class="designers">
-		<div
-			v-if="users.length || loading"
-			class="designers__content"
-		>
+		<div v-if="users.length || loading" class="designers__content">
 			<UserCard
 				v-for="user in users"
 				:key="user.id"
@@ -26,23 +23,21 @@ import { Http } from '@/plugins'
 
 definePage({
 	meta: {
-		bgClass: 'shop'
-	}
+		bgClass: 'shop',
+	},
 })
 
 const users: Ref<IUser[]> = ref([])
 
 const loading = ref(true)
 const loadDesigners = async () => {
-	await Http
-		.get<IUsers>('/collections/users/records', {
-			filter: 'role=\'designer\'',
-			expand: ['avatar'],
-			perPage: 12
-		})
-		.then(res => {
-			users.value = res.items
-		})
+	await Http.get<IUsers>('/collections/users/records', {
+		filter: "role='designer'",
+		expand: ['avatar'],
+		perPage: 12,
+	}).then((res) => {
+		users.value = res.items
+	})
 }
 
 const loadData = async () => {

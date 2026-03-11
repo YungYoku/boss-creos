@@ -1,8 +1,5 @@
 <template>
-	<Grid
-		class="moderation"
-		:columns="['350px', 1]"
-	>
+	<Grid class="moderation" :columns="['350px', 1]">
 		<div class="moderation__tabs">
 			<router-link
 				v-for="tab in tabs"
@@ -10,21 +7,16 @@
 				:to="tab.link"
 				class="moderation__tab"
 				:class="{
-					'_active': tab.link === currentTab
+					_active: tab.link === currentTab,
 				}"
 			>
 				{{ tab.name }}
 			</router-link>
 		</div>
 
-		<router-view/>
+		<router-view />
 
-		<span
-			v-if="isTabNotSelected"
-			class="moderation__empty"
-		>
-			Не выбран пункт меню
-		</span>
+		<span v-if="isTabNotSelected" class="moderation__empty"> Не выбран пункт меню </span>
 	</Grid>
 </template>
 
@@ -38,8 +30,8 @@ import { ADMIN, AUTH } from '@/data/permissions'
 definePage({
 	meta: {
 		permissions: [AUTH, ADMIN],
-		bgClass: 'shop'
-	}
+		bgClass: 'shop',
+	},
 })
 
 const route = useRoute()
@@ -49,15 +41,15 @@ const isTabNotSelected = computed(() => route.name === '/moderation/')
 const tabs = [
 	{
 		name: 'Креативы',
-		link: 'creatives'
+		link: 'creatives',
 	},
 	{
 		name: 'Пользователи',
-		link: 'users'
+		link: 'users',
 	},
-].map(item => ({
+].map((item) => ({
 	...item,
-	link: `/moderation/${item.link}`
+	link: `/moderation/${item.link}`,
 }))
 </script>
 
@@ -68,19 +60,19 @@ const tabs = [
 		flex-direction: column;
 		gap: 10px;
 		padding: 10px;
-		background: #FFF;
+		background: #fff;
 		border-radius: 8px;
 		overflow: hidden;
 	}
 
 	.moderation__tab {
 		padding: 6px 12px;
-		background: #2264E5;
+		background: #2264e5;
 		border-radius: 6px;
 		cursor: pointer;
 
 		&._active {
-			background: #001C53;
+			background: #001c53;
 		}
 
 		&:hover {

@@ -1,24 +1,18 @@
 <template>
 	<div class="balance">
-		<div class="balance__title">
-			Пополнение баланса
-		</div>
+		<div class="balance__title">Пополнение баланса</div>
 
 		<div class="balance__description">
-			Баланс кошелька — это сумма на вашем личном счете внутри нашего сайта.
-			Эти средства можно использовать для покупки креативов, не совершая каждый раз транзакцию.
+			Баланс кошелька — это сумма на вашем личном счете внутри нашего сайта. Эти средства
+			можно использовать для покупки креативов, не совершая каждый раз транзакцию.
 		</div>
 
 		<div class="balance__action-panel">
-			<BadgeBalance/>
+			<BadgeBalance />
 
 			<div class="balance__actions">
-				<Badge @click="showWithdrawModal">
-					Вывод средств
-				</Badge>
-				<Badge @click="showDepositModal">
-					Пополнить баланс
-				</Badge>
+				<Badge @click="showWithdrawModal"> Вывод средств </Badge>
+				<Badge @click="showDepositModal"> Пополнить баланс </Badge>
 			</div>
 		</div>
 
@@ -28,21 +22,20 @@
 			class="balance__transaction"
 		>
 			<template #icon>
-				<img
-					src="@/assets/img/tether.svg"
-					alt=""
-				>
+				<img src="@/assets/img/tether.svg" alt="" />
 			</template>
 
 			<div class="balance__transaction-content">
 				<div class="balance__transaction-value">
-					{{ transaction.type === 'deposit' ? 'Пополнение' : 'Списание' }} ${{ transaction.amount }}
+					{{ transaction.type === 'deposit' ? 'Пополнение' : 'Списание' }} ${{
+						transaction.amount
+					}}
 
 					<div
 						class="balance__transaction-status"
 						:class="{
 							_pending: transaction.status === 'pending',
-							_done: transaction.status === 'done'
+							_done: transaction.status === 'done',
 						}"
 					/>
 				</div>
@@ -52,54 +45,23 @@
 			</div>
 		</CardLong>
 
-		<CardLong
-			v-if="transactions?.length === 0"
-			class="balance__transaction"
-		>
+		<CardLong v-if="transactions?.length === 0" class="balance__transaction">
 			Нет данных
 		</CardLong>
 	</div>
 
-	<Modal
-		v-if="modalShowing"
-		:width="585"
-		@close="modalShowing = false"
-	>
+	<Modal v-if="modalShowing" :width="585" @close="modalShowing = false">
 		<Grid vertical>
 			<template v-if="type === 'deposit'">
-				<InputRich
-					v-model="amount"
-					label="Сумма"
-					type="number"
-				/>
-				<Button
-					variant="outline"
-					@click="action"
-				>
-					Пополнить
-				</Button>
+				<InputRich v-model="amount" label="Сумма" type="number" />
+				<Button variant="outline" @click="action"> Пополнить </Button>
 			</template>
 
 			<template v-else>
-				<InputRich
-					v-model="address"
-					label="Адрес"
-				/>
-				<InputRich
-					v-model="blockchain"
-					label="Сеть"
-				/>
-				<InputRich
-					v-model="amount"
-					label="Сумма"
-					type="number"
-				/>
-				<Button
-					variant="outline"
-					@click="action"
-				>
-					Вывод
-				</Button>
+				<InputRich v-model="address" label="Адрес" />
+				<InputRich v-model="blockchain" label="Сеть" />
+				<InputRich v-model="amount" label="Сумма" type="number" />
+				<Button variant="outline" @click="action"> Вывод </Button>
 			</template>
 		</Grid>
 	</Modal>
@@ -119,8 +81,8 @@ import { AUTH } from '@/data/permissions'
 definePage({
 	meta: {
 		permissions: [AUTH],
-		bgClass: 'shop'
-	}
+		bgClass: 'shop',
+	},
 })
 
 const auth = useAuthStore()
@@ -135,7 +97,7 @@ const makeTransaction = async (status: TransactionStatus) => {
 	return await Http.post<Transaction>('/collections/transactions/records', {
 		amount: amount.value,
 		type: type.value,
-		status
+		status,
 	}).then((res) => {
 		return res.id
 	})
@@ -144,13 +106,24 @@ const makeTransaction = async (status: TransactionStatus) => {
 const updateUser = async (balance: number, transactionStatus: TransactionStatus) => {
 	const newTransactionId = await makeTransaction(transactionStatus)
 
-	await Http.patch<IUser>(`/collections/users/records/${auth.user.id}`, {
-		...auth.user,
-		transactions: [...auth.user.transactions, newTransactionId],
-		balance
-	}, {
-		expand: ['baskets', 'baskets.creative', 'baskets.creative.preview', 'baskets.creative.slot', 'baskets.geo', 'transactions']
-	}).then(data => {
+	await Http.patch<IUser>(
+		`/collections/users/records/${auth.user.id}`,
+		{
+			...auth.user,
+			transactions: [...auth.user.transactions, newTransactionId],
+			balance,
+		},
+		{
+			expand: [
+				'baskets',
+				'baskets.creative',
+				'baskets.creative.preview',
+				'baskets.creative.slot',
+				'baskets.geo',
+				'transactions',
+			],
+		},
+	).then((data) => {
 		auth.setUser(data)
 		amount.value = 0
 	})
@@ -231,7 +204,7 @@ const showWithdrawModal = () => {
 	.balance__transaction-date {
 		font-weight: 500;
 		font-size: 11px;
-		color: #AFAFB7;
+		color: #afafb7;
 	}
 
 	.balance__transaction-status {

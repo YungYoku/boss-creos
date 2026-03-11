@@ -1,9 +1,6 @@
 <template>
-	<Text
-		size="xl"
-		:loading="loading"
-	>
-		<slot/>
+	<Text size="xl" :loading="loading">
+		<slot />
 	</Text>
 </template>
 
@@ -13,7 +10,7 @@ import { Text } from '@/components/elements'
 defineProps({
 	loading: {
 		type: Boolean,
-		default: false
-	}
+		default: false,
+	},
 })
 </script>

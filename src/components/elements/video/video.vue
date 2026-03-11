@@ -15,8 +15,8 @@ import { computed, ref, useTemplateRef } from 'vue'
 import type { IImage, IVideo } from '@/types/file'
 
 interface Props {
-	src: string | IVideo,
-	preview: string | IImage,
+	src: string | IVideo
+	preview: string | IImage
 }
 
 const props = withDefaults(defineProps<Props>(), {})

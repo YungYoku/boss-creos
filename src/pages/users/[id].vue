@@ -1,24 +1,11 @@
 <template>
 	<div class="user">
-		<Grid
-			:columns-xl="['400px', 1]"
-			gap="xl"
-		>
-			<Grid
-				vertical
-				:columns="1"
-				hor-align="center"
-			>
-				<Avatar
-					size="xl"
-					:user="user"
-				/>
+		<Grid :columns-xl="['400px', 1]" gap="xl">
+			<Grid vertical :columns="1" hor-align="center">
+				<Avatar size="xl" :user="user" />
 			</Grid>
 
-			<Grid
-				:columns="1"
-				vertical
-			>
+			<Grid :columns="1" vertical>
 				<div class="user__name">
 					{{ user?.username }}
 				</div>
@@ -29,16 +16,9 @@
 			</Grid>
 		</Grid>
 
-		<div
-			v-if="creatives.length || loadingCreatives"
-			class="user__creatives"
-		>
+		<div v-if="creatives.length || loadingCreatives" class="user__creatives">
 			<template v-if="loadingCreatives">
-				<EmptyCreativeCard
-					v-for="i in 8"
-					:key="i"
-					class="main__creatives-item"
-				/>
+				<EmptyCreativeCard v-for="i in 8" :key="i" class="main__creatives-item" />
 			</template>
 			<template v-else>
 				<CreativeCard
@@ -84,15 +64,13 @@ const loadCreatives = async () => {
 	const filter = `status='approved'&&creator='${id}'`
 	const encodedFilter = encodeURIComponent(filter)
 
-	await Http
-		.get<ICreatives>('/collections/creatives/records', {
-			filter: encodedFilter,
-			expand: ['preview', 'video', 'creator', 'creator.avatar'],
-			perPage: 12
-		})
-		.then(res => {
-			creatives.value = res.items
-		})
+	await Http.get<ICreatives>('/collections/creatives/records', {
+		filter: encodedFilter,
+		expand: ['preview', 'video', 'creator', 'creator.avatar'],
+		perPage: 12,
+	}).then((res) => {
+		creatives.value = res.items
+	})
 
 	loadingCreatives.value = false
 }
@@ -104,13 +82,11 @@ const loadUser = async () => {
 
 	loading.value = true
 
-	await Http
-		.get<IUser>(`/collections/users/records/${id}`, {
-			expand: ['avatar']
-		})
-		.then(res => {
-			user.value = res
-		})
+	await Http.get<IUser>(`/collections/users/records/${id}`, {
+		expand: ['avatar'],
+	}).then((res) => {
+		user.value = res
+	})
 
 	loading.value = false
 }

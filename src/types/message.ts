@@ -9,7 +9,7 @@ export type IMessage = DBRecord & {
 	file: string | null
 	user: string
 	checked: boolean
-	expand?:{
+	expand?: {
 		file?: IFile
 	}
 }

@@ -9,35 +9,27 @@ export default defineConfig(({ mode }) => {
 
 	return {
 		esbuild: {
-			drop: isProd ? ['console', 'debugger'] : []
+			drop: isProd ? ['console', 'debugger'] : [],
 		},
 
 		plugins: [
 			vueRouter(),
 			vue({
 				features: {
-					optionsAPI: false
-				}
+					optionsAPI: false,
+				},
 			}),
 			checker({
-				// eslint: {
-				// 	lintCommand: 'eslint "./src/**/*.{ts,vue}"',
-				// 	watchPath: './src',
-				// 	useFlatConfig: true
-				// },
+				oxlint: true,
 				vueTsc: true,
 				typescript: true,
-				stylelint: {
-					lintCommand: 'stylelint ./src/**/*.{css,vue}',
-					watchPath: './src',
-				}
-			})
+			}),
 		],
 
 		resolve: {
 			alias: {
-				'@': fileURLToPath(new URL('./src', import.meta.url))
-			}
-		}
+				'@': fileURLToPath(new URL('./src', import.meta.url)),
+			},
+		},
 	}
 })

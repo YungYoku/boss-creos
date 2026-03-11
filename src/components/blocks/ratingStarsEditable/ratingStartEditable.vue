@@ -1,8 +1,5 @@
 <template>
-	<div
-		class="rating-start-editable"
-		@mouseleave="hover(null)"
-	>
+	<div class="rating-start-editable" @mouseleave="hover(null)">
 		<Icon
 			v-for="(icon, index) in icons"
 			:key="index"
@@ -21,14 +18,13 @@ import { Icon } from '@/components/elements'
 
 const value = defineModel({
 	type: Number,
-	default: 0
+	default: 0,
 })
 
 const icons = computed(() => {
 	const max = hoverIndex.value ?? value.value
 
 	const result = []
-
 
 	for (let i = 0; i < 5; i++) {
 		if (i < max) {
@@ -41,7 +37,7 @@ const icons = computed(() => {
 })
 
 const hoverIndex: Ref<number | null> = ref(null)
-const hover = (index: number | null) => hoverIndex.value = index
+const hover = (index: number | null) => (hoverIndex.value = index)
 </script>
 
 <style scoped>

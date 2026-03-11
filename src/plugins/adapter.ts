@@ -39,17 +39,19 @@ export const useAdapter = <T extends AdditionalAdapterFields<T>, Keys extends ke
 ) => {
 	const keys = Object.keys(elementSchema) as Keys[]
 
-	const fieldsForRequest = keys.filter(field => !unnecessaryFieldsForRequest.includes(field)) as string[]
-	const fieldsForTable = keys.filter(field => !unnecessaryFieldsForTable.includes(field))
+	const fieldsForRequest = keys.filter(
+		(field) => !unnecessaryFieldsForRequest.includes(field),
+	) as string[]
+	const fieldsForTable = keys.filter((field) => !unnecessaryFieldsForTable.includes(field))
 
 	const getHeader = (item: T) => {
 		const keys = Object.keys(item) as Keys[]
-		const filteredKeys = keys.filter(name => fieldsForTable.includes(name))
-		const result = filteredKeys.map(name => ({ name: String(name) }))
+		const filteredKeys = keys.filter((name) => fieldsForTable.includes(name))
+		const result = filteredKeys.map((name) => ({ name: String(name) }))
 
 		return [{ name: 'actions' }, ...result]
 	}
-	
+
 	const getValue = (item: AdapterItem<T>, key: keyof AdapterItem<T>) => {
 		if (item.expand?.[key]) {
 			return item.expand[key] as ExpandedOrDirectProperty<T, Keys>
@@ -58,15 +60,17 @@ export const useAdapter = <T extends AdditionalAdapterFields<T>, Keys extends ke
 	}
 
 	const getBody = (items: AdapterItem<T>[]) => {
-		return items.map(item => {
+		return items.map((item) => {
 			const keys = Object.keys(item) as Keys[]
-			const filteredKeys = keys.filter(name => fieldsForTable.includes(name))
+			const filteredKeys = keys.filter((name) => fieldsForTable.includes(name))
 
-			const result = [{
-				key: 'actions',
-				newValue: null,
-				options: options(item).actions
-			}] as IRow
+			const result = [
+				{
+					key: 'actions',
+					newValue: null,
+					options: options(item).actions,
+				},
+			] as IRow
 			filteredKeys.forEach((key) => {
 				const value = getValue(item, key)
 				const format = cellFormats[key] ? cellFormats[key] : <V>(value: V) => value
@@ -75,7 +79,7 @@ export const useAdapter = <T extends AdditionalAdapterFields<T>, Keys extends ke
 					key: String(key),
 					options: options(item)[key] ?? {},
 					newValue: item.changes?.[key] ?? null,
-					currentValue: format(value)
+					currentValue: format(value),
 				})
 			})
 			return result

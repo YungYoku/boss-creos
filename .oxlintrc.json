@@ -1,0 +1,18 @@
+{
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"plugins": ["vue"],
+	"categories": {
+		"correctness": "warn"
+	},
+	"rules": {},
+	"settings": {
+		"vitest": {
+			"typecheck": false
+		}
+	},
+	"env": {
+		"builtin": true
+	},
+	"globals": {},
+	"ignorePatterns": ["db/**"]
+}

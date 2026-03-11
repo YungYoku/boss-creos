@@ -5,13 +5,4 @@ import Http from './http'
 import Storage from './storage'
 import Screen from './screen'
 
-export {
-	datetimePlugin,
-	Datetime,
-	Form,
-	formatPlugin,
-	Format,
-	Http,
-	Storage,
-	Screen
-}
+export { datetimePlugin, Datetime, Form, formatPlugin, Format, Http, Storage, Screen }

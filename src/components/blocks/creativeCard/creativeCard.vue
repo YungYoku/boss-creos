@@ -11,10 +11,7 @@
 
 		<template #footer>
 			<div class="creative-card__user">
-				<User
-					link
-					:user="creative.expand?.creator ?? emptyUser"
-				/>
+				<User link :user="creative.expand?.creator ?? emptyUser" />
 
 				<Icon
 					v-if="auth.isBuyer"
@@ -35,9 +32,7 @@
 			/>
 
 			<div class="creative-card__info">
-				<div class="creative-card__price">
-					{{ creative.price }}$
-				</div>
+				<div class="creative-card__price">{{ creative.price }}$</div>
 
 				<router-link
 					v-if="auth.isGuest && forSale"
@@ -86,13 +81,13 @@ import { Http } from '@/plugins'
 
 interface Props {
 	creative: ICreative
-	forSale?: boolean,
+	forSale?: boolean
 	badge?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
 	forSale: false,
-	badge: false
+	badge: false,
 })
 
 const excludeGeo = computed(() => props.creative.unavailableGeo)
@@ -113,33 +108,39 @@ const basketWithCreative = computed(() => {
 
 	return null
 })
-watch(basketWithCreative, () => {
-	if (basketWithCreative.value) {
-		geo.value = basketWithCreative.value.geo
-	}
-}, { immediate: true })
+watch(
+	basketWithCreative,
+	() => {
+		if (basketWithCreative.value) {
+			geo.value = basketWithCreative.value.geo
+		}
+	},
+	{ immediate: true },
+)
 
 const router = useRouter()
 const updateBasket = async () => {
 	if (!basketWithCreative.value) return
 
-	await Http
-		.patch<IBasket>(`/collections/baskets/records/${basketWithCreative.value.id}`, {
+	await Http.patch<IBasket>(
+		`/collections/baskets/records/${basketWithCreative.value.id}`,
+		{
 			...basketWithCreative.value,
-			geo: [...geo.value]
-		}, {
-			expand: ['creative', 'creative.preview', 'creative.slot', 'geo']
+			geo: [...geo.value],
+		},
+		{
+			expand: ['creative', 'creative.preview', 'creative.slot', 'geo'],
+		},
+	).then(async (updatedBasket) => {
+		const baskets = (auth.user.expand?.baskets ?? []).map((basket) => {
+			if (basket.id === updatedBasket.id) {
+				return updatedBasket
+			}
+			return basket
 		})
-		.then(async updatedBasket => {
-			const baskets = (auth.user.expand?.baskets ?? []).map(basket => {
-				if (basket.id === updatedBasket.id) {
-					return updatedBasket
-				}
-				return basket
-			})
-			auth.setBaskets(baskets)
-			await router.push('/shopping-cart')
-		})
+		auth.setBaskets(baskets)
+		await router.push('/shopping-cart')
+	})
 }
 const addToBasket = async () => {
 	if (geo.value.length === 0) return
@@ -151,8 +152,8 @@ const addToBasket = async () => {
 
 	await Http.post<IUser>('/baskets/add', {
 		creative: props.creative.id,
-		geo: [...geo.value]
-	}).then(async data => {
+		geo: [...geo.value],
+	}).then(async (data) => {
 		auth.setUser(data)
 		await router.push('/shopping-cart')
 	})
@@ -164,14 +165,14 @@ const toggleFavorite = async () => {
 
 	let newFavorite = [...auth.user.favorite]
 	if (newFavorite.includes(id)) {
-		newFavorite = newFavorite.filter(fav => fav !== id)
+		newFavorite = newFavorite.filter((fav) => fav !== id)
 	} else {
 		newFavorite.push(id)
 	}
 
 	await Http.patch<IUser>(`/collections/users/records/${auth.user.id}`, {
-		favorite: newFavorite
-	}).then(data => {
+		favorite: newFavorite,
+	}).then((data) => {
 		auth.setUser(data)
 	})
 }
@@ -214,7 +215,7 @@ const isFavorite = computed(() => {
 		margin: 0 auto;
 		color: #fff;
 		background: #303036;
-		border: 1px solid #27272B;
+		border: 1px solid #27272b;
 	}
 
 	.creative-card__info,

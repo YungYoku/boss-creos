@@ -1,9 +1,9 @@
 <template>
 	<component :is="layout">
-		<router-view/>
+		<router-view />
 	</component>
 
-	<Toast/>
+	<Toast />
 </template>
 
 <script lang="ts" setup>
@@ -20,8 +20,8 @@ const auth = useAuthStore()
 const router = useRouter()
 
 const layouts = {
-	'default': DefaultLayout,
-	'auth': AuthLayout
+	default: DefaultLayout,
+	auth: AuthLayout,
 }
 
 const layout = computed(() => {
@@ -31,11 +31,22 @@ const layout = computed(() => {
 
 const loadUserInfo = async () => {
 	if (auth.isLoggedIn) {
-		await Http
-			.post<IUserRefresh>('/collections/users/auth-refresh', {
-			}, {
-				expand: ['avatar', 'baskets', 'baskets.video', 'baskets.creative', 'baskets.creative.preview', 'baskets.creative.slot', 'baskets.geo', 'transactions']
-			})
+		await Http.post<IUserRefresh>(
+			'/collections/users/auth-refresh',
+			{},
+			{
+				expand: [
+					'avatar',
+					'baskets',
+					'baskets.video',
+					'baskets.creative',
+					'baskets.creative.preview',
+					'baskets.creative.slot',
+					'baskets.geo',
+					'transactions',
+				],
+			},
+		)
 			.then(({ token, record }) => {
 				auth.setToken(token)
 				auth.setUser(record)

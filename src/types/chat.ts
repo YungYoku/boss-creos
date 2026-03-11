@@ -5,7 +5,7 @@ export type IChat = DBRecord & {
 	id: string
 	created: string
 	updated: string
-	messages: string[],
+	messages: string[]
 	expand?: {
 		messages?: IMessage[]
 	}

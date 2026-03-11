@@ -19,9 +19,7 @@ interface Error {
 	message: string
 }
 export type FormErrors<T> = {
-	[K in keyof T]?: T[K] extends RawFieldValue
-		? Error
-		: FormErrors<T[K]>
+	[K in keyof T]?: T[K] extends RawFieldValue ? Error : FormErrors<T[K]>
 }
 
 type TransformedFormFields<Schema extends RawSchema> = {
@@ -80,7 +78,7 @@ const Form = <Schema extends RawSchema<Schema>>(base: Schema): IForm<Schema> => 
 				type: 'field',
 				value,
 				error: null,
-				isTouched: false
+				isTouched: false,
 			}
 			Reflect.set(acc, key, reactive(field))
 		}
@@ -99,7 +97,7 @@ const Form = <Schema extends RawSchema<Schema>>(base: Schema): IForm<Schema> => 
 					type: 'field',
 					value,
 					error: null,
-					isTouched: false
+					isTouched: false,
 				}
 				Object.assign(field, newField)
 			}
@@ -162,7 +160,7 @@ const Form = <Schema extends RawSchema<Schema>>(base: Schema): IForm<Schema> => 
 					type: 'field',
 					value,
 					error: null,
-					isTouched: false
+					isTouched: false,
 				}
 				Object.assign(field, newField)
 			}
@@ -181,7 +179,7 @@ const Form = <Schema extends RawSchema<Schema>>(base: Schema): IForm<Schema> => 
 		setErrors,
 		clearErrors,
 		reset,
-		validate
+		validate,
 	}
 }
 

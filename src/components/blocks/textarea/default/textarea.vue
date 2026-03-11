@@ -1,28 +1,24 @@
 <template>
 	<div class="textarea">
-		<Label
-			v-if="label"
-			:active="!isEmpty"
-		>
+		<Label v-if="label" :active="!isEmpty">
 			{{ label }}
 		</Label>
 
 		<textarea
 			v-model="value"
 			class="textarea__field"
-			:class="[{
-				'_empty': value.length === 0
-			}]"
+			:class="[
+				{
+					_empty: value.length === 0,
+				},
+			]"
 			:style="{
-				height
+				height,
 			}"
 			:disabled
 		/>
 
-		<span
-			v-if="error"
-			class="textarea__error"
-		>
+		<span v-if="error" class="textarea__error">
 			{{ error }}
 		</span>
 
@@ -48,9 +44,9 @@ withDefaults(defineProps<Props>(), defaultProps)
 
 const value = defineModel<string>({
 	type: String,
-	default: ''
+	default: '',
 })
-const clear = () => value.value = ''
+const clear = () => (value.value = '')
 
 const isEmpty = computed(() => {
 	if (typeof value.value === 'number') {
@@ -78,7 +74,9 @@ const filled = computed(() => value.value.length > 0)
 		border: 1px solid hsl(var(--input));
 		border-radius: 14px;
 		outline: none;
-		transition: all 0.2s, padding 0s;
+		transition:
+			all 0.2s,
+			padding 0s;
 		resize: none;
 
 		&._empty {

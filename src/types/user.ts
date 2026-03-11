@@ -68,7 +68,7 @@ export const emptyUser: IUser = {
 	balance: 0,
 	transactions: [],
 	status: 'moderation',
-	changes: null
+	changes: null,
 }
 
 export type IUsers = DBRecordItems & {

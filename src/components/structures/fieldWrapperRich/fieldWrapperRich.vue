@@ -1,25 +1,16 @@
 <template>
 	<div class="field-wrapper-rich">
 		<div class="field-wrapper-rich__content">
-			<div
-				v-if="label"
-				class="field-wrapper-rich__label"
-			>
-				<Icon
-					name="circle"
-					:colors="['dark', 'light']"
-				/>
+			<div v-if="label" class="field-wrapper-rich__label">
+				<Icon name="circle" :colors="['dark', 'light']" />
 
 				{{ label }}
 			</div>
 
-			<slot/>
+			<slot />
 		</div>
 
-		<span
-			v-if="error"
-			class="field-wrapper-rich__error"
-		>
+		<span v-if="error" class="field-wrapper-rich__error">
 			{{ error }}
 		</span>
 	</div>
@@ -35,7 +26,7 @@ interface Props {
 
 withDefaults(defineProps<Props>(), {
 	label: '',
-	error: null
+	error: null,
 })
 </script>
 
@@ -47,7 +38,13 @@ withDefaults(defineProps<Props>(), {
 		align-items: center;
 		justify-content: space-between;
 		gap: 10px;
-		background: linear-gradient(180deg, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 8%) 100%), radial-gradient(50% 100% at 50% 0%, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 0%) 100%);
+		background:
+			linear-gradient(180deg, rgb(255 255 255 / 10%) 0%, rgb(255 255 255 / 8%) 100%),
+			radial-gradient(
+				50% 100% at 50% 0%,
+				rgb(255 255 255 / 10%) 0%,
+				rgb(255 255 255 / 0%) 100%
+			);
 		border-radius: 9px;
 	}
 

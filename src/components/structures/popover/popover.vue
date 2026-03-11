@@ -1,17 +1,7 @@
 <template>
-	<div
-		ref="popover"
-		class="popover"
-		@click="showContent"
-	>
-		<div
-			ref="trigger"
-			class="popover__trigger"
-		>
-			<slot
-				name="trigger"
-				:opened="contentShowed"
-			/>
+	<div ref="popover" class="popover" @click="showContent">
+		<div ref="trigger" class="popover__trigger">
+			<slot name="trigger" :opened="contentShowed" />
 		</div>
 
 		<Transition name="popover">
@@ -21,10 +11,10 @@
 				class="popover__content"
 				:style="{
 					maxWidth: `${triggerWidth}px`,
-					left: `${contentLeft}px`
+					left: `${contentLeft}px`,
 				}"
 			>
-				<slot/>
+				<slot />
 			</div>
 		</Transition>
 	</div>
@@ -56,7 +46,6 @@ onMounted(() => {
 onUnmounted(() => {
 	document.addEventListener('click', handleClick)
 })
-
 
 const trigger = useTemplateRef('trigger')
 const triggerWidth = ref(0)

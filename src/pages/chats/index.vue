@@ -7,24 +7,19 @@
 			@click="openedChat = null"
 		/>
 
-		<PageTitle>
-			Мои чаты
-		</PageTitle>
+		<PageTitle> Мои чаты </PageTitle>
 	</Grid>
 
-	<Grid :columns="Screen.isLarger('s') ? [1,4] : 1 ">
+	<Grid :columns="Screen.isLarger('s') ? [1, 4] : 1">
 		<Island v-if="Screen.isLarger('s') || !isChatOpened">
-			<Grid
-				vertical
-				:columns="1"
-			>
+			<Grid vertical :columns="1">
 				<Grid
 					v-for="chat in chats"
 					:key="chat.id"
 					gap="xs"
 					class="chats__item"
 					:class="{
-						'_active': openedChat?.chat === chat.chat
+						_active: openedChat?.chat === chat.chat,
 					}"
 					vertical
 					:columns="1"
@@ -34,18 +29,13 @@
 						{{ chat.title }}
 					</Text>
 
-					<UserCard
-						:loading="loading"
-						:user="getUserForChar(chat)"
-					/>
+					<UserCard :loading="loading" :user="getUserForChar(chat)" />
 				</Grid>
 			</Grid>
 		</Island>
 
 		<Island v-if="(Screen.isSize('s') && isChatOpened) || Screen.isLarger('s')">
-			<Text v-if="!isChatOpened">
-				Выберите чат
-			</Text>
+			<Text v-if="!isChatOpened"> Выберите чат </Text>
 			<Chat
 				v-else-if="openedChat !== null"
 				:project="openedChat"
@@ -75,8 +65,8 @@ import { AUTH } from '@/data/permissions'
 
 definePage({
 	meta: {
-		permissions: [AUTH]
-	}
+		permissions: [AUTH],
+	},
 })
 
 const auth = useAuthStore()
@@ -91,7 +81,7 @@ const headerColumns = computed(() => {
 const chats: Ref<IProject[]> = ref([])
 const loading = ref(true)
 
-const chatRatingType = computed(() => auth.isBuyer ? 'ratingDesigner' : 'ratingBuyer')
+const chatRatingType = computed(() => (auth.isBuyer ? 'ratingDesigner' : 'ratingBuyer'))
 const getUserForChar = (chat: IProject) => {
 	if (loading.value) return emptyUser
 
@@ -103,7 +93,7 @@ const getUserForChar = (chat: IProject) => {
 
 	return emptyUser
 }
-const chatUserType = computed(() => auth.isBuyer ? 'designer' : 'buyer')
+const chatUserType = computed(() => (auth.isBuyer ? 'designer' : 'buyer'))
 
 const getChats = async () => {
 	if (auth.user.id === '') return
@@ -114,11 +104,18 @@ const getChats = async () => {
 
 	await Http.get<IProjects>('/collections/projects/records', {
 		filter: `(${encodedFilter})`,
-		expand: ['proposals', 'type', 'discipline', 'buyer', 'ratingBuyer', 'designer', 'ratingDesigner']
+		expand: [
+			'proposals',
+			'type',
+			'discipline',
+			'buyer',
+			'ratingBuyer',
+			'designer',
+			'ratingDesigner',
+		],
+	}).then(({ items }) => {
+		chats.value = items
 	})
-		.then(({ items }) => {
-			chats.value = items
-		})
 
 	loading.value = false
 }

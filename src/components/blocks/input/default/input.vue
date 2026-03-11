@@ -1,61 +1,49 @@
 <template>
 	<div class="input">
-		<Skeleton
-			v-if="loading"
-			height="48px"
-		/>
+		<Skeleton v-if="loading" height="48px" />
 
 		<template v-else>
-			<Label
-				v-if="label"
-				:active="!isEmpty"
-			>
+			<Label v-if="label" :active="!isEmpty">
 				{{ label }}
 			</Label>
 
 			<div
 				class="input__field-wrap"
-				:class="[variant, {
-					'_disabled': disabled
-				}]"
+				:class="[
+					variant,
+					{
+						_disabled: disabled,
+					},
+				]"
 			>
-				<div
-					v-if="type ==='file' && fileName"
-					class="input__file-name"
-				>
+				<div v-if="type === 'file' && fileName" class="input__file-name">
 					{{ fileName }}
 				</div>
 
 				<input
 					v-model="value"
 					class="input__field"
-					:class="[{
-						'_transparent': transparent
-					}]"
+					:class="[
+						{
+							_transparent: transparent,
+						},
+					]"
 					:style="{
-						cursor
+						cursor,
 					}"
 					:disabled
 					:type
 					:accept
 					autocomplete="off"
 					@input="onInput"
-				>
+				/>
 			</div>
 
-			<span
-				v-if="error"
-				class="input__error"
-			>
+			<span v-if="error" class="input__error">
 				{{ error }}
 			</span>
 
-			<Icon
-				v-if="icon"
-				class="input__action"
-				:name="icon"
-				@click="action"
-			/>
+			<Icon v-if="icon" class="input__action" :name="icon" @click="action" />
 
 			<Icon
 				v-else-if="clearable && filled"
@@ -80,7 +68,7 @@ const props = withDefaults(defineProps<Props>(), defaultProps)
 
 const value = defineModel<string | number>({
 	type: [String, Number],
-	default: ''
+	default: '',
 })
 const clear = () => {
 	value.value = ''

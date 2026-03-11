@@ -2,18 +2,11 @@
 	<Popover class="select">
 		<template #trigger="{ opened }">
 			<div class="select__trigger">
-				<Label
-					v-if="label"
-					:active="!isEmpty"
-				>
+				<Label v-if="label" :active="!isEmpty">
 					{{ label }}
 				</Label>
 
-				<Text
-					v-if="showedValue"
-					class="select__showed-value"
-					size="xs"
-				>
+				<Text v-if="showedValue" class="select__showed-value" size="xs">
 					{{ showedValue }}
 				</Text>
 
@@ -25,17 +18,10 @@
 					@click.prevent.stop="clear"
 				/>
 
-				<Icon
-					class="select__state"
-					:name="opened ? 'arrow-up' : 'arrow-down'"
-					size="s"
-				/>
+				<Icon class="select__state" :name="opened ? 'arrow-up' : 'arrow-down'" size="s" />
 			</div>
 
-			<span
-				v-if="error"
-				class="select__error"
-			>
+			<span v-if="error" class="select__error">
 				{{ error }}
 			</span>
 		</template>
@@ -48,7 +34,7 @@
 			variant="plain"
 		/>
 
-		<Separator/>
+		<Separator />
 
 		<div class="select__content">
 			<div
@@ -56,7 +42,7 @@
 				:key="item.id"
 				class="select__item"
 				:class="{
-					'_active': value === item.id && !multiple
+					_active: value === item.id && !multiple,
 				}"
 				@click="chooseValue(item)"
 			>
@@ -72,11 +58,7 @@
 						{{ item.name }}
 					</Text>
 
-					<Icon
-						v-if="value === item.id"
-						name="check"
-						size="xs"
-					/>
+					<Icon v-if="value === item.id" name="check" size="xs" />
 				</template>
 			</div>
 		</div>
@@ -95,12 +77,12 @@ import { defaultProps } from './props'
 
 const value = defineModel<string | string[]>({
 	type: [String, Array],
-	default: ''
+	default: '',
 })
 
 const search = defineModel<string>('search', {
 	type: String,
-	default: ''
+	default: '',
 })
 
 const props = withDefaults(defineProps<Props>(), defaultProps)
@@ -130,11 +112,16 @@ const showedValue = computed(() => {
 			return props.items.find((item) => item.id === id)?.name ?? ''
 		}
 
-		const result = items.reduce((acc, item) => `${acc}, ${getItemName(item).trim()}`, '').slice(2)
-		const extra = _value.length > 7 ? `, ... (${_value.length.toString()})` : ` (${_value.length.toString()})`
+		const result = items
+			.reduce((acc, item) => `${acc}, ${getItemName(item).trim()}`, '')
+			.slice(2)
+		const extra =
+			_value.length > 7
+				? `, ... (${_value.length.toString()})`
+				: ` (${_value.length.toString()})`
 		return `${result}${extra}`
 	}
-	return props.items.find(item => item.id === _value)?.name ?? null
+	return props.items.find((item) => item.id === _value)?.name ?? null
 })
 
 const chooseValue = (item: Item) => {
@@ -142,7 +129,7 @@ const chooseValue = (item: Item) => {
 		if (!Array.isArray(value.value)) throw validationError
 
 		if (value.value.includes(item.id)) {
-			value.value = value.value.filter(val => val !== item.id)
+			value.value = value.value.filter((val) => val !== item.id)
 		} else {
 			value.value.push(item.id)
 		}

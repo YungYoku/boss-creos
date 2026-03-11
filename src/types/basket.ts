@@ -19,7 +19,7 @@ export type IBasket = DBRecord & {
 	expand?: {
 		creative?: ICreative
 		geo?: IGeo[]
-		video?: IVideo,
+		video?: IVideo
 	}
 }
 

@@ -16,8 +16,8 @@ import { Icon } from '@/components/elements'
 defineProps({
 	stars: {
 		type: Number,
-		default: 0
-	}
+		default: 0,
+	},
 })
 </script>
 
