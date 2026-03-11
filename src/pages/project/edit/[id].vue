@@ -1,5 +1,9 @@
 <template>
-	<Grid vertical :columns="1" gap="l">
+	<Grid
+		vertical
+		:columns="1"
+		gap="l"
+	>
 		<Grid :columns="[1, '80px', '100px']">
 			<Input
 				v-model.trim="form.title.value"
@@ -8,15 +12,36 @@
 				label="Название"
 			/>
 
-			<Button :disabled="loading" :to="`/project/${form.id.value}`"> Назад </Button>
+			<Button
+				:disabled="loading"
+				:to="`/project/${form.id.value}`"
+			>
+				Назад
+			</Button>
 
-			<Button :disabled="loading" @click="save"> Сохранить </Button>
+			<Button
+				:disabled="loading"
+				@click="save"
+			>
+				Сохранить
+			</Button>
 		</Grid>
 
-		<Grid :columns-xl="2" :columns-l="1">
+		<Grid
+			:columns-xl="2"
+			:columns-l="1"
+		>
 			<Island>
-				<Grid vertical :columns="1">
-					<Text size="m" :loading="loading"> Информация о заказе </Text>
+				<Grid
+					vertical
+					:columns="1"
+				>
+					<Text
+						size="m"
+						:loading="loading"
+					>
+						Информация о заказе
+					</Text>
 
 					<Input
 						v-model="form.price.value"
@@ -46,8 +71,16 @@
 			</Island>
 
 			<Island>
-				<Grid vertical :columns="1">
-					<Text size="m" :loading="loading"> Описание </Text>
+				<Grid
+					vertical
+					:columns="1"
+				>
+					<Text
+						size="m"
+						:loading="loading"
+					>
+						Описание
+					</Text>
 
 					<Textarea
 						v-model.trim="form.description.value"
@@ -77,8 +110,8 @@ import { AUTH, BUYER } from '@/data/permissions'
 
 definePage({
 	meta: {
-		permissions: [AUTH, BUYER],
-	},
+		permissions: [AUTH, BUYER]
+	}
 })
 
 const form = Form<IProject>({ ...emptyProject })
@@ -103,8 +136,8 @@ const loadProject = async () => {
 	loading.value = true
 
 	await Http.get<IProject>(`/collections/projects/records/${id}`, {
-		expand: ['creator', 'creator.avatar'],
-	}).then((response) => {
+		expand: ['creator', 'creator.avatar']
+	}).then(response => {
 		form.set(response)
 	})
 

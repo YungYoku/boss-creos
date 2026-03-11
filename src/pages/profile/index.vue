@@ -1,6 +1,9 @@
 <template>
 	<Island class="profile">
-		<Grid :columns="1" vertical>
+		<Grid
+			:columns="1"
+			vertical
+		>
 			<div class="profile__title">Редактировать</div>
 
 			<Grid :columns="2">
@@ -27,7 +30,12 @@
 				height="240px"
 			/>
 
-			<Button class="profile__save" :disabled="loading" variant="outline" @click="save">
+			<Button
+				class="profile__save"
+				:disabled="loading"
+				variant="outline"
+				@click="save"
+			>
 				Отправить на модерацию
 			</Button>
 		</Grid>
@@ -48,8 +56,8 @@ import { AUTH } from '@/data/permissions'
 
 definePage({
 	meta: {
-		permissions: [AUTH],
-	},
+		permissions: [AUTH]
+	}
 })
 
 const auth = useAuthStore()
@@ -64,7 +72,7 @@ watch(
 		user.set(auth.user)
 		userBase.set(auth.user)
 	},
-	{ immediate: true },
+	{ immediate: true }
 )
 
 const loading = ref(false)
@@ -86,11 +94,11 @@ const getChanges = () => {
 		'collectionName',
 		'created',
 		'changes',
-		'expand',
+		'expand'
 	] as const
 	const currentCreativeKeys = Object.keys(currentCreative) as (keyof IUser)[]
 	const filteredKeys = currentCreativeKeys.filter(
-		(key) => !readonlyFields.includes(key),
+		key => !readonlyFields.includes(key)
 	) as (keyof Omit<IUser, ReadOnlyUserFields>)[]
 
 	const changes: Record<string, unknown> = {}
@@ -112,9 +120,9 @@ const save = async () => {
 	await Http.patch<IUser>(`/collections/users/records/${auth.user.id}`, {
 		...userBase.get(),
 		status: 'moderation',
-		changes: getChanges(),
+		changes: getChanges()
 	})
-		.then((res) => {
+		.then(res => {
 			auth.setUser(res)
 			toast.set('Сохранено успешно!')
 		})

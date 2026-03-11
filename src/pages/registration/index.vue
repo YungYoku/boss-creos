@@ -1,6 +1,10 @@
 <template>
 	<div class="registration">
-		<CardAuth width="400px" title="Регистрация" @keyup.enter="register">
+		<CardAuth
+			width="400px"
+			title="Регистрация"
+			@keyup.enter="register"
+		>
 			<Input
 				v-model.trim="form.username.value"
 				:error="form.username.error"
@@ -66,7 +70,10 @@
 			<template #footer>
 				<div class="registration__have-account">
 					<Text size="xs"> Есть аккаунт? </Text>
-					<router-link to="/login" class="registration__link">
+					<router-link
+						to="/login"
+						class="registration__link"
+					>
 						<Text size="xs"> Войти </Text>
 					</router-link>
 				</div>
@@ -96,8 +103,8 @@ definePage({
 	meta: {
 		permissions: [NO_AUTH],
 		bgClass: 'auth',
-		layout: 'auth',
-	},
+		layout: 'auth'
+	}
 })
 
 type Role = 'buyer' | 'designer'
@@ -121,7 +128,7 @@ const form = Form<RegistrationForm>({
 	passwordConfirm: '',
 	role: 'buyer',
 	energy: 100,
-	checked_at: new Date(),
+	checked_at: new Date()
 })
 
 const router = useRouter()

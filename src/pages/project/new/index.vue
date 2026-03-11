@@ -1,5 +1,9 @@
 <template>
-	<Grid vertical :columns="1" gap="l">
+	<Grid
+		vertical
+		:columns="1"
+		gap="l"
+	>
 		<Grid :columns="[1, '100px']">
 			<Input
 				v-model.trim="project.title.value"
@@ -8,13 +12,29 @@
 				label="Название"
 			/>
 
-			<Button :disabled="loading" @click="create"> Создать </Button>
+			<Button
+				:disabled="loading"
+				@click="create"
+			>
+				Создать
+			</Button>
 		</Grid>
 
-		<Grid :columns-xl="2" :columns-l="1">
+		<Grid
+			:columns-xl="2"
+			:columns-l="1"
+		>
 			<Island>
-				<Grid vertical :columns="1">
-					<Text size="m" :loading="loading"> Информация о заказе </Text>
+				<Grid
+					vertical
+					:columns="1"
+				>
+					<Text
+						size="m"
+						:loading="loading"
+					>
+						Информация о заказе
+					</Text>
 
 					<Input
 						v-model="project.price.value"
@@ -43,8 +63,16 @@
 			</Island>
 
 			<Island>
-				<Grid vertical :columns="1">
-					<Text size="m" :loading="loading"> Описание </Text>
+				<Grid
+					vertical
+					:columns="1"
+				>
+					<Text
+						size="m"
+						:loading="loading"
+					>
+						Описание
+					</Text>
 
 					<Textarea
 						v-model.trim="project.description.value"
@@ -74,8 +102,8 @@ import { AUTH, BUYER } from '@/data/permissions'
 
 definePage({
 	meta: {
-		permissions: [AUTH, BUYER],
-	},
+		permissions: [AUTH, BUYER]
+	}
 })
 
 const auth = useAuthStore()
@@ -88,7 +116,7 @@ const toast = useToast()
 watch(
 	() => auth.user.id,
 	() => (project.buyer.value = auth.user.id),
-	{ immediate: true },
+	{ immediate: true }
 )
 
 const loading = ref(false)
@@ -105,7 +133,7 @@ const create = async () => {
 	project.description_lowercase.value = project.description.value
 
 	await Http.post<IProject>('/collections/projects/records', project.get())
-		.then((response) => {
+		.then(response => {
 			void router.push(`/project/${response.id}`)
 		})
 		.catch((error: unknown) => {

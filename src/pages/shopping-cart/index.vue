@@ -10,7 +10,11 @@
 			<span v-if="baskets.length === 0">Пусто</span>
 			<span v-else>Стоимость ${{ totalPrice }}</span>
 
-			<CardLong v-for="basket in baskets" :key="basket.id" class="shopping-cart__creative">
+			<CardLong
+				v-for="basket in baskets"
+				:key="basket.id"
+				class="shopping-cart__creative"
+			>
 				<template #icon>
 					<Image
 						v-if="basket.expand?.creative?.expand?.preview"
@@ -63,7 +67,12 @@
 				</template>
 			</CardLong>
 
-			<Button v-if="totalPrice > 0" class="shopping-cart__pay" variant="outline" @click="pay">
+			<Button
+				v-if="totalPrice > 0"
+				class="shopping-cart__pay"
+				variant="outline"
+				@click="pay"
+			>
 				Оплатить
 			</Button>
 		</div>
@@ -84,15 +93,15 @@ import { AUTH } from '@/data/permissions'
 
 definePage({
 	meta: {
-		permissions: [AUTH],
-	},
+		permissions: [AUTH]
+	}
 })
 
 const auth = useAuthStore()
 
 const baskets = computed(() => {
 	const baskets = auth.user.expand?.baskets ?? []
-	return baskets.filter((basket) => basket.status === 'created')
+	return baskets.filter(basket => basket.status === 'created')
 })
 
 const totalPrice = computed(() => {
@@ -109,7 +118,7 @@ const pay = async () => {
 	if (auth.user.balance < totalPrice.value) {
 		toast.set('Недостаточно средств!')
 	} else {
-		await Http.post<IUser>('/baskets/pay').then(async (data) => {
+		await Http.post<IUser>('/baskets/pay').then(async data => {
 			auth.setUser(data)
 			await router.push('/bought')
 		})
@@ -117,12 +126,12 @@ const pay = async () => {
 }
 
 const removeShoppingCart = async (id: string) => {
-	const newBaskets = auth.user.baskets.filter((basket) => basket !== id)
+	const newBaskets = auth.user.baskets.filter(basket => basket !== id)
 	await Http.patch<IUser>(
 		`/collections/users/records/${auth.user.id}`,
 		{
 			...auth.user,
-			baskets: newBaskets,
+			baskets: newBaskets
 		},
 		{
 			expand: [
@@ -131,10 +140,10 @@ const removeShoppingCart = async (id: string) => {
 				'baskets.creative.preview',
 				'baskets.creative.slot',
 				'baskets.geo',
-				'transactions',
-			],
-		},
-	).then((data) => {
+				'transactions'
+			]
+		}
+	).then(data => {
 		auth.setUser(data)
 	})
 

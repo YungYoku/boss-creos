@@ -1,5 +1,8 @@
 <template>
-	<Grid class="moderation" :columns="['350px', 1]">
+	<Grid
+		class="moderation"
+		:columns="['350px', 1]"
+	>
 		<div class="moderation__tabs">
 			<router-link
 				v-for="tab in tabs"
@@ -7,7 +10,7 @@
 				:to="tab.link"
 				class="moderation__tab"
 				:class="{
-					_active: tab.link === currentTab,
+					_active: tab.link === currentTab
 				}"
 			>
 				{{ tab.name }}
@@ -16,7 +19,12 @@
 
 		<router-view />
 
-		<span v-if="isTabNotSelected" class="moderation__empty"> Не выбран пункт меню </span>
+		<span
+			v-if="isTabNotSelected"
+			class="moderation__empty"
+		>
+			Не выбран пункт меню
+		</span>
 	</Grid>
 </template>
 
@@ -30,8 +38,8 @@ import { ADMIN, AUTH } from '@/data/permissions'
 definePage({
 	meta: {
 		permissions: [AUTH, ADMIN],
-		bgClass: 'shop',
-	},
+		bgClass: 'shop'
+	}
 })
 
 const route = useRoute()
@@ -41,15 +49,15 @@ const isTabNotSelected = computed(() => route.name === '/moderation/')
 const tabs = [
 	{
 		name: 'Креативы',
-		link: 'creatives',
+		link: 'creatives'
 	},
 	{
 		name: 'Пользователи',
-		link: 'users',
-	},
-].map((item) => ({
+		link: 'users'
+	}
+].map(item => ({
 	...item,
-	link: `/moderation/${item.link}`,
+	link: `/moderation/${item.link}`
 }))
 </script>
 

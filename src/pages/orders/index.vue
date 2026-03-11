@@ -4,7 +4,10 @@
 
 		<span v-if="baskets.length === 0">Пусто</span>
 
-		<CardLong v-for="basket in baskets" :key="basket.id">
+		<CardLong
+			v-for="basket in baskets"
+			:key="basket.id"
+		>
 			<template #icon>
 				<Image
 					v-if="basket.expand?.creative?.expand?.preview"
@@ -25,7 +28,7 @@
 						class="orders__status"
 						:class="{
 							_pending: basket.status === 'in-progress',
-							_done: basket.status === 'done',
+							_done: basket.status === 'done'
 						}"
 					/>
 				</div>
@@ -54,16 +57,28 @@
 				>
 					Загрузить
 				</InputVideo>
-				<Button variant="outline" @click="showDescription(basket)"> Подробнее </Button>
+				<Button
+					variant="outline"
+					@click="showDescription(basket)"
+				>
+					Подробнее
+				</Button>
 			</template>
 		</CardLong>
 	</div>
 
-	<Modal v-if="modalShowing" :width="585" @close="modalShowing = false">
+	<Modal
+		v-if="modalShowing"
+		:width="585"
+		@close="modalShowing = false"
+	>
 		<div class="orders__item-description">
 			Описание: {{ modalShowingBasket?.comment || 'пусто' }}
 		</div>
-		<div v-if="modalShowingBasket?.resize?.length" class="orders__item-resize">
+		<div
+			v-if="modalShowingBasket?.resize?.length"
+			class="orders__item-resize"
+		>
 			Ресайз: {{ modalShowingBasket.resize.join(', ') }}
 		</div>
 	</Modal>
@@ -83,8 +98,8 @@ import { AUTH } from '@/data/permissions'
 definePage({
 	meta: {
 		permissions: [AUTH],
-		bgClass: 'shop',
-	},
+		bgClass: 'shop'
+	}
 })
 
 const auth = useAuthStore()
@@ -94,7 +109,7 @@ const loadCreatives = async () => {
 	if (!auth.user.id) return
 
 	await Http.get<ICreatives>('/collections/creatives/records', {
-		filter: `creator='${auth.user.id}'`,
+		filter: `creator='${auth.user.id}'`
 	}).then(({ items }) => {
 		creatives.value = items
 	})
@@ -104,10 +119,10 @@ const baskets: Ref<IBasket[]> = ref([])
 const loadBaskets = async () => {
 	if (creativesIDs.value.length === 0) return
 
-	const filter = creativesIDs.value.map((id) => `creative = '${id}'`).join(' || ')
+	const filter = creativesIDs.value.map(id => `creative = '${id}'`).join(' || ')
 	await Http.get<IBaskets>('/collections/baskets/records', {
 		filter,
-		expand: ['creative', 'creative.preview', 'creative.slot', 'geo'],
+		expand: ['creative', 'creative.preview', 'creative.slot', 'geo']
 	}).then(({ items }) => {
 		baskets.value = items
 	})
@@ -120,7 +135,7 @@ watch(
 			void loadBaskets()
 		})
 	},
-	{ immediate: true },
+	{ immediate: true }
 )
 
 const modalShowing = ref(false)
@@ -133,7 +148,7 @@ const showDescription = (basket: IBasket) => {
 const loadVideo = async (basket: IBasket) => {
 	await Http.patch<IBaskets>(`/collections/baskets/records/${basket.id}`, {
 		status: 'done',
-		video: basket.video,
+		video: basket.video
 	}).then(() => {
 		basket.status = 'done'
 	})

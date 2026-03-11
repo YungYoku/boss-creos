@@ -1,5 +1,10 @@
 <template>
-	<Table :header :body :cells @reload="loadCreatives" />
+	<Table
+		:header
+		:body
+		:cells
+		@reload="loadCreatives"
+	/>
 </template>
 
 <script lang="ts" setup>
@@ -14,8 +19,8 @@ import { useAdapter } from './adapter'
 
 definePage({
 	meta: {
-		permissions: [AUTH, ADMIN],
-	},
+		permissions: [AUTH, ADMIN]
+	}
 })
 
 const { handleLoadedData, header, body, fields, cells } = useAdapter()
@@ -33,11 +38,11 @@ const loadCreatives = async () => {
 			'creator.avatar',
 			'slot',
 			'geo',
-			'unavailableGeo',
+			'unavailableGeo'
 		],
 		perPage: 12,
-		page: 1,
-	}).then((res) => {
+		page: 1
+	}).then(res => {
 		handleLoadedData(res.items)
 	})
 }

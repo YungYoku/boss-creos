@@ -3,7 +3,11 @@
 	<div class="edit-shopping-cart">
 		<span v-if="baskets.length === 0">Пусто</span>
 
-		<div v-for="basket in baskets" :key="basket.id" class="edit-shopping-cart__creative">
+		<div
+			v-for="basket in baskets"
+			:key="basket.id"
+			class="edit-shopping-cart__creative"
+		>
 			<div class="edit-shopping-cart__creative-head">
 				<Image
 					v-if="basket.expand?.creative?.expand?.preview"
@@ -61,7 +65,12 @@
 			</Button>
 		</div>
 
-		<Button to="/shopping-cart" variant="outline"> Вернуться </Button>
+		<Button
+			to="/shopping-cart"
+			variant="outline"
+		>
+			Вернуться
+		</Button>
 	</div>
 </template>
 
@@ -79,8 +88,8 @@ import { AUTH } from '@/data/permissions'
 
 definePage({
 	meta: {
-		permissions: [AUTH],
-	},
+		permissions: [AUTH]
+	}
 })
 
 const route = useRoute()
@@ -93,7 +102,7 @@ const auth = useAuthStore()
 const baskets = computed(() => {
 	const id = getID()
 	const baskets = auth.user.expand?.baskets ?? []
-	return baskets.filter((basket) => basket.status === 'created' && basket.id === id)
+	return baskets.filter(basket => basket.status === 'created' && basket.id === id)
 })
 
 const toast = useToast()

@@ -1,6 +1,14 @@
 <template>
-	<Grid vertical :columns="1" gap="l">
-		<Grid :columns-xl="[1, '119px', '126px']" :columns-m="[1, 1]" :columns-s="1">
+	<Grid
+		vertical
+		:columns="1"
+		gap="l"
+	>
+		<Grid
+			:columns-xl="[1, '119px', '126px']"
+			:columns-m="[1, 1]"
+			:columns-s="1"
+		>
 			<PageTitle :loading="loading">
 				{{ project.title }}
 			</PageTitle>
@@ -26,50 +34,120 @@
 				<template v-else-if="authStore.isDesigner">
 					<span />
 					<span v-if="isAlreadyProposed" />
-					<Button v-else :disabled="loading" @click="showMakeProposal">
+					<Button
+						v-else
+						:disabled="loading"
+						@click="showMakeProposal"
+					>
 						Откликнуться
 					</Button>
 				</template>
 			</template>
 		</Grid>
 
-		<Grid :columns-xl="2" :columns-l="1">
+		<Grid
+			:columns-xl="2"
+			:columns-l="1"
+		>
 			<Island>
-				<Grid vertical :columns="1">
-					<Text size="m" :loading="loading"> Информация о заказе </Text>
+				<Grid
+					vertical
+					:columns="1"
+				>
+					<Text
+						size="m"
+						:loading="loading"
+					>
+						Информация о заказе
+					</Text>
 
-					<Text size="s" :loading="loading"> Цена: {{ project.price }}₽ </Text>
+					<Text
+						size="s"
+						:loading="loading"
+					>
+						Цена: {{ project.price }}₽
+					</Text>
 
 					<span />
 
-					<Text size="s" :loading="loading"> Создано: {{ $date(created) }} </Text>
-					<Text size="s" :loading="loading"> Срок сдачи: {{ $date(deadline) }} </Text>
+					<Text
+						size="s"
+						:loading="loading"
+					>
+						Создано: {{ $date(created) }}
+					</Text>
+					<Text
+						size="s"
+						:loading="loading"
+					>
+						Срок сдачи: {{ $date(deadline) }}
+					</Text>
 
 					<span />
 
-					<Text size="s" :loading="loading">
+					<Text
+						size="s"
+						:loading="loading"
+					>
 						Репетиторство: {{ project.tutoring ? 'да' : 'нет' }}
 					</Text>
 
-					<Grid v-if="project.expand?.buyer" :columns="[0, 0]" ver-align="center">
-						<Text size="s" :loading="loading"> Заказчик: </Text>
+					<Grid
+						v-if="project.expand?.buyer"
+						:columns="[0, 0]"
+						ver-align="center"
+					>
+						<Text
+							size="s"
+							:loading="loading"
+						>
+							Заказчик:
+						</Text>
 
-						<UserCard link :user="project.expand.buyer" :loading="loading" />
+						<UserCard
+							link
+							:user="project.expand.buyer"
+							:loading="loading"
+						/>
 					</Grid>
 
-					<Grid v-if="project.expand?.designer" :columns="[0, 0]" ver-align="center">
-						<Text size="s" :loading="loading"> Исполнитель: </Text>
+					<Grid
+						v-if="project.expand?.designer"
+						:columns="[0, 0]"
+						ver-align="center"
+					>
+						<Text
+							size="s"
+							:loading="loading"
+						>
+							Исполнитель:
+						</Text>
 
-						<UserCard link :user="project.expand.designer" :loading="loading" />
+						<UserCard
+							link
+							:user="project.expand.designer"
+							:loading="loading"
+						/>
 					</Grid>
 				</Grid>
 			</Island>
 
 			<Island>
-				<Grid vertical :columns="1">
-					<Text size="m" :loading="loading"> Описание </Text>
+				<Grid
+					vertical
+					:columns="1"
+				>
+					<Text
+						size="m"
+						:loading="loading"
+					>
+						Описание
+					</Text>
 
-					<Text size="s" :loading="loading">
+					<Text
+						size="s"
+						:loading="loading"
+					>
 						{{ project.description }}
 					</Text>
 				</Grid>
@@ -128,8 +206,8 @@ const loadProject = async () => {
 	}
 
 	await Http.get<IProject>(`/collections/projects/records/${id}`, {
-		expand: ['buyer', 'designer', 'proposals', 'discipline', 'type', 'university'],
-	}).then((response) => {
+		expand: ['buyer', 'designer', 'proposals', 'discipline', 'type', 'university']
+	}).then(response => {
 		project.value = response
 	})
 
@@ -151,7 +229,7 @@ const toast = useToast()
 const makeProposalModal = reactive<{
 	show: boolean
 }>({
-	show: false,
+	show: false
 })
 const showMakeProposal = () => {
 	if (isAlreadyProposed.value) return
@@ -172,8 +250,8 @@ const makeProposal = async (proposal: IProjectProposal) => {
 
 	await Http.post<IProject>(`/make-proposal/${project.value.id}`, {
 		price: proposal.price,
-		text: proposal.text,
-	}).then((response) => {
+		text: proposal.text
+	}).then(response => {
 		project.value = response
 
 		authStore.setEnergy(authStore.user.energy - 1)
@@ -189,7 +267,7 @@ const makeProposal = async (proposal: IProjectProposal) => {
 const isItMyProject = computed(() => project.value.buyer === authStore.user.id)
 const isAlreadyProposed = computed(() => {
 	const proposals = project.value.expand?.proposals ?? []
-	const proposal = proposals.find((proposal) => proposal.user === authStore.user.id)
+	const proposal = proposals.find(proposal => proposal.user === authStore.user.id)
 
 	return proposal !== undefined
 })
@@ -200,7 +278,7 @@ const deadline = computed(() => new Date(project.value.deadline))
 const deleteConfirmationModal = reactive<{
 	show: boolean
 }>({
-	show: false,
+	show: false
 })
 const showDeleteConfirmation = () => (deleteConfirmationModal.show = true)
 const hideDeleteConfirmation = () => (deleteConfirmationModal.show = false)
