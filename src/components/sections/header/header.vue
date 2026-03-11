@@ -1,10 +1,16 @@
 <template>
 	<header class="header">
-		<Grid :columns-xl="['300px', 2, 1]" :columns-s="['300px', 1]">
+		<Grid
+			:columns-xl="['300px', 2, 1]"
+			:columns-s="['300px', 1]"
+		>
 			<Logo class="header__logo" />
 
 			<nav class="header__nav">
-				<template v-for="item in nav" :key="item.text">
+				<template
+					v-for="item in nav"
+					:key="item.text"
+				>
 					<router-link
 						v-if="item.can"
 						class="header__nav-item"
@@ -17,7 +23,10 @@
 			</nav>
 
 			<nav class="header__account">
-				<router-link v-if="!auth.isLoggedIn && !isAuthPage" to="/login">
+				<router-link
+					v-if="!auth.isLoggedIn && !isAuthPage"
+					to="/login"
+				>
 					Авторизация
 				</router-link>
 
@@ -42,23 +51,23 @@ const nav = [
 	{
 		text: 'Главная',
 		to: '/',
-		can: true,
+		can: true
 	},
 	{
 		text: 'Магазин',
 		to: '/shop',
-		can: auth.isBuyer || auth.isGuest,
+		can: auth.isBuyer || auth.isGuest
 	},
 	{
 		text: 'Дизайнеры',
 		to: '/designers',
-		can: auth.isBuyer || auth.isGuest,
+		can: auth.isBuyer || auth.isGuest
 	},
 	{
 		text: 'Баланс',
 		to: '/balance',
-		can: auth.isBuyer || auth.isDesigner,
-	},
+		can: auth.isBuyer || auth.isDesigner
+	}
 	/*
 	{
 		text: 'Биржа',
