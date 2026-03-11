@@ -35,9 +35,16 @@
 			</div>
 		</div>
 
-		<div v-if="creatives.length || loadingCreatives" class="main__creatives">
+		<div
+			v-if="creatives.length || loadingCreatives"
+			class="main__creatives"
+		>
 			<template v-if="loadingCreatives">
-				<EmptyCreativeCard v-for="i in 8" :key="i" class="main__creatives-item" />
+				<EmptyCreativeCard
+					v-for="i in 8"
+					:key="i"
+					class="main__creatives-item"
+				/>
 			</template>
 			<template v-else>
 				<CreativeCard
@@ -49,7 +56,12 @@
 			</template>
 		</div>
 
-		<router-link class="main__show-more" to="/shop"> Смотреть ещё </router-link>
+		<router-link
+			class="main__show-more"
+			to="/shop"
+		>
+			Смотреть ещё
+		</router-link>
 	</div>
 </template>
 
@@ -61,8 +73,8 @@ import { Http } from '@/plugins'
 
 definePage({
 	meta: {
-		bgClass: 'home',
-	},
+		bgClass: 'home'
+	}
 })
 
 const loadingCreatives = ref(true)
@@ -73,8 +85,8 @@ const loadCreatives = async () => {
 	await Http.get<ICreatives>('/collections/creatives/records', {
 		filter: "status='approved'",
 		expand: ['preview', 'video', 'creator', 'creator.avatar'],
-		perPage: 12,
-	}).then((res) => {
+		perPage: 12
+	}).then(res => {
 		creatives.value = res.items
 	})
 
