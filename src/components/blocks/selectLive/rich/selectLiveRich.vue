@@ -1,6 +1,18 @@
 <template>
-	<FieldWrapperRich class="select-live-rich" :label :error>
-		<SelectLive v-model="value" label="" :type-key :api :filter-fields :exclude :multiple />
+	<FieldWrapperRich
+		class="select-live-rich"
+		:label
+		:error
+	>
+		<SelectLive
+			v-model="value"
+			label=""
+			:type-key
+			:api
+			:filter-fields
+			:exclude
+			:multiple
+		/>
 	</FieldWrapperRich>
 </template>
 
@@ -15,7 +27,7 @@ withDefaults(defineProps<Props>(), defaultProps)
 
 const value = defineModel<string | string[]>({
 	type: [String, Array],
-	default: '',
+	default: ''
 })
 </script>
 

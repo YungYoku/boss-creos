@@ -11,7 +11,10 @@
 
 		<template #footer>
 			<div class="creative-card__user">
-				<User link :user="creative.expand?.creator ?? emptyUser" />
+				<User
+					link
+					:user="creative.expand?.creator ?? emptyUser"
+				/>
 
 				<Icon
 					v-if="auth.isBuyer"
@@ -87,7 +90,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
 	forSale: false,
-	badge: false,
+	badge: false
 })
 
 const excludeGeo = computed(() => props.creative.unavailableGeo)
@@ -101,7 +104,7 @@ const isDetailPage = computed(() => route.name === '/creative/[id]')
 const geo: Ref<string[]> = ref([])
 const basketWithCreative = computed(() => {
 	const baskets = auth.user.expand?.baskets ?? []
-	const basket = baskets.find((basket) => basket.expand?.creative?.id === props.creative.id)
+	const basket = baskets.find(basket => basket.expand?.creative?.id === props.creative.id)
 	if (basket?.status === 'created') {
 		return basket
 	}
@@ -115,7 +118,7 @@ watch(
 			geo.value = basketWithCreative.value.geo
 		}
 	},
-	{ immediate: true },
+	{ immediate: true }
 )
 
 const router = useRouter()
@@ -126,13 +129,13 @@ const updateBasket = async () => {
 		`/collections/baskets/records/${basketWithCreative.value.id}`,
 		{
 			...basketWithCreative.value,
-			geo: [...geo.value],
+			geo: [...geo.value]
 		},
 		{
-			expand: ['creative', 'creative.preview', 'creative.slot', 'geo'],
-		},
-	).then(async (updatedBasket) => {
-		const baskets = (auth.user.expand?.baskets ?? []).map((basket) => {
+			expand: ['creative', 'creative.preview', 'creative.slot', 'geo']
+		}
+	).then(async updatedBasket => {
+		const baskets = (auth.user.expand?.baskets ?? []).map(basket => {
 			if (basket.id === updatedBasket.id) {
 				return updatedBasket
 			}
@@ -152,8 +155,8 @@ const addToBasket = async () => {
 
 	await Http.post<IUser>('/baskets/add', {
 		creative: props.creative.id,
-		geo: [...geo.value],
-	}).then(async (data) => {
+		geo: [...geo.value]
+	}).then(async data => {
 		auth.setUser(data)
 		await router.push('/shopping-cart')
 	})
@@ -165,14 +168,14 @@ const toggleFavorite = async () => {
 
 	let newFavorite = [...auth.user.favorite]
 	if (newFavorite.includes(id)) {
-		newFavorite = newFavorite.filter((fav) => fav !== id)
+		newFavorite = newFavorite.filter(fav => fav !== id)
 	} else {
 		newFavorite.push(id)
 	}
 
 	await Http.patch<IUser>(`/collections/users/records/${auth.user.id}`, {
-		favorite: newFavorite,
-	}).then((data) => {
+		favorite: newFavorite
+	}).then(data => {
 		auth.setUser(data)
 	})
 }

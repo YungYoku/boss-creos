@@ -13,19 +13,19 @@ export const useAuthStore = defineStore('auth', {
 		({
 			user: {
 				...emptyUser,
-				...(Storage.load('user') ?? {}),
+				...(Storage.load('user') ?? {})
 			},
 
-			token: Storage.load('token') ?? '',
+			token: Storage.load('token') ?? ''
 		}) as State,
 
 	getters: {
-		isGuest: (state) => state.token.length === 0,
-		isLoggedIn: (state) => state.token.length > 0,
-		isBuyer: (state) => state.user.role === 'buyer',
-		isDesigner: (state) => state.user.role === 'designer',
-		isAdmin: (state) => state.user.role === 'admin',
-		isPersonalInfoIncomplete: (state) => {
+		isGuest: state => state.token.length === 0,
+		isLoggedIn: state => state.token.length > 0,
+		isBuyer: state => state.user.role === 'buyer',
+		isDesigner: state => state.user.role === 'designer',
+		isAdmin: state => state.user.role === 'admin',
+		isPersonalInfoIncomplete: state => {
 			const { username } = state.user
 			const rules = [username.length > 0]
 
@@ -34,7 +34,7 @@ export const useAuthStore = defineStore('auth', {
 			}
 
 			return false
-		},
+		}
 	},
 
 	actions: {
@@ -46,15 +46,15 @@ export const useAuthStore = defineStore('auth', {
 		setUser(user: IUser) {
 			this.user = {
 				...this.user,
-				...user,
+				...user
 			}
 			Storage.write('user', {
-				role: user.role,
+				role: user.role
 			})
 		},
 
 		setBaskets(baskets: IBasket[]) {
-			this.user.baskets = baskets.map((item) => item.id)
+			this.user.baskets = baskets.map(item => item.id)
 			if (this.user.expand) {
 				this.user.expand.baskets = baskets
 			}
@@ -62,6 +62,6 @@ export const useAuthStore = defineStore('auth', {
 
 		setEnergy(energy: number) {
 			this.user.energy = energy
-		},
-	},
+		}
+	}
 })

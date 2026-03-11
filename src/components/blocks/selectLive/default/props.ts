@@ -31,5 +31,5 @@ export const defaultProps = {
 	api: '',
 	filterFields: () => ['id', 'name'],
 	filter: [],
-	multiple: false,
+	multiple: false
 }

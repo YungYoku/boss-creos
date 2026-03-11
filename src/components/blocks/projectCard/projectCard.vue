@@ -2,23 +2,51 @@
 	<Island class="project">
 		<div class="project__actions">
 			<template v-if="project.designer && showingChat">
-				<Skeleton v-if="loading" width="24px" height="24px" />
-				<div v-else @click="openChat">
-					<Icon name="comment-dots" size="s" />
+				<Skeleton
+					v-if="loading"
+					width="24px"
+					height="24px"
+				/>
+				<div
+					v-else
+					@click="openChat"
+				>
+					<Icon
+						name="comment-dots"
+						size="s"
+					/>
 				</div>
 			</template>
 
 			<template v-else-if="project.proposals && showingProposals">
-				<Skeleton v-if="loading" width="24px" height="24px" />
-				<div v-else class="project__proposals" @click="showProposals">
-					<Icon name="user" size="s" />
+				<Skeleton
+					v-if="loading"
+					width="24px"
+					height="24px"
+				/>
+				<div
+					v-else
+					class="project__proposals"
+					@click="showProposals"
+				>
+					<Icon
+						name="user"
+						size="s"
+					/>
 					{{ project.proposals.length }}
 				</div>
 			</template>
 
 			<template v-if="authStore.isDesigner">
-				<Skeleton v-if="loading" width="24px" height="24px" />
-				<div v-else @click="addToFavorite">
+				<Skeleton
+					v-if="loading"
+					width="24px"
+					height="24px"
+				/>
+				<div
+					v-else
+					@click="addToFavorite"
+				>
 					<Icon
 						:name="
 							authStore.user.favorite.includes(project.id) ? 'heart-active' : 'heart'
@@ -28,28 +56,62 @@
 				</div>
 			</template>
 			<template v-if="showingRemove && project.status === 'created'">
-				<Skeleton v-if="loading" width="24px" height="24px" />
-				<div v-else @click="remove">
-					<Icon name="trash" size="s" />
+				<Skeleton
+					v-if="loading"
+					width="24px"
+					height="24px"
+				/>
+				<div
+					v-else
+					@click="remove"
+				>
+					<Icon
+						name="trash"
+						size="s"
+					/>
 				</div>
 			</template>
 		</div>
 
-		<Skeleton v-if="loading" width="200px" height="32px" />
-		<router-link v-else :to="`/project/${project.id}`" class="project__title">
-			<Text size="m" :title="project.title">
+		<Skeleton
+			v-if="loading"
+			width="200px"
+			height="32px"
+		/>
+		<router-link
+			v-else
+			:to="`/project/${project.id}`"
+			class="project__title"
+		>
+			<Text
+				size="m"
+				:title="project.title"
+			>
 				{{ project.title }}
 			</Text>
 		</router-link>
 
-		<div v-if="!loading" class="project__info">
-			<Badge bg="purple" variant="secondary"> {{ project.price }} ₽ </Badge>
+		<div
+			v-if="!loading"
+			class="project__info"
+		>
+			<Badge
+				bg="purple"
+				variant="secondary"
+			>
+				{{ project.price }} ₽
+			</Badge>
 			<Badge v-if="showingStatus && status">
 				{{ status }}
 			</Badge>
 		</div>
 
-		<Text class="project__description" size="xs" :loading loading-width="140px">
+		<Text
+			class="project__description"
+			size="xs"
+			:loading
+			loading-width="140px"
+		>
 			{{ project.description }}
 		</Text>
 
@@ -62,7 +124,13 @@
 				:user="project.expand.buyer"
 			/>
 
-			<Text size="xs" :loading loading-width="100px"> Дедлайн: {{ $date(deadline) }} </Text>
+			<Text
+				size="xs"
+				:loading
+				loading-width="100px"
+			>
+				Дедлайн: {{ $date(deadline) }}
+			</Text>
 		</div>
 	</Island>
 </template>
@@ -91,7 +159,7 @@ const props = withDefaults(defineProps<Props>(), {
 	showingChat: false,
 	showingRemove: false,
 	showingStatus: false,
-	loading: false,
+	loading: false
 })
 
 const authStore = useAuthStore()
@@ -106,11 +174,11 @@ const openChat = () => {
 }
 const addToFavorite = async () => {
 	const newFavorite = authStore.user.favorite.includes(props.project.id)
-		? authStore.user.favorite.filter((id) => id !== props.project.id)
+		? authStore.user.favorite.filter(id => id !== props.project.id)
 		: [...authStore.user.favorite, props.project.id]
 
 	await Http.patch(`/collections/users/records/${authStore.user.id}`, {
-		favorite: newFavorite,
+		favorite: newFavorite
 	}).then(() => {
 		authStore.setUser({ ...authStore.user, favorite: newFavorite })
 	})

@@ -1,5 +1,9 @@
 <template>
-	<img :src="image" :alt="alt" :loading="typeof props.src === 'string' ? 'eager' : 'lazy'" />
+	<img
+		:src="image"
+		:alt="alt"
+		:loading="typeof props.src === 'string' ? 'eager' : 'lazy'"
+	/>
 </template>
 
 <script setup lang="ts">
@@ -12,7 +16,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-	alt: '',
+	alt: ''
 })
 
 const image = computed(() => {

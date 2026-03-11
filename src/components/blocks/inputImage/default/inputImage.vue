@@ -1,12 +1,17 @@
 <template>
 	<div class="input-image">
-		<Button v-if="compact" :disabled="loading" variant="outline" class="input-image__button">
+		<Button
+			v-if="compact"
+			:disabled="loading"
+			variant="outline"
+			class="input-image__button"
+		>
 			<Icon name="file" />
 
 			<div
 				class="input-image__field-wrap"
 				:class="{
-					_compact: compact,
+					_compact: compact
 				}"
 			>
 				<Input
@@ -25,7 +30,7 @@
 			v-else
 			class="input-image__field-wrap"
 			:class="{
-				_compact: compact,
+				_compact: compact
 			}"
 		>
 			<Input
@@ -39,7 +44,12 @@
 				@update-file="updateFile"
 			/>
 
-			<Icon class="input-image__icon" name="download" size="xs" :colors="['dark', 'light']" />
+			<Icon
+				class="input-image__icon"
+				name="download"
+				size="xs"
+				:colors="['dark', 'light']"
+			/>
 		</div>
 	</div>
 </template>
@@ -63,7 +73,7 @@ const updateName = (value: string) => {
 
 const value = defineModel<string | null>({
 	type: Object as PropType<string | null>,
-	default: null,
+	default: null
 })
 const updateFile = async (file: File) => {
 	updateName(file.name)

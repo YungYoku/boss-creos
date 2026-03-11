@@ -20,7 +20,7 @@ export const useAdapter = () => {
 		'referral_code',
 		'notifications',
 		'baskets',
-		'transactions',
+		'transactions'
 	]
 
 	const unnecessaryFieldsForTable: Partial<keyof IUser>[] = ['changes', 'expand']
@@ -34,11 +34,11 @@ export const useAdapter = () => {
 						...item,
 						...item.changes,
 						changes: null,
-						status: 'approved',
-					}).then((res) => {
+						status: 'approved'
+					}).then(res => {
 						toast.set(`Успех, ${res.id}`)
 					})
-				},
+				}
 			},
 			avatar: {
 				link: {
@@ -47,22 +47,22 @@ export const useAdapter = () => {
 						: '',
 					current: avatar
 						? `${import.meta.env.VITE_API}/files/${avatar.collectionId}/${avatar.id}/${avatar.watermarked_image}`
-						: '',
-				},
-			},
+						: ''
+				}
+			}
 		}
 	}
 
 	const cellFormats: CellFormats<IUser> = {
 		avatar: () => 'Ссылка',
-		created: (created) => datetime.get(created, 'datetime'),
-		updated: (updated) => datetime.get(updated, 'datetime'),
-		role: (role) => locale.t(role),
-		status: (status) => locale.t(status),
+		created: created => datetime.get(created, 'datetime'),
+		updated: updated => datetime.get(updated, 'datetime'),
+		role: role => locale.t(role),
+		status: status => locale.t(status)
 	}
 
 	const cells = {
-		actions: CellActions,
+		actions: CellActions
 	}
 
 	const { handleLoadedData, header, body, fields } = useAdapterRoot(
@@ -70,7 +70,7 @@ export const useAdapter = () => {
 		unnecessaryFieldsForRequest,
 		unnecessaryFieldsForTable,
 		options,
-		cellFormats,
+		cellFormats
 	)
 
 	return {
@@ -78,6 +78,6 @@ export const useAdapter = () => {
 		header,
 		body,
 		fields,
-		cells,
+		cells
 	}
 }

@@ -1,5 +1,8 @@
 <template>
-	<div class="rating-start-editable" @mouseleave="hover(null)">
+	<div
+		class="rating-start-editable"
+		@mouseleave="hover(null)"
+	>
 		<Icon
 			v-for="(icon, index) in icons"
 			:key="index"
@@ -18,7 +21,7 @@ import { Icon } from '@/components/elements'
 
 const value = defineModel({
 	type: Number,
-	default: 0,
+	default: 0
 })
 
 const icons = computed(() => {

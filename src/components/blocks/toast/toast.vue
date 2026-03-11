@@ -1,11 +1,18 @@
 <template>
 	<Transition name="toast">
-		<div v-if="toast.showed" class="toast">
+		<div
+			v-if="toast.showed"
+			class="toast"
+		>
 			<Text size="xs">
 				{{ toast.text }}
 			</Text>
 
-			<Icon name="close" size="s" @click="close" />
+			<Icon
+				name="close"
+				size="s"
+				@click="close"
+			/>
 		</div>
 	</Transition>
 </template>

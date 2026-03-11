@@ -22,7 +22,10 @@
 			class="balance__transaction"
 		>
 			<template #icon>
-				<img src="@/assets/img/tether.svg" alt="" />
+				<img
+					src="@/assets/img/tether.svg"
+					alt=""
+				/>
 			</template>
 
 			<div class="balance__transaction-content">
@@ -45,23 +48,54 @@
 			</div>
 		</CardLong>
 
-		<CardLong v-if="transactions?.length === 0" class="balance__transaction">
+		<CardLong
+			v-if="transactions?.length === 0"
+			class="balance__transaction"
+		>
 			Нет данных
 		</CardLong>
 	</div>
 
-	<Modal v-if="modalShowing" :width="585" @close="modalShowing = false">
+	<Modal
+		v-if="modalShowing"
+		:width="585"
+		@close="modalShowing = false"
+	>
 		<Grid vertical>
 			<template v-if="type === 'deposit'">
-				<InputRich v-model="amount" label="Сумма" type="number" />
-				<Button variant="outline" @click="action"> Пополнить </Button>
+				<InputRich
+					v-model="amount"
+					label="Сумма"
+					type="number"
+				/>
+				<Button
+					variant="outline"
+					@click="action"
+				>
+					Пополнить
+				</Button>
 			</template>
 
 			<template v-else>
-				<InputRich v-model="address" label="Адрес" />
-				<InputRich v-model="blockchain" label="Сеть" />
-				<InputRich v-model="amount" label="Сумма" type="number" />
-				<Button variant="outline" @click="action"> Вывод </Button>
+				<InputRich
+					v-model="address"
+					label="Адрес"
+				/>
+				<InputRich
+					v-model="blockchain"
+					label="Сеть"
+				/>
+				<InputRich
+					v-model="amount"
+					label="Сумма"
+					type="number"
+				/>
+				<Button
+					variant="outline"
+					@click="action"
+				>
+					Вывод
+				</Button>
 			</template>
 		</Grid>
 	</Modal>

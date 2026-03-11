@@ -1,8 +1,15 @@
 <template>
 	<Card class="user-card">
 		<template #image>
-			<Image v-if="user.expand?.avatar" class="user-card__image" :src="user.expand.avatar" />
-			<div v-else class="user-card__image" />
+			<Image
+				v-if="user.expand?.avatar"
+				class="user-card__image"
+				:src="user.expand.avatar"
+			/>
+			<div
+				v-else
+				class="user-card__image"
+			/>
 		</template>
 
 		<template #footer>
@@ -26,7 +33,7 @@ interface Props {
 
 withDefaults(defineProps<Props>(), {
 	loading: false,
-	link: false,
+	link: false
 })
 </script>
 

@@ -1,6 +1,15 @@
 <template>
-	<FieldWrapperRich class="input-video-rich" :label :error>
-		<InputVideo v-model="value" :loading :accept @update:name="updateName" />
+	<FieldWrapperRich
+		class="input-video-rich"
+		:label
+		:error
+	>
+		<InputVideo
+			v-model="value"
+			:loading
+			:accept
+			@update:name="updateName"
+		/>
 	</FieldWrapperRich>
 </template>
 

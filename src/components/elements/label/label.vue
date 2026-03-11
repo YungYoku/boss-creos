@@ -1,5 +1,8 @@
 <template>
-	<div class="label" :class="{ _active: active }">
+	<div
+		class="label"
+		:class="{ _active: active }"
+	>
 		<slot />
 	</div>
 </template>
@@ -8,8 +11,8 @@
 defineProps({
 	active: {
 		type: Boolean,
-		default: false,
-	},
+		default: false
+	}
 })
 </script>
 

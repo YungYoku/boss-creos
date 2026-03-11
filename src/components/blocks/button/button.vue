@@ -1,5 +1,9 @@
 <template>
-	<Skeleton v-if="loading" :class="props.class" height="48px" />
+	<Skeleton
+		v-if="loading"
+		:class="props.class"
+		height="48px"
+	/>
 
 	<component
 		:is="to ? 'router-link' : 'button'"
@@ -25,28 +29,28 @@ type Variant = 'default' | 'positive' | 'destructive' | 'outline'
 const props = defineProps({
 	class: {
 		type: [String, Array, Object],
-		default: '',
+		default: ''
 	},
 	loading: {
 		type: Boolean,
-		default: false,
+		default: false
 	},
 	type: {
 		type: String as PropType<Type>,
-		default: 'button',
+		default: 'button'
 	},
 	disabled: {
 		type: Boolean,
-		default: false,
+		default: false
 	},
 	variant: {
 		type: String as PropType<Variant>,
-		default: 'default',
+		default: 'default'
 	},
 	to: {
 		type: String,
-		default: null,
-	},
+		default: null
+	}
 })
 </script>
 

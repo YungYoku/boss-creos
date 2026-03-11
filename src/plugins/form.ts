@@ -78,7 +78,7 @@ const Form = <Schema extends RawSchema<Schema>>(base: Schema): IForm<Schema> => 
 				type: 'field',
 				value,
 				error: null,
-				isTouched: false,
+				isTouched: false
 			}
 			Reflect.set(acc, key, reactive(field))
 		}
@@ -97,7 +97,7 @@ const Form = <Schema extends RawSchema<Schema>>(base: Schema): IForm<Schema> => 
 					type: 'field',
 					value,
 					error: null,
-					isTouched: false,
+					isTouched: false
 				}
 				Object.assign(field, newField)
 			}
@@ -160,7 +160,7 @@ const Form = <Schema extends RawSchema<Schema>>(base: Schema): IForm<Schema> => 
 					type: 'field',
 					value,
 					error: null,
-					isTouched: false,
+					isTouched: false
 				}
 				Object.assign(field, newField)
 			}
@@ -179,7 +179,7 @@ const Form = <Schema extends RawSchema<Schema>>(base: Schema): IForm<Schema> => 
 		setErrors,
 		clearErrors,
 		reset,
-		validate,
+		validate
 	}
 }
 

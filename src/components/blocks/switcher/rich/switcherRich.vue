@@ -1,6 +1,14 @@
 <template>
-	<FieldWrapperRich class="switcher-rich" :label :error>
-		<Switcher v-model="value" :checked :disabled />
+	<FieldWrapperRich
+		class="switcher-rich"
+		:label
+		:error
+	>
+		<Switcher
+			v-model="value"
+			:checked
+			:disabled
+		/>
 	</FieldWrapperRich>
 </template>
 
@@ -15,7 +23,7 @@ withDefaults(defineProps<Props>(), defaultProps)
 
 const value = defineModel<boolean>({
 	type: Boolean,
-	default: null,
+	default: null
 })
 </script>
 

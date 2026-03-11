@@ -1,6 +1,13 @@
 <template>
-	<a :href="file" target="_blank" class="file">
-		<Icon name="file" :colors="colors" />
+	<a
+		:href="file"
+		target="_blank"
+		class="file"
+	>
+		<Icon
+			name="file"
+			:colors="colors"
+		/>
 
 		<Text size="xs"> Скачать файл </Text>
 	</a>
@@ -14,12 +21,12 @@ import { Icon, Text } from '@/components/elements'
 const props = defineProps({
 	src: {
 		type: String,
-		default: '',
+		default: ''
 	},
 	colors: {
 		type: Array,
-		default: () => ['light', 'dark'],
-	},
+		default: () => ['light', 'dark']
+	}
 })
 
 const file = computed(() => `${import.meta.env.VITE_API}/files/${props.src}`)

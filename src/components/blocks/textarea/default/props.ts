@@ -9,5 +9,5 @@ export const defaultProps = {
 	error: null,
 	label: '',
 	height: '200px',
-	disabled: false,
+	disabled: false
 } as const

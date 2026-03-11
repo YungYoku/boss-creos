@@ -1,5 +1,8 @@
 <template>
-	<CreativeCard :creative="emptyCreative" loading />
+	<CreativeCard
+		:creative="emptyCreative"
+		loading
+	/>
 </template>
 
 <script setup lang="ts">

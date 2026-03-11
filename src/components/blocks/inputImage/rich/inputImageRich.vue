@@ -1,6 +1,15 @@
 <template>
-	<FieldWrapperRich class="input-image-rich" :label :error>
-		<InputImage v-model="value" :loading :accept @update:name="updateName" />
+	<FieldWrapperRich
+		class="input-image-rich"
+		:label
+		:error
+	>
+		<InputImage
+			v-model="value"
+			:loading
+			:accept
+			@update:name="updateName"
+		/>
 	</FieldWrapperRich>
 </template>
 
@@ -22,7 +31,7 @@ const updateName = (value: string) => {
 
 const value = defineModel<string | null>({
 	type: Object as PropType<string | null>,
-	default: null,
+	default: null
 })
 </script>
 

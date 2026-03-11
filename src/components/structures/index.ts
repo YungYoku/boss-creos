@@ -6,7 +6,7 @@ const CardAuth = defineAsyncComponent(() => import('./card/auth/cardAuth.vue'))
 const CardLong = defineAsyncComponent(() => import('./card/long/cardLong.vue'))
 const Dropdown = defineAsyncComponent(() => import('./dropdown/dropdown.vue'))
 const FieldWrapperRich = defineAsyncComponent(
-	() => import('./fieldWrapperRich/fieldWrapperRich.vue'),
+	() => import('./fieldWrapperRich/fieldWrapperRich.vue')
 )
 const Grid = defineAsyncComponent(() => import('./grid/grid.vue'))
 const Island = defineAsyncComponent(() => import('./island/island.vue'))
@@ -27,5 +27,5 @@ export {
 	Modal,
 	Page,
 	Popover,
-	StepByStep,
+	StepByStep
 }

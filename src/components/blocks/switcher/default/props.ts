@@ -9,5 +9,5 @@ export const defaultProps = {
 	error: null,
 	checked: false,
 	disabled: false,
-	label: '',
+	label: ''
 } as const

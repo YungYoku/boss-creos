@@ -1,19 +1,25 @@
 <template>
-	<div class="switcher" @click="toggle">
-		<div v-if="label" class="switcher__label">
+	<div
+		class="switcher"
+		@click="toggle"
+	>
+		<div
+			v-if="label"
+			class="switcher__label"
+		>
 			{{ label }}
 		</div>
 
 		<div
 			class="switcher__content"
 			:class="{
-				_active: isActive,
+				_active: isActive
 			}"
 		>
 			<div
 				class="switcher__content-icon"
 				:class="{
-					_active: isActive,
+					_active: isActive
 				}"
 			/>
 		</div>
@@ -30,7 +36,7 @@ const props = withDefaults(defineProps<Props>(), defaultProps)
 
 const value = defineModel<boolean | null>({
 	type: Boolean,
-	default: null,
+	default: null
 })
 
 const toggle = () => {

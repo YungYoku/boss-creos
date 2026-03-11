@@ -1,6 +1,11 @@
 <template>
 	<div class="cell cell__actions">
-		<Button variant="positive" @click="onClick(cell)"> Принять </Button>
+		<Button
+			variant="positive"
+			@click="onClick(cell)"
+		>
+			Принять
+		</Button>
 
 		<Button variant="destructive"> Отклонить </Button>
 	</div>

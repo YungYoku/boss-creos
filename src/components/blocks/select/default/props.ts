@@ -18,5 +18,5 @@ export const defaultProps = {
 	items: () => [],
 	multiple: false,
 	clearable: true,
-	searchable: false,
+	searchable: false
 } as const

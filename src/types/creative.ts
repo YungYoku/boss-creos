@@ -9,16 +9,16 @@ import type { DBRecord, DBRecordItems } from '@/types/dbBase'
 export type ICreativeStatus = 'moderation' | 'approved'
 export type ICreativeType = 'video' | 'static' | 'pwa'
 const _creativeTypeItems: ICreativeType[] = ['video', 'static', 'pwa']
-export const creativeTypeItems = _creativeTypeItems.map((item) => ({
+export const creativeTypeItems = _creativeTypeItems.map(item => ({
 	id: item,
-	name: item,
+	name: item
 }))
 
 export type IRatio = '1:1' | '2:3' | '3:2' | '3:4' | '4:3' | '4:5' | '9:16' | '16:9'
 const _ratioItems: IRatio[] = ['1:1', '2:3', '3:2', '3:4', '4:3', '4:5', '9:16', '16:9']
-export const ratioItems = _ratioItems.map((item) => ({
+export const ratioItems = _ratioItems.map(item => ({
 	id: item,
-	name: item,
+	name: item
 }))
 
 export type ResizePrices = Record<IRatio, number>
@@ -86,13 +86,13 @@ export const emptyCreative: ICreative = {
 		'4:3': 0,
 		'4:5': 0,
 		'9:16': 0,
-		'16:9': 0,
+		'16:9': 0
 	},
 	changes: null,
 	status: 'moderation',
 	reskin: false,
 	reskinPrice: 0,
-	expand: {},
+	expand: {}
 }
 
 export type ICreatives = DBRecordItems & {

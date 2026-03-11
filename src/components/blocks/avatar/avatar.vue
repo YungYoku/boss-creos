@@ -4,8 +4,8 @@
 		:class="[
 			`_${size}`,
 			{
-				_editable: editable && avatar,
-			},
+				_editable: editable && avatar
+			}
 		]"
 		:style="style"
 	>
@@ -30,10 +30,20 @@
 					@input="onImageLoad"
 				/>
 
-				<Icon v-if="editable" class="avatar__icon-upload" name="upload" size="m" />
+				<Icon
+					v-if="editable"
+					class="avatar__icon-upload"
+					name="upload"
+					size="m"
+				/>
 			</template>
 
-			<Icon v-else name="user" :colors="['light', 'light']" :size="size" />
+			<Icon
+				v-else
+				name="user"
+				:colors="['light', 'light']"
+				:size="size"
+			/>
 		</template>
 	</div>
 </template>
@@ -57,7 +67,7 @@ const props = withDefaults(defineProps<Props>(), {
 	user: () => ({ ...emptyUser }),
 	self: false,
 	size: 'm',
-	editable: false,
+	editable: false
 })
 
 const auth = useAuthStore()
@@ -72,7 +82,7 @@ const avatar = computed(() => {
 const style = computed(() => {
 	if (avatar.value) {
 		return {
-			backgroundImage: `url(${avatar.value})`,
+			backgroundImage: `url(${avatar.value})`
 		}
 	}
 	return {}

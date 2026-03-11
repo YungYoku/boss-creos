@@ -11,5 +11,5 @@ export const defaultProps = {
 	loading: false,
 	compact: false,
 	label: '',
-	accept: '',
+	accept: ''
 } as const

@@ -45,12 +45,12 @@ class Http {
 		token: string,
 		options: HeadersOptions = {
 			isFormData: false,
-			isSSE: false,
-		},
+			isSSE: false
+		}
 	) {
 		const headers: Record<string, string> = {
 			Accept: 'application/json',
-			Authorization: token,
+			Authorization: token
 		}
 		if (!options.isFormData) {
 			headers['Content-Type'] = 'application/json'
@@ -90,12 +90,12 @@ class Http {
 
 		return fetch(this.api + _url, {
 			method: 'GET',
-			headers: this.getHeaders(auth.token),
+			headers: this.getHeaders(auth.token)
 		})
-			.then((response) => {
+			.then(response => {
 				return response
 					.json()
-					.then((res) => {
+					.then(res => {
 						if (response.status === 400 || response.status === 404) {
 							throw res
 						}
@@ -113,7 +113,7 @@ class Http {
 	async post<T>(
 		url: string,
 		body: object | FormData = {},
-		query: Query | null = null,
+		query: Query | null = null
 	): Promise<T> {
 		const auth = useAuthStore()
 
@@ -125,14 +125,14 @@ class Http {
 		return fetch(this.api + _url, {
 			method: 'POST',
 			headers: this.getHeaders(auth.token, {
-				isFormData: body instanceof FormData,
+				isFormData: body instanceof FormData
 			}),
-			body: _body,
+			body: _body
 		})
-			.then((response) => {
+			.then(response => {
 				return response
 					.json()
-					.then((res) => {
+					.then(res => {
 						if (response.status === 400 || response.status === 404) {
 							throw res
 						}
@@ -150,7 +150,7 @@ class Http {
 	async patch<T>(
 		url: string,
 		body: object | FormData = {},
-		query: Query | null = null,
+		query: Query | null = null
 	): Promise<T> {
 		const auth = useAuthStore()
 
@@ -162,14 +162,14 @@ class Http {
 		return fetch(this.api + _url, {
 			method: 'PATCH',
 			headers: this.getHeaders(auth.token, {
-				isFormData: body instanceof FormData,
+				isFormData: body instanceof FormData
 			}),
-			body: _body,
+			body: _body
 		})
-			.then((response) => {
+			.then(response => {
 				return response
 					.json()
-					.then((res) => {
+					.then(res => {
 						if (response.status === 400 || response.status === 404) {
 							throw res
 						}
@@ -192,18 +192,18 @@ class Http {
 
 		return fetch(this.api + _url, {
 			method: 'DELETE',
-			headers: this.getHeaders(auth.token),
+			headers: this.getHeaders(auth.token)
 		})
-			.then((response) => {
+			.then(response => {
 				if (response.status === 204) {
-					return new Promise((resolve) => {
+					return new Promise(resolve => {
 						resolve({})
 					})
 				}
 
 				return response
 					.json()
-					.then((res) => {
+					.then(res => {
 						if (response.status === 400 || response.status === 404) {
 							throw res
 						}
@@ -223,13 +223,13 @@ class Http {
 
 		const body = JSON.stringify({
 			clientId,
-			subscriptions: [url],
+			subscriptions: [url]
 		})
 
 		return fetch(this.api + '/realtime', {
 			method: 'POST',
 			headers: this.getHeaders(auth.token),
-			body,
+			body
 		})
 	}
 
@@ -240,16 +240,16 @@ class Http {
 			id: '',
 			expand: [],
 			cb: () =>
-				new Promise((resolve) => {
+				new Promise(resolve => {
 					resolve()
-				}),
-		},
+				})
+		}
 	): void {
 		const url = `${options.collection}/${options.id}`
 
 		const request = async () => {
 			return await this.get<T>(`/collections/${options.collection}/records/${options.id}`, {
-				expand: options.expand,
+				expand: options.expand
 			})
 		}
 
@@ -261,14 +261,14 @@ class Http {
 				const data = JSON.parse(event.data)
 				void this.setSubscription(url, data.clientId)
 			},
-			{ once: true },
+			{ once: true }
 		)
 
-		void request().then((response) => {
+		void request().then(response => {
 			void options.cb(response)
 		})
 		this.eventSource.addEventListener(url, () => {
-			void request().then((response) => {
+			void request().then(response => {
 				void options.cb(response)
 			})
 		})

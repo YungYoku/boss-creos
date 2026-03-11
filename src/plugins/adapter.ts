@@ -35,19 +35,19 @@ export const useAdapter = <T extends AdditionalAdapterFields<T>, Keys extends ke
 	unnecessaryFieldsForRequest: Keys[],
 	unnecessaryFieldsForTable: Keys[],
 	options: (item: T) => Options<T>,
-	cellFormats: CellFormats<T>,
+	cellFormats: CellFormats<T>
 ) => {
 	const keys = Object.keys(elementSchema) as Keys[]
 
 	const fieldsForRequest = keys.filter(
-		(field) => !unnecessaryFieldsForRequest.includes(field),
+		field => !unnecessaryFieldsForRequest.includes(field)
 	) as string[]
-	const fieldsForTable = keys.filter((field) => !unnecessaryFieldsForTable.includes(field))
+	const fieldsForTable = keys.filter(field => !unnecessaryFieldsForTable.includes(field))
 
 	const getHeader = (item: T) => {
 		const keys = Object.keys(item) as Keys[]
-		const filteredKeys = keys.filter((name) => fieldsForTable.includes(name))
-		const result = filteredKeys.map((name) => ({ name: String(name) }))
+		const filteredKeys = keys.filter(name => fieldsForTable.includes(name))
+		const result = filteredKeys.map(name => ({ name: String(name) }))
 
 		return [{ name: 'actions' }, ...result]
 	}
@@ -60,18 +60,18 @@ export const useAdapter = <T extends AdditionalAdapterFields<T>, Keys extends ke
 	}
 
 	const getBody = (items: AdapterItem<T>[]) => {
-		return items.map((item) => {
+		return items.map(item => {
 			const keys = Object.keys(item) as Keys[]
-			const filteredKeys = keys.filter((name) => fieldsForTable.includes(name))
+			const filteredKeys = keys.filter(name => fieldsForTable.includes(name))
 
 			const result = [
 				{
 					key: 'actions',
 					newValue: null,
-					options: options(item).actions,
-				},
+					options: options(item).actions
+				}
 			] as IRow
-			filteredKeys.forEach((key) => {
+			filteredKeys.forEach(key => {
 				const value = getValue(item, key)
 				const format = cellFormats[key] ? cellFormats[key] : <V>(value: V) => value
 
@@ -79,7 +79,7 @@ export const useAdapter = <T extends AdditionalAdapterFields<T>, Keys extends ke
 					key: String(key),
 					options: options(item)[key] ?? {},
 					newValue: item.changes?.[key] ?? null,
-					currentValue: format(value),
+					currentValue: format(value)
 				})
 			})
 			return result
@@ -102,6 +102,6 @@ export const useAdapter = <T extends AdditionalAdapterFields<T>, Keys extends ke
 		handleLoadedData,
 		header,
 		body,
-		fields: fieldsForRequest,
+		fields: fieldsForRequest
 	}
 }

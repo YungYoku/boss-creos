@@ -25,5 +25,5 @@ export const defaultProps = {
 	clearable: true,
 	variant: 'default',
 	transparent: false,
-	accept: '',
+	accept: ''
 } as const

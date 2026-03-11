@@ -21,5 +21,5 @@ export const emptyRating: IRating = {
 	id: '',
 	review: '',
 	stars: 0,
-	updated: '',
+	updated: ''
 }

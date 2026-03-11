@@ -1,5 +1,8 @@
 <template>
-	<Dropdown class="user-dropdown" :items>
+	<Dropdown
+		class="user-dropdown"
+		:items
+	>
 		<div class="user-dropdown__account">Аккаунт</div>
 	</Dropdown>
 </template>
@@ -54,51 +57,51 @@ const items = computed(() => [
 	[
 		{
 			text: 'Профиль',
-			to: `/users/${auth.user.id}`,
+			to: `/users/${auth.user.id}`
 		},
 		{
 			text: 'Настройки',
-			to: '/profile',
-		},
+			to: '/profile'
+		}
 	],
 	[
 		{
 			text: 'Мои заказы',
 			to: '/bought',
-			can: auth.isBuyer,
+			can: auth.isBuyer
 		},
 		{
 			text: 'Избранное',
 			to: '/favorite',
-			can: auth.isBuyer,
+			can: auth.isBuyer
 		},
 		{
 			text: 'Корзина',
 			to: '/shopping-cart',
-			can: auth.isBuyer,
+			can: auth.isBuyer
 		},
 
 		{
 			text: 'Мои креативы',
 			to: '/made-creatives',
-			can: auth.isDesigner,
+			can: auth.isDesigner
 		},
 		{
 			text: 'Мои заказы',
 			to: '/orders',
-			can: auth.isDesigner,
+			can: auth.isDesigner
 		},
 		{
 			text: 'Создать креатив',
 			to: '/creative/new',
-			can: auth.isDesigner,
+			can: auth.isDesigner
 		},
 
 		{
 			text: 'На модерации',
 			to: '/moderation',
-			can: auth.isAdmin,
-		},
+			can: auth.isAdmin
+		}
 
 		// {
 		// 	text: 'Выполняемые объявления',
@@ -114,9 +117,9 @@ const items = computed(() => [
 	[
 		{
 			text: 'Выйти',
-			action: logout,
-		},
-	],
+			action: logout
+		}
+	]
 ])
 </script>
 

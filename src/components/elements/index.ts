@@ -29,5 +29,5 @@ export {
 	Separator,
 	Skeleton,
 	Text,
-	Video,
+	Video
 }

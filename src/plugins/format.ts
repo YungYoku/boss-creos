@@ -9,7 +9,7 @@ class Format {
 
 			number(value: number, length = 1) {
 				return value.toFixed(length)
-			},
+			}
 		}
 
 		return types[type](value, ...props)
@@ -27,7 +27,7 @@ const formatPlugin: Plugin = {
 		) => {
 			return format.get(type, value, ...props)
 		}
-	},
+	}
 }
 
 export { format, formatPlugin }

@@ -3,7 +3,7 @@
 		class="icon"
 		:class="[`_${size}`, currentColor]"
 		:style="{
-			cursor: pointer ? 'pointer' : 'initial',
+			cursor: pointer ? 'pointer' : 'initial'
 		}"
 		:src="src"
 		alt="icon"
@@ -19,23 +19,23 @@ import Image from '../image/image.vue'
 const props = defineProps({
 	name: {
 		type: String,
-		default: 'file',
+		default: 'file'
 	},
 	size: {
 		type: String,
 		default: 's',
 		validator: (size: string) => {
 			return ['xs', 's', 'm', 'l', 'xl'].includes(size)
-		},
+		}
 	},
 	colors: {
 		type: Array,
-		default: () => ['light', 'dark'],
+		default: () => ['light', 'dark']
 	},
 	pointer: {
 		type: Boolean,
-		default: true,
-	},
+		default: true
+	}
 })
 
 const currentColor = computed(() => {

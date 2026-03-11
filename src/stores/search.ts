@@ -9,7 +9,7 @@ export const useSearchStore = defineStore('search', {
 	state: (): State =>
 		({
 			search: '',
-			loading: false,
+			loading: false
 		}) as State,
 
 	getters: {},
@@ -21,6 +21,6 @@ export const useSearchStore = defineStore('search', {
 
 		setLoading(value: boolean) {
 			this.loading = value
-		},
-	},
+		}
+	}
 })

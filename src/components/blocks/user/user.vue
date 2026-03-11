@@ -1,16 +1,23 @@
 <template>
-	<Skeleton v-if="loading" width="120px" height="28px" />
+	<Skeleton
+		v-if="loading"
+		width="120px"
+		height="28px"
+	/>
 
 	<component
 		:is="link && user.id ? 'router-link' : 'div'"
 		v-else
 		class="user"
 		:class="{
-			_link: link && user.id,
+			_link: link && user.id
 		}"
 		:to="`/users/${user.id}`"
 	>
-		<Avatar size="m" :user="user" />
+		<Avatar
+			size="m"
+			:user="user"
+		/>
 
 		<div class="user__info">
 			<div class="user__name">
@@ -37,7 +44,7 @@ interface Props {
 withDefaults(defineProps<Props>(), {
 	loading: false,
 	link: false,
-	boughtAmount: 0,
+	boughtAmount: 0
 })
 </script>
 

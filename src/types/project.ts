@@ -28,7 +28,7 @@ export const emptyProposal: IProjectProposal = {
 	user: '',
 	chat: '',
 	text: '',
-	price: 0,
+	price: 0
 }
 
 export type IProject = DBRecord & {
@@ -85,8 +85,8 @@ export const emptyProject: IProject = {
 	price: 100,
 	tutoring: false,
 	expand: {
-		proposals: [],
-	},
+		proposals: []
+	}
 }
 
 export type IProjects = DBRecordItems & {

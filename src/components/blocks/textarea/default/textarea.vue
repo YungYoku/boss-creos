@@ -1,6 +1,9 @@
 <template>
 	<div class="textarea">
-		<Label v-if="label" :active="!isEmpty">
+		<Label
+			v-if="label"
+			:active="!isEmpty"
+		>
 			{{ label }}
 		</Label>
 
@@ -9,16 +12,19 @@
 			class="textarea__field"
 			:class="[
 				{
-					_empty: value.length === 0,
-				},
+					_empty: value.length === 0
+				}
 			]"
 			:style="{
-				height,
+				height
 			}"
 			:disabled
 		/>
 
-		<span v-if="error" class="textarea__error">
+		<span
+			v-if="error"
+			class="textarea__error"
+		>
 			{{ error }}
 		</span>
 
@@ -44,7 +50,7 @@ withDefaults(defineProps<Props>(), defaultProps)
 
 const value = defineModel<string>({
 	type: String,
-	default: '',
+	default: ''
 })
 const clear = () => (value.value = '')
 

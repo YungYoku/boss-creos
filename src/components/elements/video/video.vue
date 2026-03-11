@@ -7,6 +7,7 @@
 		:poster="previewSrc"
 		:controls="showControls"
 		@click="showVideo"
+		preview=""
 	/>
 </template>
 

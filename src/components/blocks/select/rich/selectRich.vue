@@ -1,6 +1,17 @@
 <template>
-	<FieldWrapperRich class="select-rich" :label :error>
-		<Select v-model="value" v-model:search="search" :items :multiple :clearable :searchable />
+	<FieldWrapperRich
+		class="select-rich"
+		:label
+		:error
+	>
+		<Select
+			v-model="value"
+			v-model:search="search"
+			:items
+			:multiple
+			:clearable
+			:searchable
+		/>
 	</FieldWrapperRich>
 </template>
 
@@ -15,12 +26,12 @@ withDefaults(defineProps<Props>(), defaultProps)
 
 const value = defineModel<string | string[]>({
 	type: [String, Array],
-	default: '',
+	default: ''
 })
 
 const search = defineModel<string>('search', {
 	type: String,
-	default: '',
+	default: ''
 })
 </script>
 

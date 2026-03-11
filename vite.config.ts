@@ -9,27 +9,27 @@ export default defineConfig(({ mode }) => {
 
 	return {
 		esbuild: {
-			drop: isProd ? ['console', 'debugger'] : [],
+			drop: isProd ? ['console', 'debugger'] : []
 		},
 
 		plugins: [
 			vueRouter(),
 			vue({
 				features: {
-					optionsAPI: false,
-				},
+					optionsAPI: false
+				}
 			}),
 			checker({
 				oxlint: true,
 				vueTsc: true,
-				typescript: true,
-			}),
+				typescript: true
+			})
 		],
 
 		resolve: {
 			alias: {
-				'@': fileURLToPath(new URL('./src', import.meta.url)),
-			},
-		},
+				'@': fileURLToPath(new URL('./src', import.meta.url))
+			}
+		}
 	}
 })

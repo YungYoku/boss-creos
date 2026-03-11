@@ -23,7 +23,7 @@ export interface ICell {
 export const emptyCell: ICell = {
 	key: '',
 	newValue: '',
-	options: {},
+	options: {}
 }
 
 export type IRow = ICell[]

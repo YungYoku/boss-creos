@@ -1,6 +1,10 @@
 <template>
 	<div class="auth-slots">
-		<div v-for="column in columns" :key="`column-${column}`" class="auth-slots__column">
+		<div
+			v-for="column in columns"
+			:key="`column-${column}`"
+			class="auth-slots__column"
+		>
 			<img
 				v-for="slot in column"
 				ref="slots"
@@ -19,12 +23,12 @@ import image from '@/assets/img/slot.webp'
 
 const slotsRefs = useTemplateRef('slots')
 const slotBase = {
-	image,
+	image
 }
 const columns = reactive([
 	[slotBase, slotBase, slotBase, slotBase, slotBase, slotBase, slotBase],
 	[slotBase, slotBase, slotBase, slotBase, slotBase, slotBase, slotBase],
-	[slotBase, slotBase, slotBase, slotBase, slotBase, slotBase, slotBase],
+	[slotBase, slotBase, slotBase, slotBase, slotBase, slotBase, slotBase]
 ])
 
 const height = computed(() => {

@@ -1,6 +1,11 @@
 <template>
 	<div class="input-video">
-		<Button v-if="compact" :disabled="loading" variant="outline" class="input-video__button">
+		<Button
+			v-if="compact"
+			:disabled="loading"
+			variant="outline"
+			class="input-video__button"
+		>
 			<Icon name="video" />
 			<slot />
 
@@ -40,7 +45,12 @@
 				@update-file="updateFile"
 			/>
 
-			<Icon class="input-video__icon" name="download" size="xs" :colors="['dark', 'light']" />
+			<Icon
+				class="input-video__icon"
+				name="download"
+				size="xs"
+				:colors="['dark', 'light']"
+			/>
 		</div>
 	</div>
 </template>

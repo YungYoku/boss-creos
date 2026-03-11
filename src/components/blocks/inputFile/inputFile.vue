@@ -1,12 +1,17 @@
 <template>
 	<div class="input-file">
-		<Button v-if="compact" :disabled="loading" variant="outline" class="input-file__button">
+		<Button
+			v-if="compact"
+			:disabled="loading"
+			variant="outline"
+			class="input-file__button"
+		>
 			<Icon name="file" />
 
 			<div
 				class="input-file__field-wrap"
 				:class="{
-					_compact: compact,
+					_compact: compact
 				}"
 			>
 				<Input
@@ -25,7 +30,7 @@
 			v-else
 			class="input-file__field-wrap"
 			:class="{
-				_compact: compact,
+				_compact: compact
 			}"
 		>
 			<Input
@@ -62,7 +67,7 @@ withDefaults(defineProps<Props>(), {
 	loading: false,
 	compact: false,
 	label: '',
-	accept: '',
+	accept: ''
 })
 
 const emit = defineEmits(['update:name'])
@@ -72,7 +77,7 @@ const updateName = (value: string) => {
 
 const value = defineModel<string | null>({
 	type: Object as PropType<string | null>,
-	default: null,
+	default: null
 })
 const updateFile = async (file: File) => {
 	updateName(file.name)
@@ -82,7 +87,7 @@ const updateFile = async (file: File) => {
 	formData.append('file', file)
 
 	value.value = await Http.post<{ id: string }>('/collections/files/records', formData).then(
-		({ id }) => id,
+		({ id }) => id
 	)
 }
 </script>

@@ -1,5 +1,8 @@
 <template>
-	<router-link to="/" class="logo">
+	<router-link
+		to="/"
+		class="logo"
+	>
 		<div class="logo__text">
 			<span class="logo__name">Boss Creos</span>
 			<span class="logo__description">Работаем 24/7</span>

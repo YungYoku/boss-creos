@@ -1,6 +1,13 @@
 <template>
-	<Dropdown class="notifications" :items>
-		<Button variant="outline" class="notifications__button" @click="onOpen">
+	<Dropdown
+		class="notifications"
+		:items
+	>
+		<Button
+			variant="outline"
+			class="notifications__button"
+			@click="onOpen"
+		>
 			<Icon name="notifications" />
 
 			<span
@@ -10,16 +17,27 @@
 		</Button>
 
 		<template #item="{ item }">
-			<Grid :columns="1" vertical gap="xs" class="notifications__item">
+			<Grid
+				:columns="1"
+				vertical
+				gap="xs"
+				class="notifications__item"
+			>
 				<Text size="xs">
 					{{ item.text }}
 				</Text>
 
-				<Text v-if="item?.created" size="xs">
+				<Text
+					v-if="item?.created"
+					size="xs"
+				>
 					{{ $date(new Date(item.created), 'datetime') }}
 				</Text>
 
-				<span v-if="!item.checked" class="notifications__signal" />
+				<span
+					v-if="!item.checked"
+					class="notifications__signal"
+				/>
 			</Grid>
 		</template>
 	</Dropdown>
