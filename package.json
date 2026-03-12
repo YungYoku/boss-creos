@@ -19,8 +19,8 @@
 	},
 	"devDependencies": {
 		"@vitejs/plugin-vue": "6.0.5",
-		"oxfmt": "0.39.0",
-		"oxlint": "1.54.0",
+		"oxfmt": "0.40.0",
+		"oxlint": "1.55.0",
 		"typescript": "5.9.3",
 		"vite": "8.0.0",
 		"vite-plugin-checker": "0.12.0",
