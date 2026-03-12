@@ -66,8 +66,7 @@ const creative: Ref<ICreative> = ref({ ...emptyCreative })
 const route = useRoute()
 
 const getID = () => {
-	// @ts-expect-error TODO: видимо косяк в vue-router/experimental
-	return route.params.id as string
+	return route.params.id
 }
 
 const isOnModeration = ref(false)

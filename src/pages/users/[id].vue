@@ -71,8 +71,7 @@ const loadingCreatives = ref(true)
 const creatives: Ref<ICreative[]> = ref([])
 
 const getID = () => {
-	// @ts-expect-error TODO: видимо косяк в vue-router/experimental
-	return route.params.id as string
+	return route.params.id
 }
 
 const loadCreatives = async () => {

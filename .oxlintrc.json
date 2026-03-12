@@ -2,17 +2,17 @@
 	"$schema": "./node_modules/oxlint/configuration_schema.json",
 	"plugins": ["vue"],
 	"categories": {
-		"correctness": "warn"
+		"correctness": "error"
 	},
 	"rules": {},
-	"settings": {
-		"vitest": {
-			"typecheck": false
-		}
-	},
+	"settings": {},
 	"env": {
 		"builtin": true
 	},
 	"globals": {},
+	"options": {
+		"typeAware": true,
+		"typeCheck": true
+	},
 	"ignorePatterns": ["db/**"]
 }

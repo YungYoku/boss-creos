@@ -94,8 +94,7 @@ definePage({
 
 const route = useRoute()
 const getID = () => {
-	// @ts-expect-error TODO: видимо косяк в vue-router/experimental
-	return route.params.id as string
+	return route.params.id
 }
 
 const auth = useAuthStore()
