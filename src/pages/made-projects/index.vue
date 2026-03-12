@@ -1,12 +1,24 @@
 <template>
-	<Grid vertical :columns="1" gap="l">
+	<Grid
+		vertical
+		:columns="1"
+		gap="l"
+	>
 		<Grid :columns="1">
 			<PageTitle> Мои объявления </PageTitle>
 		</Grid>
 
-		<Grid :columns-xl="4" :columns-l="3" :columns-m="2" :columns-s="1">
+		<Grid
+			:columns-xl="4"
+			:columns-l="3"
+			:columns-m="2"
+			:columns-s="1"
+		>
 			<template v-if="loading">
-				<EmptyProjectCard v-for="i in 8" :key="i" />
+				<EmptyProjectCard
+					v-for="i in 8"
+					:key="i"
+				/>
 			</template>
 			<template v-else>
 				<ProjectCard
@@ -33,7 +45,11 @@
 		@close="closeResponses"
 	/>
 
-	<Modal v-if="openedChat" :width="600" @close="closeChat">
+	<Modal
+		v-if="openedChat"
+		:width="600"
+		@close="closeChat"
+	>
 		<Chat
 			:project="openedChat"
 			rating-type="ratingDesigner"
@@ -68,8 +84,8 @@ import { AUTH, BUYER } from '@/data/permissions'
 
 definePage({
 	meta: {
-		permissions: [AUTH, BUYER],
-	},
+		permissions: [AUTH, BUYER]
+	}
 })
 
 const auth = useAuthStore()
@@ -84,8 +100,8 @@ const getUserProjects = async () => {
 
 	await Http.get<IProjects>('/collections/projects/records', {
 		filter: `(creator='${auth.user.id}')`,
-		expand: ['proposals', 'proposals.user', 'type', 'discipline', 'designer', 'ratingDesigner'],
-	}).then((response) => {
+		expand: ['proposals', 'proposals.user', 'type', 'discipline', 'designer', 'ratingDesigner']
+	}).then(response => {
 		projects.value = response.items
 	})
 
@@ -107,7 +123,7 @@ const closeResponses = () => {
 const pickDesigner = async (user: IUser) => {
 	if (!openedProject.value || loading.value) return
 	const designerChat = openedProject.value.expand?.proposals?.find(
-		(proposal) => proposal.user === user.id,
+		proposal => proposal.user === user.id
 	)?.chat
 
 	loading.value = true
@@ -115,7 +131,7 @@ const pickDesigner = async (user: IUser) => {
 	await Http.patch(`/collections/projects/records/${openedProject.value.id}`, {
 		designer: user.id,
 		status: 'in_progress',
-		chat: designerChat,
+		chat: designerChat
 	}).then(() => {
 		closeResponses()
 		void getUserProjects()
@@ -127,7 +143,7 @@ const remove = async () => {
 	if (!project) return
 
 	await Http.delete(`/collections/projects/records/${project.id}`).then(() => {
-		projects.value = projects.value.filter((item) => item.id !== project.id)
+		projects.value = projects.value.filter(item => item.id !== project.id)
 	})
 
 	hideDeleteConfirmation()
@@ -156,7 +172,7 @@ const deleteConfirmationModal = reactive<{
 	project: IProject | null
 }>({
 	show: false,
-	project: null,
+	project: null
 })
 const showDeleteConfirmation = (project: IProject) => {
 	deleteConfirmationModal.show = true

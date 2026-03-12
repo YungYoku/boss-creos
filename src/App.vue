@@ -21,7 +21,7 @@ const router = useRouter()
 
 const layouts = {
 	default: DefaultLayout,
-	auth: AuthLayout,
+	auth: AuthLayout
 }
 
 const layout = computed(() => {
@@ -43,9 +43,9 @@ const loadUserInfo = async () => {
 					'baskets.creative.preview',
 					'baskets.creative.slot',
 					'baskets.geo',
-					'transactions',
-				],
-			},
+					'transactions'
+				]
+			}
 		)
 			.then(({ token, record }) => {
 				auth.setToken(token)

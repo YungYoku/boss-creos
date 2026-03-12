@@ -1,11 +1,23 @@
 <template>
 	<div class="step-by-step">
 		<div class="step-by-step__steps">
-			<span v-for="(step, i) in steps" :key="step" :class="getCurrentClass(i)" />
+			<span
+				v-for="(step, i) in steps"
+				:key="step"
+				:class="getCurrentClass(i)"
+			/>
 		</div>
 
-		<template v-for="(step, i) in steps" :key="step">
-			<slot v-if="i + 1 === currentStep" :name="step" :next="next" :back="back" />
+		<template
+			v-for="(step, i) in steps"
+			:key="step"
+		>
+			<slot
+				v-if="i + 1 === currentStep"
+				:name="step"
+				:next="next"
+				:back="back"
+			/>
 		</template>
 	</div>
 </template>
@@ -16,18 +28,18 @@ import { ref, reactive, computed } from 'vue'
 const emit = defineEmits(['apply'])
 
 const slots = defineSlots<Record<string, string>>()
-const steps = reactive<string[]>(Object.keys(slots).filter((slot) => slot !== 'footer'))
+const steps = reactive<string[]>(Object.keys(slots).filter(slot => slot !== 'footer'))
 const currentStep = ref(1)
 
 defineProps({
 	width: {
 		type: Number,
-		default: 302,
+		default: 302
 	},
 	title: {
 		type: String,
-		default: null,
-	},
+		default: null
+	}
 })
 
 const isRequestStep = computed(() => currentStep.value === steps.length)

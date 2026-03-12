@@ -1,6 +1,10 @@
 <template>
 	<div class="table__row">
-		<div v-for="item in data" :key="item.name" class="table__col _header">
+		<div
+			v-for="item in data"
+			:key="item.name"
+			class="table__col _header"
+		>
 			<div class="table__content">
 				{{ $t(item.name) }}
 			</div>
@@ -15,7 +19,7 @@ import type { IHeader } from '@/types/table'
 defineProps({
 	data: {
 		type: Array as PropType<IHeader>,
-		default: () => [],
-	},
+		default: () => []
+	}
 })
 </script>

@@ -4,8 +4,8 @@
 		:class="[
 			`_gap-${gap}`,
 			{
-				_vertical: vertical,
-			},
+				_vertical: vertical
+			}
 		]"
 		:style="style"
 	>
@@ -42,7 +42,7 @@ const props = withDefaults(defineProps<Props>(), {
 	columnsXl: null,
 	columnsL: null,
 	columnsM: null,
-	columnsS: null,
+	columnsS: null
 })
 
 const activeColumns: Ref<(number | string)[] | number | null> = ref(1)
@@ -76,7 +76,7 @@ onBeforeUnmount(() => {
 })
 watch(
 	() => [props.columns, props.columnsXl, props.columnsL, props.columnsM, props.columnsS],
-	updateActiveColumns,
+	updateActiveColumns
 )
 
 const getAlign = (align: Align) => {
@@ -100,7 +100,7 @@ const style = computed(() => {
 
 	if (props.vertical) {
 		return {
-			'align-items': getAlign(props.horAlign),
+			'align-items': getAlign(props.horAlign)
 		}
 	}
 
@@ -108,7 +108,7 @@ const style = computed(() => {
 		return {
 			gridTemplateColumns: `repeat(${activeColumns.value.toString()}, 1fr)`,
 			'align-items': getAlign(props.verAlign),
-			'justify-items': getAlign(props.horAlign),
+			'justify-items': getAlign(props.horAlign)
 		}
 	}
 
@@ -122,7 +122,7 @@ const style = computed(() => {
 			}, '')
 			.trim(),
 		'align-items': getAlign(props.verAlign),
-		'justify-items': getAlign(props.horAlign),
+		'justify-items': getAlign(props.horAlign)
 	}
 })
 </script>

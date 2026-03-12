@@ -1,12 +1,16 @@
 <template>
-	<Skeleton v-if="loading" :width="loadingWidth" :height="skeletonHeights[size]" />
+	<Skeleton
+		v-if="loading"
+		:width="loadingWidth"
+		:height="skeletonHeights[size]"
+	/>
 
 	<span
 		v-else
 		class="text"
 		:class="size"
 		:style="{
-			height: skeletonHeights[size],
+			height: skeletonHeights[size]
 		}"
 	>
 		<slot />
@@ -23,16 +27,16 @@ type Size = 'xs' | 's' | 'm' | 'l' | 'xl'
 defineProps({
 	size: {
 		type: String as PropType<Size>,
-		default: 'm',
+		default: 'm'
 	},
 	loading: {
 		type: Boolean,
-		default: false,
+		default: false
 	},
 	loadingWidth: {
 		type: String,
-		default: '400px',
-	},
+		default: '400px'
+	}
 })
 
 const skeletonHeights = {
@@ -40,7 +44,7 @@ const skeletonHeights = {
 	s: 'auto',
 	m: '24px',
 	l: '30px',
-	xl: '48px',
+	xl: '48px'
 }
 </script>
 

@@ -1,6 +1,12 @@
 <template>
-	<Modal :width="600" @close="close">
-		<Grid :columns="1" vertical>
+	<Modal
+		:width="600"
+		@close="close"
+	>
+		<Grid
+			:columns="1"
+			vertical
+		>
 			<slot />
 
 			<Grid :columns="2">

@@ -12,7 +12,7 @@
 			<div
 				class="input-video__field-wrap"
 				:class="{
-					_compact: compact,
+					_compact: compact
 				}"
 			>
 				<Input
@@ -31,7 +31,7 @@
 			v-else
 			class="input-video__field-wrap"
 			:class="{
-				_compact: compact,
+				_compact: compact
 			}"
 		>
 			<Input
@@ -74,7 +74,7 @@ const updateName = (value: string) => {
 
 const value = defineModel<string | null>({
 	type: Object as PropType<string | null>,
-	default: null,
+	default: null
 })
 const updateFile = async (file: File) => {
 	updateName(file.name)

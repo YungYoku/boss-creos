@@ -2,18 +2,30 @@
 	<div
 		class="card-auth"
 		:style="{
-			width,
+			width
 		}"
 	>
-		<div v-if="title" class="card-auth__title">
+		<div
+			v-if="title"
+			class="card-auth__title"
+		>
 			{{ title }}
 		</div>
 
-		<Grid vertical gap="l" class="card-auth__content">
+		<Grid
+			vertical
+			gap="l"
+			class="card-auth__content"
+		>
 			<slot />
 		</Grid>
 
-		<Grid v-if="$slots.footer" vertical class="card-auth__footer" gap="xs">
+		<Grid
+			v-if="$slots.footer"
+			vertical
+			class="card-auth__footer"
+			gap="xs"
+		>
 			<slot name="footer" />
 		</Grid>
 	</div>
@@ -25,12 +37,12 @@ import { Grid } from '@/components/structures'
 defineProps({
 	width: {
 		type: String,
-		default: '300px',
+		default: '300px'
 	},
 	title: {
 		type: String,
-		default: null,
-	},
+		default: null
+	}
 })
 </script>
 

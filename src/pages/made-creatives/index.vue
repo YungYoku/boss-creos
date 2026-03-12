@@ -1,10 +1,22 @@
 <template>
-	<Grid vertical :columns="1" gap="l" class="made-creatives">
+	<Grid
+		vertical
+		:columns="1"
+		gap="l"
+		class="made-creatives"
+	>
 		<div class="made-creatives__title">Мои креативы</div>
 
-		<div v-if="creatives.length || loading" class="made-creatives__creatives">
+		<div
+			v-if="creatives.length || loading"
+			class="made-creatives__creatives"
+		>
 			<template v-if="loading">
-				<EmptyCreativeCard v-for="i in 8" :key="i" class="main__creatives-item" />
+				<EmptyCreativeCard
+					v-for="i in 8"
+					:key="i"
+					class="main__creatives-item"
+				/>
 			</template>
 			<template v-else>
 				<CreativeCard
@@ -30,8 +42,8 @@ import { AUTH, DESIGNER } from '@/data/permissions'
 
 definePage({
 	meta: {
-		permissions: [AUTH, DESIGNER],
-	},
+		permissions: [AUTH, DESIGNER]
+	}
 })
 
 const auth = useAuthStore()
@@ -46,8 +58,8 @@ const getUserCreatives = async () => {
 
 	await Http.get<ICreatives>('/collections/creatives/records', {
 		filter: `creator='${auth.user.id}'`,
-		expand: ['preview', 'video', 'creator', 'creator.avatar', 'slot'],
-	}).then((response) => {
+		expand: ['preview', 'video', 'creator', 'creator.avatar', 'slot']
+	}).then(response => {
 		creatives.value = response.items
 	})
 

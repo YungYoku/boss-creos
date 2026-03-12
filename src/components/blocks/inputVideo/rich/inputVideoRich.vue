@@ -31,7 +31,7 @@ const updateName = (value: string) => {
 
 const value = defineModel<string | null>({
 	type: Object as PropType<string | null>,
-	default: null,
+	default: null
 })
 </script>
 

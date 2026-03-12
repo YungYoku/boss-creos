@@ -1,8 +1,18 @@
 <template>
-	<Grid v-if="isAvailable" vertical :columns="1" gap="l" class="edit-creative">
+	<Grid
+		v-if="isAvailable"
+		vertical
+		:columns="1"
+		gap="l"
+		class="edit-creative"
+	>
 		<Island>
 			<Grid vertical>
-				<Text size="m" :loading="loading" class="edit-creative__title">
+				<Text
+					size="m"
+					:loading="loading"
+					class="edit-creative__title"
+				>
 					Добавить креатив
 				</Text>
 
@@ -147,9 +157,16 @@
 
 	<div v-else>Креатив с ID {{ getID() }} не существует или был создан не вами</div>
 
-	<Modal v-if="modalShowing" :width="585" @close="modalShowing = false">
+	<Modal
+		v-if="modalShowing"
+		:width="585"
+		@close="modalShowing = false"
+	>
 		<Grid>
-			<template v-for="item in ratioItems" :key="item.id">
+			<template
+				v-for="item in ratioItems"
+				:key="item.id"
+			>
 				<InputRich
 					v-if="creative.resizePrices?.[item.id]"
 					v-model="creative.resizePrices[item.id].value"
@@ -178,7 +195,7 @@ import {
 	SelectLiveRich,
 	SelectRich,
 	SwitcherRich,
-	TextareaRich,
+	TextareaRich
 } from '@/components/blocks'
 import { Form, Http } from '@/plugins'
 import { Text } from '@/components/elements'
@@ -188,8 +205,8 @@ import { AUTH, DESIGNER } from '@/data/permissions'
 
 definePage({
 	meta: {
-		permissions: [AUTH, DESIGNER],
-	},
+		permissions: [AUTH, DESIGNER]
+	}
 })
 
 const creativeBase = Form<ICreative>({ ...emptyCreative })
@@ -216,7 +233,7 @@ const loadCreative = async () => {
 	isAvailable.value = true
 
 	await Http.get<ICreative>(`/collections/creatives/records/${id}`)
-		.then((response) => {
+		.then(response => {
 			if (response.creator !== auth.user.id) {
 				isAvailable.value = false
 			}
@@ -251,11 +268,11 @@ const getChanges = () => {
 		'created',
 		'proposals',
 		'changes',
-		'expand',
+		'expand'
 	] as const
 	const currentCreativeKeys = Object.keys(currentCreative) as (keyof ICreative)[]
 	const filteredKeys = currentCreativeKeys.filter(
-		(key) => !readonlyFields.includes(key),
+		key => !readonlyFields.includes(key)
 	) as (keyof Omit<ICreative, ReadOnlyCreativeFields>)[]
 
 	const changes: Record<string, unknown> = {}
@@ -281,14 +298,14 @@ const update = async () => {
 		const isNoApproach = !creative.approach.value
 		if (isNoApproach) {
 			creative.setErrors({
-				approach: { code: 'validation_required', message: 'Cannot be blank.' },
+				approach: { code: 'validation_required', message: 'Cannot be blank.' }
 			})
 		}
 
 		const isNoVideo = !creative.video.value
 		if (isNoVideo) {
 			creative.setErrors({
-				video: { code: 'validation_required', message: 'Cannot be blank.' },
+				video: { code: 'validation_required', message: 'Cannot be blank.' }
 			})
 		}
 
@@ -303,9 +320,9 @@ const update = async () => {
 	await Http.patch<ICreative>(`/collections/creatives/records/${creativeBase.id.value}`, {
 		...creativeBase.get(),
 		status: 'moderation',
-		changes: getChanges(),
+		changes: getChanges()
 	})
-		.then(async (response) => {
+		.then(async response => {
 			await router.push(`/creative/${response.id}`)
 		})
 		.catch((error: unknown) => {

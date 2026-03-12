@@ -1,7 +1,18 @@
 <template>
-	<div v-for="(row, rowIndex) in data" :key="rowIndex" class="table__row">
-		<div v-for="cell in row" :key="`${rowIndex}-${cell.key}`" class="table__col _content">
-			<slot name="cell" :cell="cell">
+	<div
+		v-for="(row, rowIndex) in data"
+		:key="rowIndex"
+		class="table__row"
+	>
+		<div
+			v-for="cell in row"
+			:key="`${rowIndex}-${cell.key}`"
+			class="table__col _content"
+		>
+			<slot
+				name="cell"
+				:cell="cell"
+			>
 				<div class="table__content">
 					<template v-if="cell.newValue != null">
 						<component
@@ -45,7 +56,7 @@ import type { IRows } from '@/types/table'
 defineProps({
 	data: {
 		type: Array as PropType<IRows>,
-		default: () => [],
-	},
+		default: () => []
+	}
 })
 </script>

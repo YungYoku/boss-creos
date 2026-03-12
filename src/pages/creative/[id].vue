@@ -1,9 +1,18 @@
 <template>
 	<div v-if="loading">Загрузка</div>
 
-	<Grid v-else-if="isExists && !isOnModeration" class="creative" vertical :columns="1" gap="l">
+	<Grid
+		v-else-if="isExists && !isOnModeration"
+		class="creative"
+		vertical
+		:columns="1"
+		gap="l"
+	>
 		<Grid :columns="['430px', 1]">
-			<CreativeCard :creative="creative" for-sale />
+			<CreativeCard
+				:creative="creative"
+				for-sale
+			/>
 
 			<div class="creative__info">
 				<div class="creative__name">
@@ -74,9 +83,9 @@ const loadProject = async () => {
 	isExists.value = true
 
 	await Http.get<ICreative>(`/collections/creatives/records/${id}`, {
-		expand: ['creator', 'creator.avatar', 'preview', 'video', 'slot', 'geo', 'approach'],
+		expand: ['creator', 'creator.avatar', 'preview', 'video', 'slot', 'geo', 'approach']
 	})
-		.then((response) => {
+		.then(response => {
 			if (response.status === 'moderation') {
 				if (response.creator === auth.user.id) {
 					isOnModeration.value = true

@@ -1,12 +1,29 @@
 <template>
-	<Modal :width="440" class="modal-proposals" @close="close">
-		<Grid :columns="1" gap="l">
+	<Modal
+		:width="440"
+		class="modal-proposals"
+		@close="close"
+	>
+		<Grid
+			:columns="1"
+			gap="l"
+		>
 			<Text size="m"> Отклики </Text>
 
-			<template v-for="(proposal, index) in proposals" :key="proposal.id">
+			<template
+				v-for="(proposal, index) in proposals"
+				:key="proposal.id"
+			>
 				<div class="modal-proposals__item">
-					<Grid :columns="[1, '80px']" ver-align="center">
-						<UserCard v-if="proposal.expand?.user" :user="proposal.expand.user" link />
+					<Grid
+						:columns="[1, '80px']"
+						ver-align="center"
+					>
+						<UserCard
+							v-if="proposal.expand?.user"
+							:user="proposal.expand.user"
+							link
+						/>
 
 						<Button
 							v-if="proposal.expand?.user"
@@ -24,7 +41,12 @@
 				<Separator v-if="index !== proposals.length - 1" />
 			</template>
 
-			<Text v-if="proposals.length === 0" size="xs"> Пусто </Text>
+			<Text
+				v-if="proposals.length === 0"
+				size="xs"
+			>
+				Пусто
+			</Text>
 		</Grid>
 	</Modal>
 </template>

@@ -1,7 +1,18 @@
 <template>
-	<div class="modal" @click.self="close">
-		<form class="modal__form" :style="style" @submit.prevent>
-			<Icon class="modal__close" name="close" @click="close" />
+	<div
+		class="modal"
+		@click.self="close"
+	>
+		<form
+			class="modal__form"
+			:style="style"
+			@submit.prevent
+		>
+			<Icon
+				class="modal__close"
+				name="close"
+				@click="close"
+			/>
 			<slot />
 		</form>
 	</div>
@@ -15,12 +26,12 @@ import { Icon } from '@/components/elements'
 const props = defineProps({
 	width: {
 		type: Number,
-		default: 300,
-	},
+		default: 300
+	}
 })
 
 const style = computed(() => ({
-	width: `${props.width.toString()}px`,
+	width: `${props.width.toString()}px`
 }))
 
 const emit = defineEmits(['close'])

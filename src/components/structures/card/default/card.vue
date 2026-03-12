@@ -1,6 +1,11 @@
 <template>
 	<div class="card">
-		<img v-if="badge" src="@/assets/img/creative__badge.webp" class="card__badge" alt="" />
+		<img
+			v-if="badge"
+			src="@/assets/img/creative__badge.webp"
+			class="card__badge"
+			alt=""
+		/>
 
 		<slot name="image" />
 
@@ -14,8 +19,8 @@
 defineProps({
 	badge: {
 		type: Boolean,
-		default: true,
-	},
+		default: true
+	}
 })
 </script>
 

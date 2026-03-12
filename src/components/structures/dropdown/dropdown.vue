@@ -1,14 +1,27 @@
 <template>
-	<div ref="dropdown" class="dropdown" @click="contentShowed = true">
+	<div
+		ref="dropdown"
+		class="dropdown"
+		@click="contentShowed = true"
+	>
 		<div class="dropdown__trigger">
 			<slot />
 		</div>
 
 		<Transition name="dropdown">
-			<div v-if="contentShowed" class="dropdown__content">
-				<template v-for="(item, index) in items" :key="index">
+			<div
+				v-if="contentShowed"
+				class="dropdown__content"
+			>
+				<template
+					v-for="(item, index) in items"
+					:key="index"
+				>
 					<div class="dropdown__group">
-						<template v-for="child in item" :key="child.text">
+						<template
+							v-for="child in item"
+							:key="child.text"
+						>
 							<component
 								:is="child.to ? 'router-link' : 'div'"
 								v-if="child.can !== false"
@@ -21,7 +34,10 @@
 									}
 								"
 							>
-								<slot name="item" :item="child">
+								<slot
+									name="item"
+									:item="child"
+								>
 									{{ child.text }}
 								</slot>
 							</component>
@@ -31,7 +47,12 @@
 					<Separator v-if="index !== items.length - 1" />
 				</template>
 
-				<div v-if="items.length === 0" class="dropdown__empty">Пусто</div>
+				<div
+					v-if="items.length === 0"
+					class="dropdown__empty"
+				>
+					Пусто
+				</div>
 			</div>
 		</Transition>
 	</div>
@@ -46,8 +67,8 @@ import Separator from '@/components/elements/separator/separator.vue'
 defineProps({
 	items: {
 		type: Array as PropType<IDropdownMenuItem[][]>,
-		default: () => [],
-	},
+		default: () => []
+	}
 })
 
 const contentShowed = ref(false)

@@ -38,7 +38,7 @@
 						class="balance__transaction-status"
 						:class="{
 							_pending: transaction.status === 'pending',
-							_done: transaction.status === 'done',
+							_done: transaction.status === 'done'
 						}"
 					/>
 				</div>
@@ -115,8 +115,8 @@ import { AUTH } from '@/data/permissions'
 definePage({
 	meta: {
 		permissions: [AUTH],
-		bgClass: 'shop',
-	},
+		bgClass: 'shop'
+	}
 })
 
 const auth = useAuthStore()
@@ -131,8 +131,8 @@ const makeTransaction = async (status: TransactionStatus) => {
 	return await Http.post<Transaction>('/collections/transactions/records', {
 		amount: amount.value,
 		type: type.value,
-		status,
-	}).then((res) => {
+		status
+	}).then(res => {
 		return res.id
 	})
 }
@@ -145,7 +145,7 @@ const updateUser = async (balance: number, transactionStatus: TransactionStatus)
 		{
 			...auth.user,
 			transactions: [...auth.user.transactions, newTransactionId],
-			balance,
+			balance
 		},
 		{
 			expand: [
@@ -154,10 +154,10 @@ const updateUser = async (balance: number, transactionStatus: TransactionStatus)
 				'baskets.creative.preview',
 				'baskets.creative.slot',
 				'baskets.geo',
-				'transactions',
-			],
-		},
-	).then((data) => {
+				'transactions'
+			]
+		}
+	).then(data => {
 		auth.setUser(data)
 		amount.value = 0
 	})

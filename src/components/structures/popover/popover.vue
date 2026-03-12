@@ -1,7 +1,17 @@
 <template>
-	<div ref="popover" class="popover" @click="showContent">
-		<div ref="trigger" class="popover__trigger">
-			<slot name="trigger" :opened="contentShowed" />
+	<div
+		ref="popover"
+		class="popover"
+		@click="showContent"
+	>
+		<div
+			ref="trigger"
+			class="popover__trigger"
+		>
+			<slot
+				name="trigger"
+				:opened="contentShowed"
+			/>
 		</div>
 
 		<Transition name="popover">
@@ -11,7 +21,7 @@
 				class="popover__content"
 				:style="{
 					maxWidth: `${triggerWidth}px`,
-					left: `${contentLeft}px`,
+					left: `${contentLeft}px`
 				}"
 			>
 				<slot />

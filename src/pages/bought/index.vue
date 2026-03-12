@@ -9,11 +9,14 @@
 					:key="filter.value"
 					class="bought__filter"
 					:class="{
-						_passive: activeFilter !== null && activeFilter !== filter.value,
+						_passive: activeFilter !== null && activeFilter !== filter.value
 					}"
 					@click="toggleFilter(filter.value)"
 				>
-					<div class="bought__filter-status" :class="[`_${filter.value}`]" />
+					<div
+						class="bought__filter-status"
+						:class="[`_${filter.value}`]"
+					/>
 					{{ filter.name }}
 				</Badge>
 			</div>
@@ -23,7 +26,10 @@
 
 		<span v-if="baskets.length === 0">Пусто</span>
 
-		<CardLong v-for="basket in baskets" :key="basket.id">
+		<CardLong
+			v-for="basket in baskets"
+			:key="basket.id"
+		>
 			<template #icon>
 				<Image
 					v-if="basket.expand?.creative?.expand?.preview"
@@ -44,7 +50,7 @@
 						class="bought__status"
 						:class="{
 							_pending: basket.status === 'in-progress',
-							_done: basket.status === 'done',
+							_done: basket.status === 'done'
 						}"
 					/>
 				</div>
@@ -72,12 +78,21 @@
 				>
 					Скачать
 				</Button>
-				<Button variant="outline" @click="showDescription(basket)"> Подробнее </Button>
+				<Button
+					variant="outline"
+					@click="showDescription(basket)"
+				>
+					Подробнее
+				</Button>
 			</template>
 		</CardLong>
 	</div>
 
-	<Modal v-if="modalShowing" :width="585" @close="modalShowing = false">
+	<Modal
+		v-if="modalShowing"
+		:width="585"
+		@close="modalShowing = false"
+	>
 		Описание: {{ modalShowingBasket?.comment || 'пусто' }}
 	</Modal>
 </template>
@@ -94,8 +109,8 @@ import { AUTH } from '@/data/permissions'
 definePage({
 	meta: {
 		permissions: [AUTH],
-		bgClass: 'shop',
-	},
+		bgClass: 'shop'
+	}
 })
 
 interface Filter {
@@ -106,12 +121,12 @@ type Filters = Filter[]
 const filters: Filters = [
 	{
 		value: 'done',
-		name: 'Выполненные',
+		name: 'Выполненные'
 	},
 	{
 		value: 'in-progress',
-		name: 'В работе',
-	},
+		name: 'В работе'
+	}
 ] as const
 const activeFilter: Ref<BasketStatus | null> = ref(null)
 const toggleFilter = (value: BasketStatus) => {
@@ -127,8 +142,8 @@ const auth = useAuthStore()
 const baskets = computed(() => {
 	const baskets = auth.user.expand?.baskets ?? []
 	return baskets
-		.filter((basket) => basket.status !== 'created')
-		.filter((basket) => {
+		.filter(basket => basket.status !== 'created')
+		.filter(basket => {
 			if (activeFilter.value !== null) {
 				return basket.status === activeFilter.value
 			}
@@ -149,7 +164,7 @@ const downloadVideo = (basket: IBasket) => {
 
 	window.open(
 		`${import.meta.env.VITE_API}/files/${file.collectionId}/${file.id}/${file.original_video}`,
-		'_blank',
+		'_blank'
 	)
 }
 </script>

@@ -11,7 +11,7 @@
 			<Icon name="notifications" />
 
 			<span
-				v-if="notifications.findIndex((item) => !item.checked) !== -1"
+				v-if="notifications.findIndex(item => !item.checked) !== -1"
 				class="notifications__signal"
 			/>
 		</Button>
@@ -56,7 +56,7 @@ import { Http } from '@/plugins'
 const auth = useAuthStore()
 
 const notifications = computed<INotification[]>(() => auth.user.expand?.notifications ?? [])
-const items = computed(() => notifications.value.map((item) => [item]))
+const items = computed(() => notifications.value.map(item => [item]))
 
 const onOpen = async () => {
 	await Http.post<INotification[]>('/check-notifications')
@@ -66,11 +66,11 @@ const onOpen = async () => {
 			...auth.user,
 			expand: {
 				...auth.user.expand,
-				notifications: notifications.value.map((item) => {
+				notifications: notifications.value.map(item => {
 					item.checked = true
 					return item
-				}),
-			},
+				})
+			}
 		})
 	}, 3000)
 }

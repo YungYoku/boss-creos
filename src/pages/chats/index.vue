@@ -12,14 +12,17 @@
 
 	<Grid :columns="Screen.isLarger('s') ? [1, 4] : 1">
 		<Island v-if="Screen.isLarger('s') || !isChatOpened">
-			<Grid vertical :columns="1">
+			<Grid
+				vertical
+				:columns="1"
+			>
 				<Grid
 					v-for="chat in chats"
 					:key="chat.id"
 					gap="xs"
 					class="chats__item"
 					:class="{
-						_active: openedChat?.chat === chat.chat,
+						_active: openedChat?.chat === chat.chat
 					}"
 					vertical
 					:columns="1"
@@ -29,7 +32,10 @@
 						{{ chat.title }}
 					</Text>
 
-					<UserCard :loading="loading" :user="getUserForChar(chat)" />
+					<UserCard
+						:loading="loading"
+						:user="getUserForChar(chat)"
+					/>
 				</Grid>
 			</Grid>
 		</Island>
@@ -65,8 +71,8 @@ import { AUTH } from '@/data/permissions'
 
 definePage({
 	meta: {
-		permissions: [AUTH],
-	},
+		permissions: [AUTH]
+	}
 })
 
 const auth = useAuthStore()
@@ -111,8 +117,8 @@ const getChats = async () => {
 			'buyer',
 			'ratingBuyer',
 			'designer',
-			'ratingDesigner',
-		],
+			'ratingDesigner'
+		]
 	}).then(({ items }) => {
 		chats.value = items
 	})

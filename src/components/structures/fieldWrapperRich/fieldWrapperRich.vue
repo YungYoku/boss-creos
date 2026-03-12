@@ -1,8 +1,14 @@
 <template>
 	<div class="field-wrapper-rich">
 		<div class="field-wrapper-rich__content">
-			<div v-if="label" class="field-wrapper-rich__label">
-				<Icon name="circle" :colors="['dark', 'light']" />
+			<div
+				v-if="label"
+				class="field-wrapper-rich__label"
+			>
+				<Icon
+					name="circle"
+					:colors="['dark', 'light']"
+				/>
 
 				{{ label }}
 			</div>
@@ -10,7 +16,10 @@
 			<slot />
 		</div>
 
-		<span v-if="error" class="field-wrapper-rich__error">
+		<span
+			v-if="error"
+			class="field-wrapper-rich__error"
+		>
 			{{ error }}
 		</span>
 	</div>
@@ -26,7 +35,7 @@ interface Props {
 
 withDefaults(defineProps<Props>(), {
 	label: '',
-	error: null,
+	error: null
 })
 </script>
 

@@ -1,15 +1,44 @@
 <template>
-	<Grid vertical gap="l" class="rating">
-		<Text size="m" :loading> Оставьте свой отзыв для {{ user }}! </Text>
+	<Grid
+		vertical
+		gap="l"
+		class="rating"
+	>
+		<Text
+			size="m"
+			:loading
+		>
+			Оставьте свой отзыв для {{ user }}!
+		</Text>
 
-		<RatingStarsEditable v-if="!loading" v-model="value.stars" />
+		<RatingStarsEditable
+			v-if="!loading"
+			v-model="value.stars"
+		/>
 
-		<Textarea v-model="value.review" label="Отзыв" :disabled="loading" />
+		<Textarea
+			v-model="value.review"
+			label="Отзыв"
+			:disabled="loading"
+		/>
 
-		<Grid :columns-xl="2" :columns-s="1">
-			<Button :loading @click="back"> Назад </Button>
+		<Grid
+			:columns-xl="2"
+			:columns-s="1"
+		>
+			<Button
+				:loading
+				@click="back"
+			>
+				Назад
+			</Button>
 
-			<Button :loading @click="send"> Отправить </Button>
+			<Button
+				:loading
+				@click="send"
+			>
+				Отправить
+			</Button>
 		</Grid>
 	</Grid>
 </template>
@@ -25,16 +54,16 @@ import type { IRating } from '@/types/rating'
 const props = defineProps({
 	modelValue: {
 		type: Object as PropType<IRating>,
-		default: () => ({}),
+		default: () => ({})
 	},
 	loading: {
 		type: Boolean,
-		default: false,
+		default: false
 	},
 	user: {
 		type: String,
-		default: 'User',
-	},
+		default: 'User'
+	}
 })
 
 const emit = defineEmits(['update:modelValue', 'back'])
@@ -47,14 +76,14 @@ const value: Ref<IRating> = ref({
 	id: '',
 	updated: '',
 	stars: 0,
-	review: '',
+	review: ''
 })
 watch(
 	() => props.modelValue,
 	() => {
 		value.value = props.modelValue
 	},
-	{ immediate: true },
+	{ immediate: true }
 )
 
 const back = () => {

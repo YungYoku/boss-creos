@@ -1,20 +1,45 @@
 <template>
-	<StepByStep :key="project.id" class="chat">
+	<StepByStep
+		:key="project.id"
+		class="chat"
+	>
 		<template #step_1="{ next }">
-			<Grid vertical :columns="1">
-				<Grid :columns="[0, 1, 0]" ver-align="center">
-					<User v-if="chatMember" :loading="loading" link :user="chatMember" />
+			<Grid
+				vertical
+				:columns="1"
+			>
+				<Grid
+					:columns="[0, 1, 0]"
+					ver-align="center"
+				>
+					<User
+						v-if="chatMember"
+						:loading="loading"
+						link
+						:user="chatMember"
+					/>
 
 					<span />
 
-					<Badge v-if="auth.isDesigner && project.status === 'on_review'" bg="yellow">
+					<Badge
+						v-if="auth.isDesigner && project.status === 'on_review'"
+						bg="yellow"
+					>
 						Проверяется
 					</Badge>
-					<Badge v-if="project.status === 'ended'" bg="green"> Завершено </Badge>
+					<Badge
+						v-if="project.status === 'ended'"
+						bg="green"
+					>
+						Завершено
+					</Badge>
 					<span v-else />
 				</Grid>
 
-				<div ref="messages-ref" class="chat__messages">
+				<div
+					ref="messages-ref"
+					class="chat__messages"
+				>
 					<Message
 						v-for="message in chat.expand?.messages ?? []"
 						:key="message.id"
@@ -25,12 +50,15 @@
 
 				<Grid vertical>
 					<Badge v-if="fileName"> Прикреплен файл {{ fileName }} </Badge>
-					<Grid :columns="['54px', 1]" gap="xs">
+					<Grid
+						:columns="['54px', 1]"
+						gap="xs"
+					>
 						<InputFile
 							v-model="file"
 							:loading="loading"
 							compact
-							@update:name="(value) => (fileName = value)"
+							@update:name="value => (fileName = value)"
 						/>
 
 						<Input
@@ -53,18 +81,39 @@
 					Отправить на проверку
 				</Button>
 
-				<Grid v-if="auth.isBuyer && project.status === 'on_review'" :columns="[1, 1]">
-					<Button :loading="loading" variant="destructive" @click="declineReview">
+				<Grid
+					v-if="auth.isBuyer && project.status === 'on_review'"
+					:columns="[1, 1]"
+				>
+					<Button
+						:loading="loading"
+						variant="destructive"
+						@click="declineReview"
+					>
 						Отказ
 					</Button>
-					<Button :loading="loading" variant="positive" @click="approveReview">
+					<Button
+						:loading="loading"
+						variant="positive"
+						@click="approveReview"
+					>
 						Подтвердить выполнение
 					</Button>
 				</Grid>
 
 				<template v-if="project.status === 'ended'">
-					<Button v-if="rating" @click="next"> Просмотр отзыва </Button>
-					<Button v-else @click="next"> Оставить отзыв </Button>
+					<Button
+						v-if="rating"
+						@click="next"
+					>
+						Просмотр отзыва
+					</Button>
+					<Button
+						v-else
+						@click="next"
+					>
+						Оставить отзыв
+					</Button>
 				</template>
 			</Grid>
 		</template>
@@ -117,8 +166,8 @@ const chat: Ref<IChat> = ref({
 	collectionName: '',
 	updated: '',
 	expand: {
-		messages: [],
-	},
+		messages: []
+	}
 })
 
 const loading = ref(true)
@@ -131,7 +180,7 @@ const loadChat = () => {
 		collection: 'chats',
 		id: props.project.chat,
 		expand: ['messages', 'messages.file'],
-		cb: async (response) => {
+		cb: async response => {
 			chat.value = response
 
 			await nextTick(() => {
@@ -142,7 +191,7 @@ const loadChat = () => {
 
 				loading.value = false
 			})
-		},
+		}
 	})
 }
 
@@ -151,7 +200,7 @@ watch(
 	() => props.project.status,
 	() => {
 		loading.value = false
-	},
+	}
 )
 
 const auth = useAuthStore()
@@ -167,7 +216,7 @@ const sendMessage = async () => {
 
 	await Http.post<IMessage>(`/send-message/${props.project.chat}`, {
 		text: newMessage.value,
-		file: file.value,
+		file: file.value
 	})
 
 	newMessage.value = ''
@@ -182,13 +231,13 @@ const updateStatus = async (status: IProjectStatus) => {
 
 	const body: IProject = {
 		...props.project,
-		status,
+		status
 	}
 
 	await Http.patch<IProject>(`/collections/projects/records/${props.project.id}`, body).then(
-		(response) => {
+		response => {
 			emit('update:status', response.status)
-		},
+		}
 	)
 
 	loading.value = false
@@ -206,14 +255,14 @@ const newRating: Ref<IRating> = ref({
 	id: '',
 	updated: '',
 	stars: 0,
-	review: '',
+	review: ''
 })
 watch(
 	rating,
 	() => {
 		if (rating.value) newRating.value = rating.value
 	},
-	{ immediate: true },
+	{ immediate: true }
 )
 
 const sendRating = async (value: { stars: number; review: string } = { stars: 1, review: '' }) => {
@@ -221,8 +270,8 @@ const sendRating = async (value: { stars: number; review: string } = { stars: 1,
 
 	await Http.post<IRating>(`/send-review/${props.project.id}`, {
 		stars,
-		review,
-	}).then((response) => {
+		review
+	}).then(response => {
 		emit('update:rating', response)
 
 		toast.set('Отзыв оставлен!')
