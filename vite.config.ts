@@ -8,8 +8,17 @@ export default defineConfig(({ mode }) => {
 	const isProd = mode === 'production'
 
 	return {
-		esbuild: {
-			drop: isProd ? ['console', 'debugger'] : []
+		build: {
+			rolldownOptions: {
+				output: {
+					minify: {
+						compress: {
+							dropConsole: isProd,
+							dropDebugger: isProd
+						}
+					}
+				}
+			}
 		},
 
 		plugins: [
