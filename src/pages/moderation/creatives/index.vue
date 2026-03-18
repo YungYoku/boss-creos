@@ -29,7 +29,9 @@ const loading = ref(true)
 const loadCreatives = async () => {
 	await Http.get<ICreatives>('/collections/creatives/records', {
 		fields,
-		filter: "status='moderation'",
+		filter: {
+			status: 'moderation'
+		},
 		expand: [
 			'approach',
 			'preview',

@@ -1,8 +1,12 @@
 import { useAuthStore } from '@/stores/auth'
 
+interface Filter {
+	[key: string]: string
+}
+
 interface Query {
 	fields?: string[]
-	filter?: string
+	filter?: Filter
 	expand?: string[]
 	perPage?: number
 	page?: number
@@ -62,10 +66,22 @@ class Http {
 		return headers
 	}
 
+	getFormatedFilter(filter: Filter) {
+		const result = Object.keys(filter).reduce((result, key) => {
+			const value = filter[key]
+			if (value) {
+				result += `${key}='${value}' &&`
+			}
+
+			return result
+		}, '')
+		return encodeURIComponent(result.slice(0, result.length - 4))
+	}
+
 	getFormatedQuery(query: Query) {
 		let result = '?'
 		if (query.filter) {
-			result += 'filter=' + query.filter + '&'
+			result += 'filter=' + this.getFormatedFilter(query.filter) + '&'
 		}
 		if (query.expand && query.expand.length > 0) {
 			result += 'expand=' + query.expand.join(',') + '&'

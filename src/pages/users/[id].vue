@@ -80,11 +80,11 @@ const loadCreatives = async () => {
 
 	loadingCreatives.value = true
 
-	const filter = `status='approved'&&creator='${id}'`
-	const encodedFilter = encodeURIComponent(filter)
-
 	await Http.get<ICreatives>('/collections/creatives/records', {
-		filter: encodedFilter,
+		filter: {
+			status: 'approved',
+			creator: id
+		},
 		expand: ['preview', 'video', 'creator', 'creator.avatar'],
 		perPage: 12
 	}).then(res => {

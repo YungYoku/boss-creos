@@ -134,24 +134,18 @@ const form = Form<SearchForm>({
 
 const loading = ref(true)
 const loadCreatives = async () => {
-	const filters = []
-	let encodedFilter = ''
-
-	if (form.geo.value) filters.push(`unavailableGeo!~'${form.geo.value}'`)
-	if (form.slot.value) filters.push(`slot='${form.slot.value}'`)
-	if (form.approach.value) filters.push(`approach='${form.approach.value}'`)
-	if (form.ratio.value) filters.push(`ratio='${form.ratio.value}'`)
-	if (form.type.value) filters.push(`type='${form.type.value}'`)
-	filters.push(`status='${form.status.value}'`)
-	if (filters.length) {
-		let filter = filters.reduce((acc, filter) => (filter ? `${acc} && ${filter}` : acc), '')
-		filter = filter.slice(4)
-
-		encodedFilter = encodeURIComponent(filter)
+	const filter = {
+		status: form.status.value
 	}
 
+	if (form.geo.value) filter.unavailableGeo = `!~'${form.geo.value}'`
+	if (form.slot.value) filter.slot = form.slot.value
+	if (form.approach.value) filter.approach = form.approach.value
+	if (form.ratio.value) filter.ratio = form.ratio.value
+	if (form.type.value) filter.type = form.type.value
+
 	await Http.get<ICreatives>('/collections/creatives/records', {
-		filter: encodedFilter,
+		filter,
 		expand: ['preview', 'video', 'creator', 'creator.avatar'],
 		perPage: 12
 	}).then(res => {

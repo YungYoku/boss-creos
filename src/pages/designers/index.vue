@@ -35,7 +35,9 @@ const users: Ref<IUser[]> = ref([])
 const loading = ref(true)
 const loadDesigners = async () => {
 	await Http.get<IUsers>('/collections/users/records', {
-		filter: "role='designer'",
+		filter: {
+			role: 'designer'
+		},
 		expand: ['avatar'],
 		perPage: 12
 	}).then(res => {

@@ -29,7 +29,9 @@ const loading = ref(true)
 const loadCreatives = async () => {
 	await Http.get<IUsers>('/collections/users/records', {
 		fields,
-		filter: "status='moderation'",
+		filter: {
+			status: 'moderation'
+		},
 		expand: ['avatar'],
 		perPage: 12,
 		page: 1

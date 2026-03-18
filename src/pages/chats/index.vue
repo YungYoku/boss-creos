@@ -105,11 +105,11 @@ const getChats = async () => {
 	if (auth.user.id === '') return
 	loading.value = true
 
-	const filter = auth.isBuyer ? `buyer='${auth.user.id}'` : `designer='${auth.user.id}'`
-	const encodedFilter = encodeURIComponent(`(${filter} && status!='created')`)
-
 	await Http.get<IProjects>('/collections/projects/records', {
-		filter: `(${encodedFilter})`,
+		filter: {
+			status: '!created',
+			[auth.isBuyer ? 'buyer' : 'designer']: auth.user.id
+		},
 		expand: [
 			'proposals',
 			'type',

@@ -99,7 +99,9 @@ const getUserProjects = async () => {
 	loading.value = true
 
 	await Http.get<IProjects>('/collections/projects/records', {
-		filter: `(creator='${auth.user.id}')`,
+		filter: {
+			creator: auth.user.id
+		},
 		expand: ['proposals', 'proposals.user', 'type', 'discipline', 'designer', 'ratingDesigner']
 	}).then(response => {
 		projects.value = response.items

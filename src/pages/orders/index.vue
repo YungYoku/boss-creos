@@ -109,7 +109,9 @@ const loadCreatives = async () => {
 	if (!auth.user.id) return
 
 	await Http.get<ICreatives>('/collections/creatives/records', {
-		filter: `creator='${auth.user.id}'`
+		filter: {
+			creator: auth.user.id
+		}
 	}).then(({ items }) => {
 		creatives.value = items
 	})
