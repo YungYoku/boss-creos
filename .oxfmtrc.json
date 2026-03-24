@@ -1,6 +1,6 @@
 {
 	"$schema": "./node_modules/oxfmt/configuration_schema.json",
-	"ignorePatterns": ["db/**"],
+	"ignorePatterns": ["db/**", "typed-router.d.ts"],
 	"useTabs": true,
 	"tabWidth": 4,
 	"singleQuote": true,
