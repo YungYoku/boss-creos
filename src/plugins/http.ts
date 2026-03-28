@@ -1,13 +1,25 @@
 import { useAuthStore } from '@/stores/auth'
 
+type DBEntity<T extends object> = T extends { items: infer R extends object } ? R : T
+
+type Fields<T extends object> = (keyof T)[]
+
 interface Filter {
 	[key: string]: string
 }
 
-interface Query {
-	fields?: string[]
+type Expand<T extends object> = T extends { expand: infer E }
+	? keyof E extends string
+		? E[keyof E] extends { expand: object }
+			? `${keyof E}.${Expand<E[keyof E]>}`[]
+			: (keyof E)[]
+		: never
+	: never
+
+interface Query<T extends object> {
+	fields?: Fields<DBEntity<T>>
 	filter?: Filter
-	expand?: string[]
+	expand?: Expand<DBEntity<T>>
 	perPage?: number
 	page?: number
 	sort?: string
@@ -18,10 +30,10 @@ interface HeadersOptions {
 	isSSE?: boolean
 }
 
-interface ConnectOptions<T> {
+interface ConnectOptions<T extends object> {
 	collection: string
 	id: string
-	expand: string[]
+	expand?: Expand<DBEntity<T>>
 
 	cb: (response: T) => Promise<void>
 }
@@ -78,7 +90,7 @@ class Http {
 		return encodeURIComponent(result.slice(0, result.length - 4))
 	}
 
-	getFormatedQuery(query: Query) {
+	getFormatedQuery<T extends object>(query: Query<T>) {
 		let result = '?'
 		if (query.filter) {
 			result += 'filter=' + this.getFormatedFilter(query.filter) + '&'
@@ -98,7 +110,7 @@ class Http {
 		return result.slice(0, -1)
 	}
 
-	async get<T>(url: string, query: Query | null = null): Promise<T> {
+	async get<T extends object>(url: string, query: Query<T> | null = null): Promise<T> {
 		const auth = useAuthStore()
 
 		let _url = url
@@ -126,10 +138,10 @@ class Http {
 			})
 	}
 
-	async post<T>(
+	async post<T extends object>(
 		url: string,
 		body: object | FormData = {},
-		query: Query | null = null
+		query: Query<T> | null = null
 	): Promise<T> {
 		const auth = useAuthStore()
 
@@ -163,10 +175,10 @@ class Http {
 			})
 	}
 
-	async patch<T>(
+	async patch<T extends object>(
 		url: string,
 		body: object | FormData = {},
-		query: Query | null = null
+		query: Query<T> | null = null
 	): Promise<T> {
 		const auth = useAuthStore()
 
@@ -200,7 +212,7 @@ class Http {
 			})
 	}
 
-	async delete(url: string, query: Query | null = null): Promise<Response> {
+	async delete<T extends object>(url: string, query: Query<T> | null = null): Promise<Response> {
 		const auth = useAuthStore()
 
 		let _url = url
@@ -250,11 +262,10 @@ class Http {
 	}
 
 	eventSource: EventSource | null = null
-	connect<T>(
+	connect<T extends object>(
 		options: ConnectOptions<T> = {
 			collection: '',
 			id: '',
-			expand: [],
 			cb: () =>
 				new Promise(resolve => {
 					resolve()
@@ -264,9 +275,14 @@ class Http {
 		const url = `${options.collection}/${options.id}`
 
 		const request = async () => {
-			return await this.get<T>(`/collections/${options.collection}/records/${options.id}`, {
-				expand: options.expand
-			})
+			const body: Query<T> = {}
+			if (options.expand) {
+				body.expand = options.expand
+			}
+			return await this.get<T>(
+				`/collections/${options.collection}/records/${options.id}`,
+				body
+			)
 		}
 
 		if (this.eventSource) this.eventSource.close()
