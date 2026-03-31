@@ -11,7 +11,7 @@ interface Filter {
 type Expand<T extends object> = T extends { expand: infer E }
 	? keyof E extends string
 		? E[keyof E] extends { expand: object }
-			? `${keyof E}.${Expand<E[keyof E]>}`[]
+			? `${keyof E}.${Expand<E[keyof E]>[number]}`[]
 			: (keyof E)[]
 		: never
 	: never
