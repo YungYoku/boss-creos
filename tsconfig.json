@@ -21,7 +21,6 @@
 		},
 
 		// Strict Checks
-		"strict": true,
 		"skipLibCheck": true,
 		"exactOptionalPropertyTypes": true,
 
@@ -34,12 +33,10 @@
 		"noUncheckedIndexedAccess": true,
 		"noUncheckedSideEffectImports": true,
 		"noImplicitOverride": true,
-		"useUnknownInCatchVariables": true
+		"allowUnreachableCode": false
 	},
 	"include": [
-		"src/**/*.ts",
-		"src/**/*.d.ts",
-		"src/**/*.vue",
+		"src/**/*",
 		"typed-router.d.ts",
 		"vite.config.ts",
 		"env.d.ts",
@@ -47,7 +44,7 @@
 		"shims-vue.d.ts",
 		"directives.d.ts"
 	],
-	"exclude": ["node_modules", "dist", ".idea", "db"],
+	"exclude": ["node_modules/**/*", "dist/**/*", ".idea/**/*", "db/**/*"],
 	"vueCompilerOptions": {
 		"plugins": ["vue-router/volar/sfc-route-blocks", "vue-router/volar/sfc-typed-router"]
 	}
