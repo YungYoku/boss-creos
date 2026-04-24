@@ -8,13 +8,19 @@ interface Filter {
 	[key: string]: string
 }
 
-type Expand<T extends object> = T extends { expand: infer E }
+type GetExpandKeys<E> = E extends object
 	? keyof E extends string
-		? E[keyof E] extends { expand: object }
+		? E[keyof E] extends { expand?: object }
 			? `${keyof E}.${Expand<E[keyof E]>[number]}`[]
 			: (keyof E)[]
 		: never
 	: never
+
+type Expand<T extends object> = T extends { expand?: infer E }
+	? GetExpandKeys<E>
+	: T extends { record: { expand?: infer F } }
+		? GetExpandKeys<F>
+		: never
 
 interface Query<T extends object> {
 	fields?: Fields<DBEntity<T>>
