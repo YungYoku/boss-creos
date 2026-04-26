@@ -8,13 +8,14 @@ interface Filter {
 	[key: string]: string
 }
 
-type GetExpandKeys<E> = E extends object
-	? keyof E extends string
-		? E[keyof E] extends { expand?: object }
-			? `${keyof E}.${Expand<E[keyof E]>[number]}`[]
-			: (keyof E)[]
+type GetExpandKeys<E> =
+	E extends Record<string, any>
+		? {
+				[key in keyof E]: E[key] extends { expand?: infer T }
+					? `${keyof E & string}.${GetExpandKeys<T> & string}`
+					: keyof E
+			}[keyof E][]
 		: never
-	: never
 
 type Expand<T extends object> = T extends { expand?: infer E }
 	? GetExpandKeys<E>
