@@ -1,18 +1,18 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test'
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test('login test', async ({ page }) => {
+	// Переход на страницу логина
+	await page.goto('http://localhost:5173/login')
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+	// Ввод логина
+	await page.fill('input[type="text"]', '123')
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+	// Ввод пароля
+	await page.fill('input[type="password"]', '321')
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+	// Клик по кнопке "Войти"
+	await page.click('button:has-text("Войти")')
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-});
+	// Пример проверки (замени под свой кейс)
+	await expect(page).toHaveURL(/.*dashboard|.*home/)
+})

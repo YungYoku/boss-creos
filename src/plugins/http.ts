@@ -1,27 +1,43 @@
 import { useAuthStore } from '@/stores/auth'
 
-type DBEntity<T extends object> = T extends { items: infer R extends object } ? R : T
+type DBEntity<T> = T extends { items: (infer R)[] } ? R : T
 
-type Fields<T extends object> = (keyof T)[]
+type Fields<T> = T extends Record<string, any> ? (keyof T)[] : []
 
 interface Filter {
 	[key: string]: string
 }
 
+type UnwrapExpand<T> = T extends { expand?: infer E }
+	? E
+	: T extends { record: { expand?: infer F } }
+		? F
+		: T extends { items: { expand?: infer R }[] }
+			? R
+			: never
+
+type Prev = [never, 0, 1, 2, 3, 4, 5]
+type FullRequired<T, D extends number = 5> = D extends 0
+	? T
+	: T extends Record<string, any>
+		? {
+				[key in keyof T]-?: FullRequired<T[key], Prev[D]>
+			}
+		: T
+
+type UnwrapArray<T> = T extends (infer U)[] ? U : T
+
 type GetExpandKeys<E> =
 	E extends Record<string, any>
 		? {
-				[key in keyof E]: E[key] extends { expand?: infer T }
-					? `${keyof E & string}.${GetExpandKeys<T> & string}`
-					: keyof E
-			}[keyof E][]
+				[key in keyof E]-?: UnwrapArray<E[key]> extends { expand?: infer T }
+					? (key & string) | `${key & string}.${GetExpandKeys<T>}`
+					: key & string
+			}[keyof E]
 		: never
 
-type Expand<T extends object> = T extends { expand?: infer E }
-	? GetExpandKeys<E>
-	: T extends { record: { expand?: infer F } }
-		? GetExpandKeys<F>
-		: never
+type Expand<T> =
+	UnwrapExpand<T> extends never ? never : GetExpandKeys<FullRequired<UnwrapExpand<T>>>[]
 
 interface Query<T extends object> {
 	fields?: Fields<DBEntity<T>>
