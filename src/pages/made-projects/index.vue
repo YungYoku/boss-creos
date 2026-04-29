@@ -102,7 +102,7 @@ const getUserProjects = async () => {
 		filter: {
 			creator: auth.user.id
 		},
-		expand: ['proposals', 'proposals.user', 'type', 'discipline', 'designer', 'ratingDesigner']
+		expand: ['proposals', 'proposals.user', 'designer', 'ratingDesigner']
 	}).then(response => {
 		projects.value = response.items
 	})

@@ -110,15 +110,7 @@ const getChats = async () => {
 			status: '!created',
 			[auth.isBuyer ? 'buyer' : 'designer']: auth.user.id
 		},
-		expand: [
-			'proposals',
-			'type',
-			'discipline',
-			'buyer',
-			'ratingBuyer',
-			'designer',
-			'ratingDesigner'
-		]
+		expand: ['proposals', 'buyer', 'ratingBuyer', 'designer', 'ratingDesigner']
 	}).then(({ items }) => {
 		chats.value = items
 	})

@@ -205,7 +205,7 @@ const loadProject = async () => {
 	}
 
 	await Http.get<IProject>(`/collections/projects/records/${id}`, {
-		expand: ['buyer', 'designer', 'proposals', 'discipline', 'type', 'university']
+		expand: ['buyer', 'designer', 'proposals']
 	}).then(response => {
 		project.value = response
 	})

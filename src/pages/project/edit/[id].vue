@@ -134,9 +134,7 @@ const loadProject = async () => {
 
 	loading.value = true
 
-	await Http.get<IProject>(`/collections/projects/records/${id}`, {
-		expand: ['creator', 'creator.avatar']
-	}).then(response => {
+	await Http.get<IProject>(`/collections/projects/records/${id}`).then(response => {
 		form.set(response)
 	})
 
