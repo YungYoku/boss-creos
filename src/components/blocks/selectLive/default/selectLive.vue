@@ -36,24 +36,6 @@ const value = computed<string[] | string>({
 	}
 })
 
-const getExcludedItems = () => {
-	if (props.exclude) {
-		let result = '('
-		props.exclude.forEach(item => {
-			result += `id!='${item}' && `
-		})
-		result = result.slice(0, result.length - 3).trim()
-		if (result) {
-			result += ')'
-			return encodeURIComponent(result)
-		}
-
-		return ''
-	}
-
-	return ''
-}
-
 const getPayload = (entity: string | string[], isIncluded = false) => {
 	const payload: {
 		sort?: string
@@ -116,7 +98,14 @@ const loadItems = async (include?: string | string[]) => {
 	const loadDefaultItems = async () => {
 		if (search.value.length === 0) {
 			await Http.get<Items>(`/collections/${props.api}/records`, {
-				filter: getExcludedItems()
+				filter: {
+					id: () => ({
+						value: props.exclude ?? [],
+						props: {
+							sign: '!='
+						}
+					})
+				}
 			}).then(response => {
 				_defaultItems = response.items
 			})

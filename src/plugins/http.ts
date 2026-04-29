@@ -4,8 +4,14 @@ type DBEntity<T> = T extends { items: (infer R)[] } ? R : T
 
 type Fields<T> = T extends Record<string, any> ? (keyof T)[] : []
 
+type FilterCB = () => {
+	value: string[]
+	props?: {
+		sign?: '=' | '!=' | '~'
+	}
+}
 interface Filter {
-	[key: string]: string
+	[key: string]: string | FilterCB
 }
 
 type UnwrapExpand<T> = T extends { expand?: infer E }
@@ -101,10 +107,30 @@ class Http {
 		return headers
 	}
 
+	getFormatedFilterCB(key: string, cb: FilterCB) {
+		const { value, props } = cb()
+
+		const sign = props?.sign ?? '='
+
+		let result = '('
+		value.forEach(item => {
+			result += `${key}${sign}'${item}' && `
+		})
+		result = result.slice(0, result.length - 3).trim()
+		if (result) {
+			result += ')'
+			return result
+		}
+
+		return ''
+	}
+
 	getFormatedFilter(filter: Filter) {
 		const result = Object.keys(filter).reduce((result, key) => {
 			const value = filter[key]
-			if (value) {
+			if (typeof value === 'function') {
+				result += this.getFormatedFilterCB(key, value)
+			} else if (value) {
 				result += `${key}='${value}' &&`
 			}
 
