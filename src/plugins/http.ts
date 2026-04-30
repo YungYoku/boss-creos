@@ -112,14 +112,12 @@ class Http {
 
 		const sign = props?.sign ?? '='
 
-		let result = '('
+		const result: string[] = []
 		value.forEach(item => {
-			result += `${key}${sign}'${item}' && `
+			result.push(`${key}${sign}'${item}'`)
 		})
-		result = result.slice(0, result.length - 3).trim()
-		if (result) {
-			result += ')'
-			return result
+		if (result.length) {
+			return `(${result.join('&&')})`
 		}
 
 		return ''
@@ -129,14 +127,14 @@ class Http {
 		const result = Object.keys(filter).reduce((result, key) => {
 			const value = filter[key]
 			if (typeof value === 'function') {
-				result += this.getFormatedFilterCB(key, value)
+				result.push(this.getFormatedFilterCB(key, value))
 			} else if (value) {
-				result += `${key}='${value}' &&`
+				result.push(`${key}='${value}'`)
 			}
 
 			return result
-		}, '')
-		return encodeURIComponent(result.slice(0, result.length - 4))
+		}, [] as string[])
+		return encodeURIComponent(result.join('&&'))
 	}
 
 	getFormatedQuery<T extends object>(query: Query<T>) {

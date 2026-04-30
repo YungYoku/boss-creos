@@ -64,7 +64,7 @@ const loadFavorite = async () => {
 
 	if (favorite.value.length === 0) return
 
-	const favoriteIds = favorite.value.map(id => `id = '${id}'`).join(' || ')
+	const favoriteIds = favorite.value.map(id => `id='${id}'`).join(' || ')
 
 	loading.value = true
 
