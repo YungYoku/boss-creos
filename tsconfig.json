@@ -45,9 +45,7 @@
 	],
 	"exclude": ["node_modules/**/*", "dist/**/*", ".idea/**/*", "db/**/*"],
 	"vueCompilerOptions": {
+		"strictTemplates": true,
 		"plugins": ["vue-router/volar/sfc-route-blocks", "vue-router/volar/sfc-typed-router"]
-	},
-	"references": [
-		{ "path": "./tsconfig.node.json" }
-	]
+	}
 }

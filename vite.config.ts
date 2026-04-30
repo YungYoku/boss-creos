@@ -13,8 +13,7 @@ export default defineConfig(({ mode }) => {
 				output: {
 					minify: {
 						compress: {
-							dropConsole: isProd,
-							dropDebugger: isProd
+							dropConsole: isProd
 						}
 					}
 				}
