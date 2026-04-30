@@ -70,13 +70,11 @@ const user: Ref<IUser | null> = ref(null)
 const loadingCreatives = ref(true)
 const creatives: Ref<ICreative[]> = ref([])
 
-const getID = () => {
-	return route.params.id
-}
+const getID = () => route.params.id
 
 const loadCreatives = async () => {
 	const id = getID()
-	if (!id || Array.isArray(id)) return
+	if (!id) return
 
 	loadingCreatives.value = true
 
@@ -97,7 +95,7 @@ void loadCreatives()
 
 const loadUser = async () => {
 	const id = getID()
-	if (!id || Array.isArray(id)) return
+	if (!id) return
 
 	loading.value = true
 

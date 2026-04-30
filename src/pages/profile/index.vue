@@ -84,18 +84,20 @@ type ReadOnlyUserFields =
 	| 'created'
 	| 'changes'
 	| 'expand'
+
+const readonlyFields: (keyof IUser)[] = [
+	'id',
+	'collectionId',
+	'collectionName',
+	'created',
+	'changes',
+	'expand'
+] as const
+
 const getChanges = () => {
 	const currentCreative = userBase.get()
 	const updatedCreative = user.get()
 
-	const readonlyFields: (keyof IUser)[] = [
-		'id',
-		'collectionId',
-		'collectionName',
-		'created',
-		'changes',
-		'expand'
-	] as const
 	const currentCreativeKeys = Object.keys(currentCreative) as (keyof IUser)[]
 	const filteredKeys = currentCreativeKeys.filter(
 		key => !readonlyFields.includes(key)

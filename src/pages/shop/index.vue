@@ -7,7 +7,7 @@
 					@keyup.enter="loadData"
 				>
 					<SelectLiveRich
-						v-model="form.geo.value"
+						v-model="form.unavailableGeo.value"
 						label="Свободные гео"
 						api="geo"
 					/>
@@ -111,7 +111,7 @@ definePage({
 })
 
 interface SearchForm {
-	geo: string
+	unavailableGeo: string
 	slot: string
 	approach: string
 	type: ICreativeType | ''
@@ -124,7 +124,7 @@ const creatives: Ref<ICreative[]> = ref([])
 const searchStore = useSearchStore()
 
 const form = Form<SearchForm>({
-	geo: '',
+	unavailableGeo: '',
 	slot: '',
 	approach: '',
 	type: '',
@@ -134,15 +134,15 @@ const form = Form<SearchForm>({
 
 const loading = ref(true)
 const loadCreatives = async () => {
-	const filter = {
+	const filter: Partial<SearchForm> = {
 		status: form.status.value
 	}
 
-	if (form.geo.value) filter.unavailableGeo = `!~'${form.geo.value}'`
-	if (form.slot.value) filter.slot = form.slot.value
-	if (form.approach.value) filter.approach = form.approach.value
-	if (form.ratio.value) filter.ratio = form.ratio.value
-	if (form.type.value) filter.type = form.type.value
+	if (form.unavailableGeo?.value) filter.unavailableGeo = `!~'${form.unavailableGeo.value}'`
+	if (form.slot?.value) filter.slot = form.slot.value
+	if (form.approach?.value) filter.approach = form.approach.value
+	if (form.ratio?.value) filter.ratio = form.ratio.value
+	if (form.type?.value) filter.type = form.type.value
 
 	await Http.get<ICreatives>('/collections/creatives/records', {
 		filter,
