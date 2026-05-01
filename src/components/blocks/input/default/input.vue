@@ -95,7 +95,7 @@ const clear = () => {
 
 const fileName = ref('')
 
-const emit = defineEmits(['update-file', 'input', 'action', 'clear'])
+const emit = defineEmits(['keyup', 'update-file', 'input', 'action', 'clear'])
 const onInput = (event: Event) => {
 	const target = event.target as HTMLInputElement
 	if (props.type === 'file') {

@@ -83,10 +83,7 @@
 			:to="`/project/${project.id}`"
 			class="project__title"
 		>
-			<Text
-				size="m"
-				:title="project.title"
-			>
+			<Text size="m">
 				{{ project.title }}
 			</Text>
 		</router-link>
@@ -95,12 +92,7 @@
 			v-if="!loading"
 			class="project__info"
 		>
-			<Badge
-				bg="purple"
-				variant="secondary"
-			>
-				{{ project.price }} ₽
-			</Badge>
+			<Badge> {{ project.price }} ₽ </Badge>
 			<Badge v-if="showingStatus && status">
 				{{ status }}
 			</Badge>

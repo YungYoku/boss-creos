@@ -3,11 +3,9 @@
 		ref="video"
 		class="video"
 		:src="videoSrc"
-		:loading="typeof props.src === 'string' ? 'eager' : 'lazy'"
 		:poster="previewSrc"
 		:controls="showControls"
 		@click="showVideo"
-		preview=""
 	/>
 </template>
 

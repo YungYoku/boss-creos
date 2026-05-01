@@ -21,7 +21,7 @@ import { defaultProps } from '../default/props'
 
 withDefaults(defineProps<Props>(), defaultProps)
 
-const value = defineModel<boolean>({
+const value = defineModel<boolean | null>({
 	type: Boolean,
 	default: null
 })

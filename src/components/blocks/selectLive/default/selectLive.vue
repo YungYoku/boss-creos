@@ -36,58 +36,64 @@ const value = computed<string[] | string>({
 	}
 })
 
+const getSort = (entity: string | string[]) => {
+	let sort = ''
+
+	if (typeof entity === 'string' && entity.length) {
+		sort = 'name'
+	} else if (Array.isArray(entity) && entity.length) {
+		sort = 'name'
+	}
+
+	return sort
+}
+
 const getPayload = (entity: string | string[], isIncluded = false) => {
-	const payload: {
-		sort?: string
-		filter?: string
-	} = {}
+	let filter = ''
 
 	const sign = isIncluded ? '=' : '~'
 	if (typeof entity === 'string' && entity.length) {
-		payload.sort = 'name'
-		payload.filter = '('
+		filter = '('
 
-		if (isIncluded) payload.filter += `id='${entity}'`
+		if (isIncluded) filter += `id='${entity}'`
 		else {
 			props.filterFields.forEach(field => {
-				if (payload.filter) {
-					payload.filter += `${field}${sign}'${entity.toLowerCase()}' || `
+				if (filter) {
+					filter += `${field}${sign}'${entity.toLowerCase()}' || `
 				}
 			})
-			payload.filter = payload.filter.slice(0, payload.filter.length - 3).trim()
+			filter = filter.slice(0, filter.length - 3).trim()
 		}
 
-		payload.filter += ')'
+		filter += ')'
 	} else if (Array.isArray(entity) && entity.length) {
-		payload.sort = 'name'
-		payload.filter = '('
+		filter = '('
 
 		entity
 			.filter(item => !(props.exclude ?? []).includes(item))
 			.forEach(item => {
 				if (isIncluded) {
-					if (payload.filter) {
-						payload.filter += `id='${item}' || `
+					if (filter) {
+						filter += `id='${item}' || `
 					}
 				} else {
 					props.filterFields.forEach((field: string) => {
 						if (item) {
-							if (payload.filter) {
-								payload.filter += `${field}${sign}'${item.toLowerCase()}' || `
+							if (filter) {
+								filter += `${field}${sign}'${item.toLowerCase()}' || `
 							}
 						}
 					})
 				}
 			})
 
-		payload.filter = payload.filter.slice(0, payload.filter.length - 3).trim()
-		if (payload.filter.length > 0) {
-			payload.filter += ')'
+		filter = filter.slice(0, filter.length - 3).trim()
+		if (filter.length > 0) {
+			filter += ')'
 		}
 	}
 
-	if (Object.keys(payload).length > 0) return payload
-	return null
+	return filter
 }
 
 const loadItems = async (include?: string | string[]) => {
@@ -113,20 +119,20 @@ const loadItems = async (include?: string | string[]) => {
 	}
 	const loadSearchItems = async () => {
 		if (search.value.length > 0) {
-			await Http.get<Items>(
-				`/collections/${props.api}/records`,
-				getPayload(search.value)
-			).then(response => {
+			await Http.get<Items>(`/collections/${props.api}/records`, {
+				sort: getSort(search.value),
+				filter: getPayload(search.value)
+			}).then(response => {
 				_searchItems = response.items
 			})
 		}
 	}
 	const loadExtraItems = async () => {
 		if (include?.length) {
-			await Http.get<Items>(
-				`/collections/${props.api}/records`,
-				getPayload(include, true)
-			).then(response => {
+			await Http.get<Items>(`/collections/${props.api}/records`, {
+				sort: getSort(include),
+				filter: getPayload(include, true)
+			}).then(response => {
 				_extraItems = response.items
 			})
 		}

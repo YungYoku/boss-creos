@@ -4,6 +4,10 @@
 	</div>
 </template>
 
+<script setup lang="ts">
+defineEmits(['click'])
+</script>
+
 <style scoped>
 .badge {
 	display: flex;

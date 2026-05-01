@@ -19,7 +19,6 @@
 				:error="form.price.error"
 				:disabled="loading"
 				label="Своя цена"
-				height="240px"
 			/>
 
 			<Grid :columns="2">

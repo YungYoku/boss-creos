@@ -23,6 +23,8 @@ import type { PropType } from 'vue'
 
 import { Skeleton } from '@/components/elements'
 
+defineEmits(['click'])
+
 type Type = 'button' | 'submit' | 'reset'
 type Variant = 'default' | 'positive' | 'destructive' | 'outline'
 

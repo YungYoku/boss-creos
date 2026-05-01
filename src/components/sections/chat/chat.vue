@@ -21,18 +21,10 @@
 
 					<span />
 
-					<Badge
-						v-if="auth.isDesigner && project.status === 'on_review'"
-						bg="yellow"
-					>
+					<Badge v-if="auth.isDesigner && project.status === 'on_review'">
 						Проверяется
 					</Badge>
-					<Badge
-						v-if="project.status === 'ended'"
-						bg="green"
-					>
-						Завершено
-					</Badge>
+					<Badge v-if="project.status === 'ended'"> Завершено </Badge>
 					<span v-else />
 				</Grid>
 
