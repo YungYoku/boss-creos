@@ -16,6 +16,7 @@
 				}"
 			>
 				<Input
+					v-model="value"
 					:disabled="loading"
 					:error
 					:accept
@@ -35,6 +36,7 @@
 			}"
 		>
 			<Input
+				v-model="value"
 				:disabled="loading"
 				:error
 				:accept
@@ -56,8 +58,6 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
-
 import { Button, Input } from '@/components/blocks'
 import { Icon } from '@/components/elements'
 import { Http } from '@/plugins'
@@ -73,7 +73,6 @@ const updateName = (value: string) => {
 }
 
 const value = defineModel<string | null>({
-	type: Object as PropType<string | null>,
 	default: null
 })
 const updateFile = async (file: File) => {

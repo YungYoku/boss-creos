@@ -34,6 +34,8 @@
 <script setup lang="ts">
 import { Grid } from '@/components/structures'
 
+defineEmits(['keyup'])
+
 defineProps({
 	width: {
 		type: String,

@@ -21,7 +21,7 @@
 	</FieldWrapperRich>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends string | number | null">
 import Input from '../default/input.vue'
 
 import type { Props } from '../default/props'
@@ -30,9 +30,8 @@ import FieldWrapperRich from '@/components/structures/fieldWrapperRich/fieldWrap
 
 withDefaults(defineProps<Props>(), defaultProps)
 
-const value = defineModel<string | number>({
-	type: [String, Number],
-	default: ''
+const value = defineModel<T>({
+	default: null
 })
 
 const emit = defineEmits(['action'])

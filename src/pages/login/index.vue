@@ -6,14 +6,14 @@
 			@keyup.enter="login"
 		>
 			<Input
-				v-model.trim="form.identity.value"
+				v-model="form.identity.value"
 				:error="form.identity.error"
 				label="Логин или почта"
 				type="text"
 			/>
 
 			<Input
-				v-model.trim="form.password.value"
+				v-model="form.password.value"
 				:error="form.password.error"
 				label="Пароль"
 				type="password"

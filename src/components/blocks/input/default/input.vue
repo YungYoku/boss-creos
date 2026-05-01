@@ -73,7 +73,7 @@
 	</div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends string | number | null">
 import { computed, ref } from 'vue'
 
 import { Icon, Label, Skeleton } from '@/components/elements'
@@ -83,12 +83,17 @@ import { defaultProps } from './props'
 
 const props = withDefaults(defineProps<Props>(), defaultProps)
 
-const value = defineModel<string | number>({
-	type: [String, Number],
-	default: ''
+const value = defineModel<T>({
+	default: null,
+	required: true
 })
+
 const clear = () => {
-	value.value = ''
+	if (typeof value.value === 'string') {
+		value.value = '' as T
+	} else {
+		value.value = null as T
+	}
 	fileName.value = ''
 	emit('clear')
 }
