@@ -14,8 +14,6 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
-
 import { FieldWrapperRich } from '@/components/structures'
 
 import type { Props } from '../default/props'
@@ -29,8 +27,7 @@ const updateName = (value: string) => {
 	emit('update:name', value)
 }
 
-const value = defineModel<string | null>({
-	type: Object as PropType<string | null>,
+const value = defineModel<string>({
 	default: null
 })
 </script>

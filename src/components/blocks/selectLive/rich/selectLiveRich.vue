@@ -16,7 +16,7 @@
 	</FieldWrapperRich>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends string | string[]">
 import { FieldWrapperRich } from '@/components/structures'
 import SelectLive from '../default/selectLive.vue'
 
@@ -25,9 +25,8 @@ import type { Props } from '../default/props'
 
 withDefaults(defineProps<Props>(), defaultProps)
 
-const value = defineModel<string | string[]>({
-	type: [String, Array],
-	default: ''
+const value = defineModel<T>({
+	default: null
 })
 </script>
 

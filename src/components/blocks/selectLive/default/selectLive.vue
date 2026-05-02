@@ -16,84 +16,88 @@ import { computed, type Ref, ref, watch } from 'vue'
 
 import { Select } from '@/components/blocks'
 import { Http } from '@/plugins'
+import type { Filter } from '@/plugins/http'
 
 import type { Item, Items, Props } from './props'
 import { defaultProps } from './props'
 
-const props = withDefaults(defineProps<Props<T>>(), defaultProps)
+const props = withDefaults(defineProps<Props>(), defaultProps)
 
 const items: Ref<Item[]> = ref([])
 
-const emit = defineEmits(['update:model-value'])
+const rawValue = defineModel<T>({
+	default: []
+})
+
 const value = computed<T>({
-	get: () => props.modelValue,
+	get: () => rawValue.value,
 	set(value) {
-		if (props.multiple && Array.isArray(props.modelValue) && Array.isArray(value)) {
-			emit('update:model-value', [...value])
+		if (props.multiple && Array.isArray(rawValue.value) && Array.isArray(value)) {
+			rawValue.value = [...value] as T
 		} else if (typeof value === 'string') {
-			emit('update:model-value', value)
+			rawValue.value = value
 		}
 	}
 })
 
 const getSort = (entity: T) => {
-	let sort = ''
-
 	if (typeof entity === 'string' && entity.length) {
-		sort = 'name'
+		return 'name'
 	} else if (Array.isArray(entity) && entity.length) {
-		sort = 'name'
+		return 'name'
 	}
 
-	return sort
+	return ''
 }
 
-const getPayload = (entity: T, isIncluded = false) => {
-	let filter = ''
-
+const getPayload = (entity: T, isIncluded = false): Filter => {
 	const sign = isIncluded ? '=' : '~'
 	if (typeof entity === 'string' && entity.length) {
-		filter = '('
-
-		if (isIncluded) filter += `id='${entity}'`
-		else {
-			props.filterFields.forEach(field => {
-				if (filter) {
-					filter += `${field}${sign}'${entity.toLowerCase()}' || `
-				}
-			})
-			filter = filter.slice(0, filter.length - 3).trim()
-		}
-
-		filter += ')'
-	} else if (Array.isArray(entity) && entity.length) {
-		filter = '('
-
-		entity
-			.filter(item => !(props.exclude ?? []).includes(item))
-			.forEach(item => {
-				if (isIncluded) {
-					if (filter) {
-						filter += `id='${item}' || `
+		if (isIncluded) {
+			return {
+				id: entity
+			}
+		} else {
+			const keys = Object.keys(props.filterFields)
+			return keys.reduce((acc, key) => {
+				acc[key] = () => ({
+					value: [entity],
+					props: {
+						sign,
+						separator: '||'
 					}
-				} else {
-					props.filterFields.forEach((field: string) => {
-						if (item) {
-							if (filter) {
-								filter += `${field}${sign}'${item.toLowerCase()}' || `
-							}
-						}
-					})
-				}
-			})
+				})
+				return acc
+			}, {} as Filter)
+		}
+	} else if (Array.isArray(entity) && entity.length) {
+		const filteredEntity = entity.filter(item => !(props.exclude ?? []).includes(item))
 
-		filter = filter.slice(0, filter.length - 3).trim()
-		if (filter.length > 0) {
-			filter += ')'
+		if (isIncluded) {
+			return {
+				id: () => ({
+					value: filteredEntity,
+					props: {
+						sign: '=',
+						separator: '||'
+					}
+				})
+			}
+		} else {
+			return props.filterFields.reduce((acc, key) => {
+				acc[key] = () => ({
+					value: filteredEntity,
+					props: {
+						sign,
+						separator: '||'
+					}
+				})
+				return acc
+			}, {} as Filter)
 		}
 	}
 
-	return filter
+	return {}
 }
 
 const loadItems = async (include?: T) => {
@@ -120,8 +124,8 @@ const loadItems = async (include?: T) => {
 	const loadSearchItems = async () => {
 		if (search.value.length > 0) {
 			await Http.get<Items>(`/collections/${props.api}/records`, {
-				sort: getSort(search.value),
-				filter: getPayload(search.value)
+				sort: getSort(search.value as T),
+				filter: getPayload(search.value as T)
 			}).then(response => {
 				_searchItems = response.items
 			})
@@ -149,7 +153,7 @@ const loadItems = async (include?: T) => {
 	items.value = [..._extraItems, ..._searchItems, ..._defaultItems]
 }
 
-const search = ref('')
+const search: Ref<string> = ref('')
 
 const handleContextChange = async () => {
 	const selectedValue = value.value

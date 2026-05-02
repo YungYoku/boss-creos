@@ -17,7 +17,6 @@
 				<InputImageRich
 					v-model="user.avatar.value"
 					:error="user.avatar.error"
-					:disabled="loading"
 					label="Аватар"
 				/>
 			</Grid>

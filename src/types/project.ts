@@ -49,7 +49,7 @@ export type IProject = DBRecord & {
 	proposals: string[]
 	chat: string
 	file: string | null
-	tutoring: false
+	tutoring: boolean
 	expand?: {
 		buyer?: IUser
 		designer?: IUser

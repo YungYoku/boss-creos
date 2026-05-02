@@ -41,7 +41,7 @@ export const useAdapter = <T extends AdditionalAdapterFields<T>, Keys extends ke
 
 	const fieldsForRequest = keys.filter(
 		field => !unnecessaryFieldsForRequest.includes(field)
-	) as string[]
+	) as Keys[]
 	const fieldsForTable = keys.filter(field => !unnecessaryFieldsForTable.includes(field))
 
 	const getHeader = (item: T) => {

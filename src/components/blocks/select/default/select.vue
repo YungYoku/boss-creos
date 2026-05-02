@@ -120,7 +120,7 @@ const showedValue = computed(() => {
 
 	if (props.multiple) {
 		if (!Array.isArray(_value)) throw validationError
-		const items = _value.length > 7 ? _value.slice(0, 7) : _value
+		const items: string[] = _value.length > 7 ? _value.slice(0, 7) : _value
 
 		if (items.length === 0) return null
 
@@ -145,24 +145,24 @@ const chooseValue = (item: Item) => {
 		if (!Array.isArray(value.value)) throw validationError
 
 		if (value.value.includes(item.id)) {
-			value.value = value.value.filter(val => val !== item.id)
+			value.value = value.value.filter(val => val !== item.id) as T
 		} else {
 			value.value.push(item.id)
 		}
 	} else {
 		if (value.value === item.id) {
-			value.value = ''
+			value.value = '' as T
 		} else {
-			value.value = item.id
+			value.value = item.id as T
 		}
 	}
 }
 
 const clear = () => {
 	if (props.multiple && Array.isArray(value.value)) {
-		value.value = []
+		value.value = [] as string[] as T
 	} else {
-		value.value = ''
+		value.value = '' as T
 	}
 }
 </script>

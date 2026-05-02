@@ -8,9 +8,10 @@ type FilterCB = () => {
 	value: string[]
 	props?: {
 		sign?: '=' | '!=' | '~'
+		separator?: '&&' | '||'
 	}
 }
-interface Filter {
+export interface Filter {
 	[key: string]: string | FilterCB
 }
 
@@ -111,13 +112,14 @@ class Http {
 		const { value, props } = cb()
 
 		const sign = props?.sign ?? '='
+		const separator = props?.separator ?? '&&'
 
 		const result: string[] = []
 		value.forEach(item => {
 			result.push(`${key}${sign}'${item}'`)
 		})
 		if (result.length) {
-			return `(${result.join('&&')})`
+			return `(${result.join(separator)})`
 		}
 
 		return ''

@@ -65,7 +65,7 @@ export const useAdapter = () => {
 		actions: CellActions
 	}
 
-	const { handleLoadedData, header, body, fields } = useAdapterRoot(
+	const { handleLoadedData, header, body, fields } = useAdapterRoot<IUser>(
 		emptyUser,
 		unnecessaryFieldsForRequest,
 		unnecessaryFieldsForTable,

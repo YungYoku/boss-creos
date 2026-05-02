@@ -28,7 +28,6 @@
 
 						<SelectLiveRich
 							v-model="creative.geo.value"
-							:disabled="loading"
 							:error="creative.geo.error"
 							label="Гео"
 							api="geo"
@@ -36,7 +35,6 @@
 
 						<SelectLiveRich
 							v-model="creative.slot.value"
-							:disabled="loading"
 							:error="creative.slot.error"
 							label="Слот"
 							api="slots"
@@ -44,7 +42,6 @@
 
 						<SelectRich
 							v-model="creative.type.value"
-							:disabled="loading"
 							:error="creative.type.error"
 							:items="creativeTypeItems"
 							:clearable="false"
@@ -60,7 +57,6 @@
 
 						<InputImageRich
 							v-model="creative.preview.value"
-							:disabled="loading"
 							:error="creative.preview.error"
 							accept=".gif,.jpg,.jpeg,.png,.webp"
 							:label="creative.type.value === 'static' ? 'Загрузите крео' : 'Обложка'"
@@ -68,7 +64,6 @@
 
 						<SelectLiveRich
 							v-model="creative.unavailableGeo.value"
-							:disabled="loading"
 							multiple
 							:error="creative.unavailableGeo.error"
 							label="Недоступные гео"
@@ -79,7 +74,6 @@
 					<Grid vertical>
 						<SelectRich
 							v-model="creative.ratio.value"
-							:disabled="loading"
 							:error="creative.ratio.error"
 							:items="ratioItems"
 							label="Размер"
@@ -119,7 +113,6 @@
 						<SelectLiveRich
 							v-if="creative.type.value !== 'static'"
 							v-model="creative.approach.value"
-							:disabled="loading"
 							:error="creative.approach.error"
 							label="Подход"
 							api="approaches"
@@ -128,7 +121,6 @@
 						<InputVideoRich
 							v-if="creative.type.value !== 'static'"
 							v-model="creative.video.value"
-							:disabled="loading"
 							:error="creative.video.error"
 							accept=".mp4,.avi,.mov,.3gp"
 							label="Загрузите крео"

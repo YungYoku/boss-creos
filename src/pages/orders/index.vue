@@ -121,9 +121,16 @@ const baskets: Ref<IBasket[]> = ref([])
 const loadBaskets = async () => {
 	if (creativesIDs.value.length === 0) return
 
-	const filter = creativesIDs.value.map(id => `creative = '${id}'`).join(' || ')
 	await Http.get<IBaskets>('/collections/baskets/records', {
-		filter,
+		filter: {
+			creative: () => ({
+				value: creativesIDs.value,
+				props: {
+					sign: '=',
+					separator: '||'
+				}
+			})
+		},
 		expand: ['creative', 'creative.preview', 'creative.slot', 'geo']
 	}).then(({ items }) => {
 		baskets.value = items

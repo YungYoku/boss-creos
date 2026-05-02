@@ -64,12 +64,18 @@ const loadFavorite = async () => {
 
 	if (favorite.value.length === 0) return
 
-	const favoriteIds = favorite.value.map(id => `id='${id}'`).join(' || ')
-
 	loading.value = true
 
 	await Http.get<ICreatives>('/collections/creatives/records', {
-		filter: favoriteIds,
+		filter: {
+			id: () => ({
+				value: favorite.value,
+				props: {
+					sign: '=',
+					separator: '||'
+				}
+			})
+		},
 		expand: ['preview', 'video', 'creator', 'creator.avatar', 'slot']
 	}).then(response => {
 		creatives.value = response.items

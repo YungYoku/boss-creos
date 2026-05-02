@@ -12,8 +12,7 @@ export interface Items {
 	items: Item[]
 }
 
-export interface Props<T extends string[] | string> {
-	modelValue: T
+export interface Props {
 	error?: string | null
 	typeKey?: string
 	label?: string
@@ -23,12 +22,11 @@ export interface Props<T extends string[] | string> {
 	multiple?: boolean
 }
 
-export const defaultProps: Props<string[]> = {
-	modelValue: [],
+export const defaultProps = {
 	error: null,
 	typeKey: 'name',
 	label: 'Значение',
 	api: '',
-	filterFields: ['id', 'name'],
+	filterFields: () => ['id', 'name'],
 	multiple: false
-}
+} as const

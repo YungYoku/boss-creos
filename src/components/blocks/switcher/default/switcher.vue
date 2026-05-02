@@ -34,8 +34,7 @@ import { defaultProps } from './props'
 
 const props = withDefaults(defineProps<Props>(), defaultProps)
 
-const value = defineModel<boolean | null>({
-	type: Boolean,
+const value = defineModel<boolean>({
 	default: null
 })
 

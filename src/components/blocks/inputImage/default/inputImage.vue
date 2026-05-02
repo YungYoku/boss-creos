@@ -71,7 +71,7 @@ const updateName = (value: string) => {
 	emit('update:name', value)
 }
 
-const value = defineModel<string | null>({
+const value = defineModel<string>({
 	default: null
 })
 const updateFile = async (file: File) => {
