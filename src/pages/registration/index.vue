@@ -6,28 +6,28 @@
 			@keyup.enter="register"
 		>
 			<Input
-				v-model.trim="form.username.value"
+				v-model="form.username.value"
 				:error="form.username.error"
 				label="Имя"
 				type="text"
 			/>
 
 			<Input
-				v-model.trim="form.telegram.value"
+				v-model="form.telegram.value"
 				:error="form.telegram.error"
 				label="Telegram"
 				type="text"
 			/>
 
 			<Input
-				v-model.trim="form.email.value"
+				v-model="form.email.value"
 				:error="form.email.error"
 				label="Почта"
 				type="text"
 			/>
 
 			<Input
-				v-model.trim="form.password.value"
+				v-model="form.password.value"
 				:error="form.password.error"
 				label="Пароль"
 				type="password"
@@ -35,7 +35,7 @@
 			/>
 
 			<Input
-				v-model.trim="form.passwordConfirm.value"
+				v-model="form.passwordConfirm.value"
 				:error="form.passwordConfirm.error"
 				label="Повторите пароль"
 				type="password"

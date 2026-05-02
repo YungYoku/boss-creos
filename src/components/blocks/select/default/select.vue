@@ -83,7 +83,7 @@
 	</Popover>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends string | string[]">
 import { computed } from 'vue'
 
 import { Popover } from '@/components/structures'
@@ -93,13 +93,11 @@ import { Icon, Label, Separator, Text } from '@/components/elements'
 import type { Item, Props } from './props'
 import { defaultProps } from './props'
 
-const value = defineModel<string | string[]>({
-	type: [String, Array],
-	default: ''
+const value = defineModel<T>({
+	default: null
 })
 
 const search = defineModel<string>('search', {
-	type: String,
 	default: ''
 })
 
@@ -114,7 +112,7 @@ const isEmpty = computed(() => {
 		if (!Array.isArray(_value)) throw validationError
 		return _value.length === 0
 	}
-	return _value === ''
+	return _value === '' || _value === null
 })
 
 const showedValue = computed(() => {

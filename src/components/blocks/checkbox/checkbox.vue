@@ -46,9 +46,8 @@ withDefaults(defineProps<Props>(), {
 	label: ''
 })
 
-const value = defineModel<boolean | null>({
-	type: Boolean,
-	default: null
+const value = defineModel<boolean>({
+	default: false
 })
 
 const toggle = () => {

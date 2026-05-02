@@ -11,7 +11,7 @@
 	/>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends string | string[]">
 import { computed, type Ref, ref, watch } from 'vue'
 
 import { Select } from '@/components/blocks'
@@ -20,12 +20,12 @@ import { Http } from '@/plugins'
 import type { Item, Items, Props } from './props'
 import { defaultProps } from './props'
 
-const props = withDefaults(defineProps<Props>(), defaultProps)
+const props = withDefaults(defineProps<Props<T>>(), defaultProps)
 
 const items: Ref<Item[]> = ref([])
 
 const emit = defineEmits(['update:model-value'])
-const value = computed<string[] | string>({
+const value = computed<T>({
 	get: () => props.modelValue,
 	set(value) {
 		if (props.multiple && Array.isArray(props.modelValue) && Array.isArray(value)) {
@@ -36,7 +36,7 @@ const value = computed<string[] | string>({
 	}
 })
 
-const getSort = (entity: string | string[]) => {
+const getSort = (entity: T) => {
 	let sort = ''
 
 	if (typeof entity === 'string' && entity.length) {
@@ -48,7 +48,7 @@ const getSort = (entity: string | string[]) => {
 	return sort
 }
 
-const getPayload = (entity: string | string[], isIncluded = false) => {
+const getPayload = (entity: T, isIncluded = false) => {
 	let filter = ''
 
 	const sign = isIncluded ? '=' : '~'
@@ -96,7 +96,7 @@ const getPayload = (entity: string | string[], isIncluded = false) => {
 	return filter
 }
 
-const loadItems = async (include?: string | string[]) => {
+const loadItems = async (include?: T) => {
 	let _defaultItems: Item[] = []
 	let _searchItems: Item[] = []
 	let _extraItems: Item[] = []

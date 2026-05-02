@@ -73,7 +73,6 @@
 					v-for="creative in creatives"
 					:key="creative.id"
 					:creative="creative"
-					:loading="loading"
 					class="shop__creatives-item"
 				/>
 			</template>

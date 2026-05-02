@@ -18,7 +18,7 @@ import { computed, onBeforeUnmount, onMounted, ref, type Ref, watch } from 'vue'
 
 import { Screen } from '@/plugins'
 
-defineEmits(['click'])
+defineEmits(['keyup', 'click'])
 
 type Align = 'start' | 'center' | 'end' | 'stretch' | 'initial'
 type Columns = number | (number | string)[] | null

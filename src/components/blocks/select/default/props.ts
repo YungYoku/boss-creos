@@ -12,10 +12,10 @@ export interface Props {
 	searchable?: boolean
 }
 
-export const defaultProps = {
+export const defaultProps: Props = {
 	error: null,
 	label: '',
-	items: () => [],
+	items: [],
 	multiple: false,
 	clearable: true,
 	searchable: false

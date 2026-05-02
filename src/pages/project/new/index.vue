@@ -6,7 +6,7 @@
 	>
 		<Grid :columns="[1, '100px']">
 			<Input
-				v-model.trim="project.title.value"
+				v-model="project.title.value"
 				:disabled="loading"
 				:error="project.title.error"
 				label="Название"
@@ -75,7 +75,7 @@
 					</Text>
 
 					<Textarea
-						v-model.trim="project.description.value"
+						v-model="project.description.value"
 						:error="project.description.error"
 						height="200px"
 						label="Описание"

@@ -24,11 +24,14 @@ import { Popover } from '@/components/structures'
 import { Button, Calendar } from '@/components/blocks'
 import { Label } from '@/components/elements'
 
-defineProps({
-	label: {
-		type: String,
-		default: 'Дата'
-	}
+interface Props {
+	error?: string | null
+	label?: string
+}
+
+withDefaults(defineProps<Props>(), {
+	error: null,
+	label: 'Дата'
 })
 
 const months = [
