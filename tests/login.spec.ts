@@ -14,5 +14,5 @@ test('login test', async ({ page }) => {
 	await page.click('button:has-text("Войти")')
 
 	// Пример проверки (замени под свой кейс)
-	await expect(page).toHaveURL(/.*dashboard|.*home/)
+	await expect(page).toHaveURL(/.*dashboard/)
 })
