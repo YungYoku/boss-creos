@@ -1,6 +1,9 @@
 <template>
 	<div
 		class="switcher"
+		:class="{
+			_disabled: disabled
+		}"
 		@click="toggle"
 	>
 		<div
@@ -24,26 +27,34 @@
 			/>
 		</div>
 	</div>
+
+	<span
+		v-if="error"
+		class="switcher__error"
+	>
+		{{ error }}
+	</span>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 
 import type { Props } from './props'
-import { defaultProps } from './props'
 
-const props = withDefaults(defineProps<Props>(), defaultProps)
+const { error = null, checked = false, disabled = false, label = '' } = defineProps<Props>()
 
 const value = defineModel<boolean>({
 	default: null
 })
 
 const toggle = () => {
+	if (disabled) return
+
 	value.value = !value.value
 }
 
 const isActive = computed(() => {
-	return value.value ?? props.checked
+	return value.value ?? checked
 })
 </script>
 

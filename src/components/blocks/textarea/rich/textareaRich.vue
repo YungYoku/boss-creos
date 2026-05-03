@@ -17,9 +17,8 @@ import FieldWrapperRich from '@/components/structures/fieldWrapperRich/fieldWrap
 import Textarea from '../default/textarea.vue'
 
 import type { Props } from '../default/props'
-import { defaultProps } from '../default/props'
 
-withDefaults(defineProps<Props>(), defaultProps)
+const { error = null, label = '', height = '200px', disabled = false } = defineProps<Props>()
 
 const value = defineModel<string>({
 	type: String,

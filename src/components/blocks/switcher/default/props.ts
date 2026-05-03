@@ -4,10 +4,3 @@ export interface Props {
 	disabled?: boolean
 	label?: string
 }
-
-export const defaultProps = {
-	error: null,
-	checked: false,
-	disabled: false,
-	label: ''
-} as const

@@ -43,7 +43,7 @@
 					:disabled
 					:type
 					:accept
-					autocomplete="off"
+					:autocomplete
 					@input="onInput"
 				/>
 			</div>
@@ -79,9 +79,21 @@ import { computed, ref } from 'vue'
 import { Icon, Label, Skeleton } from '@/components/elements'
 
 import type { Props } from './props'
-import { defaultProps } from './props'
 
-const props = withDefaults(defineProps<Props>(), defaultProps)
+const {
+	error = null,
+	loading = false,
+	label = '',
+	disabled = false,
+	type = 'text',
+	icon = null,
+	autocomplete = 'off',
+	cursor = 'text',
+	clearable = true,
+	variant = 'default',
+	transparent = false,
+	accept = ''
+} = defineProps<Props>()
 
 const value = defineModel<T>({
 	default: null,
@@ -103,7 +115,7 @@ const fileName = ref('')
 const emit = defineEmits(['keyup', 'update-file', 'input', 'action', 'clear'])
 const onInput = (event: Event) => {
 	const target = event.target as HTMLInputElement
-	if (props.type === 'file') {
+	if (type === 'file') {
 		const file = target.files?.[0]
 		fileName.value = file?.name ?? ''
 		if (file) emit('update-file', file)

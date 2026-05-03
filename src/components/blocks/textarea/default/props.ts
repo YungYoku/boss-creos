@@ -4,10 +4,3 @@ export interface Props {
 	height?: string
 	disabled?: boolean
 }
-
-export const defaultProps = {
-	error: null,
-	label: '',
-	height: '200px',
-	disabled: false
-} as const

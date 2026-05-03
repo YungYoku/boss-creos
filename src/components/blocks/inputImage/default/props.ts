@@ -5,11 +5,3 @@ export interface Props {
 	label?: string
 	accept?: string
 }
-
-export const defaultProps = {
-	error: null,
-	loading: false,
-	compact: false,
-	label: '',
-	accept: ''
-} as const

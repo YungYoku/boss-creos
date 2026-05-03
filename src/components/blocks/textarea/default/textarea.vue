@@ -44,9 +44,8 @@ import { computed } from 'vue'
 import { Icon, Label } from '@/components/elements'
 
 import type { Props } from './props'
-import { defaultProps } from './props'
 
-withDefaults(defineProps<Props>(), defaultProps)
+const { error = null, label = '', height = '200px', disabled = false } = defineProps<Props>()
 
 const value = defineModel<string>({
 	type: String,

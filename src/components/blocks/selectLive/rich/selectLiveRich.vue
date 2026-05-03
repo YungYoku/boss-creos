@@ -7,7 +7,6 @@
 		<SelectLive
 			v-model="value"
 			label=""
-			:type-key
 			:api
 			:filter-fields
 			:exclude
@@ -20,10 +19,16 @@
 import { FieldWrapperRich } from '@/components/structures'
 import SelectLive from '../default/selectLive.vue'
 
-import { defaultProps } from '../default/props'
 import type { Props } from '../default/props'
 
-withDefaults(defineProps<Props>(), defaultProps)
+const {
+	error = null,
+	label = 'Значение',
+	api = '',
+	filterFields = ['id', 'name'],
+	exclude,
+	multiple = false
+} = defineProps<Props>()
 
 const value = defineModel<T>({
 	default: null

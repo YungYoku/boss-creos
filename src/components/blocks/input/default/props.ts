@@ -12,18 +12,3 @@ export interface Props {
 	transparent?: boolean
 	accept?: string
 }
-
-export const defaultProps = {
-	error: null,
-	loading: false,
-	label: '',
-	disabled: false,
-	type: 'text',
-	icon: null,
-	autocomplete: 'off',
-	cursor: 'text',
-	clearable: true,
-	variant: 'default',
-	transparent: false,
-	accept: ''
-} as const

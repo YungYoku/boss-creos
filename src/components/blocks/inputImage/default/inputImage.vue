@@ -62,9 +62,14 @@ import { Icon } from '@/components/elements'
 import { Http } from '@/plugins'
 
 import type { Props } from './props'
-import { defaultProps } from './props'
 
-withDefaults(defineProps<Props>(), defaultProps)
+const {
+	error = null,
+	loading = false,
+	compact = false,
+	label = '',
+	accept = ''
+} = defineProps<Props>()
 
 const emit = defineEmits(['update:name'])
 const updateName = (value: string) => {

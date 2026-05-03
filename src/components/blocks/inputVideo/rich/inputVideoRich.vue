@@ -17,10 +17,9 @@
 import { FieldWrapperRich } from '@/components/structures'
 
 import type { Props } from '../default/props'
-import { defaultProps } from '../default/props'
 import InputVideo from '../default/inputVideo.vue'
 
-withDefaults(defineProps<Props>(), defaultProps)
+const { error = null, loading = false, label = '', accept = '' } = defineProps<Props>()
 
 const emit = defineEmits(['update:name'])
 const updateName = (value: string) => {

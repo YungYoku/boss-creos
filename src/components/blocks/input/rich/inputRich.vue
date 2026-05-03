@@ -22,13 +22,25 @@
 </template>
 
 <script setup lang="ts" generic="T extends string | number | null">
+import { FieldWrapperRich } from '@/components/structures'
+
 import Input from '../default/input.vue'
-
 import type { Props } from '../default/props'
-import { defaultProps } from '../default/props'
-import FieldWrapperRich from '@/components/structures/fieldWrapperRich/fieldWrapperRich.vue'
 
-withDefaults(defineProps<Props>(), defaultProps)
+const {
+	error = null,
+	loading = false,
+	label = '',
+	disabled = false,
+	type = 'text',
+	icon = null,
+	autocomplete = 'off',
+	cursor = 'text',
+	clearable = true,
+	variant = 'default',
+	transparent = false,
+	accept = ''
+} = defineProps<Props>()
 
 const value = defineModel<T>({
 	default: null

@@ -17,9 +17,8 @@ import { FieldWrapperRich } from '@/components/structures'
 
 import Switcher from '../default/switcher.vue'
 import type { Props } from '../default/props'
-import { defaultProps } from '../default/props'
 
-withDefaults(defineProps<Props>(), defaultProps)
+const { error = null, checked = false, disabled = false, label = '' } = defineProps<Props>()
 
 const value = defineModel<boolean>({
 	default: false

@@ -19,10 +19,16 @@
 import { FieldWrapperRich } from '@/components/structures'
 import Select from '../default/select.vue'
 
-import { defaultProps } from '../default/props'
 import type { Props } from '../default/props'
 
-withDefaults(defineProps<Props>(), defaultProps)
+const {
+	error = null,
+	label = '',
+	items = [],
+	multiple = false,
+	clearable = true,
+	searchable = false
+} = defineProps<Props>()
 
 const value = defineModel<T>({
 	default: null

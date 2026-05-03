@@ -19,9 +19,15 @@ import { Http } from '@/plugins'
 import type { Filter } from '@/plugins/http'
 
 import type { Item, Items, Props } from './props'
-import { defaultProps } from './props'
 
-const props = withDefaults(defineProps<Props>(), defaultProps)
+const {
+	error = null,
+	label = 'Значение',
+	api = '',
+	filterFields = ['id', 'name'],
+	exclude,
+	multiple = false
+} = defineProps<Props>()
 
 const items: Ref<Item[]> = ref([])
 
@@ -32,7 +38,7 @@ const rawValue = defineModel<T>({
 const value = computed<T>({
 	get: () => rawValue.value,
 	set(value) {
-		if (props.multiple && Array.isArray(rawValue.value) && Array.isArray(value)) {
+		if (multiple && Array.isArray(rawValue.value) && Array.isArray(value)) {
 			rawValue.value = [...value] as T
 		} else if (typeof value === 'string') {
 			rawValue.value = value
@@ -58,7 +64,7 @@ const getPayload = (entity: T, isIncluded = false): Filter => {
 				id: entity
 			}
 		} else {
-			const keys = Object.keys(props.filterFields)
+			const keys = Object.keys(filterFields)
 			return keys.reduce((acc, key) => {
 				acc[key] = () => ({
 					value: [entity],
@@ -71,7 +77,7 @@ const getPayload = (entity: T, isIncluded = false): Filter => {
 			}, {} as Filter)
 		}
 	} else if (Array.isArray(entity) && entity.length) {
-		const filteredEntity = entity.filter(item => !(props.exclude ?? []).includes(item))
+		const filteredEntity = entity.filter(item => !(exclude ?? []).includes(item))
 
 		if (isIncluded) {
 			return {
@@ -84,7 +90,7 @@ const getPayload = (entity: T, isIncluded = false): Filter => {
 				})
 			}
 		} else {
-			return props.filterFields.reduce((acc, key) => {
+			return filterFields.reduce((acc, key) => {
 				acc[key] = () => ({
 					value: filteredEntity,
 					props: {
@@ -107,10 +113,10 @@ const loadItems = async (include?: T) => {
 
 	const loadDefaultItems = async () => {
 		if (search.value.length === 0) {
-			await Http.get<Items>(`/collections/${props.api}/records`, {
+			await Http.get<Items>(`/collections/${api}/records`, {
 				filter: {
 					id: () => ({
-						value: props.exclude ?? [],
+						value: exclude ?? [],
 						props: {
 							sign: '!='
 						}
@@ -123,7 +129,7 @@ const loadItems = async (include?: T) => {
 	}
 	const loadSearchItems = async () => {
 		if (search.value.length > 0) {
-			await Http.get<Items>(`/collections/${props.api}/records`, {
+			await Http.get<Items>(`/collections/${api}/records`, {
 				sort: getSort(search.value as T),
 				filter: getPayload(search.value as T)
 			}).then(response => {
@@ -133,7 +139,7 @@ const loadItems = async (include?: T) => {
 	}
 	const loadExtraItems = async () => {
 		if (include?.length) {
-			await Http.get<Items>(`/collections/${props.api}/records`, {
+			await Http.get<Items>(`/collections/${api}/records`, {
 				sort: getSort(include),
 				filter: getPayload(include, true)
 			}).then(response => {
@@ -157,12 +163,12 @@ const search: Ref<string> = ref('')
 
 const handleContextChange = async () => {
 	const selectedValue = value.value
-	if (props.multiple && Array.isArray(selectedValue)) {
+	if (multiple && Array.isArray(selectedValue)) {
 		await loadItems(selectedValue)
 	} else if (typeof selectedValue === 'string' && !Array.isArray(selectedValue)) {
 		await loadItems(selectedValue)
 	}
 }
 
-watch(() => [value.value, props.exclude], handleContextChange, { immediate: true })
+watch(() => [value.value, exclude], handleContextChange, { immediate: true })
 </script>

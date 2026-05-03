@@ -14,19 +14,9 @@ export interface Items {
 
 export interface Props {
 	error?: string | null
-	typeKey?: string
 	label?: string
 	api: string
 	filterFields?: string[]
 	exclude?: string[] | undefined
 	multiple?: boolean
 }
-
-export const defaultProps = {
-	error: null,
-	typeKey: 'name',
-	label: 'Значение',
-	api: '',
-	filterFields: () => ['id', 'name'],
-	multiple: false
-} as const

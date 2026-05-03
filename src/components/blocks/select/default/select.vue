@@ -91,7 +91,6 @@ import { Checkbox, Input } from '@/components/blocks'
 import { Icon, Label, Separator, Text } from '@/components/elements'
 
 import type { Item, Props } from './props'
-import { defaultProps } from './props'
 
 const value = defineModel<T>({
 	default: null
@@ -101,14 +100,21 @@ const search = defineModel<string>('search', {
 	default: ''
 })
 
-const props = withDefaults(defineProps<Props>(), defaultProps)
+const {
+	error = null,
+	label = '',
+	items = [],
+	multiple = false,
+	clearable = true,
+	searchable = false
+} = defineProps<Props>()
 
 const validationError = new Error('Select multiple, but value is not an array')
 
 const isEmpty = computed(() => {
 	const _value = value.value
 
-	if (props.multiple) {
+	if (multiple) {
 		if (!Array.isArray(_value)) throw validationError
 		return _value.length === 0
 	}
@@ -118,17 +124,17 @@ const isEmpty = computed(() => {
 const showedValue = computed(() => {
 	const _value = value.value
 
-	if (props.multiple) {
+	if (multiple) {
 		if (!Array.isArray(_value)) throw validationError
-		const items: string[] = _value.length > 7 ? _value.slice(0, 7) : _value
+		const filteredItems: string[] = _value.length > 7 ? _value.slice(0, 7) : _value
 
-		if (items.length === 0) return null
+		if (filteredItems.length === 0) return null
 
 		const getItemName = (id: string) => {
-			return props.items.find(item => item.id === id)?.name ?? ''
+			return items.find(item => item.id === id)?.name ?? ''
 		}
 
-		const result = items
+		const result = filteredItems
 			.reduce((acc, item) => `${acc}, ${getItemName(item).trim()}`, '')
 			.slice(2)
 		const extra =
@@ -137,11 +143,11 @@ const showedValue = computed(() => {
 				: ` (${_value.length.toString()})`
 		return `${result}${extra}`
 	}
-	return props.items.find(item => item.id === _value)?.name ?? null
+	return items.find(item => item.id === _value)?.name ?? null
 })
 
 const chooseValue = (item: Item) => {
-	if (props.multiple) {
+	if (multiple) {
 		if (!Array.isArray(value.value)) throw validationError
 
 		if (value.value.includes(item.id)) {
@@ -159,7 +165,7 @@ const chooseValue = (item: Item) => {
 }
 
 const clear = () => {
-	if (props.multiple && Array.isArray(value.value)) {
+	if (multiple && Array.isArray(value.value)) {
 		value.value = [] as string[] as T
 	} else {
 		value.value = '' as T
