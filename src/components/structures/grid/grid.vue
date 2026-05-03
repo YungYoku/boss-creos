@@ -35,29 +35,24 @@ interface Props {
 	columnsS?: Columns
 }
 
-const props = withDefaults(defineProps<Props>(), {
-	vertical: false,
-	gap: 's',
-	verAlign: 'initial',
-	horAlign: 'initial',
-	columns: null,
-	columnsXl: null,
-	columnsL: null,
-	columnsM: null,
-	columnsS: null
-})
+const {
+	vertical = false,
+	gap = 's',
+	verAlign = 'initial',
+	horAlign = 'initial',
+	columns = null,
+	columnsXl = null,
+	columnsL = null,
+	columnsM = null,
+	columnsS = null
+} = defineProps<Props>()
 
 const activeColumns: Ref<(number | string)[] | number | null> = ref(1)
 const updateActiveColumns = () => {
-	if (props.columns) {
-		activeColumns.value = props.columns
+	if (columns) {
+		activeColumns.value = columns
 		return
 	}
-
-	const columnsXl = props.columnsXl
-	const columnsL = props.columnsL
-	const columnsM = props.columnsM
-	const columnsS = props.columnsS
 
 	if (Screen.isSize('s')) {
 		activeColumns.value = columnsS ?? columnsM ?? columnsL ?? columnsXl
@@ -76,10 +71,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
 	window.removeEventListener('resize', updateActiveColumns)
 })
-watch(
-	() => [props.columns, props.columnsXl, props.columnsL, props.columnsM, props.columnsS],
-	updateActiveColumns
-)
+watch(() => [columns, columnsXl, columnsL, columnsM, columnsS], updateActiveColumns)
 
 const getAlign = (align: Align) => {
 	switch (align) {
@@ -100,17 +92,17 @@ const getAlign = (align: Align) => {
 const style = computed(() => {
 	if (activeColumns.value === null) return {}
 
-	if (props.vertical) {
+	if (vertical) {
 		return {
-			'align-items': getAlign(props.horAlign)
+			'align-items': getAlign(horAlign)
 		}
 	}
 
 	if (typeof activeColumns.value === 'number') {
 		return {
 			gridTemplateColumns: `repeat(${activeColumns.value.toString()}, 1fr)`,
-			'align-items': getAlign(props.verAlign),
-			'justify-items': getAlign(props.horAlign)
+			'align-items': getAlign(verAlign),
+			'justify-items': getAlign(horAlign)
 		}
 	}
 
@@ -123,8 +115,8 @@ const style = computed(() => {
 				return result
 			}, '')
 			.trim(),
-		'align-items': getAlign(props.verAlign),
-		'justify-items': getAlign(props.horAlign)
+		'align-items': getAlign(verAlign),
+		'justify-items': getAlign(horAlign)
 	}
 })
 </script>

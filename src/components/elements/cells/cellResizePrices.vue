@@ -9,5 +9,5 @@ interface Props {
 	cell: ICell
 }
 
-withDefaults(defineProps<Props>(), {})
+const { cell } = defineProps<Props>()
 </script>

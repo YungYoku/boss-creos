@@ -8,8 +8,6 @@
 				v-for="user in users"
 				:key="user.id"
 				:user="user"
-				link
-				:loading="loading"
 				class="designers__item"
 			/>
 		</div>

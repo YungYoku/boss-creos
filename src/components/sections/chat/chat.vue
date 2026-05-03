@@ -147,7 +147,7 @@ interface Props {
 	userType: 'designer' | 'buyer'
 	ratingType: 'ratingDesigner' | 'ratingBuyer'
 }
-const props = withDefaults(defineProps<Props>(), {})
+const { project, userType, ratingType } = defineProps<Props>()
 
 const messagesRef = useTemplateRef('messages-ref')
 const chat: Ref<IChat> = ref({
@@ -164,13 +164,13 @@ const chat: Ref<IChat> = ref({
 
 const loading = ref(true)
 
-const chatMember = computed(() => props.project.expand?.[props.userType])
-const rating = computed(() => props.project.expand?.[props.ratingType] ?? null)
+const chatMember = computed(() => project.expand?.[userType])
+const rating = computed(() => project.expand?.[ratingType] ?? null)
 
 const loadChat = () => {
 	Http.connect<IChat>({
 		collection: 'chats',
-		id: props.project.chat,
+		id: project.chat,
 		expand: ['messages', 'messages.file'],
 		cb: async response => {
 			chat.value = response
@@ -187,9 +187,9 @@ const loadChat = () => {
 	})
 }
 
-watch(() => props.project.chat, loadChat, { immediate: true })
+watch(() => project.chat, loadChat, { immediate: true })
 watch(
-	() => props.project.status,
+	() => project.status,
 	() => {
 		loading.value = false
 	}
@@ -206,7 +206,7 @@ const sendMessage = async () => {
 
 	loading.value = true
 
-	await Http.post<IMessage>(`/send-message/${props.project.chat}`, {
+	await Http.post<IMessage>(`/send-message/${project.chat}`, {
 		text: newMessage.value,
 		file: file.value
 	})
@@ -222,11 +222,11 @@ const updateStatus = async (status: IProjectStatus) => {
 	loading.value = true
 
 	const body: IProject = {
-		...props.project,
+		...project,
 		status
 	}
 
-	await Http.patch<IProject>(`/collections/projects/records/${props.project.id}`, body).then(
+	await Http.patch<IProject>(`/collections/projects/records/${project.id}`, body).then(
 		response => {
 			emit('update:status', response.status)
 		}
@@ -260,7 +260,7 @@ watch(
 const sendRating = async (value: { stars: number; review: string } = { stars: 1, review: '' }) => {
 	const { stars, review } = value
 
-	await Http.post<IRating>(`/send-review/${props.project.id}`, {
+	await Http.post<IRating>(`/send-review/${project.id}`, {
 		stars,
 		review
 	}).then(response => {

@@ -18,26 +18,22 @@ interface Props {
 	preview: string | IImage
 }
 
-const props = withDefaults(defineProps<Props>(), {})
+const { src, preview } = defineProps<Props>()
 
 const getFileSrc = (file: IVideo | IImage, src: string) => {
 	return `${import.meta.env.VITE_API}/files/${file.collectionId}/${file.id}/${src}`
 }
 
 const videoSrc = computed(() => {
-	const file = props.src
+	if (typeof src === 'string') return src
 
-	if (typeof file === 'string') return file
-
-	return getFileSrc(file, file.watermarked_video)
+	return getFileSrc(src, src.watermarked_video)
 })
 
 const previewSrc = computed(() => {
-	const file = props.preview
+	if (typeof preview === 'string') return preview
 
-	if (typeof file === 'string') return file
-
-	return getFileSrc(file, file.watermarked_image)
+	return getFileSrc(preview, preview.watermarked_image)
 })
 
 const videoRef = useTemplateRef('video')

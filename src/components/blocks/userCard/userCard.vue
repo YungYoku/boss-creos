@@ -27,8 +27,6 @@ import { type IUser } from '@/types/user'
 
 interface Props {
 	user: IUser
-	loading?: boolean
-	link?: boolean
 }
 
 const { user } = defineProps<Props>()

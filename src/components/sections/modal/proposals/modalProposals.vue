@@ -22,7 +22,6 @@
 						<UserCard
 							v-if="proposal.expand?.user"
 							:user="proposal.expand.user"
-							link
 						/>
 
 						<Button
@@ -64,9 +63,9 @@ interface Props {
 	project: IProject
 }
 
-const props = withDefaults(defineProps<Props>(), {})
+const { project } = defineProps<Props>()
 
-const proposals = computed(() => props.project.expand?.proposals ?? [])
+const proposals = computed(() => project.expand?.proposals ?? [])
 
 const emit = defineEmits(['close', 'chose-proposal'])
 const close = () => {

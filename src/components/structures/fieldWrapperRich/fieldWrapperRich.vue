@@ -33,10 +33,7 @@ interface Props {
 	error?: string | null
 }
 
-withDefaults(defineProps<Props>(), {
-	label: '',
-	error: null
-})
+const { label = '', error = null } = defineProps<Props>()
 </script>
 
 <style>

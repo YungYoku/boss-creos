@@ -2,7 +2,7 @@
 	<img
 		:src="image"
 		:alt="alt"
-		:loading="typeof props.src === 'string' ? 'eager' : 'lazy'"
+		:loading="typeof src === 'string' ? 'eager' : 'lazy'"
 	/>
 </template>
 
@@ -15,13 +15,9 @@ interface Props {
 	alt?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
-	alt: ''
-})
+const { src, alt = '' } = defineProps<Props>()
 
 const image = computed(() => {
-	const src = props.src
-
 	if (typeof src === 'string') return src
 
 	return `${import.meta.env.VITE_API}/files/${src.collectionId}/${src.id}/${src.watermarked_image}`

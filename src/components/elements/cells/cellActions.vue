@@ -19,7 +19,7 @@ interface Props {
 	cell: ICell
 }
 
-withDefaults(defineProps<Props>(), {})
+const { cell } = defineProps<Props>()
 
 const emit = defineEmits(['action'])
 const reload = () => {
