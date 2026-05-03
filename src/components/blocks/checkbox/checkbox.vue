@@ -1,6 +1,9 @@
 <template>
 	<Grid
 		class="checkbox"
+		:class="{
+			_disabled: disabled
+		}"
 		:columns="['16px', 1]"
 		ver-align="center"
 		@click="toggle"
@@ -26,6 +29,13 @@
 			{{ label }}
 		</div>
 	</Grid>
+
+	<span
+		v-if="error"
+		class="checkbox__error"
+	>
+		{{ error }}
+	</span>
 </template>
 
 <script setup lang="ts">
@@ -39,18 +49,15 @@ interface Props {
 	label?: string
 }
 
-withDefaults(defineProps<Props>(), {
-	error: null,
-	checked: false,
-	disabled: false,
-	label: ''
-})
+const { error = null, checked = false, disabled = false, label = '' } = defineProps<Props>()
 
 const value = defineModel<boolean>({
 	default: false
 })
 
 const toggle = () => {
+	if (disabled) return
+
 	if (value.value !== null) {
 		value.value = !value.value
 	}

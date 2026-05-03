@@ -58,22 +58,16 @@ import { emptyUser, type IUser } from '@/types/user'
 
 interface Props {
 	user?: IUser | null | undefined
-	self?: boolean
 	size?: 'xs' | 's' | 'm' | 'l' | 'xl'
 	editable?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
-	user: () => ({ ...emptyUser }),
-	self: false,
-	size: 'm',
-	editable: false
-})
+const { user = { ...emptyUser }, size = 'm', editable = false } = defineProps<Props>()
 
 const auth = useAuthStore()
 
 const avatar = computed(() => {
-	const avatar = props.user?.expand?.avatar
+	const avatar = user?.expand?.avatar
 	if (!avatar) return null
 
 	return `${import.meta.env.VITE_API}/files/${avatar.collectionId}/${avatar.id}/${avatar.original_image}`

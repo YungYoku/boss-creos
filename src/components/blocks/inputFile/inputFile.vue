@@ -62,13 +62,13 @@ interface Props {
 	accept?: string
 }
 
-withDefaults(defineProps<Props>(), {
-	error: null,
-	loading: false,
-	compact: false,
-	label: '',
-	accept: ''
-})
+const {
+	error = null,
+	loading = false,
+	compact = false,
+	label = '',
+	accept = ''
+} = defineProps<Props>()
 
 const emit = defineEmits(['update:name'])
 const updateName = (value: string) => {

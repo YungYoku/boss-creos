@@ -31,10 +31,7 @@ interface Props {
 	link?: boolean
 }
 
-withDefaults(defineProps<Props>(), {
-	loading: false,
-	link: false
-})
+const { user } = defineProps<Props>()
 </script>
 
 <style scoped>

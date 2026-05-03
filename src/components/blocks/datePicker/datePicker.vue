@@ -15,6 +15,13 @@
 
 		<Calendar v-model="value" />
 	</Popover>
+
+	<span
+		v-if="error"
+		class="date-picker__error"
+	>
+		{{ error }}
+	</span>
 </template>
 
 <script setup lang="ts">
@@ -29,10 +36,7 @@ interface Props {
 	label?: string
 }
 
-withDefaults(defineProps<Props>(), {
-	error: null,
-	label: 'Дата'
-})
+const { error = null, label = 'Дата' } = defineProps<Props>()
 
 const months = [
 	'января',

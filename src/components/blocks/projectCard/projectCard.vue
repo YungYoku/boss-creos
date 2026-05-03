@@ -146,28 +146,29 @@ interface Props {
 	loading?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
-	showingProposals: false,
-	showingChat: false,
-	showingRemove: false,
-	showingStatus: false,
-	loading: false
-})
+const {
+	project,
+	showingProposals = false,
+	showingChat = false,
+	showingRemove = false,
+	showingStatus = false,
+	loading = false
+} = defineProps<Props>()
 
 const authStore = useAuthStore()
 
 const emit = defineEmits(['show-proposals', 'show-chat', 'add-to-favorite', 'remove'])
 
 const showProposals = () => {
-	emit('show-proposals', props.project)
+	emit('show-proposals', project)
 }
 const openChat = () => {
-	emit('show-chat', props.project)
+	emit('show-chat', project)
 }
 const addToFavorite = async () => {
-	const newFavorite = authStore.user.favorite.includes(props.project.id)
-		? authStore.user.favorite.filter(id => id !== props.project.id)
-		: [...authStore.user.favorite, props.project.id]
+	const newFavorite = authStore.user.favorite.includes(project.id)
+		? authStore.user.favorite.filter(id => id !== project.id)
+		: [...authStore.user.favorite, project.id]
 
 	await Http.patch(`/collections/users/records/${authStore.user.id}`, {
 		favorite: newFavorite
@@ -176,11 +177,11 @@ const addToFavorite = async () => {
 	})
 }
 const remove = () => {
-	emit('remove', props.project)
+	emit('remove', project)
 }
 
 const status = computed(() => {
-	switch (props.project.status) {
+	switch (project.status) {
 		case 'created':
 			return 'Создано'
 		case 'in_progress':
@@ -194,7 +195,7 @@ const status = computed(() => {
 	}
 })
 
-const deadline = computed(() => new Date(props.project.deadline))
+const deadline = computed(() => new Date(project.deadline))
 </script>
 
 <style scoped>

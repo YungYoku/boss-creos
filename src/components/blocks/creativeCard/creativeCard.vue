@@ -85,18 +85,14 @@ import { Http } from '@/plugins'
 interface Props {
 	creative: ICreative
 	forSale?: boolean
-	badge?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
-	forSale: false,
-	badge: false
-})
+const { creative, forSale = false } = defineProps<Props>()
 
-const excludeGeo = computed(() => props.creative.unavailableGeo)
+const excludeGeo = computed(() => creative.unavailableGeo)
 
 const auth = useAuthStore()
-const isItMine = computed(() => props.creative.creator === auth.user.id)
+const isItMine = computed(() => creative.creator === auth.user.id)
 
 const route = useRoute()
 const isDetailPage = computed(() => route.name === '/creative/[id]')
@@ -104,7 +100,7 @@ const isDetailPage = computed(() => route.name === '/creative/[id]')
 const geo: Ref<string[]> = ref([])
 const basketWithCreative = computed(() => {
 	const baskets = auth.user.expand?.baskets ?? []
-	const basket = baskets.find(basket => basket.expand?.creative?.id === props.creative.id)
+	const basket = baskets.find(basket => basket.expand?.creative?.id === creative.id)
 	if (basket?.status === 'created') {
 		return basket
 	}
@@ -154,7 +150,7 @@ const addToBasket = async () => {
 	}
 
 	await Http.post<IUser>('/baskets/add', {
-		creative: props.creative.id,
+		creative: creative.id,
 		geo: [...geo.value]
 	}).then(async data => {
 		auth.setUser(data)
@@ -163,7 +159,7 @@ const addToBasket = async () => {
 }
 
 const toggleFavorite = async () => {
-	const id = props.creative.id
+	const id = creative.id
 	if (!id) return
 
 	let newFavorite = [...auth.user.favorite]
@@ -181,7 +177,7 @@ const toggleFavorite = async () => {
 }
 
 const isFavorite = computed(() => {
-	return auth.user.favorite.includes(props.creative.id)
+	return auth.user.favorite.includes(creative.id)
 })
 </script>
 

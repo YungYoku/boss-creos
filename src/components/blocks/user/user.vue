@@ -41,11 +41,7 @@ interface Props {
 	boughtAmount?: number
 }
 
-withDefaults(defineProps<Props>(), {
-	loading: false,
-	link: false,
-	boughtAmount: 0
-})
+const { loading = false, link = false, boughtAmount = 0 } = defineProps<Props>()
 </script>
 
 <style scoped>

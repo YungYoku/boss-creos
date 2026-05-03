@@ -24,13 +24,11 @@
 					v-if="creatives[0]"
 					class="main__prologue-creative"
 					:creative="creatives[0]"
-					:badge="false"
 				/>
 				<CreativeCard
 					v-if="creatives[1]"
 					class="main__prologue-creative"
 					:creative="creatives[1]"
-					:badge="false"
 				/>
 			</div>
 		</div>
