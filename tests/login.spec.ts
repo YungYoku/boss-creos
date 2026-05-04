@@ -5,14 +5,14 @@ test('login test', async ({ page }) => {
 	await page.goto('http://localhost:5173/login')
 
 	// Ввод логина
-	await page.fill('input[type="text"]', '123')
+	await page.fill('input[type="text"]', 'yungyoku@yandex.ru')
 
 	// Ввод пароля
-	await page.fill('input[type="password"]', '321')
+	await page.fill('input[type="password"]', 'yungyoku@yandex.ru')
 
 	// Клик по кнопке "Войти"
 	await page.click('button:has-text("Войти")')
 
 	// Пример проверки (замени под свой кейс)
-	await expect(page).toHaveURL(/.*dashboard/)
+	await expect(page).toHaveURL('http://localhost:5173/')
 })

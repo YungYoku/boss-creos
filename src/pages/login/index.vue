@@ -94,6 +94,7 @@ const toast = useToast()
 
 const loading = ref(false)
 const login = async () => {
+	console.log(isLoginPossible.value)
 	if (isLoginPossible.value) {
 		loading.value = true
 		form.clearErrors()

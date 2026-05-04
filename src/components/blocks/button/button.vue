@@ -13,6 +13,7 @@
 		:class="[props.class, variant]"
 		:type
 		:disabled
+		@click="emit('click')"
 	>
 		<slot />
 	</component>
@@ -23,7 +24,7 @@ import type { PropType } from 'vue'
 
 import { Skeleton } from '@/components/elements'
 
-defineEmits(['click'])
+const emit = defineEmits(['click'])
 
 type Type = 'button' | 'submit' | 'reset'
 type Variant = 'default' | 'positive' | 'destructive' | 'outline'

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-test('login test', async ({ page }) => {
+test('menu test', async ({ page }) => {
 	// Переход на главную страницу
 	await page.goto('http://localhost:5173/')
 
@@ -8,5 +8,5 @@ test('login test', async ({ page }) => {
 	await page.click('a:has-text("Магазин")')
 
 	// Пример проверки (замени под свой кейс)
-	await expect(page).toHaveURL(/.*shop/)
+	await expect(page).toHaveURL('http://localhost:5173/shop')
 })
