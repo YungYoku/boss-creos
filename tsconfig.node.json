@@ -4,8 +4,5 @@
 		"module": "ESNext",
 		"types": ["@types/node", "node"]
 	},
-	"include": [
-		"playwright.config.ts",
-		"vite.config.ts"
-	]
+	"include": ["playwright.config.ts", "vite.config.ts"]
 }
