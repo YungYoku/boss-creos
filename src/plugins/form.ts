@@ -8,7 +8,7 @@ type RawSchema<Schema extends object = object> = {
 }
 
 interface FormField<T> {
-	type: 'field'
+	_type: 'field'
 	value: T
 	error: string | null
 	isTouched: boolean
@@ -31,7 +31,7 @@ type TransformedFormFields<Schema extends RawSchema> = {
 }
 
 type IForm<Schema extends RawSchema> = TransformedFormFields<Schema> & {
-	type: 'form'
+	_type: 'form'
 	set(data: Partial<Schema>): void
 	get(): Schema
 	setErrors(_: FormErrors<Schema>): void
@@ -75,7 +75,7 @@ const Form = <Schema extends RawSchema<Schema>>(base: Schema): IForm<Schema> => 
 			Reflect.set(acc, key, Form(value))
 		} else {
 			const field: FormField<typeof value> = {
-				type: 'field',
+				_type: 'field',
 				value,
 				error: null,
 				isTouched: false
@@ -94,7 +94,7 @@ const Form = <Schema extends RawSchema<Schema>>(base: Schema): IForm<Schema> => 
 				field.set(value)
 			} else {
 				const newField: FormField<typeof value> = {
-					type: 'field',
+					_type: 'field',
 					value,
 					error: null,
 					isTouched: false
@@ -157,7 +157,7 @@ const Form = <Schema extends RawSchema<Schema>>(base: Schema): IForm<Schema> => 
 			} else {
 				const value = base[key]
 				const newField: FormField<typeof value> = {
-					type: 'field',
+					_type: 'field',
 					value,
 					error: null,
 					isTouched: false
@@ -173,7 +173,7 @@ const Form = <Schema extends RawSchema<Schema>>(base: Schema): IForm<Schema> => 
 
 	return {
 		...form,
-		type: 'form',
+		_type: 'form',
 		set,
 		get,
 		setErrors,

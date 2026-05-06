@@ -3,12 +3,16 @@
 		:src="image"
 		:alt="alt"
 		:loading="typeof src === 'string' ? 'eager' : 'lazy'"
+		@click="e => emit('click', e)"
+		@mouseenter="e => emit('mouseenter', e)"
 	/>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { IImage } from '@/types/file'
+
+const emit = defineEmits(['click', 'mouseenter'])
 
 interface Props {
 	src: string | IImage

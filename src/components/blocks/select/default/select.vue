@@ -18,7 +18,7 @@
 				</Text>
 
 				<Icon
-					v-if="clearable && value.length > 0"
+					v-if="clearable && value?.length"
 					class="select__clear"
 					name="close"
 					size="s"
@@ -62,7 +62,7 @@
 			>
 				<Checkbox
 					v-if="multiple"
-					:checked="value.includes(item.id)"
+					:checked="isChecked(item.id)"
 					disabled
 					:label="item.name"
 				/>
@@ -108,6 +108,15 @@ const {
 	clearable = true,
 	searchable = false
 } = defineProps<Props>()
+
+const isChecked = (id: string) => {
+	if (multiple) return false
+
+	const _value = value.value
+	if (!Array.isArray(_value)) throw validationError
+
+	return _value.includes(id)
+}
 
 const validationError = new Error('Select multiple, but value is not an array')
 
@@ -173,7 +182,7 @@ const clear = () => {
 }
 </script>
 
-<style scoped>
+<style>
 .select {
 	.select__trigger {
 		position: relative;

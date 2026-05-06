@@ -57,22 +57,22 @@ const action = () => {
 	.input {
 		width: 120px;
 		height: 25px;
-	}
 
-	.input__field-wrap {
-		height: 25px;
-		border-radius: 8px;
-		border: 1px solid #ffffff1a;
-		background: transparent;
-	}
+		.input__field-wrap {
+			height: 25px;
+			border-radius: 8px;
+			border: 1px solid #ffffff1a;
+			background: transparent;
+		}
 
-	.input__field {
-		padding: 4px 24px 4px 8px;
-	}
+		.input__field {
+			padding: 4px 24px 4px 8px;
+		}
 
-	.input__clear {
-		top: 3px;
-		right: 3px;
+		.input__clear {
+			top: 3px;
+			right: 3px;
+		}
 	}
 }
 </style>

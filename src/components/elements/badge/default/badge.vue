@@ -1,11 +1,11 @@
 <template>
-	<div class="badge">
+	<div class="badge" @click="emit('click')">
 		<slot />
 	</div>
 </template>
 
 <script setup lang="ts">
-defineEmits(['click'])
+const emit = defineEmits(['click'])
 </script>
 
 <style scoped>

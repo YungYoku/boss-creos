@@ -7,6 +7,8 @@
 		}"
 		:src="src"
 		alt="icon"
+		@click="e => emit('click', e)"
+		@mouseenter="e => emit('mouseenter', e)"
 	/>
 </template>
 
@@ -15,7 +17,7 @@ import { computed } from 'vue'
 
 import Image from '../image/image.vue'
 
-defineEmits(['click', 'mouseenter'])
+const emit = defineEmits(['click', 'mouseenter'])
 
 const props = defineProps({
 	name: {

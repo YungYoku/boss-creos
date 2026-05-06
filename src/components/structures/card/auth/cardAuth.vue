@@ -4,6 +4,7 @@
 		:style="{
 			width
 		}"
+		@keyup="emit('keyup')"
 	>
 		<div
 			v-if="title"
@@ -34,7 +35,7 @@
 <script setup lang="ts">
 import { Grid } from '@/components/structures'
 
-defineEmits(['keyup'])
+const emit = defineEmits(['keyup'])
 
 defineProps({
 	width: {
