@@ -28,7 +28,7 @@
 		"oxlint-tsgolint": "0.22.1",
 		"playwright": "1.59.1",
 		"typescript": "6.0.3",
-		"vite": "8.0.10",
+		"vite": "8.0.11",
 		"vite-plugin-checker": "0.13.0",
 		"vue-tsc": "3.2.8"
 	}
