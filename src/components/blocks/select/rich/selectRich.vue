@@ -31,7 +31,7 @@ const {
 } = defineProps<Props>()
 
 const value = defineModel<T>({
-    default: null
+	default: null
 })
 
 const search = defineModel<string>('search', {

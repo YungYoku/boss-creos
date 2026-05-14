@@ -37,32 +37,32 @@ const value = defineModel<string>({
 		width: 120px;
 		height: 25px;
 
-    	.input__field,
-    	.input__file-name {
-    		padding: 2px 40px 4px 8px;
-    	}
+		.input__field,
+		.input__file-name {
+			padding: 2px 40px 4px 8px;
+		}
 
-    	.input__file-name {
-    		overflow: hidden;
-    		text-overflow: ellipsis;
-    	}
+		.input__file-name {
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
 
-    	.input__field-wrap {
-    		height: 25px;
-    		border-radius: 8px;
-    		border: 1px solid #ffffff1a;
-    		background: transparent;
-    	}
+		.input__field-wrap {
+			height: 25px;
+			border-radius: 8px;
+			border: 1px solid #ffffff1a;
+			background: transparent;
+		}
 
-    	.input__clear {
-    		top: 5px;
-    		right: 20px;
-    	}
+		.input__clear {
+			top: 5px;
+			right: 20px;
+		}
 
-    	.input-image__icon {
-    		top: 5px;
-    		right: 5px;
-    	}
+		.input-image__icon {
+			top: 5px;
+			right: 5px;
+		}
 	}
 }
 </style>

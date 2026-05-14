@@ -1,5 +1,8 @@
 <template>
-	<div class="badge" @click="emit('click')">
+	<div
+		class="badge"
+		@click="emit('click')"
+	>
 		<slot />
 	</div>
 </template>
