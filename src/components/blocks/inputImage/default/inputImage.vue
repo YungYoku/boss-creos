@@ -71,9 +71,11 @@ const {
 	accept = ''
 } = defineProps<Props>()
 
-const emit = defineEmits(['update:name'])
+const name = defineModel<string | null>('name', {
+	default: null
+})
 const updateName = (value: string) => {
-	emit('update:name', value)
+	name.value = value
 }
 
 const value = defineModel<string>({

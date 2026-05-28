@@ -2,23 +2,24 @@ type data = number | string | boolean | object | (number | string | boolean | ob
 
 class Storage {
 	write(key: string, data: data) {
-		localStorage[key] = JSON.stringify(data)
+		try {
+			localStorage.setItem(key, JSON.stringify(data))
+		} catch (err) {
+			console.error('Storage write error', err)
+		}
 	}
 
 	load(key: string) {
-		const data = localStorage[key]
 		try {
-			if (data) {
-				return JSON.parse(data)
-			}
+			const raw = localStorage.getItem(key)
+			return raw ? JSON.parse(raw) : null
 		} catch {
 			return null
 		}
 	}
 
-	clear() {
-		localStorage.removeItem('user')
-		localStorage.removeItem('token')
+	clear(keys: string[] = ['user', 'token']) {
+		keys.forEach(k => localStorage.removeItem(k))
 	}
 }
 

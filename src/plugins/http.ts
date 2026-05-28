@@ -159,32 +159,25 @@ class Http {
 		return result.slice(0, -1)
 	}
 
+	private async handleResponse<T>(res: Response): Promise<T> {
+		if (res.status === 204) return null as unknown as T
+		const ct = res.headers.get('content-type') || ''
+		const body = ct.includes('application/json') ? await res.json() : await res.text()
+		if (!res.ok) throw body || { status: res.status, statusText: res.statusText }
+		return body as T
+	}
+
 	async get<T extends object>(url: string, query: Query<T> | null = null): Promise<T> {
 		const auth = useAuthStore()
 
 		let _url = url
 		if (query) _url += this.getFormatedQuery(query)
 
-		return fetch(this.api + _url, {
+		const res = await fetch(this.api + _url, {
 			method: 'GET',
 			headers: this.getHeaders(auth.token)
 		})
-			.then(response => {
-				return response
-					.json()
-					.then(res => {
-						if (response.status === 400 || response.status === 404) {
-							throw res
-						}
-						return res
-					})
-					.catch((err: unknown) => {
-						throw err
-					})
-			})
-			.catch((err: unknown) => {
-				throw err
-			})
+		return this.handleResponse<T>(res)
 	}
 
 	async post<T extends object>(
@@ -199,29 +192,14 @@ class Http {
 
 		const _body = body instanceof FormData ? body : JSON.stringify(body)
 
-		return fetch(this.api + _url, {
+		const res = await fetch(this.api + _url, {
 			method: 'POST',
 			headers: this.getHeaders(auth.token, {
 				isFormData: body instanceof FormData
 			}),
 			body: _body
 		})
-			.then(response => {
-				return response
-					.json()
-					.then(res => {
-						if (response.status === 400 || response.status === 404) {
-							throw res
-						}
-						return res
-					})
-					.catch((err: unknown) => {
-						throw err
-					})
-			})
-			.catch((err: unknown) => {
-				throw err
-			})
+		return this.handleResponse<T>(res)
 	}
 
 	async patch<T extends object>(
@@ -236,29 +214,14 @@ class Http {
 
 		const _body = body instanceof FormData ? body : JSON.stringify(body)
 
-		return fetch(this.api + _url, {
+		const res = await fetch(this.api + _url, {
 			method: 'PATCH',
 			headers: this.getHeaders(auth.token, {
 				isFormData: body instanceof FormData
 			}),
 			body: _body
 		})
-			.then(response => {
-				return response
-					.json()
-					.then(res => {
-						if (response.status === 400 || response.status === 404) {
-							throw res
-						}
-						return res
-					})
-					.catch((err: unknown) => {
-						throw err
-					})
-			})
-			.catch((err: unknown) => {
-				throw err
-			})
+		return this.handleResponse<T>(res)
 	}
 
 	async delete<T extends object>(url: string, query: Query<T> | null = null): Promise<Response> {
@@ -267,32 +230,11 @@ class Http {
 		let _url = url
 		if (query) _url += this.getFormatedQuery(query)
 
-		return fetch(this.api + _url, {
+		const res = await fetch(this.api + _url, {
 			method: 'DELETE',
 			headers: this.getHeaders(auth.token)
 		})
-			.then(response => {
-				if (response.status === 204) {
-					return new Promise(resolve => {
-						resolve({})
-					})
-				}
-
-				return response
-					.json()
-					.then(res => {
-						if (response.status === 400 || response.status === 404) {
-							throw res
-						}
-						return res
-					})
-					.catch((err: unknown) => {
-						throw err
-					})
-			})
-			.catch((err: unknown) => {
-				throw err
-			})
+		return this.handleResponse<Response>(res)
 	}
 
 	setSubscription(url: string, clientId: string): Promise<Response> {

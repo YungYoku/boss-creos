@@ -2,16 +2,13 @@ import type { App, Plugin } from 'vue'
 
 export type FormatType = 'percent' | 'number'
 
+const types = {
+	percent: (value: number) => `${value.toFixed(2)}%`,
+	number: (value: number, length = 1) => value.toFixed(length)
+} as const
+
 class Format {
 	get(type: FormatType, value: number, ...props: number[]) {
-		const types = {
-			percent: (value: number) => `${value.toFixed(2)}%`,
-
-			number(value: number, length = 1) {
-				return value.toFixed(length)
-			}
-		}
-
 		return types[type](value, ...props)
 	}
 }

@@ -23,9 +23,10 @@ class Screen {
 		else if (value <= this.#sizes.m) this.#size.value = 'm'
 		else if (value <= this.#sizes.l) this.#size.value = 'l'
 		else if (value <= this.#sizes.xl) this.#size.value = 'xl'
+		else this.#size.value = 'xl'
 	}
 
-	isSize(size: string) {
+	isSize(size: Size) {
 		return this.#size.value === size
 	}
 

@@ -14,11 +14,12 @@ class Datetime {
 	get(date: Date | string | null, type: Method = 'default') {
 		if (date === null) return ''
 		if (typeof date === 'string') {
-			try {
-				date = new Date(date)
-			} catch (e) {
-				console.warn(e)
+			const parsed = new Date(date)
+			if (isNaN(parsed.getTime())) {
+				console.warn('Invalid date string passed to Datetime.get():', date)
 				date = new Date()
+			} else {
+				date = parsed
 			}
 		}
 
@@ -26,7 +27,7 @@ class Datetime {
 		const getValue = (value: number) => String(value).padStart(2, '0')
 		const month = getValue(date.getMonth() + 1)
 		const day = getValue(date.getDate())
-		const hour = getValue(date.getUTCHours())
+		const hour = getValue(date.getHours())
 		const min = getValue(date.getMinutes())
 		const second = getValue(date.getSeconds())
 

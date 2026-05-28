@@ -48,9 +48,9 @@
 					>
 						<InputFile
 							v-model="file"
+							v-model:name="fileName"
 							:loading="loading"
 							compact
-							@update:name="value => (fileName = value)"
 						/>
 
 						<Input

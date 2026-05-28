@@ -6,9 +6,9 @@
 	>
 		<InputVideo
 			v-model="value"
+			v-model:name="name"
 			:loading
 			:accept
-			@update:name="updateName"
 		/>
 	</FieldWrapperRich>
 </template>
@@ -21,10 +21,9 @@ import InputVideo from '../default/inputVideo.vue'
 
 const { error = null, loading = false, label = '', accept = '' } = defineProps<Props>()
 
-const emit = defineEmits(['update:name'])
-const updateName = (value: string) => {
-	emit('update:name', value)
-}
+const name = defineModel<string | null>('name', {
+	default: null
+})
 
 const value = defineModel<string>({
 	default: null
