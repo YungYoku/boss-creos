@@ -15,7 +15,7 @@ export type IBasket = DBRecord & {
 	reskin: boolean
 	comment: string
 	status: BasketStatus
-	video: string
+	video: string | null
 	expand?: {
 		creative?: ICreative
 		geo?: IGeo[]

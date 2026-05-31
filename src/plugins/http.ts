@@ -162,9 +162,11 @@ class Http {
 	private async handleResponse<T>(res: Response): Promise<T> {
 		if (res.status === 204) return null as unknown as T
 		const ct = res.headers.get('content-type') || ''
-		const body = ct.includes('application/json') ? await res.json() : await res.text()
-		if (!res.ok) throw body || { status: res.status, statusText: res.statusText }
-		return body as T
+		if (!res.ok) {
+			const body = ct.includes('application/json') ? await res.json() : await res.text()
+			throw body ?? { status: res.status, statusText: res.statusText }
+		}
+		return (ct.includes('application/json') ? await res.json() : await res.text()) as T
 	}
 
 	async get<T extends object>(url: string, query: Query<T> | null = null): Promise<T> {
@@ -224,7 +226,7 @@ class Http {
 		return this.handleResponse<T>(res)
 	}
 
-	async delete<T extends object>(url: string, query: Query<T> | null = null): Promise<Response> {
+	async delete<T extends object>(url: string, query: Query<T> | null = null): Promise<null> {
 		const auth = useAuthStore()
 
 		let _url = url
@@ -234,7 +236,7 @@ class Http {
 			method: 'DELETE',
 			headers: this.getHeaders(auth.token)
 		})
-		return this.handleResponse<Response>(res)
+		return this.handleResponse<null>(res)
 	}
 
 	setSubscription(url: string, clientId: string): Promise<Response> {

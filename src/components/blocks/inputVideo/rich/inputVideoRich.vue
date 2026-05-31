@@ -25,7 +25,7 @@ const name = defineModel<string | null>('name', {
 	default: null
 })
 
-const value = defineModel<string>({
+const value = defineModel<string | null>({
 	default: null
 })
 </script>

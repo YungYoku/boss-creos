@@ -87,6 +87,8 @@ const Form = <Schema extends RawSchema<Schema>>(base: Schema): IForm<Schema> => 
 
 	const set = (data: Partial<Schema>) => {
 		for (const key of keys) {
+			if (!(key in data)) continue
+
 			const field = form[key]
 			const value = data[key]
 

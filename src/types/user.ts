@@ -8,7 +8,7 @@ import type { Transaction } from '@/types/transaction'
 import type { ICreative } from '@/types/creative'
 
 export type IUser = DBRecord & {
-	avatar: string
+	avatar: string | null
 	created: Date
 	updated: Date
 	email: string
@@ -46,7 +46,7 @@ export interface IUserRefresh {
 }
 
 export const emptyUser: IUser = {
-	avatar: '',
+	avatar: null,
 	collectionId: '',
 	collectionName: '',
 	email: '',

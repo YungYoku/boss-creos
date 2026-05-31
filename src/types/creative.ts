@@ -34,9 +34,9 @@ export type ICreative = DBRecord & {
 	geo: string
 	unavailableGeo: string[]
 	slot: string
-	preview: string
+	preview: string | null
 	watermark: boolean
-	video: string
+	video: string | null
 	description: string
 	approach: string
 	ratio: IRatio
@@ -71,9 +71,9 @@ export const emptyCreative: ICreative = {
 	geo: '',
 	unavailableGeo: [],
 	slot: '',
-	preview: '',
+	preview: null,
 	watermark: false,
-	video: '',
+	video: null,
 	description: '',
 	approach: '',
 	ratio: '1:1',

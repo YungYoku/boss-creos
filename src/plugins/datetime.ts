@@ -27,7 +27,7 @@ class Datetime {
 		const getValue = (value: number) => String(value).padStart(2, '0')
 		const month = getValue(date.getMonth() + 1)
 		const day = getValue(date.getDate())
-		const hour = getValue(date.getHours())
+		const hour = getValue(date.getUTCHours())
 		const min = getValue(date.getMinutes())
 		const second = getValue(date.getSeconds())
 

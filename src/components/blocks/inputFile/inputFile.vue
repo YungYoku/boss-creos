@@ -52,7 +52,7 @@
 <script setup lang="ts">
 import { Button, Input } from '@/components/blocks'
 import { Icon } from '@/components/elements'
-import { Http } from '@/plugins'
+import { useFileUpload } from '@/composables/useFileUpload'
 
 interface Props {
 	error?: string | null
@@ -70,27 +70,9 @@ const {
 	accept = ''
 } = defineProps<Props>()
 
-const name = defineModel<string | null>('name', {
-	default: null
-})
-const updateName = (value: string) => {
-	name.value = value
-}
-
-const value = defineModel<string | null>({
-	default: null
-})
-const updateFile = async (file: File) => {
-	updateName(file.name)
-
-	const formData = new FormData()
-
-	formData.append('file', file)
-
-	value.value = await Http.post<{ id: string }>('/collections/files/records', formData).then(
-		({ id }) => id
-	)
-}
+const name = defineModel<string | null>('name', { default: null })
+const value = defineModel<string | null>({ default: null })
+const { updateFile } = useFileUpload('file', '/collections/files/records', value, name)
 </script>
 
 <style scoped>

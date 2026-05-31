@@ -4,8 +4,9 @@ import vue from '@vitejs/plugin-vue'
 import vueRouter from 'vue-router/vite'
 import checker from 'vite-plugin-checker'
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode, command }) => {
 	const isProd = mode === 'production'
+	const isDev = command === 'serve'
 
 	return {
 		build: {
@@ -27,7 +28,7 @@ export default defineConfig(({ mode }) => {
 					optionsAPI: false
 				}
 			}),
-			checker({
+			isDev && checker({
 				oxlint: true,
 				vueTsc: true,
 				typescript: true
