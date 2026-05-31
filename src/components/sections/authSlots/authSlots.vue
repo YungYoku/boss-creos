@@ -51,6 +51,16 @@ const height = computed(() => {
 	}
 }
 
+@keyframes up {
+	from {
+		transform: translateY(0);
+	}
+
+	to {
+		transform: translateY(v-bind(height));
+	}
+}
+
 .auth-slots {
 	display: flex;
 	height: 100vh;
@@ -68,6 +78,7 @@ const height = computed(() => {
 
 		&:nth-child(2) {
 			margin-top: calc((100% - 150px) / 7);
+			animation: up 3s linear infinite;
 		}
 
 		animation: down 3s linear infinite;
