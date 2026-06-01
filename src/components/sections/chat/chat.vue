@@ -93,20 +93,12 @@
 					</Button>
 				</Grid>
 
-				<template v-if="project.status === 'ended'">
-					<Button
-						v-if="rating"
-						@click="next"
-					>
-						Просмотр отзыва
-					</Button>
-					<Button
-						v-else
-						@click="next"
-					>
-						Оставить отзыв
-					</Button>
-				</template>
+				<Button
+					v-if="project.status === 'ended'"
+					@click="next"
+				>
+					{{ rating ? 'Просмотр отзыва' : 'Оставить отзыв' }}
+				</Button>
 			</Grid>
 		</template>
 
@@ -136,7 +128,7 @@ import { Http } from '@/plugins'
 import type { IMessage } from '@/types/message'
 import type { IChat } from '@/types/chat'
 import { type IProject, type IProjectStatus } from '@/types/project'
-import type { IRating } from '@/types/rating'
+import { emptyRating, type IRating } from '@/types/rating'
 
 import { Message } from './components'
 
@@ -239,16 +231,7 @@ const declineReview = () => updateStatus('in_progress')
 const sendToReview = () => updateStatus('on_review')
 const approveReview = () => updateStatus('ended')
 
-const newRating: Ref<IRating> = ref({
-	by: '',
-	collectionId: '',
-	collectionName: '',
-	created: '',
-	id: '',
-	updated: '',
-	stars: 0,
-	review: ''
-})
+const newRating: Ref<IRating> = ref({ ...emptyRating })
 watch(
 	rating,
 	() => {

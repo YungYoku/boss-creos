@@ -64,16 +64,13 @@ import type { ICreative, ICreatives } from '@/types/creative'
 
 const route = useRoute()
 
-const loading = ref(true)
 const user: Ref<IUser | null> = ref(null)
 
 const loadingCreatives = ref(true)
 const creatives: Ref<ICreative[]> = ref([])
 
-const getID = () => route.params.id
-
 const loadCreatives = async () => {
-	const id = getID()
+	const id = route.params.id
 	if (!id) return
 
 	loadingCreatives.value = true
@@ -94,20 +91,16 @@ const loadCreatives = async () => {
 void loadCreatives()
 
 const loadUser = async () => {
-	const id = getID()
+	const id = route.params.id
 	if (!id) return
-
-	loading.value = true
 
 	await Http.get<IUser>(`/collections/users/records/${id}`, {
 		expand: ['avatar']
 	}).then(res => {
 		user.value = res
 	})
-
-	loading.value = false
 }
-watch(() => getID(), loadUser, { immediate: true })
+watch(() => route.params.id, loadUser, { immediate: true })
 </script>
 
 <style scoped>

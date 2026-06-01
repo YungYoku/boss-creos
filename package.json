@@ -7,7 +7,7 @@
 		"dev": "vite",
 		"typecheck": "vue-tsc --noEmit",
 		"build": "bun run typecheck && vite build",
-		"test": "bunx playwright test",
+		"test:e2e": "bunx playwright test",
 		"test:unit": "vitest run",
 		"test:unit:watch": "vitest",
 		"preview": "vite preview",
@@ -31,9 +31,9 @@
 		"oxlint-tsgolint": "0.23.0",
 		"playwright": "1.60.0",
 		"typescript": "6.0.3",
-		"vite": "8.0.14",
+		"vite": "8.0.16",
 		"vite-plugin-checker": "0.14.1",
-		"vitest": "4.1.7",
+		"vitest": "4.1.8",
 		"vue-tsc": "3.3.3"
 	}
 }

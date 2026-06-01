@@ -50,13 +50,11 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
 import type { IRows } from '@/types/table'
 
-defineProps({
-	data: {
-		type: Array as PropType<IRows>,
-		default: () => []
-	}
-})
+interface Props {
+	data?: IRows
+}
+
+const { data = [] } = defineProps<Props>()
 </script>

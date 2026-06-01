@@ -31,16 +31,6 @@ const slots = defineSlots<Record<string, string>>()
 const steps = reactive<string[]>(Object.keys(slots).filter(slot => slot !== 'footer'))
 const currentStep = ref(1)
 
-defineProps({
-	width: {
-		type: Number,
-		default: 302
-	},
-	title: {
-		type: String,
-		default: null
-	}
-})
 
 const isRequestStep = computed(() => currentStep.value === steps.length)
 const isCancelStep = computed(() => currentStep.value === 1)
@@ -61,7 +51,7 @@ const next = () => {
 
 const getCurrentClass = (step: number) => {
 	const _step = step + 1
-	if (_step + 1 === currentStep.value) return 'current_step'
+	if (_step === currentStep.value) return 'current_step'
 	if (_step < currentStep.value) return 'accept_step'
 
 	return ''

@@ -9,16 +9,12 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-	width: {
-		type: String,
-		default: '100%'
-	},
-	height: {
-		type: String,
-		default: '100%'
-	}
-})
+interface Props {
+	width?: string
+	height?: string
+}
+
+const { width = '100%', height = '100%' } = defineProps<Props>()
 </script>
 
 <style scoped>

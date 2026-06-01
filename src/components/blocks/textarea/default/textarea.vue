@@ -53,15 +53,7 @@ const value = defineModel<string>({
 })
 const clear = () => (value.value = '')
 
-const isEmpty = computed(() => {
-	if (typeof value.value === 'number') {
-		return false
-	} else if (typeof value.value === 'string') {
-		return value.value.length === 0
-	}
-
-	return true
-})
+const isEmpty = computed(() => value.value.length === 0)
 
 const filled = computed(() => value.value.length > 0)
 </script>

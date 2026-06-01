@@ -22,7 +22,6 @@
 		<template v-else>
 			<template v-if="editable">
 				<input
-					v-if="editable"
 					id="avatar"
 					class="avatar__input"
 					type="file"
@@ -31,7 +30,6 @@
 				/>
 
 				<Icon
-					v-if="editable"
 					class="avatar__icon-upload"
 					name="upload"
 					size="m"
@@ -41,7 +39,7 @@
 			<Icon
 				v-else
 				name="user"
-				:colors="['light', 'light']"
+				color="light"
 				:size="size"
 			/>
 		</template>

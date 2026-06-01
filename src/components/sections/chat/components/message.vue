@@ -12,7 +12,7 @@
 		<File
 			v-if="message.expand?.file?.file"
 			:src="`${message.expand.file.collectionId}/${message.expand.file.id}/${message.expand.file.file}`"
-			:colors="self ? ['dark', 'light'] : ['light', 'dark']"
+			:color="self ? 'dark' : 'light'"
 		/>
 
 		<span class="message__date">{{ $date(created, 'fullDatetime') }}</span>
@@ -23,19 +23,16 @@
 import { computed } from 'vue'
 
 import { File, Text } from '@/components/elements'
+import type { IMessage } from '@/types/message'
 
-const props = defineProps({
-	message: {
-		type: Object,
-		default: () => ({})
-	},
-	self: {
-		type: Boolean,
-		default: false
-	}
-})
+interface Props {
+	message: IMessage
+	self?: boolean
+}
 
-const created = computed(() => new Date(props.message.created))
+const { message, self = false } = defineProps<Props>()
+
+const created = computed(() => new Date(message.created))
 </script>
 
 <style scoped>

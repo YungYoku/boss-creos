@@ -45,9 +45,9 @@
 		</Grid>
 	</Grid>
 
-	<div v-else-if="isOnModeration">Креатив с ID {{ getID() }} на модерации</div>
+	<div v-else-if="isOnModeration">Креатив с ID {{ route.params.id }} на модерации</div>
 
-	<div v-else-if="!isExists">Креатив с ID {{ getID() }} не существует</div>
+	<div v-else-if="!isExists">Креатив с ID {{ route.params.id }} не существует</div>
 </template>
 
 <script setup lang="ts">
@@ -65,16 +65,12 @@ const auth = useAuthStore()
 const creative: Ref<ICreative> = ref({ ...emptyCreative })
 const route = useRoute()
 
-const getID = () => {
-	return route.params.id
-}
-
 const isOnModeration = ref(false)
 const isExists = ref(true)
 
 const loading = ref(true)
 const loadProject = async () => {
-	const id = getID()
+	const id = route.params.id
 	if (!id || Array.isArray(id)) return
 
 	loading.value = true

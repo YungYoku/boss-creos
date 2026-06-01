@@ -7,7 +7,7 @@
 			>
 				<Icon
 					name="circle"
-					:colors="['dark', 'light']"
+					color="dark"
 				/>
 
 				{{ label }}

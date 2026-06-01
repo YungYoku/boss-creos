@@ -37,23 +37,20 @@ import { Button, Input, Textarea } from '@/components/blocks'
 import { Form } from '@/plugins'
 import { emptyProposal, type IProjectProposal } from '@/types/project'
 
-const props = defineProps({
-	loading: {
-		type: Boolean,
-		default: false
-	},
-	defaultPrice: {
-		type: Number,
-		default: 0
-	}
-})
+interface Props {
+	loading?: boolean
+	defaultPrice?: number
+}
+
+const props = defineProps<Props>()
+const { loading = false } = props
 
 const form = Form<IProjectProposal>({ ...emptyProposal })
 
 watch(
 	() => props.defaultPrice,
 	() => {
-		form.price.value = props.defaultPrice
+		form.price.value = props.defaultPrice ?? 0
 	},
 	{ immediate: true }
 )

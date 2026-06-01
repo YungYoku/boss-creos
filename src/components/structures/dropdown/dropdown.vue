@@ -59,17 +59,16 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, type PropType, ref, useTemplateRef } from 'vue'
+import { onMounted, onUnmounted, ref, useTemplateRef } from 'vue'
 
 import type { IDropdownMenuItem } from '@/types/dropdownMenuItem'
 import Separator from '@/components/elements/separator/separator.vue'
 
-defineProps({
-	items: {
-		type: Array as PropType<IDropdownMenuItem[][]>,
-		default: () => []
-	}
-})
+interface Props {
+	items?: IDropdownMenuItem[][]
+}
+
+const { items = [] } = defineProps<Props>()
 
 const contentShowed = ref(false)
 

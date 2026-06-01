@@ -13,13 +13,11 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
 import type { IHeader } from '@/types/table'
 
-defineProps({
-	data: {
-		type: Array as PropType<IHeader>,
-		default: () => []
-	}
-})
+interface Props {
+	data?: IHeader
+}
+
+const { data = [] } = defineProps<Props>()
 </script>

@@ -64,8 +64,7 @@ const getPayload = (entity: T, isIncluded = false): Filter => {
 				id: entity
 			}
 		} else {
-			const keys = Object.keys(filterFields)
-			return keys.reduce((acc, key) => {
+			return filterFields.reduce((acc, key) => {
 				acc[key] = () => ({
 					value: [entity],
 					props: {

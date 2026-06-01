@@ -7,7 +7,12 @@
 			Принять
 		</Button>
 
-		<Button variant="destructive"> Отклонить </Button>
+		<Button
+			variant="destructive"
+			@click="onReject"
+		>
+			Отклонить
+		</Button>
 	</div>
 </template>
 
@@ -31,6 +36,10 @@ const onClick = async (cell: ICell) => {
 		await cell.options.handler()
 		reload()
 	}
+}
+
+const onReject = () => {
+	emit('action', 'reject')
 }
 </script>
 

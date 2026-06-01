@@ -121,7 +121,7 @@ const isLoginPossible = computed(() => {
 	const password = form.password.value
 	const identity = form.identity.value
 
-	return password.length >= 0 && identity.length > 0
+	return password.length > 0 && identity.length > 0
 })
 </script>
 

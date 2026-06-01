@@ -31,36 +31,22 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
 import type { IHeader, IRows } from '@/types/table'
 import Header from './components/header.vue'
 import Row from './components/row.vue'
 
-defineProps({
-	header: {
-		type: Array as PropType<IHeader>,
-		default: () => []
-	},
-	body: {
-		type: Array as PropType<IRows>,
-		default: () => []
-	},
-	cells: {
-		type: Object as PropType<Record<string, unknown>>,
-		default: () => ({})
-	}
-})
+interface Props {
+	header?: IHeader
+	body?: IRows
+	cells?: Record<string, unknown>
+}
+
+const { header = [], body = [], cells = {} } = defineProps<Props>()
 
 const emit = defineEmits(['reload'])
-const reload = () => {
-	emit('reload')
-}
 
-const actions = {
-	reload: reload
-}
-const handleAction = (key: keyof typeof actions) => {
-	actions[key]()
+const handleAction = (key: string) => {
+	if (key === 'reload') emit('reload')
 }
 </script>
 

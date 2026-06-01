@@ -1,16 +1,16 @@
 <template>
 	<div class="auth-slots">
 		<div
-			v-for="column in columns"
-			:key="`column-${column}`"
+			v-for="(column, colIndex) in columns"
+			:key="colIndex"
 			class="auth-slots__column"
 		>
 			<img
-				v-for="slot in column"
+				v-for="(src, index) in column"
 				ref="slots"
-				:key="`slot-${slot}`"
+				:key="index"
 				class="auth-slots__slot"
-				:src="slot.image"
+				:src="src"
 				alt=""
 			/>
 		</div>
@@ -18,19 +18,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, useTemplateRef } from 'vue'
+import { computed, useTemplateRef } from 'vue'
 import image from '@/assets/img/slot.webp'
 
-const slotsRefs = useTemplateRef('slots')
-const slotBase = {
-	image
-}
-const columns = reactive([
-	[slotBase, slotBase, slotBase, slotBase, slotBase, slotBase, slotBase],
-	[slotBase, slotBase, slotBase, slotBase, slotBase, slotBase, slotBase],
-	[slotBase, slotBase, slotBase, slotBase, slotBase, slotBase, slotBase]
-])
+const columns = [
+	Array(7).fill(image),
+	Array(7).fill(image),
+	Array(7).fill(image)
+]
 
+const slotsRefs = useTemplateRef('slots')
 const height = computed(() => {
 	if (slotsRefs.value?.[0]) {
 		const height: number = slotsRefs.value[0].height

@@ -54,7 +54,7 @@ onMounted(() => {
 	document.addEventListener('click', handleClick)
 })
 onUnmounted(() => {
-	document.addEventListener('click', handleClick)
+	document.removeEventListener('click', handleClick)
 })
 
 const trigger = useTemplateRef('trigger')

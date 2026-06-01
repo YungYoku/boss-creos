@@ -47,7 +47,7 @@ import { Logo } from '@/components/elements'
 
 const auth = useAuthStore()
 
-const nav = [
+const nav = computed(() => [
 	{
 		text: 'Главная',
 		to: '/',
@@ -68,21 +68,7 @@ const nav = [
 		to: '/balance',
 		can: auth.isBuyer || auth.isDesigner
 	}
-	/*
-	{
-		text: 'Биржа',
-		to: '/',
-	},
-	{
-		text: 'Реклама',
-		to: '/',
-	},
-	{
-		text: 'Контакты',
-		to: '/',
-	},
-	*/
-]
+])
 
 const route = useRoute()
 const isAuthPage = computed(() => route.name === '/login/' || route.name === '/registration/')
@@ -144,9 +130,6 @@ const isAuthPage = computed(() => route.name === '/login/' || route.name === '/r
 		margin: 0 0 0 auto;
 	}
 
-	.header__shopping-cart {
-		display: flex;
-		align-items: center;
-	}
+
 }
 </style>

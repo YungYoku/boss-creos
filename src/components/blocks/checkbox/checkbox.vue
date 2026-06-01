@@ -18,7 +18,7 @@
 				v-if="value ?? checked"
 				name="check"
 				size="xs"
-				:colors="['dark', 'light']"
+				color="dark"
 			/>
 		</div>
 

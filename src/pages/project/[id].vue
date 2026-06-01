@@ -191,13 +191,9 @@ const router = useRouter()
 const project: Ref<IProject> = ref({ ...emptyProject })
 const route = useRoute()
 
-const getID = () => {
-	return route.params.id
-}
-
 const loading = ref(true)
 const loadProject = async () => {
-	const id = getID()
+	const id = route.params.id
 	if (!id) return
 	if (Array.isArray(id)) {
 		console.warn('ID is array for some reason.')

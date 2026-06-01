@@ -23,15 +23,14 @@ import { computed } from 'vue'
 
 import { Icon } from '@/components/elements'
 
-const props = defineProps({
-	width: {
-		type: Number,
-		default: 300
-	}
-})
+interface Props {
+	width?: number
+}
+
+const { width = 300 } = defineProps<Props>()
 
 const style = computed(() => ({
-	width: `${props.width.toString()}px`
+	width: `${width.toString()}px`
 }))
 
 const emit = defineEmits(['close'])

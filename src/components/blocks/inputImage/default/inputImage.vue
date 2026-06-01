@@ -50,7 +50,7 @@
 				class="input-image__icon"
 				name="download"
 				size="xs"
-				:colors="['dark', 'light']"
+				color="dark"
 			/>
 		</div>
 	</div>

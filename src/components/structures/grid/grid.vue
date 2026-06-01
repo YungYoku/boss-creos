@@ -122,7 +122,6 @@ const style = computed(() => {
 	}
 })
 </script>
-]
 
 <style scoped>
 .grid {

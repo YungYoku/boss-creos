@@ -18,28 +18,19 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
-
 import { Skeleton } from '@/components/elements'
 
 type Size = 'xs' | 's' | 'm' | 'l' | 'xl'
 
-defineProps({
-	size: {
-		type: String as PropType<Size>,
-		default: 'm'
-	},
-	loading: {
-		type: Boolean,
-		default: false
-	},
-	loadingWidth: {
-		type: String,
-		default: '400px'
-	}
-})
+interface Props {
+	size?: Size
+	loading?: boolean
+	loadingWidth?: string
+}
 
-const skeletonHeights = {
+const { size = 'm', loading = false, loadingWidth = '400px' } = defineProps<Props>()
+
+const skeletonHeights: Record<Size, string> = {
 	xs: 'auto',
 	s: 'auto',
 	m: '24px',

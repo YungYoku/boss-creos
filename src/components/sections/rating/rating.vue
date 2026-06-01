@@ -44,44 +44,29 @@
 </template>
 
 <script setup lang="ts">
-import { type PropType, ref, type Ref, watch } from 'vue'
+import { ref, type Ref, watch } from 'vue'
 
 import { Grid } from '@/components/structures'
 import { Button, RatingStarsEditable, Textarea } from '@/components/blocks'
 import { Text } from '@/components/elements'
-import type { IRating } from '@/types/rating'
+import { emptyRating, type IRating } from '@/types/rating'
 
-const props = defineProps({
-	modelValue: {
-		type: Object as PropType<IRating>,
-		default: () => ({})
-	},
-	loading: {
-		type: Boolean,
-		default: false
-	},
-	user: {
-		type: String,
-		default: 'User'
-	}
-})
+interface Props {
+	modelValue?: IRating
+	loading?: boolean
+	user?: string
+}
+
+const props = defineProps<Props>()
+const { loading = false, user = 'User' } = props
 
 const emit = defineEmits(['update:modelValue', 'back'])
 
-const value: Ref<IRating> = ref({
-	by: '',
-	collectionId: '',
-	collectionName: '',
-	created: '',
-	id: '',
-	updated: '',
-	stars: 0,
-	review: ''
-})
+const value: Ref<IRating> = ref({ ...emptyRating })
 watch(
 	() => props.modelValue,
 	() => {
-		value.value = props.modelValue
+		if (props.modelValue) value.value = props.modelValue
 	},
 	{ immediate: true }
 )

@@ -16,12 +16,11 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-	badge: {
-		type: Boolean,
-		default: true
-	}
-})
+interface Props {
+	badge?: boolean
+}
+
+const { badge = true } = defineProps<Props>()
 </script>
 
 <style scoped>

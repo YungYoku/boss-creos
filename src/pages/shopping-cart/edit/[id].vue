@@ -93,13 +93,10 @@ definePage({
 })
 
 const route = useRoute()
-const getID = () => {
-	return route.params.id
-}
 
 const auth = useAuthStore()
 const baskets = computed(() => {
-	const id = getID()
+	const id = route.params.id
 	const baskets = auth.user.expand?.baskets ?? []
 	return baskets.filter(basket => basket.status === 'created' && basket.id === id)
 })

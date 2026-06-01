@@ -13,12 +13,11 @@
 <script setup lang="ts">
 import { Icon } from '@/components/elements'
 
-defineProps({
-	stars: {
-		type: Number,
-		default: 0
-	}
-})
+interface Props {
+	stars?: number
+}
+
+const { stars = 0 } = defineProps<Props>()
 </script>
 
 <style scoped>

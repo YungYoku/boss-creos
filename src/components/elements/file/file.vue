@@ -6,7 +6,7 @@
 	>
 		<Icon
 			name="file"
-			:colors="colors"
+			:color
 		/>
 
 		<Text size="xs"> Скачать файл </Text>
@@ -18,18 +18,14 @@ import { computed } from 'vue'
 
 import { Icon, Text } from '@/components/elements'
 
-const props = defineProps({
-	src: {
-		type: String,
-		default: ''
-	},
-	colors: {
-		type: Array,
-		default: () => ['light', 'dark']
-	}
-})
+interface Props {
+	src?: string
+	color?: 'light' | 'dark'
+}
 
-const file = computed(() => `${import.meta.env.VITE_API}/files/${props.src}`)
+const { src = '', color = 'light' } = defineProps<Props>()
+
+const file = computed(() => `${import.meta.env.VITE_API}/files/${src}`)
 </script>
 
 <style scoped>

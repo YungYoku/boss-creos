@@ -10,10 +10,9 @@
 <script setup lang="ts">
 import { Text } from '@/components/elements'
 
-defineProps({
-	loading: {
-		type: Boolean,
-		default: false
-	}
-})
+interface Props {
+	loading?: boolean
+}
+
+const { loading = false } = defineProps<Props>()
 </script>

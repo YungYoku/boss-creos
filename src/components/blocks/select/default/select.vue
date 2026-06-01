@@ -110,7 +110,7 @@ const {
 } = defineProps<Props>()
 
 const isChecked = (id: string) => {
-	if (multiple) return false
+	if (!multiple) return false
 
 	const _value = value.value
 	if (!Array.isArray(_value)) throw validationError

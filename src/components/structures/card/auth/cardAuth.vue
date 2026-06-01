@@ -37,16 +37,12 @@ import { Grid } from '@/components/structures'
 
 const emit = defineEmits(['keyup'])
 
-defineProps({
-	width: {
-		type: String,
-		default: '300px'
-	},
-	title: {
-		type: String,
-		default: null
-	}
-})
+interface Props {
+	width?: string
+	title?: string | null
+}
+
+const { width = '300px', title = null } = defineProps<Props>()
 </script>
 
 <style scoped>

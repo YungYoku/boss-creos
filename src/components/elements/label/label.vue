@@ -8,12 +8,11 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-	active: {
-		type: Boolean,
-		default: false
-	}
-})
+interface Props {
+	active?: boolean
+}
+
+const { active = false } = defineProps<Props>()
 </script>
 
 <style scoped>
@@ -33,7 +32,6 @@ defineProps({
 		left: 12px;
 		font-size: 12px;
 		font-weight: 200;
-		transition: all 0.1s linear;
 	}
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
 	<Image
 		class="icon"
-		:class="[`_${size}`, currentColor]"
+		:class="[`_${size}`, color]"
 		:style="{
 			cursor: pointer ? 'pointer' : 'initial'
 		}"
@@ -19,36 +19,17 @@ import Image from '../image/image.vue'
 
 const emit = defineEmits(['click', 'mouseenter'])
 
-const props = defineProps({
-	name: {
-		type: String,
-		default: 'file'
-	},
-	size: {
-		type: String,
-		default: 's',
-		validator: (size: string) => {
-			return ['xs', 's', 'm', 'l', 'xl'].includes(size)
-		}
-	},
-	colors: {
-		type: Array,
-		default: () => ['light', 'dark']
-	},
-	pointer: {
-		type: Boolean,
-		default: true
-	}
-})
+interface Props {
+	name?: string
+	size?: 'xs' | 's' | 'm' | 'l' | 'xl'
+	color?: 'light' | 'dark'
+	pointer?: boolean
+}
 
-const currentColor = computed(() => {
-	const colorIndex = 0
-
-	return props.colors[colorIndex]
-})
+const { name = 'file', size = 's', color = 'light', pointer = true } = defineProps<Props>()
 
 const src = computed(() => {
-	return new URL(`./icons/${props.name}.svg`, import.meta.url).href
+	return new URL(`./icons/${name}.svg`, import.meta.url).href
 })
 </script>
 
