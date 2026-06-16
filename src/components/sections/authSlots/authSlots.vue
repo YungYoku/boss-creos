@@ -21,11 +21,7 @@
 import { computed, useTemplateRef } from 'vue'
 import image from '@/assets/img/slot.webp'
 
-const columns = [
-	Array(7).fill(image),
-	Array(7).fill(image),
-	Array(7).fill(image)
-]
+const columns = [Array(7).fill(image), Array(7).fill(image), Array(7).fill(image)]
 
 const slotsRefs = useTemplateRef('slots')
 const height = computed(() => {

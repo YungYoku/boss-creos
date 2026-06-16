@@ -28,11 +28,12 @@ export default defineConfig(({ mode, command }) => {
 					optionsAPI: false
 				}
 			}),
-			isDev && checker({
-				oxlint: true,
-				vueTsc: true,
-				typescript: true
-			})
+			isDev &&
+				checker({
+					oxlint: true,
+					vueTsc: true,
+					typescript: true
+				})
 		],
 
 		resolve: {

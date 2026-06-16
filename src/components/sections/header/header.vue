@@ -129,7 +129,5 @@ const isAuthPage = computed(() => route.name === '/login/' || route.name === '/r
 		gap: 10px;
 		margin: 0 0 0 auto;
 	}
-
-
 }
 </style>

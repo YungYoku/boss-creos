@@ -31,7 +31,6 @@ const slots = defineSlots<Record<string, string>>()
 const steps = reactive<string[]>(Object.keys(slots).filter(slot => slot !== 'footer'))
 const currentStep = ref(1)
 
-
 const isRequestStep = computed(() => currentStep.value === steps.length)
 const isCancelStep = computed(() => currentStep.value === 1)
 

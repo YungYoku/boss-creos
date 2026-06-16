@@ -104,7 +104,7 @@ describe('Http.getFormatedFilter', () => {
 	it('skips empty string values', () => {
 		const result = Http.getFormatedFilter({ status: '', type: 'admin' })
 		const decoded = decodeURIComponent(result)
-		expect(decoded).not.toContain("status=")
+		expect(decoded).not.toContain('status=')
 		expect(decoded).toContain("type='admin'")
 	})
 
